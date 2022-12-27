@@ -2,8 +2,12 @@
   "name": "@fintraffic-design/coreui-components",
   "private": true,
   "version": "0.0.1",
-  "description": "Finfraffic Design System Core UI (Web) Components",
+  "description": "Fintraffic Design System Core UI (Web) Components",
   "type": "module",
+  "types": "dist/my-component.d.ts",
+  "files": [
+    "dist/"
+  ],
   "dependencies": {
     "lit": "^2.2.4"
   },
@@ -39,13 +43,13 @@
     "serve": "wds",
     "test": "wtr",
     "test:watch": "wtr --watch",
-    "clean": "rimraf build"
+    "clean": "rimraf dist",
+    "prepare": "npm run build"
   },
   "keywords": [],
   "author": "Fintraffic",
   "license": "",
   "volta": {
     "node": "18.12.1"
-  },
-  "customElements": "custom-elements.json"
+  }
 }

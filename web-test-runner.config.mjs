@@ -13,7 +13,7 @@ const browsers = {
 export default {
   nodeResolve: true,
   browsers: [browsers.chromium],
-  files: ['src/**/*.spec.ts'],
+  files: ['src/**/*.test.ts'],
   testFramework: {
     // https://mochajs.org/api/mocha
     config: {

@@ -8,23 +8,18 @@ import typescript from '@rollup/plugin-typescript';
 export default {
   input: 'src/my-component.ts',
   output: {
-    dir: 'build',
+    dir: 'dist'
   },
   plugins: [
-    typescript(),
-    // Resolve bare module specifiers to relative paths
+    typescript({ exclude: ['**/*.test.ts'] }),
     resolve(),
-    // Minify HTML template literals
     minifyHTML(),
-    // Minify JS
     terser({
       ecma: 2020,
       module: true,
       warnings: true,
     }),
-    // Print bundle summary
     summary(),
-    // Optional: copy any static assets to build directory
     copy({
       patterns: ['images/**/*'],
     }),

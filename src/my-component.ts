@@ -11,7 +11,6 @@ export class MyComponent extends LitElement {
       padding: 16px;
     }
   `
-
   @property() name: string = 'World';
   @property() count: number = 0;
 

@@ -4,11 +4,16 @@
   <head>
     <meta charset="utf-8" />
     <title>Fintraffic coreui-components DEV page</title>
-    <script type="module" src="src/my-component.ts"></script>
+    <script type="module" src="src/fintraffic-card.ts"></script>
   </head>
   <body>
-    <my-component name="FIRA" count="5">
-      <p>This is child content</p>
-    </my-component>
+  <fintraffic-card title-text="Title text">
+    Container
+  </fintraffic-card>
+  <fintraffic-card>
+    <span slot="title">Title slot</span>
+    Container
+  </fintraffic-card>
+
   </body>
 </html>

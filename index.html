@@ -5,15 +5,30 @@
     <meta charset="utf-8" />
     <title>Fintraffic coreui-components DEV page</title>
     <script type="module" src="src/fds-card.ts"></script>
+    <script type="module" src="src/fds-dialog.ts"></script>
+    <style>
+      body {
+          background: whitesmoke;
+      }
+    </style>
   </head>
   <body>
-  <fds-card title-text="Title text">
-    Container
+  <fds-card>
+    <div slot="header-title">Card1 title</div>
+    Card1 body Card1 body Card1 body
+    <div slot="footer">
+      <div>Card footer</div>
+    </div>
   </fds-card>
   <fds-card>
-    <span slot="title">Title slot</span>
-    Container
+    <div slot="header-title">Card2 title</div>
+    <div slot="header-corner">Corner</div>
+    Card2 body Card2 body Card2 body
   </fds-card>
-
+  <fds-dialog>
+    <div slot="header">Dialog header</div>
+    Dialog body
+    <div slot="footer">Dialog footer</div>
+  </fds-dialog>
   </body>
 </html>

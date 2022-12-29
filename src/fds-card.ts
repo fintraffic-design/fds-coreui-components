@@ -1,39 +1,48 @@
-import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { css, html, LitElement } from 'lit';
+import { customElement } from 'lit/decorators.js';
 import { TemplateResult } from 'lit-html';
 
 @customElement('fds-card')
 export class FdsCard extends LitElement {
   static override styles = css`
     :host {
-      display: block;
+      display: inline-block;
+      padding: 0.5rem;
+      background: white;
     }
 
-    .fds-card-title h3 {
+    .card__header h3 {
       display: flex;
       justify-content: space-between;
       margin: 0 0 0.5rem;
     }
+    
+    .card__header-corner {
+      margin-left: 1rem;
+    }
+    
+    .card__footer ::slotted(*) {
+      margin-top: 0.5rem;
+    }
   `
-
-  @property({ attribute: 'title-text' }) titleText: string = '';
 
   override render(): TemplateResult {
     return html`
       <div class="card__header">
         <h3>
-          <slot name="title"></slot>
-          <span>${this.titleText}</span>
-          <div class="fds-card-action-corner">
-            <slot name="action-corner"></slot>
+          <div class="card__header-title">
+            <slot name="header-title"></slot>
+          </div>
+          <div class="card__header-corner">
+            <slot name="header-corner"></slot>
           </div>
         </h3>
       </div>
-      <div class="fds-card-content">
+      <div class="card__body">
         <slot></slot>
       </div>
-      <div class="fds-card-footer">
-        <slot name="action-footer"></slot>
+      <div class="card__footer">
+        <slot name="footer"></slot>
       </div>
     `;
   };

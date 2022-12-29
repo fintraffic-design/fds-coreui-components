@@ -2,14 +2,14 @@ import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { TemplateResult } from 'lit-html';
 
-@customElement('fintraffic-card')
-export class FintrafficCard extends LitElement {
+@customElement('fds-card')
+export class FdsCard extends LitElement {
   static override styles = css`
     :host {
       display: block;
     }
 
-    .fintraffic-card-title h3 {
+    .fds-card-title h3 {
       display: flex;
       justify-content: space-between;
       margin: 0 0 0.5rem;
@@ -20,19 +20,19 @@ export class FintrafficCard extends LitElement {
 
   override render(): TemplateResult {
     return html`
-      <div class="fintraffic-card-title">
+      <div class="card__header">
         <h3>
           <slot name="title"></slot>
           <span>${this.titleText}</span>
-          <div class="fintraffic-card-action-corner">
+          <div class="fds-card-action-corner">
             <slot name="action-corner"></slot>
           </div>
         </h3>
       </div>
-      <div class="fintraffic-card-content">
+      <div class="fds-card-content">
         <slot></slot>
       </div>
-      <div class="fintraffic-card-footer">
+      <div class="fds-card-footer">
         <slot name="action-footer"></slot>
       </div>
     `;
@@ -41,6 +41,6 @@ export class FintrafficCard extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'fintraffic-card': FintrafficCard
+    'fds-card': FdsCard
   }
 }

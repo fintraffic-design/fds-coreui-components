@@ -6,9 +6,11 @@ import { TemplateResult } from 'lit-html';
 export class FdsCard extends LitElement {
   static override styles = css`
     :host {
-      display: inline-block;
-      padding: 16px;
+      display: block;
+      padding: 8px;
       background: white;
+      height: fit-content;
+      width: fit-content;
     }
 
     .card__header h3 {

@@ -6,9 +6,12 @@ import { TemplateResult } from 'lit-html';
 export class FdsActions extends LitElement {
   static override styles = css`
     
+    :host {
+      display: block;
+    }
+    
     .actions {
       display: flex;
-      justify-content: space-between;
       align-items: center;
     }
     
@@ -23,7 +26,7 @@ export class FdsActions extends LitElement {
     .actions__horizontal ::slotted(:not(:last-child)) {
       margin-right: 8px;
     }
-
+    
     .actions__vertical ::slotted(:not(:last-child)) {
       margin-bottom: 8px;
     }

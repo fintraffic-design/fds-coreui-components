@@ -1,6 +1,7 @@
 import { css, html, LitElement, PropertyValues } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { TemplateResult } from 'lit-html';
+import './fds-card';
 
 @customElement('fds-dialog')
 export class FdsDialog extends LitElement {
@@ -8,12 +9,11 @@ export class FdsDialog extends LitElement {
     :host {
     }
     
-    .dialog__header h3 {
-      margin: 0 0 16px 0;
-    }
-    
-    .dialog__body {
-      margin-bottom: 16px;
+    dialog {
+      padding: 8px;
+      border-radius: 8px;
+      border: none;
+      box-shadow: grey 0 8px 16px;
     }
   `;
 
@@ -43,15 +43,7 @@ export class FdsDialog extends LitElement {
     console.log(this.open);
     return html`
       <dialog style="${this.style.cssText}">
-        <div class="dialog__header">
-          <h3><slot name="header"></slot></h3>
-        </div>
-        <div class="dialog__body">
-          <slot></slot>
-        </div>
-        <div class="dialog__footer">
-          <slot name="footer"></slot>
-        </div>
+        <slot></slot>
       </dialog>
     `;
   };

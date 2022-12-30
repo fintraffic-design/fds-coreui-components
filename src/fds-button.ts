@@ -1,4 +1,4 @@
-import { css, html, LitElement } from 'lit';
+import { css, html, LitElement, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { TemplateResult } from 'lit-html';
 
@@ -21,8 +21,16 @@ export class FdsButton extends LitElement {
     }
     
     .button:hover {
-      background: gray;
+      background: blue;
+      border-color: blue;
+      color: white;
       transition: all 200ms;
+    }
+    
+    .button:disabled {
+      border-color: darkgray;
+      color: gray;
+      background: lightgray;
     }
 
     .button__primary {
@@ -34,17 +42,41 @@ export class FdsButton extends LitElement {
       background: white;
       color: black;
     }
+
+    .button__tertiary {
+      background: transparent;
+      border-color: transparent;
+      color: black;
+    }
+    
+    .button__danger {
+      background: red;
+      border-color: red;
+      color: white;
+    }
+    
+    .button__danger:hover {
+      background: darkred;
+      border-color: darkred;
+    }
+
+    .button__glyph {
+      background: transparent;
+      border-color: transparent;
+      color: black;
+    }
     
     .button__icon ::slotted(*) {
       margin-right: 8px;
     }
   `;
 
-  @property() variant: 'primary' | 'secondary' | 'tertiary' | 'danger' = 'primary';
+  @property() variant: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'glyph' = 'primary';
+  @property({ type: Boolean }) disabled: boolean = false;
 
   override render(): TemplateResult {
     return html`
-      <button class="button button__${this.variant}">
+      <button class="button button__${this.variant}" disabled="${this.disabled || nothing}">
         <div class="button__icon"><slot name="icon"></slot></div>
         <slot></slot>
       </button>

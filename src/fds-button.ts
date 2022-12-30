@@ -7,7 +7,7 @@ export class FdsButton extends LitElement {
   static override styles = css`
     
     :host {
-      display: flex;
+      display: inline-flex;
       justify-content: center;
     }
     

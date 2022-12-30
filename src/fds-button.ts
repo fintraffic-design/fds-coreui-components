@@ -6,6 +6,12 @@ import { TemplateResult } from 'lit-html';
 export class FdsButton extends LitElement {
   static override styles = css`
     
+    :host {
+      display: flex;
+      justify-content: center;
+    }
+    
+    
     .button {
       display: flex;
       border: 2px solid black;
@@ -14,10 +20,15 @@ export class FdsButton extends LitElement {
       padding: 0 16px;
       cursor: pointer;
       align-items: center;
+      justify-content: center;
     }
     
     .button *, .button ::slotted(*) {
       line-height: 1;
+    }
+
+    :host-context(.actions__vertical) .button:not(.button__glyph) {
+      width: 100%;
     }
     
     .button:hover {

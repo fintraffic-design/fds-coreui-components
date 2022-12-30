@@ -30,6 +30,10 @@ export class FdsActions extends LitElement {
     .actions__vertical ::slotted(:not(:last-child)) {
       margin-bottom: 8px;
     }
+
+    .actions__vertical ::slotted(*) {
+      width: 100%;
+    }
   `;
 
   @property() direction: 'horizontal' | 'vertical' = 'horizontal';

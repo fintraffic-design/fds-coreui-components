@@ -7,24 +7,24 @@ export class FdsCard extends LitElement {
   static override styles = css`
     :host {
       display: inline-block;
-      padding: 0.5rem;
+      padding: 16px;
       background: white;
     }
 
     .card__header h3 {
       display: flex;
       justify-content: space-between;
-      margin: 0 0 0.5rem;
+      margin: 0 0 16px;
     }
     
     .card__header-corner {
       margin-left: 1rem;
     }
     
-    .card__footer ::slotted(*) {
-      margin-top: 0.5rem;
+    .card__body {
+      margin-bottom: 16px;
     }
-  `
+  `;
 
   override render(): TemplateResult {
     return html`

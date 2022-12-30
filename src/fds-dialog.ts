@@ -1,26 +1,48 @@
-import { css, html, LitElement } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { css, html, LitElement, PropertyValues } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
 import { TemplateResult } from 'lit-html';
 
 @customElement('fds-dialog')
 export class FdsDialog extends LitElement {
   static override styles = css`
     :host {
-      display: block;
     }
     
     .dialog__header h3 {
-      margin: 0 0 0.5rem 0;
+      margin: 0 0 16px 0;
     }
+    
+    .dialog__body {
+      margin-bottom: 16px;
+    }
+  `;
 
-    .dialog__footer ::slotted(*) {
-      margin-top: 0.5rem;
+  @property({ type: Boolean }) open: boolean = false;
+  @property({ type: Boolean }) modal: boolean = false;
+
+  @query('dialog')
+  private readonly dialog: HTMLDialogElement | undefined;
+
+  override update(changes: PropertyValues): void {
+    super.update(changes);
+    console.log('changes', changes, this.open, this.modal);
+    if ( changes.get('open') !== this.open ) {
+      if (this.open) {
+        if (this.modal) {
+          this.dialog?.showModal();
+        } else {
+          this.dialog?.show();
+        }
+      } else {
+        this.dialog?.close();
+      }
     }
-  `
+  }
 
   override render(): TemplateResult {
+    console.log(this.open);
     return html`
-      <dialog open>
+      <dialog style="${this.style.cssText}">
         <div class="dialog__header">
           <h3><slot name="header"></slot></h3>
         </div>

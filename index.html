@@ -6,29 +6,66 @@
     <title>Fintraffic coreui-components DEV page</title>
     <script type="module" src="src/fds-card.ts"></script>
     <script type="module" src="src/fds-dialog.ts"></script>
+    <script type="module" src="src/fds-actions.ts"></script>
+    <script type="module" src="src/fds-button.ts"></script>
     <style>
-      body {
-          background: whitesmoke;
-      }
+        body {
+            background: whitesmoke;
+        }
     </style>
   </head>
   <body>
-  <fds-card>
-    <div slot="header-title">Card1 title</div>
-    Card1 body Card1 body Card1 body
-    <div slot="footer">
-      <div>Card footer</div>
-    </div>
-  </fds-card>
-  <fds-card>
-    <div slot="header-title">Card2 title</div>
-    <div slot="header-corner">Corner</div>
-    Card2 body Card2 body Card2 body
-  </fds-card>
-  <fds-dialog>
-    <div slot="header">Dialog header</div>
-    Dialog body
-    <div slot="footer">Dialog footer</div>
-  </fds-dialog>
+
+    <fds-card>
+      <div slot="header-title">Card1 title</div>
+      Card1 body Card1 body Card1 body
+      <fds-actions slot="footer">
+        <fds-button variant="secondary">
+          <div>Secondary</div>
+        </fds-button>
+        <fds-button>
+          <div>Primary</div>
+        </fds-button>
+      </fds-actions>
+    </fds-card>
+    <fds-card>
+      <div slot="header-title">Card2 title</div>
+      <div slot="header-corner">Corner</div>
+      Card2 body Card2 body Card2 body
+    </fds-card>
+
+    <fds-dialog style="top: 400px" open>
+      <div slot="header">Dialog header</div>
+      Dialog body
+      <div slot="footer">Dialog footer</div>
+    </fds-dialog>
+
+
+    <fds-actions direction="vertical">
+      <fds-button>
+        <span slot="icon">😀</span>
+        <div>Vertical actions button 1 with Icon</div>
+      </fds-button>
+      <fds-button variant="secondary">
+        <div>Vertical actions button 2 no Icon</div>
+      </fds-button>
+    </fds-actions>
+
+    <fds-button onclick="openModalDialog()">Open a modal dialog</fds-button>
+  <script>
+    function openModalDialog() {
+      const dialog = document.createElement('fds-dialog');
+      dialog.open = true;
+      dialog.modal = true;
+      const message = document.createTextNode('Modal dialog');
+      dialog.appendChild(message);
+      const button = document.createElement('fds-button');
+      button.innerText = 'Close';
+      button.slot = 'footer';
+      dialog.appendChild(button);
+      button.addEventListener('click', () => document.body.removeChild(dialog));
+      document.body.appendChild(dialog);
+    }
+  </script>
   </body>
 </html>

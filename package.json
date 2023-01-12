@@ -4,10 +4,13 @@
   "version": "0.0.1",
   "description": "Fintraffic Design System Core UI (Web) Components",
   "type": "module",
-  "files": ["dist", "src"],
+  "files": [
+    "dist",
+    "src"
+  ],
   "dependencies": {
-    "lit": "^2.5.0",
-    "@fintraffic-design/coreui-css": "git@github.com:fintraffic-design/coreui-css.git#e7006f3360449ec3c961b3e8a3720339aefc6610"
+    "@fintraffic-design/coreui-css": "git@github.com:fintraffic-design/coreui-css.git#e7006f3360449ec3c961b3e8a3720339aefc6610",
+    "lit": "^2.5.0"
   },
   "devDependencies": {
     "@open-wc/testing": "^3.1.7",

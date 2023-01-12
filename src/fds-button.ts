@@ -1,17 +1,15 @@
-import { css, html, LitElement, nothing } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import { TemplateResult } from 'lit-html';
+import { css, html, LitElement, nothing } from 'lit'
+import { customElement, property } from 'lit/decorators.js'
+import { TemplateResult } from 'lit-html'
 
 @customElement('fds-button')
 export class FdsButton extends LitElement {
   static override styles = css`
-    
     :host {
       display: inline-flex;
       justify-content: center;
     }
-    
-    
+
     .button {
       display: flex;
       border: 2px solid black;
@@ -22,22 +20,23 @@ export class FdsButton extends LitElement {
       align-items: center;
       justify-content: center;
     }
-    
-    .button *, .button ::slotted(*) {
+
+    .button *,
+    .button ::slotted(*) {
       line-height: 1;
     }
 
     :host-context(.actions__vertical) .button:not(.button__glyph) {
       width: 100%;
     }
-    
+
     .button:hover {
       background: blue;
       border-color: blue;
       color: white;
       transition: all 200ms;
     }
-    
+
     .button:disabled {
       border-color: darkgray;
       color: gray;
@@ -59,13 +58,13 @@ export class FdsButton extends LitElement {
       border-color: transparent;
       color: black;
     }
-    
+
     .button__danger {
       background: red;
       border-color: red;
       color: white;
     }
-    
+
     .button__danger:hover {
       background: darkred;
       border-color: darkred;
@@ -76,14 +75,14 @@ export class FdsButton extends LitElement {
       border-color: transparent;
       color: black;
     }
-    
+
     .button__icon ::slotted(*) {
       margin-right: 8px;
     }
-  `;
+  `
 
-  @property() variant: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'glyph' = 'primary';
-  @property({ type: Boolean }) disabled: boolean = false;
+  @property() variant: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'glyph' = 'primary'
+  @property({ type: Boolean }) disabled: boolean = false
 
   override render(): TemplateResult {
     return html`
@@ -91,8 +90,8 @@ export class FdsButton extends LitElement {
         <div class="button__icon"><slot name="icon"></slot></div>
         <slot></slot>
       </button>
-    `;
-  };
+    `
+  }
 }
 
 declare global {

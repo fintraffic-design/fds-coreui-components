@@ -32,7 +32,8 @@
     "lint": "eslint 'src/**/*.ts'",
     "serve": "wds",
     "test": "wtr",
-    "test:watch": "wtr --watch"
+    "test:watch": "wtr --watch",
+    "stylecheck": "prettier --check src"
   },
   "keywords": [],
   "author": "Fintraffic",

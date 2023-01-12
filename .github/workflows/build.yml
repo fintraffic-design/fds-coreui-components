@@ -16,8 +16,9 @@ jobs:
           node-version: 18
           cache: 'npm'
       - name: compile, lint, test
-        run: | 
+        run: |
           npm ci
+          npm run stylecheck
           npm run compile
           npm run lint
           npm run test

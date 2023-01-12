@@ -26,6 +26,7 @@ jobs:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
           npm ci
+          npm run stylecheck
           npm run compile
           npm run lint
           npm run test

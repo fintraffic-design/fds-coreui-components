@@ -1,6 +1,6 @@
-import { css, html, LitElement } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { TemplateResult } from 'lit-html';
+import { css, html, LitElement } from 'lit'
+import { customElement } from 'lit/decorators.js'
+import { TemplateResult } from 'lit-html'
 
 @customElement('fds-card')
 export class FdsCard extends LitElement {
@@ -18,15 +18,15 @@ export class FdsCard extends LitElement {
       justify-content: space-between;
       margin: 0 0 16px;
     }
-    
+
     .card__header-corner {
       margin-left: 1rem;
     }
-    
+
     .card__body {
       margin-bottom: 16px;
     }
-  `;
+  `
 
   override render(): TemplateResult {
     return html`
@@ -46,8 +46,8 @@ export class FdsCard extends LitElement {
       <div class="card__footer">
         <slot name="footer"></slot>
       </div>
-    `;
-  };
+    `
+  }
 }
 
 declare global {

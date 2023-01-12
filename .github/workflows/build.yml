@@ -21,12 +21,11 @@ jobs:
         run: |
           ssh-agent -a $SSH_AUTH_SOCK > /dev/null
           ssh-add - <<< "${{ secrets.COREUI_CSS_SSH_KEY }}"
-      - name: build, lint, test
+      - name: compile, lint, test
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
-          cd frontend
           npm ci
-          npm run build
+          npm run compile
           npm run lint
           npm run test

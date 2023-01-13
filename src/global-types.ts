@@ -1,4 +1,4 @@
-import { FdsIcon } from './common/fds-icon'
+import { FdsIcon } from './fds-icon'
 import { FdsActions } from './fds-actions'
 import { FdsButton } from './fds-button'
 import { FdsCard } from './fds-card'

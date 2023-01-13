@@ -10,7 +10,8 @@
   ],
   "dependencies": {
     "@fintraffic-design/coreui-css": "git@github.com:fintraffic-design/coreui-css.git#e7006f3360449ec3c961b3e8a3720339aefc6610",
-    "lit": "^2.5.0"
+    "lit": "^2.5.0",
+    "lucide": "^0.104.0"
   },
   "devDependencies": {
     "@open-wc/testing": "^3.1.7",

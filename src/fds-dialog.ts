@@ -48,9 +48,3 @@ export class FdsDialog extends LitElement {
     `
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'fds-dialog': FdsDialog
-  }
-}

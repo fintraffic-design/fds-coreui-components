@@ -45,9 +45,3 @@ export class FdsActions extends LitElement {
     `
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'fds-actions': FdsActions
-  }
-}

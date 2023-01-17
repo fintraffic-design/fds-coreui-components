@@ -41,7 +41,7 @@ type SvgSize = '18' | '24' | '36'
  * - trash-2
  */
 @customElement('fds-icon')
-export class FdsIcon extends LitElement {
+export default class FdsIcon extends LitElement {
   @property() color: keyof typeof ColorMap = 'black'
   @property() size: SvgSize = '24'
   @property() icon?: keyof typeof IconTypeMap

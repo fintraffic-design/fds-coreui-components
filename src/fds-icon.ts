@@ -20,25 +20,24 @@ const ColorMap = {
 type SvgSize = '18' | '24' | '36'
 
 /**
- * Add interactible icon element. Icon library:
- * https://lucide.dev/
+ * Add interactible icon element. Icon library: https://lucide.dev/
  *
- * @property onClick - On click handler for icon
- * @property color of the icon - options:
- * @property {string} size - Options:
- * - 18
- * - 24
- * - 36
- * - black (default)
- * - gray
- * - interactive
- * - danger
- * @property icon - options:
- * - chevron-right
- * - alert-triangle
+ * @property {string} icon - Options:
  * - alert-circle
+ * - alert-triangle
+ * - chevron-right
  * - plus-circle
  * - trash-2
+ * @property {string} size - Options:
+ * - 18
+ * - 24 (default)
+ * - 36
+ * @property {string} color - Options:
+ * - black (default)
+ * - danger
+ * - gray
+ * - interactive
+ * @property {(e: MouseEvent) => void} onClick - On click handler for the icon.
  */
 @customElement('fds-icon')
 export default class FdsIcon extends LitElement {

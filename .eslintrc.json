@@ -13,13 +13,10 @@
   "rules": {
     "semi": "off",
     "space-in-parens": "off",
-    "no-trailing-spaces": ["error", { "skipBlankLines": true, "ignoreComments": true }],
-    "comma-dangle": "off",
-    "@typescript-eslint/comma-dangle": "off",
-    "@typescript-eslint/space-before-function-paren": ["error", { "anonymous": "always", "named": "never" }],
-    "@typescript-eslint/no-unnecessary-type-assertion": "off",
-    "@typescript-eslint/no-non-null-assertion": "off",
-    "@typescript-eslint/explicit-function-return-type": "error",
+    "no-trailing-spaces": ["warn", { "skipBlankLines": true, "ignoreComments": true }],
+    "@typescript-eslint/space-before-function-paren": ["warn", { "anonymous": "always", "named": "never" }],
+    "@typescript-eslint/no-unnecessary-type-assertion": "warn",
+    "@typescript-eslint/explicit-function-return-type": "warn",
     "@typescript-eslint/no-unused-vars": "warn"
   }
 }

@@ -33,9 +33,10 @@
     </div>
 
     <h1 style="padding-bottom: 12rem">Dialog</h1>
-    <fds-dialog style="top: 16rem" open>
+    <fds-dialog style="top: 16rem">
       <fds-card>
         <div slot="header-title">Dialog header</div>
+        <fds-icon slot="header-corner" icon="X"></fds-icon>
         Dialog with card inside
         <fds-actions slot="footer">
           <fds-button variant="secondary">
@@ -51,7 +52,6 @@
     <script>
       function openModalDialog() {
         const dialog = document.createElement('fds-dialog');
-        dialog.open = true;
         dialog.modal = true;
         const message = document.createTextNode('Modal dialog');
         dialog.appendChild(message);
@@ -63,7 +63,8 @@
       }
     </script>
 
-
+    <h1>Icons</h1>
+    <fds-icon icon="AlertCircle" onclick="console.log('icon click')" color="color-danger-300"></fds-icon>
 
     <h1>Actions and buttons</h1>
     <fds-actions style="padding: 0.5rem">

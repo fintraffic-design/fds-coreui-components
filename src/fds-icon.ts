@@ -61,6 +61,11 @@ export default class FdsIcon extends LitElement {
     if (this.class !== undefined) {
       svgElement.classList.add(this.class)
     }
+
+    if (this.onClick !== undefined) {
+      svgElement.addEventListener('click', this.onClick)
+    }
+
     return svgElement
   }
 }

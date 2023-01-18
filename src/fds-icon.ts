@@ -49,7 +49,7 @@ export default class FdsIcon extends LitElement {
   @property() onClick?: (e: MouseEvent) => void
 
   override render(): SVGElement | null {
-    if (this.icon === undefined) {
+    if (!this.icon) {
       return null
     }
 
@@ -58,11 +58,11 @@ export default class FdsIcon extends LitElement {
     svgElement.setAttribute('width', this.size)
     svgElement.setAttribute('height', this.size)
 
-    if (this.class !== undefined) {
+    if (this.class) {
       svgElement.classList.add(this.class)
     }
 
-    if (this.onClick !== undefined) {
+    if (this.onClick) {
       svgElement.addEventListener('click', this.onClick)
     }
 

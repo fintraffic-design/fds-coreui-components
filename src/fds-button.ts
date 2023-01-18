@@ -1,9 +1,9 @@
-import { css, html, LitElement, nothing } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
+import { customElement, property } from 'lit/decorators.js'
 
 @customElement('fds-button')
-export class FdsButton extends LitElement {
+export default class FdsButton extends LitElement {
   static override styles = css`
     :host {
       display: inline-flex;
@@ -82,11 +82,11 @@ export class FdsButton extends LitElement {
   `
 
   @property() variant: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'glyph' = 'primary'
-  @property({ type: Boolean }) disabled: boolean = false
+  @property() disabled: boolean = false
 
   override render(): TemplateResult {
     return html`
-      <button class="button button__${this.variant}" disabled="${this.disabled || nothing}">
+      <button class="button button__${this.variant}" ?disabled="${this.disabled}">
         <div class="button__icon"><slot name="icon"></slot></div>
         <slot></slot>
       </button>

@@ -2,6 +2,7 @@ import { css, html, LitElement, PropertyValues } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
 import './fds-card'
+import { token } from './token-utils'
 
 @customElement('fds-dialog')
 export class FdsDialog extends LitElement {
@@ -10,10 +11,10 @@ export class FdsDialog extends LitElement {
     }
 
     dialog {
-      padding: 8px;
-      border-radius: 8px;
+      padding: ${token('radius-large')};
+      border-radius: ${token('radius-large')};
       border: none;
-      box-shadow: grey 0 8px 16px;
+      box-shadow: ${token('style-elevation-400')};
     }
   `
 
@@ -23,9 +24,8 @@ export class FdsDialog extends LitElement {
   @query('dialog')
   private readonly dialog: HTMLDialogElement | undefined
 
-  override update(changes: PropertyValues): void {
+  override update(changes: PropertyValues<FdsDialog>): void {
     super.update(changes)
-    console.log('changes', changes, this.open, this.modal)
     if (changes.get('open') !== this.open) {
       if (this.open) {
         if (this.modal) {
@@ -40,7 +40,6 @@ export class FdsDialog extends LitElement {
   }
 
   override render(): TemplateResult {
-    console.log(this.open)
     return html`
       <dialog style="${this.style.cssText}">
         <slot></slot>

@@ -5,7 +5,7 @@ import './fds-card'
 import { token } from './token-utils'
 
 @customElement('fds-dialog')
-export class FdsDialog extends LitElement {
+export default class FdsDialog extends LitElement {
   static override styles = css`
     :host {
     }
@@ -18,8 +18,8 @@ export class FdsDialog extends LitElement {
     }
   `
 
-  @property({ type: Boolean }) open: boolean = false
-  @property({ type: Boolean }) modal: boolean = false
+  @property() open: boolean = false
+  @property() modal: boolean = false
 
   @query('dialog')
   private readonly dialog: HTMLDialogElement | undefined

@@ -1,5 +1,4 @@
 import { html } from 'lit'
-
 import '../fds-button'
 
 export default {

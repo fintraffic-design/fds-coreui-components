@@ -37,13 +37,15 @@ type SvgSize = '18' | '24' | '36'
  * - danger
  * - gray
  * - interactive
+ * @property {string} class - CSS style class.
  * @property {(e: MouseEvent) => void} onClick - On click handler for the icon.
  */
 @customElement('fds-icon')
 export default class FdsIcon extends LitElement {
-  @property() color: keyof typeof ColorMap = 'black'
   @property() size: SvgSize = '24'
+  @property() color: keyof typeof ColorMap = 'black'
   @property() icon?: keyof typeof IconTypeMap
+  @property() class?: string
   @property() onClick?: (e: MouseEvent) => void
 
   override render(): SVGElement | null {
@@ -56,6 +58,9 @@ export default class FdsIcon extends LitElement {
     svgElement.setAttribute('width', this.size)
     svgElement.setAttribute('height', this.size)
 
+    if (this.class !== undefined) {
+      svgElement.classList.add(this.class)
+    }
     return svgElement
   }
 }

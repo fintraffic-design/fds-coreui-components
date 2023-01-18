@@ -1,6 +1,7 @@
 import { css, html, LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
+import './global-types'
 
 @customElement('fds-card')
 export class FdsCard extends LitElement {
@@ -35,11 +36,9 @@ export class FdsCard extends LitElement {
           <div class="card__header-title">
             <slot name="header-title"></slot>
           </div>
-          <div class="card__header-corner">
-            <slot name="header-corner"></slot>
-          </div>
         </h3>
       </div>
+      <fds-icon .icon=${'chevron-right'}></fds-icon>
       <div class="card__body">
         <slot></slot>
       </div>
@@ -47,11 +46,5 @@ export class FdsCard extends LitElement {
         <slot name="footer"></slot>
       </div>
     `
-  }
-}
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'fds-card': FdsCard
   }
 }

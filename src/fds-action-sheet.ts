@@ -2,8 +2,8 @@ import { css, html, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
 
-@customElement('fds-actions')
-export class FdsActions extends LitElement {
+@customElement('fds-action-sheet')
+export class FdsActionSheet extends LitElement {
   static override styles = css`
     :host {
       display: block;

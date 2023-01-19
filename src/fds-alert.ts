@@ -10,6 +10,13 @@ const IconColorMap = {
   info: 'color-interactive-300',
   success: 'color-success-300',
 }
+
+/**
+ * Alert component.
+ *
+ * @property {string} variant
+ * Type of alert: error, warning, info or success
+ */
 @customElement('fds-alert')
 class FdsAlert extends LitElement {
   static override styles = css`

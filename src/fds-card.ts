@@ -36,9 +36,11 @@ export class FdsCard extends LitElement {
           <div class="card__header-title">
             <slot name="header-title"></slot>
           </div>
+          <div class="card__header-corner">
+            <slot name="header-corner"></slot>
+          </div>
         </h3>
       </div>
-      <fds-icon .icon=${'chevron-right'}></fds-icon>
       <div class="card__body">
         <slot></slot>
       </div>

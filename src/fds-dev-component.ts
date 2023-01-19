@@ -5,10 +5,16 @@ import './fds-button'
 import './fds-card'
 import './fds-dialog'
 import './fds-icon'
+import { FdsColorDanger300 } from '@fintraffic-design/coreui-css/dist/tokens'
 
 @customElement('fds-test-component')
 export class FdsCard extends LitElement {
   @state() private modalOpen: boolean = false
+
+  constructor() {
+    super()
+    new EventSource('/esbuild').addEventListener('change', () => location.reload())
+  }
 
   override createRenderRoot(): HTMLElement {
     return this
@@ -43,8 +49,11 @@ export class FdsCard extends LitElement {
           </fds-actions>
         </fds-card>
       </fds-dialog>
-      <fds-button @click="${this.toggleModal}">Open a modal dialog</fds-button>
       ${this.renderModal()}
+      <fds-button @click="${this.toggleModal}">Open a modal dialog</fds-button>
+
+      <h1>Icons</h1>
+      <fds-icon icon="alert-circle" .color="${FdsColorDanger300}"></fds-icon>
 
       <h1>Actions and buttons</h1>
       <fds-actions style="padding: 0.5rem">

@@ -17,8 +17,6 @@
     "@open-wc/testing": "^3.1.7",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",
-    "@web/dev-server": "^0.1.35",
-    "@web/dev-server-esbuild": "^0.3.3",
     "@web/test-runner": "^0.15.0",
     "@web/test-runner-playwright": "^0.9.0",
     "eslint": "^8.30.0",
@@ -34,7 +32,7 @@
   "scripts": {
     "compile": "tsc",
     "lint": "eslint 'src/**/*.ts'",
-    "serve": "wds",
+    "serve": "esbuild src/fds-dev-component.ts --bundle --outdir=build --watch --servedir=.",
     "test": "wtr",
     "test:watch": "wtr --watch",
     "stylecheck": "prettier --check src",

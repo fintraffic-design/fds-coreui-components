@@ -32,7 +32,7 @@
   "scripts": {
     "compile": "tsc",
     "lint": "eslint 'src/**/*.ts'",
-    "serve": "esbuild src/fds-dev-component.ts --bundle --outdir=build --watch --servedir=.",
+    "serve": "esbuild src/fds-dev-component.ts --bundle --outdir=build --watch --servedir=. --conditions=development",
     "test": "wtr",
     "test:watch": "wtr --watch",
     "stylecheck": "prettier --check src",

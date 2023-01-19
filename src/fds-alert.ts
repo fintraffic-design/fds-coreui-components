@@ -1,34 +1,44 @@
 import { css, html, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js';
 import { TemplateResult } from 'lit-html'
+import { token } from './token-utils'
+import "./global-types";
 
+const IconColorMap = {
+  error: 'color-success-300',
+  warning: 'color-warning-300',
+  info: 'color-interactive-300',
+  success: 'color-success-300',
+}
 @customElement('fds-alert')
 class FdsAlert extends LitElement {
   static override styles = css`
     .alert {
-      padding: 8px;
-      border-bottom: 2px solid #b40000;
+      padding: ${token('size-1')};
+      border-bottom: 2px solid;
       display: flex;
       align-items: baseline;
     }
     .alert--error {
-      background-color: #ff9b87; // $color-danger-100
-      border-bottom-color: #b40000; // $color-danger-300
+      background-color: ${token('color-danger-100')};
+      border-bottom-color: ${token('color-danger-300')};
     }
     .alert--warning {
-      background-color: #ffe37f; // $color-warning-100;
-      border-bottom-color: #b47324; // $color-warning-300;
+      background-color:${token('color-warning-100')};
+      border-bottom-color: ${token('color-warning-300')};
     }
     .alert--info {
-      background-color: #90cefe; // $color-interactive-100;
-      border-bottom-color: #0034ac; // $color-interactive-300;
+      background-color: ${token('color-interactive-100')};
+      border-bottom-color: ${token('color-interactive-300')};
     }
     .alert--success {
-      background-color: #82e8c3; // $color-success-100;
-      border-bottom-color: #005f61; // $color-success-300;
+      background-color: ${token('color-success-100')};
+      border-bottom-color: ${token('color-success-300')};
     }
     .alert__icon {
-      margin-right: 8px;
+      margin-right: ${token('size-1')};
+      top: 3px;
+      position: relative;
     }
   `
 
@@ -37,7 +47,9 @@ class FdsAlert extends LitElement {
   override render(): TemplateResult {
       return html`
         <div class="alert alert--${this.variant}">
-          <div class="alert__icon">&#9888;</div>
+          <div class="alert__icon">
+            <fds-icon icon='alert-triangle' size='18' color="${IconColorMap[this.variant]}"></fds-icon>
+          </div>
           <slot name="content"></slot>
         </div>
       `

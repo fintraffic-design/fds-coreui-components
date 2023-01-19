@@ -1,20 +1,18 @@
-import { LitElement } from 'lit'
+import { css, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { AlertCircle, AlertTriangle, ChevronRight, createElement, PlusCircle, Trash2 } from 'lucide'
+import { FdsColorToken, FdsColorText1000 } from '@fintraffic-design/coreui-css/dist/tokens'
+import { tokenVar } from './token-utils'
 
+/**
+ * Only the common icons needed in fds components are here to keep bundle size smaller
+ */
 const IconTypeMap = {
   'chevron-right': ChevronRight,
   'alert-triangle': AlertTriangle,
   'alert-circle': AlertCircle,
   'plus-circle': PlusCircle,
   'trash-2': Trash2,
-}
-
-const ColorMap = {
-  black: '#000000',
-  gray: '#9696AA',
-  interactive: '#1777F8',
-  danger: '#B40000',
 }
 
 type SvgSize = '18' | '24' | '36'
@@ -37,35 +35,29 @@ type SvgSize = '18' | '24' | '36'
  * - danger
  * - gray
  * - interactive
- * @property {string} class - CSS style class.
- * @property {(e: MouseEvent) => void} onClick - On click handler for the icon.
  */
 @customElement('fds-icon')
 export default class FdsIcon extends LitElement {
+  static override styles = css`
+    :host {
+      display: inline-flex;
+    }
+  `
+
   @property() size: SvgSize = '24'
-  @property() color: keyof typeof ColorMap = 'black'
+  @property() color: FdsColorToken = FdsColorText1000
   @property() icon?: keyof typeof IconTypeMap
-  @property() class?: string
-  @property() onClick?: (e: MouseEvent) => void
 
   override render(): SVGElement | null {
     if (!this.icon) {
+      console.error('icon not defined')
       return null
     }
 
     const svgElement = createElement(IconTypeMap[this.icon])
-    svgElement.setAttribute('color', ColorMap[this.color])
+    svgElement.setAttribute('color', tokenVar(this.color).cssText)
     svgElement.setAttribute('width', this.size)
     svgElement.setAttribute('height', this.size)
-
-    if (this.class) {
-      svgElement.classList.add(this.class)
-    }
-
-    if (this.onClick) {
-      svgElement.addEventListener('click', this.onClick)
-    }
-
     return svgElement
   }
 }

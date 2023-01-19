@@ -4,90 +4,15 @@
   <head>
     <meta charset="utf-8" />
     <title>Fintraffic coreui-components DEV page</title>
-    <script type="module" src="src/fds-card.ts"></script>
-    <script type="module" src="src/fds-dialog.ts"></script>
-    <script type="module" src="src/fds-actions.ts"></script>
-    <script type="module" src="src/fds-button.ts"></script>
-    <script type="module" src="src/fds-icon.ts"></script>
+    <script type="module" src="src/fds-dev-component.ts"></script>
     <link rel="stylesheet" href="node_modules/@fintraffic-design/coreui-css/dist/style.css">
     <style>
-        body {
-            background: whitesmoke;
-        }
+      body {
+          background: whitesmoke;
+      }
     </style>
   </head>
   <body>
-
-    <h1>Card</h1>
-    <div style="display: flex">
-      <fds-card style="margin-right: 2rem;">
-        <div slot="header-title">Title</div>
-        <div slot="header-corner">Corner</div>
-        Body
-        <div slot="footer">Footer</div>
-      </fds-card>
-
-      <fds-card>
-        Card with body only
-      </fds-card>
-    </div>
-
-    <h1 style="padding-bottom: 12rem">Dialog</h1>
-    <fds-dialog style="top: 16rem" open>
-      <fds-card>
-        <div slot="header-title">Dialog header</div>
-        Dialog with card inside
-        <fds-actions slot="footer">
-          <fds-button variant="secondary">
-            <div>Secondary</div>
-          </fds-button>
-          <fds-button>
-            <div>Primary</div>
-          </fds-button>
-        </fds-actions>
-      </fds-card>
-    </fds-dialog>
-    <fds-button onclick="openModalDialog()">Open a modal dialog</fds-button>
-    <script>
-      function openModalDialog() {
-        const dialog = document.createElement('fds-dialog');
-        dialog.open = true;
-        dialog.modal = true;
-        const message = document.createTextNode('Modal dialog');
-        dialog.appendChild(message);
-        const button = document.createElement('fds-button');
-        button.innerText = 'Close';
-        dialog.appendChild(button);
-        button.addEventListener('click', () => document.body.removeChild(dialog));
-        document.body.appendChild(dialog);
-      }
-    </script>
-
-
-
-    <h1>Actions and buttons</h1>
-    <fds-actions style="padding: 0.5rem">
-      <fds-button><span slot="icon">😀</span><span>Horizontal primary with icon</span></fds-button>
-      <fds-button variant="secondary">Horizontal secondary</fds-button>
-      <fds-button variant="tertiary">Horizontal tertiary</fds-button>
-      <fds-button variant="danger">Horizontal danger</fds-button>
-      <fds-button variant="glyph">✕</fds-button>
-    </fds-actions>
-    <fds-actions direction="horizontal" style="padding: 0.5rem">
-      <fds-button disabled>Primary disabled</fds-button>
-      <fds-button variant="secondary" disabled>Secondary disabled</fds-button>
-      <fds-button variant="tertiary" disabled>Tertiary disabled</fds-button>
-      <fds-button variant="danger" disabled>Danger disabled</fds-button>
-      <fds-button variant="glyph" disabled>✕</fds-button>
-    </fds-actions>
-    <fds-actions direction="vertical" style="width: 20rem; padding: 2rem">
-      <fds-button><span slot="icon">😀</span><span>Vertical primary with Icon</span>
-      </fds-button>
-      <fds-button variant="secondary">Vertical secondary</fds-button>
-      <fds-button variant="tertiary">Vertical tertiary</fds-button>
-      <fds-button variant="danger">Vertical danger</fds-button>
-      <fds-button variant="glyph">✕</fds-button>
-    </fds-actions>
-
+    <fds-test-component></fds-test-component>
   </body>
 </html>

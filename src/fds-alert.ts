@@ -49,7 +49,7 @@ class FdsAlert extends LitElement {
     }
   `
 
-  @property() variant: 'error' | 'warning' | 'info' | 'success' = 'error';    
+  @property() variant: 'error' | 'warning' | 'info' | 'success' = 'error';
   
   override render(): TemplateResult {
       return html`

@@ -1,7 +1,7 @@
-import { FdsActions } from './fds-actions'
-import { FdsButton } from './fds-button'
+import { FdsActionSheet } from './fds-action-sheet'
+import FdsButton from './fds-button'
 import { FdsCard } from './fds-card'
-import { FdsDialog } from './fds-dialog'
+import FdsDialog from './fds-dialog'
 import FdsIcon from './fds-icon'
 
 declare global {
@@ -10,6 +10,6 @@ declare global {
     'fds-card': FdsCard
     'fds-dialog': FdsDialog
     'fds-button': FdsButton
-    'fds-actions': FdsActions
+    'fds-action-sheet': FdsActionSheet
   }
 }

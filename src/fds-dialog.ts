@@ -13,7 +13,7 @@ import { FdsRadiusLarge, FdsStyleElevation400 } from '@fintraffic-design/coreui-
  * Cannot be changed later.
  */
 @customElement('fds-dialog')
-export class FdsDialog extends LitElement {
+export default class FdsDialog extends LitElement {
   static override styles = css`
     :host {
     }

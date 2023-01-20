@@ -14,23 +14,23 @@ export class FdsActionSheet extends LitElement {
       align-items: center;
     }
 
-    .actions__horizontal {
+    .actions--horizontal {
       flex-direction: row;
     }
 
-    .actions__vertical {
+    .actions--vertical {
       flex-direction: column;
     }
 
-    .actions__horizontal ::slotted(:not(:last-child)) {
+    .actions--horizontal ::slotted(:not(:last-child)) {
       margin-right: 8px;
     }
 
-    .actions__vertical ::slotted(:not(:last-child)) {
+    .actions--vertical ::slotted(:not(:last-child)) {
       margin-bottom: 8px;
     }
 
-    .actions__vertical ::slotted(*) {
+    .actions--vertical ::slotted(*) {
       width: 100%;
     }
   `
@@ -39,7 +39,7 @@ export class FdsActionSheet extends LitElement {
 
   override render(): TemplateResult {
     return html`
-      <div class="actions actions__${this.direction}">
+      <div class="actions actions--${this.direction}">
         <slot></slot>
       </div>
     `

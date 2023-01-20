@@ -9,14 +9,13 @@
     "src"
   ],
   "dependencies": {
-    "@fintraffic-design/coreui-css": "git@github.com:fintraffic-design/coreui-css.git#292431e014b4e4c70ba8e88fd82134ee0bf924ed",
-    "@typescript-eslint/parser": "^5.48.2",
+    "@fintraffic-design/coreui-css": "git@github.com:fintraffic-design/coreui-css.git#883f556140a7d36de164591ad592735818e8536a",
     "lit": "^2.5.0",
     "lucide": "^0.104.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.12",
     "@open-wc/testing": "^3.1.7",
+    "@typescript-eslint/parser": "^5.47.1",
     "@storybook/addon-actions": "^6.5.15",
     "@storybook/addon-essentials": "^6.5.15",
     "@storybook/addon-links": "^6.5.15",
@@ -24,7 +23,6 @@
     "@storybook/manager-webpack4": "^6.5.15",
     "@storybook/web-components": "^6.5.15",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
-    "@web/dev-server": "^0.1.35",
     "@web/dev-server-esbuild": "^0.3.3",
     "@web/test-runner": "^0.15.0",
     "@web/test-runner-playwright": "^0.9.0",
@@ -37,15 +35,17 @@
     "eslint-plugin-storybook": "^0.6.10",
     "lit-html": "^2.6.1",
     "prettier": "^2.8.2",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "esbuild": "^0.17.3"
   },
   "scripts": {
     "compile": "tsc",
     "lint": "eslint 'src/**/*.ts'",
-    "serve": "wds",
+    "serve": "esbuild src/fds-dev-component.ts --bundle --outdir=build --watch --servedir=. --conditions=development",
     "test": "wtr",
     "test:watch": "wtr --watch",
     "stylecheck": "prettier --check src",
+    "dev-bundle": "node dev-bundle.mjs",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

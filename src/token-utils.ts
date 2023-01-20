@@ -1,4 +1,10 @@
 import { CSSResult, unsafeCSS } from 'lit'
-import { tokens } from '@fintraffic-design/coreui-css/dist/tokens'
+import { FdsToken } from '@fintraffic-design/coreui-css/dist/tokens'
 
-export const token: (key: keyof typeof tokens) => CSSResult = key => unsafeCSS(tokens[key])
+export const tokenVar: (token: FdsToken) => CSSResult = token => {
+  if (token == null || token.name == null || token.value == null) {
+    console.error('invalid FdsToken', token)
+    return unsafeCSS('')
+  }
+  return unsafeCSS(['var(--', token.name, ', ', token.value, ')'].join(''))
+}

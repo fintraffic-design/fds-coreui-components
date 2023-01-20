@@ -1,8 +1,8 @@
 import { css, html, LitElement } from 'lit'
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
 import { token } from './token-utils'
-import "./global-types";
+import "./global-types"
 
 const IconColorMap = {
   error: 'color-success-300',
@@ -50,7 +50,7 @@ class FdsAlert extends LitElement {
   `
 
   @property() variant: 'error' | 'warning' | 'info' | 'success' = 'error';
-  
+
   override render(): TemplateResult {
       return html`
         <div class="alert alert--${this.variant}">

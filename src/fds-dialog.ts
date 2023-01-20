@@ -12,7 +12,7 @@ import { token } from './token-utils'
  * Cannot be changed later.
  */
 @customElement('fds-dialog')
-export class FdsDialog extends LitElement {
+export default class FdsDialog extends LitElement {
   static override styles = css`
     :host {
     }

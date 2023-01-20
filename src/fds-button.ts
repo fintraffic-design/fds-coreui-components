@@ -26,7 +26,7 @@ export default class FdsButton extends LitElement {
       line-height: 1;
     }
 
-    :host-context(.actions__vertical) .button:not(.button__glyph) {
+    :host-context(.actions--vertical) .button:not(.button--glyph) {
       width: 100%;
     }
 
@@ -43,34 +43,34 @@ export default class FdsButton extends LitElement {
       background: lightgray;
     }
 
-    .button__primary {
+    .button--primary {
       background: black;
       color: white;
     }
 
-    .button__secondary {
+    .button--secondary {
       background: white;
       color: black;
     }
 
-    .button__tertiary {
+    .button--tertiary {
       background: transparent;
       border-color: transparent;
       color: black;
     }
 
-    .button__danger {
+    .button--danger {
       background: red;
       border-color: red;
       color: white;
     }
 
-    .button__danger:hover {
+    .button--danger:hover {
       background: darkred;
       border-color: darkred;
     }
 
-    .button__glyph {
+    .button--glyph {
       background: transparent;
       border-color: transparent;
       color: black;
@@ -86,7 +86,7 @@ export default class FdsButton extends LitElement {
 
   override render(): TemplateResult {
     return html`
-      <button class="button button__${this.variant}" ?disabled="${this.disabled}">
+      <button class="button button--${this.variant}" ?disabled="${this.disabled}">
         <div class="button__icon"><slot name="icon"></slot></div>
         <slot></slot>
       </button>

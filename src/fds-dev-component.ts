@@ -1,10 +1,11 @@
 import { customElement, state } from 'lit/decorators.js'
 import { html, LitElement, TemplateResult } from 'lit'
-import './fds-actions'
+import './fds-action-sheet'
 import './fds-button'
 import './fds-card'
 import './fds-dialog'
 import './fds-icon'
+import './fds-alert'
 import { FdsColorDanger300 } from '@fintraffic-design/coreui-css/dist/tokens'
 
 @customElement('fds-test-component')
@@ -56,27 +57,27 @@ export class FdsCard extends LitElement {
       <fds-icon icon="alert-circle" .color="${FdsColorDanger300}"></fds-icon>
 
       <h1>Actions and buttons</h1>
-      <fds-actions style="padding: 0.5rem">
+      <fds-action-sheet style="padding: 0.5rem">
         <fds-button><span slot="icon">😀</span><span>Horizontal primary with icon</span></fds-button>
         <fds-button variant="secondary">Horizontal secondary</fds-button>
         <fds-button variant="tertiary">Horizontal tertiary</fds-button>
         <fds-button variant="danger">Horizontal danger</fds-button>
         <fds-button variant="glyph">✕</fds-button>
-      </fds-actions>
-      <fds-actions direction="horizontal" style="padding: 0.5rem">
+      </fds-action-sheet>
+      <fds-action-sheet direction="horizontal" style="padding: 0.5rem">
         <fds-button disabled>Primary disabled</fds-button>
         <fds-button variant="secondary" disabled>Secondary disabled</fds-button>
         <fds-button variant="tertiary" disabled>Tertiary disabled</fds-button>
         <fds-button variant="danger" disabled>Danger disabled</fds-button>
         <fds-button variant="glyph" disabled>✕</fds-button>
-      </fds-actions>
-      <fds-actions direction="vertical" style="width: 20rem; padding: 2rem">
+      </fds-action-sheet>
+      <fds-action-sheet direction="vertical" style="width: 20rem; padding: 2rem">
         <fds-button><span slot="icon">😀</span><span>Vertical primary with Icon</span> </fds-button>
         <fds-button variant="secondary">Vertical secondary</fds-button>
         <fds-button variant="tertiary">Vertical tertiary</fds-button>
         <fds-button variant="danger">Vertical danger</fds-button>
         <fds-button variant="glyph">✕</fds-button>
-      </fds-actions>
+      </fds-action-sheet>
     `
   }
 

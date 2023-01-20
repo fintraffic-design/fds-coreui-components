@@ -2,7 +2,7 @@ import { css, html, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
 import { token } from './token-utils'
-import "./global-types"
+import './global-types'
 
 const IconColorMap = {
   error: 'color-success-300',
@@ -31,7 +31,7 @@ class FdsAlert extends LitElement {
       border-bottom-color: ${token('color-danger-300')};
     }
     .alert--warning {
-      background-color:${token('color-warning-100')};
+      background-color: ${token('color-warning-100')};
       border-bottom-color: ${token('color-warning-300')};
     }
     .alert--info {
@@ -49,22 +49,22 @@ class FdsAlert extends LitElement {
     }
   `
 
-  @property() variant: 'error' | 'warning' | 'info' | 'success' = 'error';
+  @property() variant: 'error' | 'warning' | 'info' | 'success' = 'error'
 
   override render(): TemplateResult {
-      return html`
-        <div class="alert alert--${this.variant}">
-          <div class="alert__icon">
-            <fds-icon icon='alert-triangle' size='18' color="${IconColorMap[this.variant]}"></fds-icon>
-          </div>
-          <slot name="content"></slot>
+    return html`
+      <div class="alert alert--${this.variant}">
+        <div class="alert__icon">
+          <fds-icon icon="alert-triangle" size="18" color="${IconColorMap[this.variant]}"></fds-icon>
         </div>
-      `
-    }
+        <slot name="content"></slot>
+      </div>
+    `
+  }
 }
 
 declare global {
-    interface HTMLElementTagNameMap {
-      'fds-alert': FdsAlert
-    }
+  interface HTMLElementTagNameMap {
+    'fds-alert': FdsAlert
+  }
 }

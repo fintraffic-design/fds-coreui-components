@@ -4,6 +4,13 @@ import { TemplateResult } from 'lit-html'
 import './fds-card'
 import { token } from './token-utils'
 
+/**
+ * Dialog component.
+ *
+ * @property {boolean} modal
+ * Dialog is a modal dialog: Does not allow interaction with background elements.
+ * Cannot be changed later.
+ */
 @customElement('fds-dialog')
 export default class FdsDialog extends LitElement {
   static override styles = css`
@@ -18,24 +25,17 @@ export default class FdsDialog extends LitElement {
     }
   `
 
-  @property() open: boolean = false
-  @property() modal: boolean = false
+  @property({ type: Boolean }) modal: boolean = false
 
   @query('dialog')
   private readonly dialog: HTMLDialogElement | undefined
 
-  override update(changes: PropertyValues<FdsDialog>): void {
-    super.update(changes)
-    if (changes.get('open') !== this.open) {
-      if (this.open) {
-        if (this.modal) {
-          this.dialog?.showModal()
-        } else {
-          this.dialog?.show()
-        }
-      } else {
-        this.dialog?.close()
-      }
+  override firstUpdated(changes: PropertyValues<FdsDialog>): void {
+    super.firstUpdated(changes)
+    if (this.modal) {
+      this.dialog?.showModal()
+    } else {
+      this.dialog?.show()
     }
   }
 

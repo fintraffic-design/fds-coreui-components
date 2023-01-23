@@ -25,14 +25,24 @@ export class FdsCard extends LitElement {
     return html`
       <h1>Card</h1>
       <div style="display: flex">
-        <fds-card style="margin-right: 2rem;">
+        <fds-card style="margin-right: 2rem; width: 200px;">
           <div slot="header-title">Title</div>
           <div slot="header-corner">Corner</div>
-          Body
-          <div slot="footer">Footer</div>
+          <div slot="content">Content</div>
+          <div slot="footer" style="margin: 8px;">Footer</div>
         </fds-card>
 
-        <fds-card> Card with body only </fds-card>
+        <fds-card style="margin-right: 2rem;">
+          <div slot="header"></div>
+          <div slot="content">Card with content only</div>
+        </fds-card>
+
+        <fds-card style="width: 200px;">
+          <div slot="header" style="width: 100%; background-color: black; color: white; padding: 8px 8px;">
+            Custom header
+          </div>
+          <div slot="content">Content</div>
+        </fds-card>
       </div>
 
       <h1 style="padding-bottom: 12rem">Dialog</h1>

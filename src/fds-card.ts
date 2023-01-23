@@ -8,45 +8,40 @@ export class FdsCard extends LitElement {
   static override styles = css`
     :host {
       display: block;
-      padding: 8px;
       background: white;
       height: fit-content;
       width: fit-content;
     }
 
-    .card__header h3 {
+    .card__header {
       display: flex;
       justify-content: space-between;
-      margin: 0 0 16px;
+      flex-direction: row;
+      align-items: center;
+      margin: 0 8px;
     }
 
-    .card__header-corner {
-      margin-left: 1rem;
-    }
-
-    .card__body {
-      margin-bottom: 16px;
+    .card__content {
+      margin: 16px 8px;
     }
   `
 
   override render(): TemplateResult {
     return html`
-      <div class="card__header">
-        <h3>
-          <div class="card__header-title">
+      <slot name="header">
+        <div class="card__header">
+          <h3 class="card__header-title">
             <slot name="header-title"></slot>
+          </h3>
+          <div class="card__header-corner">
+            <slot name="header-corner"></slot>
           </div>
-        </h3>
+        </div>
+      </slot>
+      <div class="card__content">
+        <slot name="content"></slot>
       </div>
-      <div class="card__corner">
-        <slot></slot>
-      </div>
-      <div class="card__body">
-        <slot></slot>
-      </div>
-      <div class="card__footer">
-        <slot name="footer"></slot>
-      </div>
+      <slot name="footer"></slot>
     `
   }
 }

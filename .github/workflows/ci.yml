@@ -1,4 +1,4 @@
-name: compile, lint, test
+name: CI
 on:
   workflow_dispatch:
   push:

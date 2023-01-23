@@ -1,4 +1,5 @@
-name: Build and deploy Storybook to Github Pages
+name: Storybook CD
+description: Build and deploy Storybook to Github Pages
 
 on:
   push:

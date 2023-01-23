@@ -9,7 +9,7 @@
     "src"
   ],
   "dependencies": {
-    "@fintraffic-design/coreui-css": "git@github.com:fintraffic-design/coreui-css.git#097ed4dccd586735ae7d4ec2265f291f85be9129",
+    "@fintraffic-design/coreui-css": "git@github.com:fintraffic-design/coreui-css.git#c4c39b0e80e585c0deffd5862215d58a54ffc816",
     "lit": "^2.5.0",
     "lucide": "^0.104.0"
   },

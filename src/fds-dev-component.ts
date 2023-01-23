@@ -32,16 +32,16 @@ export class FdsCard extends LitElement {
           <div slot="footer" style="margin: 8px;">Footer</div>
         </fds-card>
 
-        <fds-card style="margin-right: 2rem;">
+        <fds-card style="margin-right: 2rem; width: 170px;" class="elevation-200">
           <div slot="header"></div>
-          <div slot="content">Card with content only</div>
+          <div slot="content">Card with content only and elevation-200</div>
         </fds-card>
 
-        <fds-card style="width: 200px;">
+        <fds-card style="width: 200px; margin-right: 2rem;" class="elevation-100">
           <div slot="header" style="width: 100%; background-color: black; color: white; padding: 8px 8px;">
             Custom header
           </div>
-          <div slot="content">Content</div>
+          <div slot="content">Card with custom header and elevation-100</div>
         </fds-card>
       </div>
 

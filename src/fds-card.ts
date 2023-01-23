@@ -1,7 +1,14 @@
 import { css, html, LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
+import { tokenVar } from './token-utils'
 import './global-types'
+import {
+  FdsSize1,
+  FdsSize2,
+  FdsStyleElevation100,
+  FdsStyleElevation200,
+} from '@fintraffic-design/coreui-css/dist/tokens'
 
 @customElement('fds-card')
 export class FdsCard extends LitElement {
@@ -13,16 +20,24 @@ export class FdsCard extends LitElement {
       width: fit-content;
     }
 
+    :host(.elevation-100) {
+      box-shadow: ${tokenVar(FdsStyleElevation100)};
+    }
+
+    :host(.elevation-200) {
+      box-shadow: ${tokenVar(FdsStyleElevation200)};
+    }
+
     .card__header {
       display: flex;
       justify-content: space-between;
       flex-direction: row;
       align-items: center;
-      margin: 0 8px;
+      margin: 0 ${tokenVar(FdsSize1)};
     }
 
     .card__content {
-      margin: 16px 8px;
+      margin: ${tokenVar(FdsSize2)} ${tokenVar(FdsSize1)};
     }
   `
 

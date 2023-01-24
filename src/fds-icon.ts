@@ -1,7 +1,7 @@
 import { css, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { AlertCircle, AlertTriangle, ChevronRight, createElement, PlusCircle, Trash2 } from 'lucide'
-import { FdsColorToken, FdsColorText1000 } from '@fintraffic-design/coreui-css/dist/tokens'
+import { FdsColorToken, FdsColorText1000 } from '@fintraffic-design/coreui-css'
 import { tokenVar } from './token-utils'
 
 /**

@@ -6,7 +6,7 @@ import './fds-card'
 import './fds-dialog'
 import './fds-icon'
 import './fds-alert'
-import { FdsColorDanger300 } from '@fintraffic-design/coreui-css/dist/tokens'
+import { FdsColorDanger300 } from '@fintraffic-design/coreui-css'
 
 @customElement('fds-test-component')
 export class FdsCard extends LitElement {

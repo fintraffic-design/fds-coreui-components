@@ -3,7 +3,7 @@ import { customElement, property, query } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
 import './fds-card'
 import { tokenVar } from './token-utils'
-import { FdsRadiusLarge, FdsStyleElevation400 } from '@fintraffic-design/coreui-css/dist/tokens'
+import { FdsRadiusLarge, FdsStyleElevation400 } from '@fintraffic-design/coreui-css'
 
 /**
  * Dialog component.

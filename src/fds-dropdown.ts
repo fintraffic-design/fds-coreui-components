@@ -51,9 +51,14 @@ export default class FdsDropdown extends LitElement {
       <div class="contents">
         ${this.options.map(
           option =>
-            html`<div @click=${() => this.handleSelect(option)} class="ui-label-text option">
-              ${option.label}
-            </div>`
+            html`
+              <div
+                @click=${() => this.handleSelect(option)}
+                class=${`ui-label-text option ${this.optionState(option)}`}
+              >
+                ${option.label}
+              </div>
+            `
         )}
       </div>
     `
@@ -62,7 +67,7 @@ export default class FdsDropdown extends LitElement {
       <button
         @click=${() => (this._isOpen = !this._isOpen)}
         ?disabled=${this.isDisabled}
-        class=${`ui-label-text ${!this._selectedOption && this.placeholder ? 'placeholder' : ''}`}
+        class=${`ui-label-text ${this.buttonState()}`}
       >
         ${this._selectedOption?.label || this.placeholder}
         <fds-icon .icon=${this._isOpen ? 'chevron-up' : 'chevron-down'}></fds-icon>
@@ -78,6 +83,19 @@ export default class FdsDropdown extends LitElement {
       this.onSelect(selectedOption.value)
     }
     this._isOpen = false
+  }
+
+  private buttonState() {
+    if (this.isError) {
+      return 'error'
+    }
+    if (!this._selectedOption && this.placeholder) {
+      return 'placeholder'
+    }
+  }
+
+  private optionState(option: DropdownOption) {
+    return this._selectedOption === option ? 'selected' : ''
   }
 
   static override styles = css`
@@ -138,6 +156,11 @@ export default class FdsDropdown extends LitElement {
     }
 
     .option:hover {
+      /* TODO: what color? */
+      background-color: ${tokenVar(FdsColorNeutral100)};
+    }
+
+    .selected {
       /* TODO: what color? */
       background-color: ${tokenVar(FdsColorNeutral100)};
     }

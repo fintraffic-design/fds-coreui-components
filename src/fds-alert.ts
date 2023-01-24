@@ -12,7 +12,7 @@ import {
   FdsColorInteractive300,
   FdsColorSuccess100,
   FdsColorSuccess300,
-} from '@fintraffic-design/coreui-css/dist/tokens'
+} from '@fintraffic-design/coreui-css'
 import './global-types'
 
 const IconColorMap = {

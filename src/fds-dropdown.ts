@@ -1,8 +1,13 @@
 import {
+  FdsColorBrandBlack,
   FdsColorBrandWhite,
+  FdsColorDanger200,
+  FdsColorInteractive100,
+  FdsColorInteractive200,
   FdsColorNeutral100,
   FdsColorNeutral200,
   FdsColorText1000,
+  FdsColorText300,
   FdsStyleElevation200,
   FdsTypographyUiLabelFontFamily,
   FdsTypographyUiLabelFontSize,
@@ -27,6 +32,7 @@ export interface DropdownOption {
 
 /**
  * Single choice dropdown component. For multiselection use MultiselectDropdown component.
+ *
  *
  */
 @customElement('fds-dropdown')
@@ -70,7 +76,7 @@ export default class FdsDropdown extends LitElement {
         class=${`ui-label-text ${this.buttonState()}`}
       >
         ${this._selectedOption?.label || this.placeholder}
-        <fds-icon .icon=${this._isOpen ? 'chevron-up' : 'chevron-down'}></fds-icon>
+        <fds-icon .icon=${this._isOpen ? 'chevron-up' : 'chevron-down'} .color=${FdsColorText1000}></fds-icon>
       </button>
       ${this._isOpen ? contents : null}
     `
@@ -129,6 +135,20 @@ export default class FdsDropdown extends LitElement {
       border: 1px solid ${tokenVar(FdsColorNeutral200)};
     }
 
+    button:disabled {
+      cursor: default;
+      background-color: ${tokenVar(FdsColorNeutral100)};
+    }
+
+    button.placeholder {
+      color: ${tokenVar(FdsColorText300)};
+    }
+
+    button.error {
+      color: ${tokenVar(FdsColorDanger200)};
+      border: 3px solid ${tokenVar(FdsColorDanger200)};
+    }
+
     .contents {
       cursor: pointer;
       display: block;
@@ -157,15 +177,12 @@ export default class FdsDropdown extends LitElement {
 
     .option:hover {
       /* TODO: what color? */
-      background-color: ${tokenVar(FdsColorNeutral100)};
+      background-color: ${tokenVar(FdsColorInteractive100)};
     }
 
-    .selected {
+    .option.selected {
       /* TODO: what color? */
-      background-color: ${tokenVar(FdsColorNeutral100)};
-    }
-
-    .placeholder {
+      background-color: ${tokenVar(FdsColorInteractive200)};
     }
   `
 }

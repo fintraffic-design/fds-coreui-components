@@ -67,6 +67,26 @@ export class FdsCard extends LitElement {
         ]}
       ></fds-dropdown>
 
+      <fds-dropdown
+        style="padding: 0.5rem"
+        .placeholder=${'Placeholder'}
+        .isDisabled=${true}
+        .options=${[
+          { label: 'foo', value: 'foo' },
+          { label: 'bar', value: 'bar' },
+        ]}
+      ></fds-dropdown>
+
+      <fds-dropdown
+        style="padding: 0.5rem"
+        .placeholder=${'Placeholder'}
+        .isError=${true}
+        .options=${[
+          { label: 'foo', value: 'foo' },
+          { label: 'bar', value: 'bar' },
+        ]}
+      ></fds-dropdown>
+
       <h1>Actions and buttons</h1>
       <fds-action-sheet style="padding: 0.5rem">
         <fds-button><span slot="icon">😀</span><span>Horizontal primary with icon</span></fds-button>

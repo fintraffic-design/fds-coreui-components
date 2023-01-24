@@ -10,7 +10,6 @@ import { FdsRadiusLarge, FdsStyleElevation400 } from '@fintraffic-design/coreui-
  *
  * @property {boolean} modal
  * Dialog is a modal dialog: Does not allow interaction with background elements.
- * Cannot be changed later.
  */
 @customElement('fds-dialog')
 export default class FdsDialog extends LitElement {
@@ -26,17 +25,20 @@ export default class FdsDialog extends LitElement {
     }
   `
 
-  @property({ type: Boolean }) modal: boolean = false
+  @property() modal: boolean = false
 
   @query('dialog')
   private readonly dialog: HTMLDialogElement | undefined
 
-  override firstUpdated(changes: PropertyValues<FdsDialog>): void {
-    super.firstUpdated(changes)
-    if (this.modal) {
-      this.dialog?.showModal()
-    } else {
-      this.dialog?.show()
+  override updated(changes: PropertyValues<FdsDialog>): void {
+    super.updated(changes)
+    if (this.modal !== changes.get('modal')) {
+      this.dialog?.close()
+      if (this.modal) {
+        this.dialog?.showModal()
+      } else {
+        this.dialog?.show()
+      }
     }
   }
 

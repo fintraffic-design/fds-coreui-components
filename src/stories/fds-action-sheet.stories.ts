@@ -4,7 +4,7 @@ import { FdsAlertVariant } from '../fds-alert'
 import { FdsActionSheetDirection } from '../fds-action-sheet'
 
 export default {
-  title: 'Action sheet',
+  title: 'Action Sheet',
   args: {
     direction: FdsActionSheetDirection.horizontal,
   },
@@ -20,7 +20,7 @@ type Template = (args: { direction: FdsAlertVariant }) => TemplateResult
 
 export const ActionSheet: Template = ({ direction }) => {
   return html`<fds-action-sheet .direction=${direction}>
-    <fds-button slot="destructive" icon="x" variant="danger" label="Danger"></fds-button>
+    <fds-button slot="separated" icon="x" variant="danger" label="Danger"></fds-button>
     <fds-button variant="tertiary" icon="alert-circle"></fds-button>
     <fds-button variant="tertiary" label="Tertiary"></fds-button>
     <fds-button variant="secondary" label="Secondary"></fds-button>

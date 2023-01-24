@@ -24,7 +24,6 @@ export class FdsActionSheet extends LitElement {
     .actions {
       display: flex;
       align-items: center;
-      justify-content: space-between;
     }
 
     .actions-content {
@@ -34,6 +33,11 @@ export class FdsActionSheet extends LitElement {
 
     .actions--horizontal {
       flex-direction: row;
+    }
+
+    .actions--horizontal .actions-separated {
+      flex: 1;
+      margin-right: ${tokenVar(FdsSize6)};
     }
 
     .actions--horizontal .actions-content {
@@ -52,11 +56,11 @@ export class FdsActionSheet extends LitElement {
       margin-right: ${tokenVar(FdsSize1)};
     }
 
-    .actions--vertical .actions-content ::slotted(:not(:last-child)) {
+    .actions--vertical ::slotted(:not(:last-child)) {
       margin-top: ${tokenVar(FdsSize1)};
     }
 
-    .actions--vertical ::slotted(:first-child) {
+    .actions--vertical .actions-separated {
       margin-top: ${tokenVar(FdsSize6)};
     }
 
@@ -64,11 +68,12 @@ export class FdsActionSheet extends LitElement {
       width: 100%;
     }
 
-    .actions--vertical .actions-content {
+    .actions--vertical .actions-content,
+    .actions--vertical .actions-separated {
       width: 100%;
     }
 
-    .actions--vertical .actions-content ::slotted(*) {
+    .actions--vertical ::slotted(*) {
       width: 100%;
     }
   `
@@ -78,7 +83,7 @@ export class FdsActionSheet extends LitElement {
   override render(): TemplateResult {
     return html`
       <div class="actions actions--${this.direction}">
-        <slot name="destructive"></slot>
+        <div class="actions-separated"><slot name="separated"></div><slot>
         <div class="actions-content"><slot></slot></div>
       </div>
     `

@@ -33,7 +33,6 @@
     "@types/estree": "^1.0.0",
     "babel-loader": "^8.3.0",
     "concurrently": "^5.3.0",
-    "esbuild": "^0.17.3",
     "eslint": "^8.30.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-import": "^2.26.0",
@@ -48,7 +47,6 @@
   "scripts": {
     "compile": "tsc",
     "lint": "eslint 'src/**/*.ts'",
-    "serve": "esbuild src/fds-dev-component.ts --bundle --outdir=build --watch --servedir=. --conditions=development",
     "test": "wtr",
     "build": "npm run compile && npm run lint && npm run test && npm run stylecheck",
     "test:watch": "wtr --watch",

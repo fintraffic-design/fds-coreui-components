@@ -1,6 +1,15 @@
 import { css, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import { AlertCircle, AlertTriangle, ChevronRight, createElement, PlusCircle, Trash2 } from 'lucide'
+import {
+  AlertCircle,
+  AlertTriangle,
+  ChevronDown,
+  ChevronRight,
+  ChevronUp,
+  createElement,
+  PlusCircle,
+  Trash2,
+} from 'lucide'
 import { FdsColorToken, FdsColorText1000 } from '@fintraffic-design/coreui-css/dist/tokens'
 import { tokenVar } from './token-utils'
 
@@ -9,6 +18,8 @@ import { tokenVar } from './token-utils'
  */
 const IconTypeMap = {
   'chevron-right': ChevronRight,
+  'chevron-up': ChevronUp,
+  'chevron-down': ChevronDown,
   'alert-triangle': AlertTriangle,
   'alert-circle': AlertCircle,
   'plus-circle': PlusCircle,

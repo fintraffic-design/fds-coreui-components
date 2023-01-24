@@ -10,7 +10,7 @@ import {
   PlusCircle,
   Trash2,
 } from 'lucide'
-import { FdsColorToken, FdsColorText1000 } from '@fintraffic-design/coreui-css/dist/tokens'
+import { FdsColorToken, FdsColorBrandBlack } from '@fintraffic-design/coreui-css/dist/tokens'
 import { tokenVar } from './token-utils'
 
 /**
@@ -34,18 +34,16 @@ type SvgSize = '18' | '24' | '36'
  * @property {string} icon - Options:
  * - alert-circle
  * - alert-triangle
+ * - chevron-down
  * - chevron-right
+ * - chevron-up
  * - plus-circle
  * - trash-2
  * @property {string} size - Options:
  * - 18
  * - 24 (default)
  * - 36
- * @property {string} color - Options:
- * - black (default)
- * - danger
- * - gray
- * - interactive
+ * @property {FdsColorToken} color - TODO: Add link to a list with options
  */
 @customElement('fds-icon')
 export default class FdsIcon extends LitElement {
@@ -56,7 +54,7 @@ export default class FdsIcon extends LitElement {
   `
 
   @property() size: SvgSize = '24'
-  @property() color: FdsColorToken = FdsColorText1000
+  @property() color: FdsColorToken = FdsColorBrandBlack
   @property() icon?: keyof typeof IconTypeMap
 
   override render(): SVGElement | null {

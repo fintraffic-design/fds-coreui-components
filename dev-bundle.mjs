@@ -3,7 +3,7 @@
 import esbuild from 'esbuild';
 
 const result = await esbuild.build({
-  entryPoints: ['src/fds-dev-component.ts'],
+  entryPoints: ['src/dev-bundle.ts'],
   outfile: 'build/dev-bundle.js',
   bundle: true,
   sourcemap: true,

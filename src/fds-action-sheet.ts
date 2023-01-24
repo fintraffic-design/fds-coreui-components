@@ -2,6 +2,11 @@ import { css, html, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
 
+export enum FdsActionSheetDirection {
+  horizontal = 'horizontal',
+  vertical = 'vertical',
+}
+
 @customElement('fds-action-sheet')
 export class FdsActionSheet extends LitElement {
   static override styles = css`
@@ -35,7 +40,7 @@ export class FdsActionSheet extends LitElement {
     }
   `
 
-  @property() direction: 'horizontal' | 'vertical' = 'horizontal'
+  @property() direction: FdsActionSheetDirection = FdsActionSheetDirection.horizontal
 
   override render(): TemplateResult {
     return html`

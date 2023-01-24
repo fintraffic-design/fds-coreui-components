@@ -64,7 +64,7 @@ export default class FdsButton extends LitElement {
       line-height: 1;
     }
 
-    :host-context(.actions--vertical) .button:not(.button--glyph) {
+    :host-context(.actions--vertical) .button {
       width: 100%;
     }
 

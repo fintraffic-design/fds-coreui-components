@@ -26,8 +26,7 @@ export enum FdsAlertVariant {
 /**
  * Alert component.
  *
- * @property {string} variant
- * Type of alert: error, warning, info or success
+ * @property {FdsAlertVariant} variant
  */
 @customElement('fds-alert')
 class FdsAlert extends LitElement {

@@ -20,10 +20,10 @@ type Template = (args: { direction: FdsAlertVariant }) => TemplateResult
 
 export const ActionSheet: Template = ({ direction }) => {
   return html`<fds-action-sheet .direction=${direction}>
-    <fds-button icon="x" variant="danger" label="Danger"></fds-button>
-    <fds-button label="Primary"></fds-button>
-    <fds-button variant="secondary" label="Secondary"></fds-button>
-    <fds-button variant="tertiary" label="Tertiary"></fds-button>
+    <fds-button slot="destructive" icon="x" variant="danger" label="Danger"></fds-button>
     <fds-button variant="tertiary" icon="alert-circle"></fds-button>
+    <fds-button variant="tertiary" label="Tertiary"></fds-button>
+    <fds-button variant="secondary" label="Secondary"></fds-button>
+    <fds-button label="Primary"></fds-button>
   </fds-action-sheet>`
 }

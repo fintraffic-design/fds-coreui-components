@@ -43,6 +43,7 @@
     "lint": "eslint 'src/**/*.ts'",
     "serve": "esbuild src/fds-dev-component.ts --bundle --outdir=build --watch --servedir=. --conditions=development",
     "test": "wtr",
+    "build": "npm run compile && npm run lint && npm run test && npm run stylecheck",
     "test:watch": "wtr --watch",
     "stylecheck": "prettier --check src",
     "dev-bundle": "node dev-bundle.mjs",

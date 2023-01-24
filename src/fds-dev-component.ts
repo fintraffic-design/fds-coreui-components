@@ -6,6 +6,7 @@ import './fds-card'
 import './fds-dialog'
 import './fds-icon'
 import './fds-alert'
+import './fds-dropdown'
 import { FdsColorDanger300 } from '@fintraffic-design/coreui-css/dist/tokens'
 
 @customElement('fds-test-component')
@@ -54,7 +55,17 @@ export class FdsCard extends LitElement {
       <fds-button @click="${this.toggleModal}">Open a modal dialog</fds-button>
 
       <h1>Icons</h1>
-      <fds-icon icon="alert-circle" .color="${FdsColorDanger300}"></fds-icon>
+      <fds-icon .icon=${'alert-circle'} .color=${FdsColorDanger300} style="padding: 0.5rem"></fds-icon>
+
+      <h1>Dropdown</h1>
+      <fds-dropdown
+        style="padding: 0.5rem"
+        .placeholder=${'Placeholder'}
+        .options=${[
+          { label: 'foo', value: 'foo' },
+          { label: 'bar', value: 'bar' },
+        ]}
+      ></fds-dropdown>
 
       <h1>Actions and buttons</h1>
       <fds-action-sheet style="padding: 0.5rem">

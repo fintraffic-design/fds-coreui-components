@@ -3,12 +3,7 @@ import { customElement } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
 import { tokenVar } from './token-utils'
 import './global-types'
-import {
-  FdsSize1,
-  FdsSize2,
-  FdsStyleElevation100,
-  FdsStyleElevation200,
-} from '@fintraffic-design/coreui-css/dist/tokens'
+import { FdsSize1, FdsSize2, FdsStyleElevation100, FdsStyleElevation200 } from '@fintraffic-design/coreui-css'
 
 @customElement('fds-card')
 export class FdsCard extends LitElement {

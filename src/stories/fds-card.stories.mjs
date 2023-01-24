@@ -6,10 +6,10 @@ export default {
 }
 
 const Template = () => {
-  return html`<fds-card>
+  return html`<fds-card style="width: 170px;" class="elevation-100">
     <div slot="header-title">Title</div>
     <div slot="header-corner">Corner</div>
-    Body
+    <div slot="content">Content</div>
     <div slot="footer">Footer</div>
   </fds-card>`
 }

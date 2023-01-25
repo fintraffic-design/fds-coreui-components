@@ -43,12 +43,12 @@ export interface DropdownOption {
 export default class FdsDropdown extends LitElement {
   constructor() {
     super()
+    // Set attributes to host element
     this.addEventListener('blur', () => (this._isOpen = false))
     this.tabIndex = 0
   }
 
   @property() options: DropdownOption[] = []
-  //@property() type: 'single-choice' | 'multiselect' = 'single-choice'
   @property() isDisabled: boolean = false
   @property() isError: boolean = false
   @property() placeholder?: string
@@ -67,7 +67,7 @@ export default class FdsDropdown extends LitElement {
               <div
                 @click=${() => this.handleSelect(option)}
                 @keypress=${(e: KeyboardEvent) => this.handleKeypress(e, option)}
-                class=${`ui-label-text option ${this.optionState(option)}`}
+                class=${`ui-label-text option ${this.getOptionCssClass(option)}`}
                 tabindex=${0}
                 aria-selected=${this._selectedOption === option}
               >
@@ -82,7 +82,7 @@ export default class FdsDropdown extends LitElement {
       <button
         @click=${() => (this._isOpen = !this._isOpen)}
         ?disabled=${this.isDisabled}
-        class=${`ui-label-text ${this.buttonState()}`}
+        class=${`ui-label-text ${this.getButtonCssClass()}`}
         aria-haspopup=${true}
         aria-expanded=${this._isOpen}
       >
@@ -108,7 +108,7 @@ export default class FdsDropdown extends LitElement {
     }
   }
 
-  private buttonState(): string {
+  private getButtonCssClass(): string {
     if (this.isError) {
       return 'error'
     }
@@ -118,7 +118,7 @@ export default class FdsDropdown extends LitElement {
     return ''
   }
 
-  private optionState(option: DropdownOption): string {
+  private getOptionCssClass(option: DropdownOption): string {
     return this._selectedOption === option ? 'selected' : ''
   }
 

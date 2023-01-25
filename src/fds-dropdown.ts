@@ -123,10 +123,6 @@ export default class FdsDropdown extends LitElement {
   }
 
   static override styles = css`
-    :host {
-      display: inline-flex;
-    }
-
     .ui-label-text {
       font-family: ${tokenVar(FdsTypographyUiLabelFontFamily)};
       font-style: 'medium';
@@ -141,7 +137,7 @@ export default class FdsDropdown extends LitElement {
     button {
       cursor: pointer;
       box-sizing: border-box;
-      display: flex;
+      display: inline-flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;

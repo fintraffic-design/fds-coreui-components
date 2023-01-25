@@ -86,7 +86,6 @@ export class FdsCard extends LitElement {
           { label: 'bar', value: 'bar' },
         ]}
       ></fds-dropdown>
-
       <h1>Actions and buttons</h1>
       <fds-action-sheet style="padding: 0.5rem">
         <fds-button><span slot="icon">😀</span><span>Horizontal primary with icon</span></fds-button>

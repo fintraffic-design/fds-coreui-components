@@ -13,7 +13,7 @@ import {
   FdsTypographyUiLabelFontWeight,
   FdsTypographyUiLabelLetterSpacing,
   FdsTypographyUiLabelLineHeight,
-} from '@fintraffic-design/coreui-css/dist/tokens'
+} from '@fintraffic-design/coreui-css'
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property, state } from 'lit/decorators.js'

@@ -10,10 +10,8 @@ import {
   createElement,
   PlusCircle,
   Trash2,
-  X
+  X,
 } from 'lucide'
-import { FdsColorToken, FdsColorBrandBlack } from '@fintraffic-design/coreui-css/dist/tokens'
-import { tokenVar } from './token-utils'
 
 /**
  * Only the common icons needed in fds components are here to keep bundle size smaller

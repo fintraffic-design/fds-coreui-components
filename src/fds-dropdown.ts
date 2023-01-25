@@ -1,5 +1,4 @@
 import {
-  FdsColorBrandBlack,
   FdsColorBrandWhite,
   FdsColorDanger200,
   FdsColorInteractive100,
@@ -33,7 +32,12 @@ export interface DropdownOption {
 /**
  * Single choice dropdown component. For multiselection use MultiselectDropdown component.
  *
- *
+ * @property {DropdownOption[]} options - List of options to be shown in the menu.
+ * @property {DropdownOption} defaultOption - Set option that is chosen as default.
+ * @property {boolean} isDisabled - Disable dropdown.
+ * @property {boolean} isError - Display error indicator on dropdown.
+ * @property {string} placeholder - Placeholder text while no option is selected.
+ * @property {function} onSelect - Triggered when an option is selected. The selected value is given as parameter.
  */
 @customElement('fds-dropdown')
 export default class FdsDropdown extends LitElement {
@@ -42,7 +46,9 @@ export default class FdsDropdown extends LitElement {
     this.addEventListener('blur', () => (this._isOpen = false))
     this.tabIndex = 0
   }
+
   @property() options: DropdownOption[] = []
+  //@property() type: 'single-choice' | 'multiselect' = 'single-choice'
   @property() isDisabled: boolean = false
   @property() isError: boolean = false
   @property() placeholder?: string
@@ -84,23 +90,24 @@ export default class FdsDropdown extends LitElement {
 
   private handleSelect(selectedOption: DropdownOption): void {
     this._selectedOption = selectedOption
+    this._isOpen = false
 
     if (this.onSelect) {
       this.onSelect(selectedOption.value)
     }
-    this._isOpen = false
   }
 
-  private buttonState() {
+  private buttonState(): string {
     if (this.isError) {
       return 'error'
     }
     if (!this._selectedOption && this.placeholder) {
       return 'placeholder'
     }
+    return ''
   }
 
-  private optionState(option: DropdownOption) {
+  private optionState(option: DropdownOption): string {
     return this._selectedOption === option ? 'selected' : ''
   }
 

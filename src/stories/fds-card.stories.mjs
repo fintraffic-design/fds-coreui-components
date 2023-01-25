@@ -9,7 +9,7 @@ const Template = () => {
   return html`<fds-card style="width: 170px;" class="elevation-100">
     <div slot="header-title">Title</div>
     <div slot="header-corner">Corner</div>
-    <div slot="content">Content</div>
+    <div>Content</div>
     <div slot="footer">Footer</div>
   </fds-card>`
 }

@@ -66,7 +66,10 @@ export default class FdsDropdown extends LitElement {
             html`
               <div
                 @click=${() => this.handleSelect(option)}
+                @keypress=${(e: KeyboardEvent) => this.handleKeypress(e, option)}
                 class=${`ui-label-text option ${this.optionState(option)}`}
+                tabindex=${0}
+                aria-selected=${this._selectedOption === option}
               >
                 ${option.label}
               </div>
@@ -80,12 +83,20 @@ export default class FdsDropdown extends LitElement {
         @click=${() => (this._isOpen = !this._isOpen)}
         ?disabled=${this.isDisabled}
         class=${`ui-label-text ${this.buttonState()}`}
+        aria-haspopup=${true}
+        aria-expanded=${this._isOpen}
       >
         ${this._selectedOption?.label || this.placeholder}
         <fds-icon .icon=${this._isOpen ? 'chevron-up' : 'chevron-down'} .color=${FdsColorText1000}></fds-icon>
       </button>
       ${this._isOpen ? contents : null}
     `
+  }
+
+  private handleKeypress(event: KeyboardEvent, selectedOption: DropdownOption): void {
+    if (event.key === 'Enter') {
+      this.handleSelect(selectedOption)
+    }
   }
 
   private handleSelect(selectedOption: DropdownOption): void {

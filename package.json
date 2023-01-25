@@ -9,24 +9,28 @@
     "src"
   ],
   "dependencies": {
-    "@fintraffic-design/coreui-css": "git@github.com:fintraffic-design/coreui-css.git#c4c39b0e80e585c0deffd5862215d58a54ffc816",
+    "@fintraffic-design/coreui-css": "git@github.com:fintraffic-design/coreui-css.git#40469b44ce34d013fc51e9a1819f772960094b7a",
     "lit": "^2.5.0",
     "lucide": "^0.104.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.18.6",
     "@open-wc/testing": "^3.1.7",
-    "@typescript-eslint/parser": "^5.47.1",
     "@storybook/addon-actions": "^6.5.15",
     "@storybook/addon-essentials": "^6.5.15",
     "@storybook/addon-links": "^6.5.15",
-    "@storybook/builder-webpack4": "^6.5.15",
-    "@storybook/manager-webpack4": "^6.5.15",
+    "@storybook/builder-vite": "^0.3.0",
     "@storybook/web-components": "^6.5.15",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
+    "@typescript-eslint/parser": "^5.47.1",
     "@web/dev-server-esbuild": "^0.3.3",
     "@web/test-runner": "^0.15.0",
     "@web/test-runner-playwright": "^0.9.0",
+    "@types/estree": "^1.0.0",
     "babel-loader": "^8.3.0",
+    "concurrently": "^5.3.0",
     "eslint": "^8.30.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-import": "^2.26.0",
@@ -36,18 +40,18 @@
     "lit-html": "^2.6.1",
     "prettier": "^2.8.2",
     "typescript": "^4.9.4",
-    "esbuild": "^0.17.3"
+    "vite": "^4.0.4"
   },
   "scripts": {
     "compile": "tsc",
     "lint": "eslint 'src/**/*.ts'",
-    "serve": "esbuild src/fds-dev-component.ts --bundle --outdir=build --watch --servedir=. --conditions=development",
     "test": "wtr",
+    "build": "npm run compile && npm run lint && npm run test && npm run stylecheck",
     "test:watch": "wtr --watch",
     "stylecheck": "prettier --check src",
     "dev-bundle": "node dev-bundle.mjs",
-    "storybook": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
-    "build-storybook": "NODE_OPTIONS=--openssl-legacy-provider build-storybook"
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "keywords": [],
   "author": "Fintraffic",

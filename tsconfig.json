@@ -29,5 +29,4 @@
     ]
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["src/stories/*.stories.ts"]
 }

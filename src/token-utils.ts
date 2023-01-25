@@ -1,5 +1,5 @@
 import { CSSResult, unsafeCSS } from 'lit'
-import { FdsToken } from '@fintraffic-design/coreui-css/dist/tokens'
+import { FdsToken } from '@fintraffic-design/coreui-css'
 
 export const tokenVar: (token: FdsToken) => CSSResult = token => {
   if (token == null || token.name == null || token.value == null) {

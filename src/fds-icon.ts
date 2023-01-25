@@ -1,21 +1,19 @@
+import { FdsSize3, FdsSizeToken } from '@fintraffic-design/coreui-css'
 import { css, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import { AlertCircle, AlertTriangle, ChevronRight, createElement, PlusCircle, Trash2 } from 'lucide'
-import { FdsColorToken, FdsColorText1000 } from '@fintraffic-design/coreui-css'
-import { tokenVar } from './token-utils'
+import { AlertCircle, AlertTriangle, ChevronRight, createElement, PlusCircle, Trash2, X } from 'lucide'
 
 /**
  * Only the common icons needed in fds components are here to keep bundle size smaller
  */
-const IconTypeMap = {
+export const FdsIcons = {
   'chevron-right': ChevronRight,
   'alert-triangle': AlertTriangle,
   'alert-circle': AlertCircle,
   'plus-circle': PlusCircle,
   'trash-2': Trash2,
+  x: X,
 }
-
-type SvgSize = '18' | '24' | '36'
 
 /**
  * Add interactible icon element. Icon library: https://lucide.dev/
@@ -26,15 +24,9 @@ type SvgSize = '18' | '24' | '36'
  * - chevron-right
  * - plus-circle
  * - trash-2
- * @property {string} size - Options:
- * - 18
- * - 24 (default)
- * - 36
- * @property {string} color - Options:
- * - black (default)
- * - danger
- * - gray
- * - interactive
+ * - x
+ * @property {string} size - FdsSizeToken
+ * @property {string} color - FdsColorToken
  */
 @customElement('fds-icon')
 export default class FdsIcon extends LitElement {
@@ -44,9 +36,8 @@ export default class FdsIcon extends LitElement {
     }
   `
 
-  @property() size: SvgSize = '24'
-  @property() color: FdsColorToken = FdsColorText1000
-  @property() icon?: keyof typeof IconTypeMap
+  @property() size: FdsSizeToken = FdsSize3
+  @property() icon?: keyof typeof FdsIcons
 
   override render(): SVGElement | null {
     if (!this.icon) {
@@ -54,10 +45,9 @@ export default class FdsIcon extends LitElement {
       return null
     }
 
-    const svgElement = createElement(IconTypeMap[this.icon])
-    svgElement.setAttribute('color', tokenVar(this.color).cssText)
-    svgElement.setAttribute('width', this.size)
-    svgElement.setAttribute('height', this.size)
+    const svgElement = createElement(FdsIcons[this.icon])
+    svgElement.setAttribute('width', this.size.value)
+    svgElement.setAttribute('height', this.size.value)
     return svgElement
   }
 }

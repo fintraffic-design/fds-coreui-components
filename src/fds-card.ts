@@ -17,8 +17,8 @@ export class FdsCard extends LitElement {
     :host {
       display: block;
       background: white;
-      height: fit-content;
-      width: fit-content;
+      width: 100%;
+      height: 100%;
     }
 
     .card__header {

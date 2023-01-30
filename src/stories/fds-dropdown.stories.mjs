@@ -20,14 +20,14 @@ const Template = ({ options, defaultOption, isDisabled, isError, placeholder, on
 export const Default = Template.bind({})
 
 Default.args = {
-  placeholder: 'Placeholder',
+  placeholder: 'Options',
   options: [
-    { label: 'foo', value: 'foo' },
-    { label: 'bar', value: 'bar' },
-    { label: 'foo 2', value: 'foo 2' },
-    { label: 'bar 2', value: 'bar 2' },
-    { label: 'foo 3', value: 'foo 3' },
-    { label: 'bar 3', value: 'bar 3' },
+    { label: 'Foo', value: 'Foo' },
+    { label: 'Bar', value: 'Bar' },
+    { label: 'Foo 2', value: 'Foo 2' },
+    { label: 'Bar 2', value: 'Bar 2' },
+    { label: 'Icon', value: 'Icon', icon: 'alert-triangle' },
+    { label: 'Icon 2', value: 'Icon 2', icon: 'alert-circle' },
   ],
 }
 
@@ -35,14 +35,14 @@ export const Disabled = Template.bind({})
 
 Disabled.args = {
   isDisabled: true,
-  placeholder: 'Placeholder',
+  placeholder: 'Options',
   options: [
-    { label: 'foo', value: 'foo' },
-    { label: 'bar', value: 'bar' },
-    { label: 'foo 2', value: 'foo 2' },
-    { label: 'bar 2', value: 'bar 2' },
-    { label: 'foo 3', value: 'foo 3' },
-    { label: 'bar 3', value: 'bar 3' },
+    { label: 'Foo', value: 'Foo' },
+    { label: 'Bar', value: 'Bar' },
+    { label: 'Foo 2', value: 'Foo 2' },
+    { label: 'Bar 2', value: 'Bar 2' },
+    { label: 'Icon', value: 'Icon', icon: 'alert-triangle' },
+    { label: 'Icon 2', value: 'Icon 2', icon: 'alert-circle' },
   ],
 }
 
@@ -50,13 +50,13 @@ export const Error = Template.bind({})
 
 Error.args = {
   isError: true,
-  placeholder: 'Placeholder',
+  placeholder: 'Options',
   options: [
-    { label: 'foo', value: 'foo' },
-    { label: 'bar', value: 'bar' },
+    { label: 'Foo', value: 'Foo' },
+    { label: 'Bar', value: 'Bar' },
     { label: 'foo 2', value: 'foo 2' },
-    { label: 'bar 2', value: 'bar 2' },
-    { label: 'foo 3', value: 'foo 3' },
-    { label: 'bar 3', value: 'bar 3' },
+    { label: 'Bar 2', value: 'Bar 2' },
+    { label: 'Icon', value: 'Icon', icon: 'alert-triangle' },
+    { label: 'Icon 2', value: 'Icon 2', icon: 'alert-circle' },
   ],
 }

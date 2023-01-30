@@ -73,8 +73,7 @@ export default class FdsDropdown extends LitElement {
                 tabindex=${0}
                 aria-selected=${this._selectedOption === option}
               >
-                <p>${option.label}</p>
-                <fds-icon .icon=${option.icon}></fds-icon>
+                ${this.getLabel(option)}
               </div>
             `
         )}
@@ -89,7 +88,7 @@ export default class FdsDropdown extends LitElement {
         aria-haspopup=${true}
         aria-expanded=${this._isOpen}
       >
-        ${this._selectedOption?.label || this.placeholder}
+        ${this.getLabel(this._selectedOption) || this.placeholder}
         <fds-icon class="chevron" .icon=${this._isOpen ? 'chevron-up' : 'chevron-down'}></fds-icon>
       </button>
       ${this._isOpen ? contents : null}
@@ -109,6 +108,17 @@ export default class FdsDropdown extends LitElement {
     if (this.onSelect) {
       this.onSelect(selectedOption.value)
     }
+  }
+
+  private getLabel(option?: DropdownOption): TemplateResult | Label | null {
+    if (!option) {
+      return null
+    }
+    if (!option.icon) {
+      return option.label
+    }
+
+    return html` <span class="icon-label"><fds-icon .icon=${option.icon}></fds-icon>${option.label}</span> `
   }
 
   private getButtonCssClass(): string {
@@ -164,10 +174,6 @@ export default class FdsDropdown extends LitElement {
       border: 3px solid ${tokenVar(FdsColorDanger200)};
     }
 
-    .chevron {
-      color: ${tokenVar(FdsColorText1000)};
-    }
-
     .contents {
       cursor: pointer;
       display: block;
@@ -180,6 +186,17 @@ export default class FdsDropdown extends LitElement {
       max-height: 80vw;
 
       box-shadow: ${tokenVar(FdsStyleElevation200)};
+    }
+
+    fds-icon {
+      position: static;
+      color: ${tokenVar(FdsColorText1000)};
+    }
+
+    .icon-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
     }
 
     .option {

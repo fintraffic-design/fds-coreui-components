@@ -114,11 +114,11 @@ export default class FdsDropdown extends LitElement {
     if (!option) {
       return null
     }
-    if (!option.icon) {
-      return html`<span class="label">${option.label}</span>`
-    }
+    const label = html`<span class="label">${option.label}</span>`
 
-    return html` <span class="icon-label"><fds-icon .icon=${option.icon}></fds-icon>${option.label}</span> `
+    return option.icon
+      ? html`<span class="icon-label"><fds-icon .icon=${option.icon}></fds-icon>${label}</span>`
+      : label
   }
 
   private getButtonCssClass(): string {
@@ -202,7 +202,6 @@ export default class FdsDropdown extends LitElement {
     .icon-label {
       display: flex;
       align-items: center;
-      text-overflow: ellipsis;
       overflow: hidden;
 
       gap: 0.5em;

@@ -1,25 +1,27 @@
+import { Meta, Story } from '@storybook/web-components'
 import { html } from 'lit'
 import '../fds-dropdown'
 
 export default {
   title: 'Dropdown',
-}
+} as Meta
 
-const Template = ({ options, defaultOption, isDisabled, isError, placeholder, onSelect }) =>
-  html`
+const Dropdown: Story = ({ options, defaultOption, disabled, error, placeholder, onSelect }) => {
+  return html`
     <fds-dropdown
       .options=${options}
       .defaultOption=${defaultOption}
-      .isDisabled=${isDisabled}
-      .isError=${isError}
+      .disabled=${disabled}
+      .error=${error}
       .placeholder=${placeholder}
       .onSelect=${onSelect}
     ></fds-dropdown>
   `
+}
 
-export const Default = Template.bind({})
+export const Primary: Story = Dropdown.bind({})
 
-Default.args = {
+Primary.args = {
   placeholder: 'Options',
   options: [
     { label: 'Foo', value: 'Foo' },
@@ -31,10 +33,10 @@ Default.args = {
   ],
 }
 
-export const Disabled = Template.bind({})
+export const Disabled: Story = Dropdown.bind({})
 
 Disabled.args = {
-  isDisabled: true,
+  disabled: true,
   placeholder: 'Options',
   options: [
     { label: 'Foo', value: 'Foo' },
@@ -46,10 +48,10 @@ Disabled.args = {
   ],
 }
 
-export const Error = Template.bind({})
+export const Error: Story = Dropdown.bind({})
 
 Error.args = {
-  isError: true,
+  error: true,
   placeholder: 'Options',
   options: [
     { label: 'Foo', value: 'Foo' },

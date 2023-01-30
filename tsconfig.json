@@ -21,6 +21,7 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitOverride": true,
     "useDefineForClassFields": false,
+    "skipLibCheck": true,
     "plugins": [
       {
         "name": "ts-lit-plugin",
@@ -28,5 +29,5 @@
       }
     ]
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts"]
 }

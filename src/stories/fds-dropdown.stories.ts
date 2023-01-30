@@ -8,6 +8,7 @@ export default {
 
 const Dropdown: Story = ({ options, defaultOption, disabled, error, placeholder, onSelect }) => {
   return html`
+    <div style="width:284px">
     <fds-dropdown
       .options=${options}
       .defaultOption=${defaultOption}
@@ -16,6 +17,7 @@ const Dropdown: Story = ({ options, defaultOption, disabled, error, placeholder,
       .placeholder=${placeholder}
       .onSelect=${onSelect}
     ></fds-dropdown>
+    </div>
   `
 }
 

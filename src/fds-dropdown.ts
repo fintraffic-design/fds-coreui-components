@@ -36,8 +36,8 @@ export interface DropdownOption {
  *
  * @property {DropdownOption[]} options - List of options to be shown in the menu.
  * @property {DropdownOption} defaultOption - Set option that is chosen as default.
- * @property {boolean} isDisabled - Disable dropdown.
- * @property {boolean} isError - Display error indicator on dropdown.
+ * @property {boolean} disabled - Disable dropdown.
+ * @property {boolean} error - Display error indicator on dropdown.
  * @property {string} placeholder - Placeholder text while no option is selected.
  * @property {function} onSelect - Triggered when an option is selected. The selected value is given as parameter.
  */
@@ -134,8 +134,8 @@ export default class FdsDropdown extends LitElement {
       justify-content: space-between;
       align-items: center;
 
+      width: 100%;
       /* TODO: what values? */
-      width: 284px;
       height: 48px;
       padding-left: 16px;
       padding-right: 8px;
@@ -174,9 +174,10 @@ export default class FdsDropdown extends LitElement {
       position: absolute;
       overflow: scroll;
 
-      /* TODO: change to same value as button width */
-      min-width: 284px;
-      max-height: 20vw;
+      min-width: 100%;
+      max-width: fit-content;
+      /* TODO: what value? */
+      max-height: 80vw;
 
       box-shadow: ${tokenVar(FdsStyleElevation200)};
     }

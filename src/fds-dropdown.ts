@@ -110,12 +110,12 @@ export default class FdsDropdown extends LitElement {
     }
   }
 
-  private getLabel(option?: DropdownOption): TemplateResult | Label | null {
+  private getLabel(option?: DropdownOption): TemplateResult | null {
     if (!option) {
       return null
     }
     if (!option.icon) {
-      return option.label
+      return html`<span class="label">${option.label}</span>`
     }
 
     return html` <span class="icon-label"><fds-icon .icon=${option.icon}></fds-icon>${option.label}</span> `
@@ -136,6 +136,11 @@ export default class FdsDropdown extends LitElement {
   }
 
   static override styles = css`
+    :host {
+      width: 100%;
+      position: relative;
+    }
+
     button {
       cursor: pointer;
       box-sizing: border-box;
@@ -143,6 +148,7 @@ export default class FdsDropdown extends LitElement {
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+      white-space: nowrap;
 
       width: 100%;
       /* TODO: what values? */
@@ -178,7 +184,7 @@ export default class FdsDropdown extends LitElement {
       cursor: pointer;
       display: block;
       position: absolute;
-      overflow: scroll;
+      overflow-y: scroll;
 
       min-width: 100%;
       max-width: fit-content;
@@ -196,13 +202,20 @@ export default class FdsDropdown extends LitElement {
     .icon-label {
       display: flex;
       align-items: center;
+      text-overflow: ellipsis;
+      overflow: hidden;
+
       gap: 0.5em;
+    }
+
+    .label {
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
 
     .option {
       display: flex;
       align-items: center;
-      justify-content: space-between;
 
       /* TODO: what values? */
       height: 56px;

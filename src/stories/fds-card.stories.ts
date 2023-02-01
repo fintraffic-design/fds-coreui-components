@@ -28,7 +28,12 @@ type Template = (args: {
 }) => TemplateResult
 
 export const Card: Template = ({ elevation, headerTitle, headerCorner, content, footer }) => {
-  return html`<fds-card .elevation=${elevation} style="width: 200px;">
+  return html`<fds-card
+    .elevation=${elevation}
+    style="width: 200px; cursor: pointer;"
+    .onCornerClick=${(): void => console.log('clicked corner')}
+    @click=${(): void => console.log('clicked card')}
+  >
     <div slot="header-title">${headerTitle}</div>
     <div slot="header-corner">${headerCorner}</div>
     <div>${content}</div>

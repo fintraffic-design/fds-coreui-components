@@ -16,13 +16,22 @@ export default {
 }
 
 type Template = (args: { variant: FdsNavigationVariant }) => TemplateResult
-const sections = [
+
+const items = [
   { label: 'Areatool', value: 'home' },
   { label: 'History', value: 'history' },
+  { label: 'Settings', value: 'settings', position: 'right', icon: 'chevron-down' },
 ]
+
 export const Navigation: Template = ({ variant }) => {
-  const onSelect = (value: string) => console.log('Selected', value)
+  const onSelect = (item: string) => console.log('Selected', item)
+
   return html`<div style="height: 300px;">
-    <fds-navigation .variant=${variant} .sections=${sections} .onSelect=${onSelect}></fds-navigation>
+    <fds-navigation .variant=${variant} .items=${items} .onSelect=${onSelect} .defaultItem=${items[0]}>
+      <div style="display: flex; align-items: center;">
+        <fds-icon icon="plus-circle" style="padding-right: 5px;"></fds-icon>
+        Header
+      </div>
+    </fds-navigation>
   </div>`
 }

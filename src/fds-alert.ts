@@ -29,7 +29,7 @@ export enum FdsAlertVariant {
  * @property {FdsAlertVariant} variant
  */
 @customElement('fds-alert')
-class FdsAlert extends LitElement {
+export default class FdsAlert extends LitElement {
   static override styles = css`
     .alert {
       padding: ${tokenVar(FdsSize1)} ${tokenVar(FdsSize1)} calc(${tokenVar(FdsSize1)} / 2);
@@ -82,11 +82,5 @@ class FdsAlert extends LitElement {
         <slot></slot>
       </div>
     `
-  }
-}
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'fds-alert': FdsAlert
   }
 }

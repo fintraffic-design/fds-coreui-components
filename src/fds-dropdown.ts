@@ -8,18 +8,13 @@ import {
   FdsColorText1000,
   FdsColorText300,
   FdsStyleElevation200,
-  FdsTypographyUiLabelFontFamily,
-  FdsTypographyUiLabelFontSize,
-  FdsTypographyUiLabelFontWeight,
-  FdsTypographyUiLabelLetterSpacing,
-  FdsTypographyUiLabelLineHeight,
 } from '@fintraffic-design/coreui-css'
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property, state } from 'lit/decorators.js'
-
-import './global-types'
 import { FdsIcons } from './fds-icon'
+import './global-types'
+import { uiLabelText } from './utils/css-utils'
 import { tokenVar } from './utils/token-utils'
 
 type Value = string | number | undefined
@@ -89,7 +84,7 @@ export default class FdsDropdown extends LitElement {
         aria-expanded=${this._isOpen}
       >
         ${this.getLabel(this._selectedOption) || this.placeholder}
-        <fds-icon class="chevron" .icon=${this._isOpen ? 'chevron-up' : 'chevron-down'}></fds-icon>
+        <fds-icon .icon=${this._isOpen ? 'chevron-up' : 'chevron-down'}></fds-icon>
       </button>
       ${this._isOpen ? contents : null}
     `
@@ -234,16 +229,6 @@ export default class FdsDropdown extends LitElement {
       /* TODO: what color? */
       background-color: ${tokenVar(FdsColorInteractive200)};
     }
-
-    .ui-label-text {
-      font-family: ${tokenVar(FdsTypographyUiLabelFontFamily)};
-      font-style: 'medium';
-      font-weight: ${tokenVar(FdsTypographyUiLabelFontWeight)};
-      font-size: ${tokenVar(FdsTypographyUiLabelFontSize)};
-      line-height: ${tokenVar(FdsTypographyUiLabelLineHeight)};
-      letter-spacing: ${tokenVar(FdsTypographyUiLabelLetterSpacing)};
-
-      color: ${tokenVar(FdsColorText1000)};
-    }
+    ${uiLabelText}
   `
 }

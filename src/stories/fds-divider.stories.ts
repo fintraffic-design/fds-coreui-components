@@ -6,7 +6,7 @@ import {
   FdsColorNeutral400,
   FdsColorToken,
 } from '@fintraffic-design/coreui-css'
-import './../global-types'
+import '../fds-divider'
 
 const colors = [FdsColorNeutral100, FdsColorNeutral200, FdsColorNeutral300, FdsColorNeutral400]
 

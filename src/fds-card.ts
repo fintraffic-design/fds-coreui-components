@@ -78,7 +78,7 @@ export class FdsCard extends LitElement {
       flex-direction: row;
       align-items: center;
       margin: 0 ${tokenVar(FdsSize1)};
-      min-height: 0px;
+      min-height: 0;
     }
 
     .card__content {

@@ -83,8 +83,12 @@ export class FdsActionSheet extends LitElement {
   override render(): TemplateResult {
     return html`
       <div class="actions actions--${this.direction}">
-        <div class="actions-separated"><slot name="separated"></div><slot>
-        <div class="actions-content"><slot></slot></div>
+        <div class="actions-separated">
+          <slot name="separated"></slot>
+        </div>
+        <div class="actions-content">
+          <slot></slot>
+        </div>
       </div>
     `
   }

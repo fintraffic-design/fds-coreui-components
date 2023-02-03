@@ -16,7 +16,7 @@ type Template = (args: { modal: boolean }) => TemplateResult
 
 export const Dialog: Template = ({ modal }) => {
   return html`<fds-dialog .modal=${modal}>
-    <fds-card style="padding: 0 1rem" elevation="0">
+    <fds-card elevation="0">
       <div>Dialog with action sheet and text</div>
       <fds-action-sheet style="margin-top: ${FdsSize3.value}">
         <fds-button slot="separated" variant="danger" label="Destroy"></fds-button>

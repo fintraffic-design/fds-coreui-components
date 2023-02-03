@@ -3,6 +3,7 @@ import FdsAlert from './fds-alert'
 import FdsButton from './fds-button'
 import { FdsCard } from './fds-card'
 import FdsDialog from './fds-dialog'
+import FdsDivider from './fds-divider'
 import FdsDropdown from './fds-dropdown'
 import FdsIcon from './fds-icon'
 import FdsNavigation from './fds-navigation'
@@ -17,5 +18,6 @@ declare global {
     'fds-alert': FdsAlert
     'fds-navigation': FdsNavigation
     'fds-dropdown': FdsDropdown
+    'fds-divider': FdsDivider
   }
 }

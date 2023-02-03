@@ -20,7 +20,7 @@ import {
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property } from 'lit/decorators.js'
-import { tokenVar } from './token-utils'
+import { tokenVar } from './utils/token-utils'
 import { FdsIcons } from './fds-icon'
 
 export enum FdsButtonVariant {

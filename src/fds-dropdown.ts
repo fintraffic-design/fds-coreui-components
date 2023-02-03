@@ -17,10 +17,10 @@ import {
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property, state } from 'lit/decorators.js'
-import { tokenVar } from './token-utils'
 
 import './global-types'
 import { FdsIcons } from './fds-icon'
+import { tokenVar } from './utils/token-utils'
 
 type Value = string | number | undefined
 type Label = string

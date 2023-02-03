@@ -1,7 +1,7 @@
 import { css, CSSResult, html, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
-import { tokenVar } from './token-utils'
+import { tokenVar } from './utils/token-utils'
 import './global-types'
 import { FdsSize1, FdsSize2, FdsStyleElevation100, FdsStyleElevation200 } from '@fintraffic-design/coreui-css'
 

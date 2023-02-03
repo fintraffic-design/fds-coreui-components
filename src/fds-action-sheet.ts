@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
-import { tokenVar } from './token-utils'
+import { tokenVar } from './utils/token-utils'
 import { FdsSize1, FdsSize6 } from '@fintraffic-design/coreui-css'
 
 export enum FdsActionSheetDirection {

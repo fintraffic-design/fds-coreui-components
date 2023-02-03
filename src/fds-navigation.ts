@@ -12,7 +12,7 @@ import {
 } from '@fintraffic-design/coreui-css'
 import { TemplateResult } from 'lit-html'
 import { customElement, property, state } from 'lit/decorators.js'
-import { tokenVar } from './token-utils'
+import { tokenVar } from './utils/token-utils'
 import { FdsIcons } from './fds-icon'
 
 export enum FdsNavigationVariant {

@@ -22,6 +22,8 @@ import { TemplateResult } from 'lit-html'
 import { customElement, property } from 'lit/decorators.js'
 import { tokenVar } from './utils/token-utils'
 import { FdsIcons } from './fds-icon'
+import { uiLabelTextClass } from './utils/css-utils'
+import './global-types'
 
 export enum FdsButtonVariant {
   primary = 'primary',
@@ -45,22 +47,23 @@ export default class FdsButton extends LitElement {
       justify-content: center;
     }
 
-    .button {
+    button {
       display: flex;
       border: 2px solid ${tokenVar(FdsColorBrandBlack)};
       background: ${tokenVar(FdsColorBrandBlack)};
       color: ${tokenVar(variantColorMap[FdsButtonVariant.primary])};
       border-radius: ${tokenVar(FdsRadiusLarge)};
-      padding: ${tokenVar(FdsSize1)} ${tokenVar(FdsSize1)};
+      padding: 13px 16px;
       height: ${tokenVar(FdsSize6)};
       cursor: pointer;
       align-items: center;
       justify-content: center;
+      gap: 8px;
       transition: all 200ms;
     }
 
-    .button *,
-    .button ::slotted(*) {
+    button *,
+    button ::slotted(*) {
       line-height: 1;
     }
 
@@ -118,15 +121,7 @@ export default class FdsButton extends LitElement {
       color: ${tokenVar(FdsColorText300)};
     }
 
-    .button-label {
-      padding: 0 ${tokenVar(FdsSize1)};
-      font-family: ${tokenVar(FdsTypographyUiLabelFontFamily)};
-      font-size: ${tokenVar(FdsTypographyUiLabelFontSize)};
-      letter-spacing: ${tokenVar(FdsTypographyUiLabelLetterSpacing)};
-      line-height: ${tokenVar(FdsTypographyUiLabelLineHeight)};
-      font-weight: ${tokenVar(FdsTypographyUiLabelFontWeight)};
-      display: ${tokenVar(FdsTypographyUiLabelDisplay)};
-    }
+    ${uiLabelTextClass}
   `
 
   @property() variant: FdsButtonVariant = FdsButtonVariant.primary
@@ -136,9 +131,9 @@ export default class FdsButton extends LitElement {
 
   override render(): TemplateResult {
     return html`
-      <button class="button button--${this.variant}" ?disabled="${this.disabled}">
-        ${this.icon ? html`<fds-icon class="button-icon" .icon="${this.icon}"></fds-icon>` : null}
-        ${this.label ? html`<span class="button-label">${this.label}</span>` : null}
+      <button class="button--${this.variant}" ?disabled="${this.disabled}">
+        ${this.icon && html`<fds-icon .icon="${this.icon}"></fds-icon>`}
+        ${this.label && html`<span class="ui-label-text">${this.label}</span>`}
       </button>
     `
   }

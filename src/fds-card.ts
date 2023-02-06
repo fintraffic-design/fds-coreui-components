@@ -22,15 +22,15 @@ export class FdsCard extends LitElement {
   @property() elevation: FdsCardElevation = FdsCardElevation.LOW
   @property() onCornerClick?: () => void
 
-  override render(): TemplateResult {
-    const elevationStyle = html`<style>
-      :host {
-        box-shadow: ${this.getElevationStyle()};
-      }
-    </style>`
+  override connectedCallback(): void {
+    super.connectedCallback()
+    const style = document.createElement('style')
+    style.innerHTML = `:host { box-shadow: ${this.getElevationStyle()}; }`
+    this.shadowRoot?.appendChild(style)
+  }
 
+  override render(): TemplateResult {
     return html`
-      ${elevationStyle}
       <slot name="header">
         <div class="card__header">
           <h3 class="card__header-title">

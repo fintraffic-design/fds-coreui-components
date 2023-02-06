@@ -1,16 +1,9 @@
-import {
-  FdsSize1,
-  FdsSize2,
-  FdsSize4,
-  FdsStyleElevation100,
-  FdsStyleElevation200,
-} from '@fintraffic-design/coreui-css'
-import { css, CSSResult, html, LitElement } from 'lit'
+import { FdsStyleElevation100, FdsStyleElevation200 } from '@fintraffic-design/coreui-css'
+import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property } from 'lit/decorators.js'
 import './global-types'
 import { heading4SmallTextClass } from './utils/css-utils'
-import { tokenVar } from './utils/token-utils'
 
 export enum FdsCardElevation {
   NONE = '0',
@@ -31,9 +24,7 @@ export class FdsCard extends LitElement {
 
   override connectedCallback(): void {
     super.connectedCallback()
-    const style = document.createElement('style')
-    style.innerHTML = `:host { box-shadow: ${this.getElevationStyle()}; }`
-    this.shadowRoot?.appendChild(style)
+    this.style.boxShadow = this.getElevationStyle()
   }
 
   override render(): TemplateResult {
@@ -55,13 +46,13 @@ export class FdsCard extends LitElement {
     `
   }
 
-  getElevationStyle(): CSSResult | string {
+  getElevationStyle(): string {
     if (this.elevation === FdsCardElevation.NONE) {
       return 'none'
     } else if (this.elevation === FdsCardElevation.HIGH) {
-      return tokenVar(FdsStyleElevation200)
+      return FdsStyleElevation200.value
     }
-    return tokenVar(FdsStyleElevation100)
+    return FdsStyleElevation100.value
   }
 
   onClick(event: Event): void {
@@ -95,7 +86,7 @@ export class FdsCard extends LitElement {
     }
 
     .card__content {
-      margin: 16px 32px;
+      padding: 16px 32px;
     }
 
     ${heading4SmallTextClass}

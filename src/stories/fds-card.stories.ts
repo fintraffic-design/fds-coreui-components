@@ -28,7 +28,8 @@ type Template = (args: {
 }) => TemplateResult
 
 export const Card: Template = ({ elevation, headerTitle, content }) => {
-  return html` <style>
+  return html`
+    <style>
       fds-card {
         cursor: pointer;
         width: 35%;
@@ -71,7 +72,8 @@ export const Card: Template = ({ elevation, headerTitle, content }) => {
           <fds-button label="Button"></fds-button>
         </fds-action-sheet>
       </footer>
-    </fds-card>`
+    </fds-card>
+  `
 }
 
 export const CardWithContentOnly: Template = ({ elevation, content }) => {

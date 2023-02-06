@@ -18,10 +18,10 @@ export default class FdsDialog extends LitElement {
     }
 
     dialog {
-      padding: ${tokenVar(FdsRadiusLarge)};
       border-radius: ${tokenVar(FdsRadiusLarge)};
       border: none;
       box-shadow: ${tokenVar(FdsStyleElevation400)};
+      padding: 0 !important;
     }
   `
 

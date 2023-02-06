@@ -1,11 +1,10 @@
 import { html, TemplateResult } from 'lit'
-import '../fds-dialog'
-import '../fds-card'
 import '../fds-action-sheet'
 import '../fds-button'
-import '../fds-icon'
-import { FdsSize3 } from '@fintraffic-design/coreui-css'
+import '../fds-card'
 import { FdsCardElevation } from '../fds-card'
+import '../fds-dialog'
+import '../fds-icon'
 
 export default {
   title: 'Dialog',
@@ -17,15 +16,33 @@ export default {
 type Template = (args: { modal: boolean }) => TemplateResult
 
 export const Dialog: Template = ({ modal }) => {
-  return html`<fds-dialog .modal=${modal} style="padding: 0 1rem 1rem">
-    <fds-card elevation="${FdsCardElevation.NONE}">
-      <div slot="header-title">Dialog</div>
-      <div>Dialog with action sheet and text</div>
-      <fds-action-sheet slot="footer" style="margin-top: ${FdsSize3.value}">
-        <fds-button slot="separated" variant="danger" label="Destroy"></fds-button>
-        <fds-button variant="secondary" label="Cancel"></fds-button>
-        <fds-button label="OK"></fds-button>
-      </fds-action-sheet>
-    </fds-card>
-  </fds-dialog>`
+  return html`
+    <style>
+      fds-dialog {
+        width: 35%;
+      }
+
+      fds-action-sheet {
+        padding: 32px;
+      }
+
+      h4,
+      p {
+        font-family: 'Public Sans';
+      }
+    </style>
+
+    <fds-dialog .modal=${modal}>
+      <fds-card elevation="${FdsCardElevation.NONE}">
+        <h4 slot="header-title">Modal title</h4>
+        <p>Modal message</p>
+        <fds-action-sheet slot="footer">
+          <fds-button slot="separated" variant="danger" label="Button"></fds-button>
+          <fds-button variant="tertiary" label="Button"></fds-button>
+          <fds-button variant="secondary" label="Button"></fds-button>
+          <fds-button label="Button"></fds-button>
+        </fds-action-sheet>
+      </fds-card>
+    </fds-dialog>
+  `
 }

@@ -14,6 +14,8 @@ import { TemplateResult } from 'lit-html'
 import { customElement, property, state } from 'lit/decorators.js'
 import { tokenVar } from './utils/token-utils'
 import { FdsIcons } from './fds-icon'
+import './global-types'
+import { uiLabelTextClass } from './utils/css-utils'
 
 export enum FdsNavigationVariant {
   primary = 'primary',
@@ -80,8 +82,8 @@ export default class FdsNavigation extends LitElement {
       class="item ${this._activeItem?.value === item.value ? 'item--active' : ''}"
     >
       <div class="item__label">
-        ${item.icon ? html`<fds-icon .icon="${item.icon}"></fds-icon>` : null}
-        <span>${item.label}</span>
+        <span class="ui-label-text">${item.label}</span>
+        ${item.icon && html`<fds-icon .icon="${item.icon}"></fds-icon>`}
       </div>
     </div>`
   }
@@ -98,9 +100,6 @@ export default class FdsNavigation extends LitElement {
       display: flex;
       align-items: center;
       width: 100%;
-      font-size: ${tokenVar(FdsTypographyEmphasisDefaultFontSize)};
-      line-height: ${tokenVar(FdsTypographyEmphasisDefaultLineHeight)};
-      font-weight: ${tokenVar(FdsTypographyEmphasisDefaultFontWeight)};
       user-select: none;
     }
 
@@ -151,5 +150,7 @@ export default class FdsNavigation extends LitElement {
       border-right: 6px solid transparent;
       border-bottom: 8px solid ${tokenVar(FdsColorBrandWhite)};
     }
+
+    ${uiLabelTextClass}
   `
 }

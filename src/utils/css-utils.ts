@@ -1,5 +1,9 @@
 import {
-  FdsColorText1000,
+  FdsTypographyUiHelperFontFamily,
+  FdsTypographyUiHelperFontSize,
+  FdsTypographyUiHelperFontWeight,
+  FdsTypographyUiHelperLetterSpacing,
+  FdsTypographyUiHelperLineHeight,
   FdsTypographyUiLabelFontFamily,
   FdsTypographyUiLabelFontSize,
   FdsTypographyUiLabelFontWeight,
@@ -9,7 +13,7 @@ import {
 import { css } from 'lit'
 import { tokenVar } from './token-utils'
 
-export const uiLabelText = css`
+export const uiLabelTextClass = css`
   .ui-label-text {
     font-family: ${tokenVar(FdsTypographyUiLabelFontFamily)};
     font-style: 'medium';
@@ -17,7 +21,16 @@ export const uiLabelText = css`
     font-size: ${tokenVar(FdsTypographyUiLabelFontSize)};
     line-height: ${tokenVar(FdsTypographyUiLabelLineHeight)};
     letter-spacing: ${tokenVar(FdsTypographyUiLabelLetterSpacing)};
+  }
+`
 
-    color: ${tokenVar(FdsColorText1000)};
+export const uiHelperTextClass = css`
+  .ui-helper-text {
+    font-family: ${tokenVar(FdsTypographyUiHelperFontFamily)};
+    font-style: 'medium';
+    font-weight: ${tokenVar(FdsTypographyUiHelperFontWeight)};
+    font-size: ${tokenVar(FdsTypographyUiHelperFontSize)};
+    line-height: ${tokenVar(FdsTypographyUiHelperLineHeight)};
+    letter-spacing: ${tokenVar(FdsTypographyUiHelperLetterSpacing)};
   }
 `

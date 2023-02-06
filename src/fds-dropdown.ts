@@ -14,7 +14,7 @@ import { TemplateResult } from 'lit-html'
 import { customElement, property, state } from 'lit/decorators.js'
 import { FdsIcons } from './fds-icon'
 import './global-types'
-import { uiLabelText } from './utils/css-utils'
+import { uiLabelTextClass } from './utils/css-utils'
 import { tokenVar } from './utils/token-utils'
 
 type Value = string | number | undefined
@@ -229,6 +229,6 @@ export default class FdsDropdown extends LitElement {
       /* TODO: what color? */
       background-color: ${tokenVar(FdsColorInteractive200)};
     }
-    ${uiLabelText}
+    ${uiLabelTextClass}
   `
 }

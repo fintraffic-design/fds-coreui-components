@@ -1,4 +1,9 @@
 import {
+  FdsTypographyHeadingSmallHeading4FontFamily,
+  FdsTypographyHeadingSmallHeading4FontSize,
+  FdsTypographyHeadingSmallHeading4FontWeight,
+  FdsTypographyHeadingSmallHeading4LetterSpacing,
+  FdsTypographyHeadingSmallHeading4LineHeight,
   FdsTypographyUiHelperFontFamily,
   FdsTypographyUiHelperFontSize,
   FdsTypographyUiHelperFontWeight,
@@ -32,5 +37,16 @@ export const uiHelperTextClass = css`
     font-size: ${tokenVar(FdsTypographyUiHelperFontSize)};
     line-height: ${tokenVar(FdsTypographyUiHelperLineHeight)};
     letter-spacing: ${tokenVar(FdsTypographyUiHelperLetterSpacing)};
+  }
+`
+
+export const heading4SmallTextClass = css`
+  .heading-4-small-text {
+    font-family: ${tokenVar(FdsTypographyHeadingSmallHeading4FontFamily)};
+    font-style: 'medium';
+    font-weight: ${tokenVar(FdsTypographyHeadingSmallHeading4FontWeight)};
+    font-size: ${tokenVar(FdsTypographyHeadingSmallHeading4FontSize)};
+    line-height: ${tokenVar(FdsTypographyHeadingSmallHeading4LineHeight)};
+    letter-spacing: ${tokenVar(FdsTypographyHeadingSmallHeading4LetterSpacing)};
   }
 `

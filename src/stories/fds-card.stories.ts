@@ -27,18 +27,51 @@ type Template = (args: {
   footer: string
 }) => TemplateResult
 
-export const Card: Template = ({ elevation, headerTitle, headerCorner, content, footer }) => {
-  return html`<fds-card
-    .elevation=${elevation}
-    style="width: 200px; cursor: pointer;"
-    .onCornerClick=${(): void => console.log('clicked corner')}
-    @click=${(): void => console.log('clicked card')}
-  >
-    <div slot="header-title">${headerTitle}</div>
-    <div slot="header-corner">${headerCorner}</div>
-    <div>${content}</div>
-    <div slot="footer">${footer}</div>
-  </fds-card>`
+export const Card: Template = ({ elevation, headerTitle, content }) => {
+  return html` <style>
+      fds-card {
+        cursor: pointer;
+        width: 35%;
+      }
+
+      fds-action-sheet {
+        padding: 16px;
+      }
+
+      .content,
+      footer {
+        font-family: 'Public Sans';
+      }
+
+      .content {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+      }
+
+      footer {
+        background-color: rgba(205, 205, 215, 0.2);
+      }
+    </style>
+
+    <fds-card
+      .elevation=${elevation}
+      .onCornerClick=${(): void => console.log('clicked corner')}
+      @click=${(): void => console.log('clicked card')}
+    >
+      <div slot="header-title">${headerTitle}</div>
+      <fds-icon slot="header-corner" .icon=${'chevron-right'}></fds-icon>
+      <div class="content">${content}</div>
+      <footer slot="footer">
+        <fds-divider></fds-divider>
+        <fds-action-sheet>
+          <fds-button slot="separated" variant="danger" label="Button"></fds-button>
+          <fds-button variant="tertiary" label="Button"></fds-button>
+          <fds-button variant="secondary" label="Button"></fds-button>
+          <fds-button label="Button"></fds-button>
+        </fds-action-sheet>
+      </footer>
+    </fds-card>`
 }
 
 export const CardWithContentOnly: Template = ({ elevation, content }) => {

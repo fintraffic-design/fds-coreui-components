@@ -1,48 +1,29 @@
-import { Meta, Story } from '@storybook/web-components'
-import { html } from 'lit'
+import { html, TemplateResult } from 'lit'
 import '../fds-checkbox'
 
-export default {
-  title: 'Checkbox',
-} as Meta
+type Template = (args: {
+  label: string
+  disabled: boolean
+  checked: boolean
+  onSelect: (value: boolean) => void
+}) => TemplateResult
 
-const Checkbox: Story = ({ label, disabled, defaultValue, onSelect }) => {
+export const Checkbox: Template = ({ label, disabled, checked, onSelect }) => {
   return html`
-    <div>
-      <fds-checkbox
-        .label=${label}
-        .defaultValue=${defaultValue}
-        .disabled=${disabled}
-        .onSelect=${onSelect}
-      ></fds-checkbox>
-    </div>
+    <fds-checkbox
+      .label=${label}
+      .checked=${checked}
+      .disabled=${disabled}
+      .onSelect=${onSelect}
+    ></fds-checkbox>
   `
 }
 
-export const Primary: Story = Checkbox.bind({})
-
-Primary.args = {
-  label: 'Label',
-}
-
-export const CheckedByDefault: Story = Checkbox.bind({})
-
-CheckedByDefault.args = {
-  label: 'Label',
-  defaultValue: true,
-}
-
-export const Disabled: Story = Checkbox.bind({})
-
-Disabled.args = {
-  disabled: true,
-  label: 'Label',
-}
-
-export const DisabledChecked: Story = Checkbox.bind({})
-
-DisabledChecked.args = {
-  disabled: true,
-  label: 'Label',
-  defaultValue: true,
+export default {
+  title: 'Checkbox',
+  args: {
+    label: 'Label',
+    disabled: false,
+    checked: false,
+  },
 }

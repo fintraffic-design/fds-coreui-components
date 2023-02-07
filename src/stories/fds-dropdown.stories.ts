@@ -4,9 +4,23 @@ import '../fds-dropdown'
 
 export default {
   title: 'Dropdown',
+  args: {
+    placeholder: 'Options',
+    options: [
+      { label: 'Foo', value: 'Foo' },
+      { label: 'Bar', value: 'Bar' },
+      { label: 'Foo 2', value: 'Foo 2' },
+      { label: 'Bar 2', value: 'Bar 2' },
+      { label: 'Icon', value: 'Icon', icon: 'alert-triangle' },
+      { label: 'Icon 2', value: 'Icon 2', icon: 'alert-circle' },
+    ],
+    defaultOption: undefined,
+    disabled: false,
+    error: false,
+  },
 } as Meta
 
-const Dropdown: Story = ({ options, defaultOption, disabled, error, placeholder, onSelect }) => {
+const Template: Story = ({ options, defaultOption, disabled, error, placeholder, onSelect }) => {
   return html`
     <div style="width:284px">
       <fds-dropdown
@@ -21,51 +35,9 @@ const Dropdown: Story = ({ options, defaultOption, disabled, error, placeholder,
   `
 }
 
-export const Primary: Story = Dropdown.bind({})
+export const Dropdown: Story = Template.bind({})
 
-Primary.args = {
-  placeholder: 'Options',
-  options: [
-    { label: 'Foo', value: 'Foo' },
-    { label: 'Bar', value: 'Bar' },
-    { label: 'Foo 2', value: 'Foo 2' },
-    { label: 'Bar 2', value: 'Bar 2' },
-    { label: 'Icon', value: 'Icon', icon: 'alert-triangle' },
-    { label: 'Icon 2', value: 'Icon 2', icon: 'alert-circle' },
-  ],
-}
-
-export const Disabled: Story = Dropdown.bind({})
-
-Disabled.args = {
-  disabled: true,
-  placeholder: 'Options',
-  options: [
-    { label: 'Foo', value: 'Foo' },
-    { label: 'Bar', value: 'Bar' },
-    { label: 'Foo 2', value: 'Foo 2' },
-    { label: 'Bar 2', value: 'Bar 2' },
-    { label: 'Alert', value: 'Alert', icon: 'alert-triangle' },
-    { label: 'Alert 2', value: 'Alert 2', icon: 'alert-circle' },
-  ],
-}
-
-export const Error: Story = Dropdown.bind({})
-
-Error.args = {
-  error: true,
-  placeholder: 'Options',
-  options: [
-    { label: 'Foo', value: 'Foo' },
-    { label: 'Bar', value: 'Bar' },
-    { label: 'foo 2', value: 'foo 2' },
-    { label: 'Bar 2', value: 'Bar 2' },
-    { label: 'Alert 1', value: 'Alert 1', icon: 'alert-triangle' },
-    { label: 'Alert 2', value: 'Alert 2', icon: 'alert-circle' },
-  ],
-}
-
-export const LongText: Story = Dropdown.bind({})
+export const LongText: Story = Template.bind({})
 
 LongText.args = {
   placeholder: 'Options',

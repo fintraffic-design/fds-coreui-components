@@ -1,9 +1,9 @@
-import { css, CSSResult, html, LitElement } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { FdsStyleElevation100, FdsStyleElevation200 } from '@fintraffic-design/coreui-css'
+import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
-import { tokenVar } from './token-utils'
+import { customElement, property } from 'lit/decorators.js'
 import './global-types'
-import { FdsSize1, FdsSize2, FdsStyleElevation100, FdsStyleElevation200 } from '@fintraffic-design/coreui-css'
+import { heading4SmallTextClass } from './utils/css-utils'
 
 export enum FdsCardElevation {
   NONE = '0',
@@ -14,7 +14,7 @@ export enum FdsCardElevation {
 /**
  * Card component.
  *
- * @property {FdsCardElevation} elevation - Depth of box shadow
+ * @property {FdsCardElevation} elevation - Depth of box shadow.
  * @property {function} onCornerClick - Triggered when top right corner is clicked.
  */
 @customElement('fds-card')
@@ -22,20 +22,15 @@ export class FdsCard extends LitElement {
   @property() elevation: FdsCardElevation = FdsCardElevation.LOW
   @property() onCornerClick?: () => void
 
-  override connectedCallback(): void {
-    super.connectedCallback()
-    const style = document.createElement('style')
-    style.innerHTML = `:host { box-shadow: ${this.getElevationStyle()}; }`
-    this.shadowRoot?.appendChild(style)
-  }
-
   override render(): TemplateResult {
+    this.style.boxShadow = this.getElevationStyle()
+
     return html`
       <slot name="header">
         <div class="card__header">
-          <h3 class="card__header-title">
+          <h4 class="card__header-title heading-4-small-text">
             <slot name="header-title"></slot>
-          </h3>
+          </h4>
           <div class="card__header-corner" @click=${this.onClick}>
             <slot name="header-corner"></slot>
           </div>
@@ -48,13 +43,13 @@ export class FdsCard extends LitElement {
     `
   }
 
-  getElevationStyle(): CSSResult | string {
+  getElevationStyle(): string {
     if (this.elevation === FdsCardElevation.NONE) {
       return 'none'
     } else if (this.elevation === FdsCardElevation.HIGH) {
-      return tokenVar(FdsStyleElevation200)
+      return FdsStyleElevation200.value
     }
-    return tokenVar(FdsStyleElevation100)
+    return FdsStyleElevation100.value
   }
 
   onClick(event: Event): void {
@@ -72,17 +67,25 @@ export class FdsCard extends LitElement {
       height: 100%;
     }
 
+    h4 {
+      margin: 0;
+    }
+
     .card__header {
       display: flex;
       justify-content: space-between;
       flex-direction: row;
       align-items: center;
-      margin: 0 ${tokenVar(FdsSize1)};
-      min-height: 0;
+      padding-left: 32px;
+      padding-right: 32px;
+      padding-top: 27px;
+      padding-bottom: 13px;
     }
 
     .card__content {
-      margin: ${tokenVar(FdsSize2)} ${tokenVar(FdsSize1)};
+      padding: 16px 32px;
     }
+
+    ${heading4SmallTextClass}
   `
 }

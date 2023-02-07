@@ -8,20 +8,15 @@ import {
   FdsColorText300,
   FdsColorToken,
   FdsRadiusLarge,
-  FdsSize1,
   FdsSize6,
-  FdsTypographyUiLabelDisplay,
-  FdsTypographyUiLabelFontFamily,
-  FdsTypographyUiLabelFontSize,
-  FdsTypographyUiLabelFontWeight,
-  FdsTypographyUiLabelLetterSpacing,
-  FdsTypographyUiLabelLineHeight,
 } from '@fintraffic-design/coreui-css'
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property } from 'lit/decorators.js'
-import { tokenVar } from './token-utils'
 import { FdsIcons } from './fds-icon'
+import './global-types'
+import { uiLabelTextClass } from './utils/css-utils'
+import { tokenVar } from './utils/token-utils'
 
 export enum FdsButtonVariant {
   primary = 'primary',
@@ -39,28 +34,40 @@ const variantColorMap: { [key in FdsButtonVariant]: FdsColorToken } = {
 
 @customElement('fds-button')
 export default class FdsButton extends LitElement {
+  @property() variant: FdsButtonVariant = FdsButtonVariant.primary
+  @property() disabled: boolean = false
+  @property() icon?: keyof typeof FdsIcons
+  @property() label?: string
+
+  override render(): TemplateResult {
+    return html`
+      <button class="button--${this.variant}" ?disabled="${this.disabled}">
+        ${this.icon && html`<fds-icon .icon="${this.icon}"></fds-icon>`}
+        ${this.label && html`<span class="ui-label-text">${this.label}</span>`}
+      </button>
+    `
+  }
+
   static override styles = css`
     :host {
       display: inline-flex;
       justify-content: center;
     }
 
-    .button {
-      display: flex;
-      border: 2px solid ${tokenVar(FdsColorBrandBlack)};
-      background: ${tokenVar(FdsColorBrandBlack)};
-      color: ${tokenVar(variantColorMap[FdsButtonVariant.primary])};
-      border-radius: ${tokenVar(FdsRadiusLarge)};
-      padding: ${tokenVar(FdsSize1)} ${tokenVar(FdsSize1)};
-      height: ${tokenVar(FdsSize6)};
+    button {
       cursor: pointer;
+      display: flex;
+      border-radius: ${tokenVar(FdsRadiusLarge)};
+      padding: 13px 16px;
+      height: ${tokenVar(FdsSize6)};
       align-items: center;
       justify-content: center;
+      gap: 8px;
       transition: all 200ms;
     }
 
-    .button *,
-    .button ::slotted(*) {
+    button *,
+    button ::slotted(*) {
       line-height: 1;
     }
 
@@ -68,41 +75,35 @@ export default class FdsButton extends LitElement {
       width: 100%;
     }
 
-    .button:hover {
-      background: ${tokenVar(FdsColorInteractive200)};
-      border-color: ${tokenVar(FdsColorInteractive200)};
-      color: ${tokenVar(FdsColorBrandWhite)};
-    }
-
-    .button:disabled {
-      background: ${tokenVar(FdsColorNeutral100)};
-      border-color: ${tokenVar(FdsColorNeutral100)};
-      color: ${tokenVar(FdsColorText300)};
+    .button--primary {
+      border: 2px solid ${tokenVar(FdsColorBrandBlack)};
+      background: ${tokenVar(FdsColorBrandBlack)};
+      color: ${tokenVar(variantColorMap[FdsButtonVariant.primary])};
     }
 
     .button--secondary {
+      border: 2px solid ${tokenVar(FdsColorBrandBlack)};
       background: ${tokenVar(FdsColorBrandWhite)};
-      color: ${tokenVar(FdsColorBrandBlack)};
-    }
-
-    .button--secondary:disabled {
-      background: transparent;
+      color: ${tokenVar(variantColorMap[FdsButtonVariant.secondary])};
     }
 
     .button--tertiary {
       background: transparent;
       border-color: transparent;
-      color: ${tokenVar(FdsColorBrandBlack)};
-    }
-
-    .button--tertiary:disabled {
-      background: transparent;
-      border-color: transparent;
+      color: ${tokenVar(variantColorMap[FdsButtonVariant.tertiary])};
     }
 
     .button--danger {
       background: ${tokenVar(FdsColorDanger300)};
-      border-color: ${tokenVar(FdsColorDanger300)};
+      border-color: transparent;
+      color: ${tokenVar(variantColorMap[FdsButtonVariant.danger])};
+    }
+
+    .button--primary:hover,
+    .button--secondary:hover,
+    .button--tertiary:hover {
+      background: ${tokenVar(FdsColorInteractive200)};
+      border-color: transparent;
       color: ${tokenVar(FdsColorBrandWhite)};
     }
 
@@ -112,34 +113,30 @@ export default class FdsButton extends LitElement {
       color: ${tokenVar(FdsColorBrandWhite)};
     }
 
-    .button--danger:disabled {
+    .button--primary:disabled {
       background: ${tokenVar(FdsColorNeutral100)};
       border-color: ${tokenVar(FdsColorNeutral100)};
       color: ${tokenVar(FdsColorText300)};
     }
 
-    .button-label {
-      padding: 0 ${tokenVar(FdsSize1)};
-      font-family: ${tokenVar(FdsTypographyUiLabelFontFamily)};
-      font-size: ${tokenVar(FdsTypographyUiLabelFontSize)};
-      letter-spacing: ${tokenVar(FdsTypographyUiLabelLetterSpacing)};
-      line-height: ${tokenVar(FdsTypographyUiLabelLineHeight)};
-      font-weight: ${tokenVar(FdsTypographyUiLabelFontWeight)};
-      display: ${tokenVar(FdsTypographyUiLabelDisplay)};
+    .button--secondary:disabled {
+      background: transparent;
+      color: ${tokenVar(FdsColorNeutral100)};
+      border-color: ${tokenVar(FdsColorNeutral100)};
     }
+
+    .button--tertiary:disabled {
+      background: transparent;
+      border-color: transparent;
+      color: ${tokenVar(FdsColorNeutral100)};
+    }
+
+    .button--danger:disabled {
+      background: ${tokenVar(FdsColorNeutral100)};
+      border-color: transparent;
+      color: ${tokenVar(FdsColorText300)};
+    }
+
+    ${uiLabelTextClass}
   `
-
-  @property() variant: FdsButtonVariant = FdsButtonVariant.primary
-  @property() disabled: boolean = false
-  @property() icon?: keyof typeof FdsIcons
-  @property() label?: string
-
-  override render(): TemplateResult {
-    return html`
-      <button class="button button--${this.variant}" ?disabled="${this.disabled}">
-        ${this.icon ? html`<fds-icon class="button-icon" .icon="${this.icon}"></fds-icon>` : null}
-        ${this.label ? html`<span class="button-label">${this.label}</span>` : null}
-      </button>
-    `
-  }
 }

@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
-import { tokenVar } from './token-utils'
+import { tokenVar } from './utils/token-utils'
 import { FdsSize1, FdsSize6 } from '@fintraffic-design/coreui-css'
 
 export enum FdsActionSheetDirection {
@@ -83,8 +83,12 @@ export class FdsActionSheet extends LitElement {
   override render(): TemplateResult {
     return html`
       <div class="actions actions--${this.direction}">
-        <div class="actions-separated"><slot name="separated"></div><slot>
-        <div class="actions-content"><slot></slot></div>
+        <div class="actions-separated">
+          <slot name="separated"></slot>
+        </div>
+        <div class="actions-content">
+          <slot></slot>
+        </div>
       </div>
     `
   }

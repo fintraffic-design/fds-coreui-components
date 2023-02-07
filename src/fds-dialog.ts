@@ -2,7 +2,7 @@ import { css, html, LitElement, PropertyValues } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
 import './fds-card'
-import { tokenVar } from './token-utils'
+import { tokenVar } from './utils/token-utils'
 import { FdsRadiusLarge, FdsStyleElevation400 } from '@fintraffic-design/coreui-css'
 
 /**
@@ -18,10 +18,10 @@ export default class FdsDialog extends LitElement {
     }
 
     dialog {
-      padding: ${tokenVar(FdsRadiusLarge)};
       border-radius: ${tokenVar(FdsRadiusLarge)};
       border: none;
       box-shadow: ${tokenVar(FdsStyleElevation400)};
+      padding: 0;
     }
   `
 

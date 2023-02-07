@@ -14,7 +14,7 @@ export enum FdsCardElevation {
 /**
  * Card component.
  *
- * @property {FdsCardElevation} elevation - Depth of box shadow
+ * @property {FdsCardElevation} elevation - Depth of box shadow.
  * @property {function} onCornerClick - Triggered when top right corner is clicked.
  */
 @customElement('fds-card')
@@ -22,12 +22,9 @@ export class FdsCard extends LitElement {
   @property() elevation: FdsCardElevation = FdsCardElevation.LOW
   @property() onCornerClick?: () => void
 
-  override connectedCallback(): void {
-    super.connectedCallback()
-    this.style.boxShadow = this.getElevationStyle()
-  }
-
   override render(): TemplateResult {
+    this.style.boxShadow = this.getElevationStyle()
+
     return html`
       <slot name="header">
         <div class="card__header">

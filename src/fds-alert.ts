@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
-import { tokenVar } from './token-utils'
+import { tokenVar } from './utils/token-utils'
 import {
   FdsColorDanger100,
   FdsColorDanger300,
@@ -15,6 +15,7 @@ import {
   FdsSize3,
 } from '@fintraffic-design/coreui-css'
 import './global-types'
+import { uiHelperTextClass } from './utils/css-utils'
 
 export enum FdsAlertVariant {
   error = 'error',
@@ -69,6 +70,7 @@ export default class FdsAlert extends LitElement {
       margin-right: ${tokenVar(FdsSize1)};
       position: relative;
     }
+    ${uiHelperTextClass}
   `
 
   @property() variant: FdsAlertVariant = FdsAlertVariant.error
@@ -77,9 +79,9 @@ export default class FdsAlert extends LitElement {
     return html`
       <div class="alert alert--${this.variant}">
         <div class="alert-icon">
-          <fds-icon icon="alert-triangle" .size="${FdsSize3}"></fds-icon>
+          <fds-icon .icon=${'alert-triangle'} .size="${FdsSize3}"></fds-icon>
         </div>
-        <slot></slot>
+        <slot class="ui-helper-text"></slot>
       </div>
     `
   }

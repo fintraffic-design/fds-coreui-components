@@ -41,7 +41,7 @@ export default class FdsDropdown extends LitElement {
   constructor() {
     super()
     // Set attributes to host element
-    this.addEventListener('blur', () => (this._isOpen = false))
+    this.addEventListener('blur', () => (this._open = false))
     this.tabIndex = 0
   }
 
@@ -52,7 +52,7 @@ export default class FdsDropdown extends LitElement {
   @property() defaultOption?: DropdownOption
   @property() onSelect?: (selectedValue: Value) => void
 
-  @state() private _isOpen: boolean = false
+  @state() private _open: boolean = false
   @state() private _selectedOption?: DropdownOption = this.defaultOption
 
   override render(): TemplateResult {
@@ -77,16 +77,16 @@ export default class FdsDropdown extends LitElement {
 
     return html`
       <button
-        @click=${() => (this._isOpen = !this._isOpen)}
+        @click=${() => (this._open = !this._open)}
         ?disabled=${this.disabled}
         class=${`ui-label-text ${this.getButtonCssClass()}`}
         aria-haspopup=${true}
-        aria-expanded=${this._isOpen}
+        aria-expanded=${this._open}
       >
         ${this.getLabel(this._selectedOption) || this.placeholder}
-        <fds-icon .icon=${this._isOpen ? 'chevron-up' : 'chevron-down'}></fds-icon>
+        <fds-icon .icon=${this._open ? 'chevron-up' : 'chevron-down'}></fds-icon>
       </button>
-      ${this._isOpen ? contents : null}
+      ${this._open ? contents : null}
     `
   }
 
@@ -98,7 +98,7 @@ export default class FdsDropdown extends LitElement {
 
   private handleSelect(selectedOption: DropdownOption): void {
     this._selectedOption = selectedOption
-    this._isOpen = false
+    this._open = false
 
     if (this.onSelect) {
       this.onSelect(selectedOption.value)

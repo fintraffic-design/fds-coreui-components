@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/web-components'
 import { html } from 'lit'
-import '../fds-dropdown'
+import '../fds-combobox'
 
 export default {
   title: 'Combobox',

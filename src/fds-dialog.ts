@@ -23,6 +23,10 @@ export default class FdsDialog extends LitElement {
       box-shadow: ${tokenVar(FdsStyleElevation400)};
       padding: 0;
     }
+
+    dialog ::slotted(*) {
+      border-radius: ${tokenVar(FdsRadiusLarge)};
+    }
   `
 
   @property() modal: boolean = false

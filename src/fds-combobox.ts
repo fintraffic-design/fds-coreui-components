@@ -2,7 +2,6 @@ import {
   FdsColorBrandWhite,
   FdsColorDanger200,
   FdsColorInteractive100,
-  FdsColorInteractive200,
   FdsColorNeutral100,
   FdsColorNeutral200,
   FdsColorText1000,
@@ -11,8 +10,8 @@ import {
 } from '@fintraffic-design/coreui-css'
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
-import { ifDefined } from 'lit/directives/if-defined.js'
 import { customElement, property, state } from 'lit/decorators.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import { tokenVar } from './utils/token-utils'
 
 import './global-types'
@@ -29,6 +28,7 @@ export default class FdsCombobox extends LitElement {
     // Set attributes to host element
     this.addEventListener('blur', () => {
       this._open = false
+      this._hightlightOption = undefined
       if (this.onSelect) {
         this.onSelect(this._value)
       }
@@ -44,7 +44,7 @@ export default class FdsCombobox extends LitElement {
 
   @state() private _open: boolean = false
   @state() private _value: string = this.initialValue ?? ''
-  @state() private _hightlightOption: number = 0
+  @state() private _hightlightOption: number | undefined
 
   override render(): TemplateResult {
     const contents = html`
@@ -112,6 +112,13 @@ export default class FdsCombobox extends LitElement {
     }
 
     if (e.key === 'Enter') {
+      if (this.shadowRoot && this._hightlightOption) {
+        const valueFromSelectedNode =
+          this.shadowRoot.querySelectorAll('#options-list>div')[this._hightlightOption].textContent
+        if (valueFromSelectedNode) {
+          this._value = valueFromSelectedNode.trim()
+        }
+      }
       this.blur()
     }
 
@@ -123,17 +130,23 @@ export default class FdsCombobox extends LitElement {
       const optionCount = this.shadowRoot.querySelectorAll('#options-list>div').length - 1
 
       if (e.key === 'ArrowUp') {
-        this._hightlightOption = this._hightlightOption === 0 ? optionCount : this._hightlightOption - 1
+        if (this._hightlightOption === undefined || this._hightlightOption === 0) {
+          this._hightlightOption = optionCount
+        } else {
+          this._hightlightOption = this._hightlightOption - 1
+        }
       }
 
       if (e.key === 'ArrowDown') {
-        this._hightlightOption = this._hightlightOption === optionCount ? 0 : this._hightlightOption + 1
+        if (this._hightlightOption === undefined || this._hightlightOption === optionCount) {
+          this._hightlightOption = 0
+        } else {
+          this._hightlightOption = this._hightlightOption + 1
+        }
       }
     } else {
-      this._hightlightOption = 0
+      this._hightlightOption = undefined
     }
-
-    console.log(this._hightlightOption)
   }
 
   private handleSelectFromList(selectedOption: string): void {

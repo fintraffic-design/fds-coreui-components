@@ -11,6 +11,7 @@ import {
 } from '@fintraffic-design/coreui-css'
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import { customElement, property, state } from 'lit/decorators.js'
 import { tokenVar } from './utils/token-utils'
 
@@ -50,7 +51,7 @@ export default class FdsCombobox extends LitElement {
               html`
                 <div
                   @click=${() => this.handleSelect(option)}
-                  @keypress=${(e: KeyboardEvent) => this.handleKeypress(e, option)}
+                  @keypress=${(e: KeyboardEvent) => this.handleOptionKeypress(e, option)}
                   class=${`ui-label-text option ${this.getOptionCssClass(option)}`}
                   tabindex=${0}
                   aria-selected=${this._selectedOption === option}
@@ -63,17 +64,22 @@ export default class FdsCombobox extends LitElement {
     `
 
     return html`
-      <input type="text" value=${this._selectedOption} @input=${this.handleInput} />
-      <button
-        @click=${() => (this._open = !this._open)}
-        ?disabled=${this.disabled}
-        class=${`ui-label-text ${this.getButtonCssClass()}`}
+      <div
+        @click=${() => (this._open = true)}
+        class=${`input-container ${this.getButtonCssClass()}`}
         aria-haspopup=${true}
         aria-expanded=${this._open}
       >
-        ${this.getLabel(this._selectedOption) || this.placeholder}
+        <input
+          type="text"
+          class="ui-label-text"
+          value=${this._selectedOption}
+          @input=${this.handleInput}
+          ?disabled=${this.disabled}
+          placeholder=${ifDefined(this.placeholder)}
+        />
         <fds-icon .icon=${this._open ? 'chevron-up' : 'chevron-down'}></fds-icon>
-      </button>
+      </div>
       ${this._open ? contents : null}
     `
   }
@@ -83,7 +89,7 @@ export default class FdsCombobox extends LitElement {
     this._selectedOption = target.value
   }
 
-  private handleKeypress(event: KeyboardEvent, selectedOption: string): void {
+  private handleOptionKeypress(event: KeyboardEvent, selectedOption: string): void {
     if (event.key === 'Enter') {
       this.handleSelect(selectedOption)
     }
@@ -125,7 +131,7 @@ export default class FdsCombobox extends LitElement {
       position: relative;
     }
 
-    button {
+    .input-container {
       cursor: pointer;
       box-sizing: border-box;
       display: inline-flex;
@@ -137,12 +143,23 @@ export default class FdsCombobox extends LitElement {
       width: 100%;
       /* TODO: what values? */
       height: 48px;
-      padding-left: 16px;
-      padding-right: 8px;
-      gap: 10px;
+    }
 
+    .input-container > input {
+      width: inherit;
+      height: inherit;
+      text-overflow: ellipsis;
+      padding-left: 16px;
+      padding-right: 40px; // icon 24px + 8px padding for left and right
       background-color: ${tokenVar(FdsColorBrandWhite)};
       border: 1px solid ${tokenVar(FdsColorNeutral200)};
+    }
+
+    .input-container > fds-icon {
+      pointer-events: none;
+      position: absolute;
+      right: 8px;
+      color: ${tokenVar(FdsColorText1000)};
     }
 
     button:disabled {
@@ -179,8 +196,9 @@ export default class FdsCombobox extends LitElement {
     }
 
     fds-icon {
-      position: static;
-      color: ${tokenVar(FdsColorText1000)};
+      //position: static;
+
+      //color: ${tokenVar(FdsColorText1000)};
     }
 
     .icon-label {

@@ -27,7 +27,12 @@ export default class FdsCombobox extends LitElement {
   constructor() {
     super()
     // Set attributes to host element
-    this.addEventListener('blur', () => (this._open = false))
+    this.addEventListener('blur', () => {
+      this._open = false
+      if (this.onSelect) {
+        this.onSelect(this._value)
+      }
+    })
   }
 
   @property() options: string[] = []
@@ -112,15 +117,15 @@ export default class FdsCombobox extends LitElement {
       const target = event.target as HTMLInputElement
       target.select()
     }
+
+    if (event.key === 'Enter') {
+      this.blur()
+    }
   }
 
   private handleSelectFromList(selectedOption: string): void {
     this._value = selectedOption
-    this._open = false
-
-    if (this.onSelect) {
-      this.onSelect(selectedOption)
-    }
+    this.blur()
   }
 
   private getButtonCssClass(): string {

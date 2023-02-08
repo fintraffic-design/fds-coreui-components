@@ -40,10 +40,11 @@ export default class FdsCombobox extends LitElement {
   @property() error: boolean = false
   @property() placeholder?: string
   @property() initialValue?: string
-  @property() onSelect?: (selectedValue: string) => void
+  @property() onSelect?: (value: string) => void
 
   @state() private _open: boolean = false
   @state() private _value: string = this.initialValue ?? ''
+  @state() private _hightlightOption: number = 0
 
   override render(): TemplateResult {
     const contents = html`
@@ -51,12 +52,12 @@ export default class FdsCombobox extends LitElement {
         ${this.options
           .filter((option: string) => option.toLowerCase().includes(this._value.toLowerCase()))
           .map(
-            option =>
+            (option, idx) =>
               html`
                 <div
                   @click=${() => this.handleSelectFromList(option)}
                   @keypress=${(e: KeyboardEvent) => this.handleOptionKeypress(e, option)}
-                  class=${`option ui-label-text ${this.getOptionCssClass(option)}`}
+                  class=${`option ui-label-text ${this.getOptionCssClass(idx)}`}
                   tabindex=${0}
                   aria-selected=${this._value === option}
                 >
@@ -75,6 +76,7 @@ export default class FdsCombobox extends LitElement {
         aria-expanded=${this._open}
       >
         <input
+          id="input"
           type="text"
           class="ui-label-text"
           .value=${this._value}
@@ -112,6 +114,26 @@ export default class FdsCombobox extends LitElement {
     if (e.key === 'Enter') {
       this.blur()
     }
+
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+      e.preventDefault()
+      if (!this.shadowRoot) {
+        return
+      }
+      const optionCount = this.shadowRoot.querySelectorAll('#options-list>div').length - 1
+
+      if (e.key === 'ArrowUp') {
+        this._hightlightOption = this._hightlightOption === 0 ? optionCount : this._hightlightOption - 1
+      }
+
+      if (e.key === 'ArrowDown') {
+        this._hightlightOption = this._hightlightOption === optionCount ? 0 : this._hightlightOption + 1
+      }
+    } else {
+      this._hightlightOption = 0
+    }
+
+    console.log(this._hightlightOption)
   }
 
   private handleSelectFromList(selectedOption: string): void {
@@ -129,8 +151,8 @@ export default class FdsCombobox extends LitElement {
     return ''
   }
 
-  private getOptionCssClass(option: string): string {
-    return this._value === option ? 'selected' : ''
+  private getOptionCssClass(idx: number): string {
+    return this._hightlightOption === idx ? 'highlight' : ''
   }
 
   static override styles = css`
@@ -216,15 +238,12 @@ export default class FdsCombobox extends LitElement {
       border-bottom: 1px solid ${tokenVar(FdsColorNeutral200)};
     }
 
-    .option:hover {
+    .option:hover,
+    .option.highlight {
       /* TODO: what color? */
       background-color: ${tokenVar(FdsColorInteractive100)};
     }
 
-    .option.selected {
-      /* TODO: what color? */
-      background-color: ${tokenVar(FdsColorInteractive200)};
-    }
     ${uiLabelTextClass}
   `
 }

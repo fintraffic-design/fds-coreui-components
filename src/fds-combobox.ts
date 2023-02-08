@@ -43,20 +43,11 @@ export default class FdsCombobox extends LitElement {
   @property() onSelect?: (selectedValue: string) => void
 
   @state() private _open: boolean = false
-  @state({
-    hasChanged(value: unknown, oldValue: unknown) {
-      if (value !== oldValue) {
-        console.log(value)
-        return true
-      }
-      return false
-    },
-  })
-  private _value: string = this.initialValue ?? ''
+  @state() private _value: string = this.initialValue ?? ''
 
   override render(): TemplateResult {
     const contents = html`
-      <div class="contents">
+      <div id="options-list">
         ${this.options
           .filter((option: string) => option.toLowerCase().includes(this._value.toLowerCase()))
           .map(
@@ -65,7 +56,7 @@ export default class FdsCombobox extends LitElement {
                 <div
                   @click=${() => this.handleSelectFromList(option)}
                   @keypress=${(e: KeyboardEvent) => this.handleOptionKeypress(e, option)}
-                  class=${`ui-label-text option ${this.getOptionCssClass(option)}`}
+                  class=${`option ui-label-text ${this.getOptionCssClass(option)}`}
                   tabindex=${0}
                   aria-selected=${this._value === option}
                 >
@@ -103,22 +94,22 @@ export default class FdsCombobox extends LitElement {
     this._value = target.value
   }
 
-  private handleOptionKeypress(event: KeyboardEvent, selectedOption: string): void {
-    if (event.key === 'Enter') {
+  private handleOptionKeypress(e: KeyboardEvent, selectedOption: string): void {
+    if (e.key === 'Enter') {
       this.handleSelectFromList(selectedOption)
     }
   }
 
-  private handleInputKeydown(event: KeyboardEvent): void {
+  private handleInputKeydown(e: KeyboardEvent): void {
     this._open = true
 
-    if (event.key === 'Escape') {
+    if (e.key === 'Escape') {
       this._open = false
-      const target = event.target as HTMLInputElement
+      const target = e.target as HTMLInputElement
       target.select()
     }
 
-    if (event.key === 'Enter') {
+    if (e.key === 'Enter') {
       this.blur()
     }
   }
@@ -198,7 +189,7 @@ export default class FdsCombobox extends LitElement {
       border: 3px solid ${tokenVar(FdsColorDanger200)};
     }
 
-    .contents {
+    #options-list {
       cursor: pointer;
       display: block;
       position: absolute;

@@ -75,6 +75,7 @@ export default class FdsCombobox extends LitElement {
           class="ui-label-text"
           value=${this._selectedOption}
           @input=${this.handleInput}
+          @keydown=${this.handleInputKeydown}
           ?disabled=${this.disabled}
           placeholder=${ifDefined(this.placeholder)}
         />
@@ -92,6 +93,14 @@ export default class FdsCombobox extends LitElement {
   private handleOptionKeypress(event: KeyboardEvent, selectedOption: string): void {
     if (event.key === 'Enter') {
       this.handleSelect(selectedOption)
+    }
+  }
+
+  private handleInputKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Escape') {
+      this._open = false
+      const target = event.target as HTMLInputElement
+      target.select()
     }
   }
 

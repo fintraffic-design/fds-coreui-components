@@ -7,6 +7,9 @@ module.exports = {
   core: {
     builder: '@storybook/builder-vite',
   },
+  features: {
+    buildStoriesJson: true
+  },
   async viteFinal(config) {
     return mergeConfig(config, { base: "/coreui-components/" })
   },

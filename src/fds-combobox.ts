@@ -45,7 +45,7 @@ export default class FdsCombobox extends LitElement {
     const contents = html`
       <div class="contents">
         ${this.options
-          .filter((option: string) => option.toLowerCase().includes(this._selectedOption))
+          .filter((option: string) => option.toLowerCase().includes(this._selectedOption.toLowerCase()))
           .map(
             option =>
               html`

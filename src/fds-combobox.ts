@@ -28,35 +28,43 @@ export default class FdsCombobox extends LitElement {
     super()
     // Set attributes to host element
     this.addEventListener('blur', () => (this._open = false))
-    this.tabIndex = 0
   }
 
   @property() options: string[] = []
   @property() disabled: boolean = false
   @property() error: boolean = false
   @property() placeholder?: string
-  @property() defaultOption?: string
+  @property() initialValue?: string
   @property() onSelect?: (selectedValue: string) => void
 
   @state() private _open: boolean = false
-  @state() private _selectedOption: string = this.defaultOption ?? ''
+  @state({
+    hasChanged(value: unknown, oldValue: unknown) {
+      if (value !== oldValue) {
+        console.log(value)
+        return true
+      }
+      return false
+    },
+  })
+  private _value: string = this.initialValue ?? ''
 
   override render(): TemplateResult {
     const contents = html`
       <div class="contents">
         ${this.options
-          .filter((option: string) => option.toLowerCase().includes(this._selectedOption.toLowerCase()))
+          .filter((option: string) => option.toLowerCase().includes(this._value.toLowerCase()))
           .map(
             option =>
               html`
                 <div
-                  @click=${() => this.handleSelect(option)}
+                  @click=${() => this.handleSelectFromList(option)}
                   @keypress=${(e: KeyboardEvent) => this.handleOptionKeypress(e, option)}
                   class=${`ui-label-text option ${this.getOptionCssClass(option)}`}
                   tabindex=${0}
-                  aria-selected=${this._selectedOption === option}
+                  aria-selected=${this._value === option}
                 >
-                  ${this.getLabel(option)}
+                  ${option}
                 </div>
               `
           )}
@@ -73,7 +81,7 @@ export default class FdsCombobox extends LitElement {
         <input
           type="text"
           class="ui-label-text"
-          value=${this._selectedOption}
+          value=${this._value}
           @input=${this.handleInput}
           @keydown=${this.handleInputKeydown}
           ?disabled=${this.disabled}
@@ -87,12 +95,12 @@ export default class FdsCombobox extends LitElement {
 
   private handleInput(e: InputEvent): void {
     const target = e.target as HTMLInputElement
-    this._selectedOption = target.value
+    this._value = target.value
   }
 
   private handleOptionKeypress(event: KeyboardEvent, selectedOption: string): void {
     if (event.key === 'Enter') {
-      this.handleSelect(selectedOption)
+      this.handleSelectFromList(selectedOption)
     }
   }
 
@@ -104,8 +112,8 @@ export default class FdsCombobox extends LitElement {
     }
   }
 
-  private handleSelect(selectedOption: string): void {
-    this._selectedOption = selectedOption
+  private handleSelectFromList(selectedOption: string): void {
+    this._value = selectedOption
     this._open = false
 
     if (this.onSelect) {
@@ -113,25 +121,18 @@ export default class FdsCombobox extends LitElement {
     }
   }
 
-  private getLabel(option?: string): TemplateResult | null {
-    if (!option) {
-      return null
-    }
-    return html`<span class="label">${option}</span>`
-  }
-
   private getButtonCssClass(): string {
     if (this.error) {
       return 'error'
     }
-    if (!this._selectedOption && this.placeholder) {
+    if (!this._value && this.placeholder) {
       return 'placeholder'
     }
     return ''
   }
 
   private getOptionCssClass(option: string): string {
-    return this._selectedOption === option ? 'selected' : ''
+    return this._value === option ? 'selected' : ''
   }
 
   static override styles = css`
@@ -204,25 +205,6 @@ export default class FdsCombobox extends LitElement {
       box-shadow: ${tokenVar(FdsStyleElevation200)};
     }
 
-    fds-icon {
-      //position: static;
-
-      //color: ${tokenVar(FdsColorText1000)};
-    }
-
-    .icon-label {
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-
-      gap: 0.5em;
-    }
-
-    .label {
-      text-overflow: ellipsis;
-      overflow: hidden;
-    }
-
     .option {
       display: flex;
       align-items: center;
@@ -230,7 +212,7 @@ export default class FdsCombobox extends LitElement {
       /* TODO: what values? */
       height: 56px;
       padding-left: 16px;
-      padding-right: 8px;
+      //padding-right: 8px;
 
       background-color: ${tokenVar(FdsColorBrandWhite)};
       border-bottom: 1px solid ${tokenVar(FdsColorNeutral200)};

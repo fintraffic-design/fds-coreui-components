@@ -112,7 +112,7 @@ export default class FdsCombobox extends LitElement {
     }
 
     if (e.key === 'Enter') {
-      if (this.shadowRoot && this._hightlightOption) {
+      if (this.shadowRoot && this._hightlightOption !== undefined) {
         const valueFromSelectedNode =
           this.shadowRoot.querySelectorAll('#options-list>div')[this._hightlightOption].textContent
         if (valueFromSelectedNode) {

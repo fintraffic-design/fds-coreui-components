@@ -27,6 +27,8 @@ export const FdsIcons = {
   x: X,
 }
 
+export type FdsIconType = keyof typeof FdsIcons
+
 /**
  * Add interactible icon element. Icon library: https://lucide.dev/
  *
@@ -50,7 +52,7 @@ export default class FdsIcon extends LitElement {
   `
 
   @property() size: FdsSizeToken = FdsSize3
-  @property() icon?: keyof typeof FdsIcons
+  @property() icon?: FdsIconType
 
   override render(): SVGElement | null {
     if (!this.icon) {

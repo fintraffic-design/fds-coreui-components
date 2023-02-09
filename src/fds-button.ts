@@ -64,15 +64,12 @@ export default class FdsButton extends LitElement {
       justify-content: center;
       gap: 8px;
       transition: all 200ms;
+      width: inherit;
     }
 
     button *,
     button ::slotted(*) {
       line-height: 1;
-    }
-
-    :host-context(.actions--vertical) .button {
-      width: 100%;
     }
 
     .button--primary {

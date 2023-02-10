@@ -2,6 +2,7 @@ import {
   FdsColorBrandWhite,
   FdsColorDanger200,
   FdsColorInteractive100,
+  FdsColorInteractive300,
   FdsColorNeutral100,
   FdsColorNeutral200,
   FdsColorText1000,
@@ -40,6 +41,7 @@ export default class FdsCombobox extends LitElement {
   @property() error: boolean = false
   @property() placeholder?: string
   @property() initialValue?: string
+  @property() addNewIndicator: boolean = false
   @property() onSelect?: (value: string) => void
 
   @state() private _open: boolean = false
@@ -47,24 +49,39 @@ export default class FdsCombobox extends LitElement {
   @state() private _hightlightOption: number | undefined
 
   override render(): TemplateResult {
+    const filteredOptions = this.options.filter((option: string) =>
+      option.toLowerCase().includes(this._value.toLowerCase())
+    )
+
+    const addOptionRow = html`
+      <div
+        @click=${() => this.handleSelectFromList(this._value)}
+        @keypress=${(e: KeyboardEvent) => this.handleOptionKeypress(e, this._value)}
+        @mouseenter=${() => (this._hightlightOption = filteredOptions.length)}
+        class=${`option new ui-label-text ${this.getOptionCssClass(filteredOptions.length)}`}
+        tabindex=${0}
+      >
+        <fds-icon .icon=${'plus'}></fds-icon>Lisää "${this._value}"
+      </div>
+    `
+
     const contents = html`
       <div id="options-list" @mouseleave=${() => (this._hightlightOption = undefined)}>
-        ${this.options
-          .filter((option: string) => option.toLowerCase().includes(this._value.toLowerCase()))
-          .map(
-            (option, idx) => html`
-                <div
-                  @click=${() => this.handleSelectFromList(option)}
-                  @keypress=${(e: KeyboardEvent) => this.handleOptionKeypress(e, option)}
-                @mouseenter=${() => (this._hightlightOption = idx)}
-                  class=${`option ui-label-text ${this.getOptionCssClass(idx)}`}
-                  tabindex=${0}
-                  aria-selected=${this._value === option}
-                >
-                  ${option}
-                </div>
-              `
-          )}
+        ${filteredOptions.map(
+          (option, idx) => html`
+            <div
+              @click=${() => this.handleSelectFromList(option)}
+              @keypress=${(e: KeyboardEvent) => this.handleOptionKeypress(e, option)}
+              @mouseenter=${() => (this._hightlightOption = idx)}
+              class=${`option ui-label-text ${this.getOptionCssClass(idx)}`}
+              tabindex=${0}
+              aria-selected=${this._value === option}
+            >
+              ${option}
+            </div>
+          `
+        )}
+        ${this.addNewIndicator && this._value ? addOptionRow : null}
       </div>
     `
 
@@ -96,10 +113,19 @@ export default class FdsCombobox extends LitElement {
     this._value = target.value
   }
 
+  /**
+   * This method is used merely for tab selection, which is an accessability option.
+   * When selecting options via arrow keys, the selection is handled differently.
+   */
   private handleOptionKeypress(e: KeyboardEvent, selectedOption: string): void {
     if (e.key === 'Enter') {
       this.handleSelectFromList(selectedOption)
     }
+  }
+
+  private handleSelectFromList(newValue: string): void {
+    this._value = newValue
+    this.blur()
   }
 
   private handleInputKeydown(e: KeyboardEvent): void {
@@ -113,10 +139,10 @@ export default class FdsCombobox extends LitElement {
 
     if (e.key === 'Enter') {
       if (this.shadowRoot && this._hightlightOption !== undefined) {
-        const valueFromSelectedNode =
-          this.shadowRoot.querySelectorAll('#options-list>div')[this._hightlightOption].textContent
-        if (valueFromSelectedNode) {
-          this._value = valueFromSelectedNode.trim()
+        const selectedNode = this.shadowRoot.querySelectorAll('#options-list>div')[this._hightlightOption]
+
+        if (!selectedNode.classList.contains('new') && selectedNode.textContent) {
+          this._value = selectedNode.textContent.trim()
         }
       }
       this.blur()
@@ -147,11 +173,6 @@ export default class FdsCombobox extends LitElement {
     } else {
       this._hightlightOption = undefined
     }
-  }
-
-  private handleSelectFromList(selectedOption: string): void {
-    this._value = selectedOption
-    this.blur()
   }
 
   private getButtonCssClass(): string {
@@ -254,6 +275,11 @@ export default class FdsCombobox extends LitElement {
     .option.highlight {
       /* TODO: what color? */
       background-color: ${tokenVar(FdsColorInteractive100)};
+    }
+
+    .option.new {
+      color: ${tokenVar(FdsColorInteractive300)};
+      gap: 10px;
     }
 
     ${uiLabelTextClass}

@@ -160,7 +160,6 @@ export default class FdsCombobox extends LitElement {
       e.preventDefault()
 
       if (selected) {
-        this.removeSelected()
         this.addSelectedTo(selected.previousElementSibling)
       } else {
         this.addSelectedTo(shadowRoot.querySelector('.option:last-child'))
@@ -170,7 +169,6 @@ export default class FdsCombobox extends LitElement {
       e.preventDefault()
 
       if (selected) {
-        this.removeSelected()
         this.addSelectedTo(selected.nextElementSibling)
       } else {
         this.addSelectedTo(shadowRoot.querySelector('.option:first-child'))
@@ -191,12 +189,12 @@ export default class FdsCombobox extends LitElement {
 
   private removeSelected(): void {
     if (this.shadowRoot) {
-      console.log('test')
-      this.shadowRoot.querySelector('.selected')?.classList.remove('selected')
+      this.shadowRoot.querySelectorAll('.selected').forEach(node => node.classList.remove('selected'))
     }
   }
 
   private addSelectedTo(node: Element | null): void {
+    this.removeSelected()
     if (node) {
       node.classList.add('selected')
     }

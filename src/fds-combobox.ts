@@ -48,15 +48,15 @@ export default class FdsCombobox extends LitElement {
 
   override render(): TemplateResult {
     const contents = html`
-      <div id="options-list">
+      <div id="options-list" @mouseleave=${() => (this._hightlightOption = undefined)}>
         ${this.options
           .filter((option: string) => option.toLowerCase().includes(this._value.toLowerCase()))
           .map(
-            (option, idx) =>
-              html`
+            (option, idx) => html`
                 <div
                   @click=${() => this.handleSelectFromList(option)}
                   @keypress=${(e: KeyboardEvent) => this.handleOptionKeypress(e, option)}
+                @mouseenter=${() => (this._hightlightOption = idx)}
                   class=${`option ui-label-text ${this.getOptionCssClass(idx)}`}
                   tabindex=${0}
                   aria-selected=${this._value === option}
@@ -251,7 +251,6 @@ export default class FdsCombobox extends LitElement {
       border-bottom: 1px solid ${tokenVar(FdsColorNeutral200)};
     }
 
-    .option:hover,
     .option.highlight {
       /* TODO: what color? */
       background-color: ${tokenVar(FdsColorInteractive100)};

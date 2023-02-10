@@ -165,6 +165,7 @@ export default class FdsCombobox extends LitElement {
       } else {
         this.addSelectedTo(shadowRoot.querySelector('.option:last-child'))
       }
+      this.scrollToView()
     } else if (e.key === 'ArrowDown') {
       e.preventDefault()
 
@@ -174,9 +175,18 @@ export default class FdsCombobox extends LitElement {
       } else {
         this.addSelectedTo(shadowRoot.querySelector('.option:first-child'))
       }
+      this.scrollToView()
     } else {
       this.removeSelected()
     }
+  }
+
+  private scrollToView(): void {
+    this.shadowRoot?.querySelector('.selected')?.scrollIntoView({
+      behavior: 'auto',
+      inline: 'nearest',
+      block: 'nearest',
+    })
   }
 
   private removeSelected(): void {

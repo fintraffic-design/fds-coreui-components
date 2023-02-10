@@ -21,6 +21,16 @@ import { uiLabelTextClass } from './utils/css-utils'
 /**
  * Combobox component.
  *
+ * @property options: {string} - List of options to suggest to user.
+ * @property disabled {boolean} - Disable combobox.
+ * @property error {boolean} - Display error indicator on combobox.
+ * @property placeholder {string} - Placeholder value to show while combobox has no input.
+ * @property initialValue {string} - Set option that is chosen as default.
+ * @property addNewIndicator {boolean} - Show a text indicator at options list telling user he can add the current value.
+ * @property onSelect {function} - Triggered when combobox loses focus. Focus is lost on following scenarios:
+ * 1. User clicks outside the element
+ * 2. User presses Enter
+ * 3. User clicks an option from the menu
  */
 @customElement('fds-combobox')
 export default class FdsCombobox extends LitElement {

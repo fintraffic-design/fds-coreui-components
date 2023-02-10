@@ -30,7 +30,7 @@ export interface DropdownOption {
  * Single choice dropdown component.
  *
  * @property {DropdownOption[]} options - List of options to be shown in the menu.
- * @property {DropdownOption} defaultOption - Set option that is chosen as default.
+ * @property {DropdownOption} initialOption - Set option that is chosen as default.
  * @property {boolean} disabled - Disable dropdown.
  * @property {boolean} error - Display error indicator on dropdown.
  * @property {string} placeholder - Placeholder text while no option is selected.
@@ -49,11 +49,11 @@ export default class FdsDropdown extends LitElement {
   @property() disabled: boolean = false
   @property() error: boolean = false
   @property() placeholder?: string
-  @property() defaultOption?: DropdownOption
+  @property() initialOption?: DropdownOption
   @property() onSelect?: (selectedValue: Value) => void
 
   @state() private _open: boolean = false
-  @state() private _selectedOption?: DropdownOption = this.defaultOption
+  @state() private _selectedOption?: DropdownOption = this.initialOption
 
   override render(): TemplateResult {
     const optionsList = html`

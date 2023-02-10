@@ -13,7 +13,7 @@ import {
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property } from 'lit/decorators.js'
-import { FdsIcons } from './fds-icon'
+import { FdsIconType } from './fds-icon'
 import './global-types'
 import { uiLabelTextClass } from './utils/css-utils'
 import { tokenVar } from './utils/token-utils'
@@ -36,7 +36,7 @@ const variantColorMap: { [key in FdsButtonVariant]: FdsColorToken } = {
 export default class FdsButton extends LitElement {
   @property() variant: FdsButtonVariant = FdsButtonVariant.primary
   @property() disabled: boolean = false
-  @property() icon?: keyof typeof FdsIcons
+  @property() icon?: FdsIconType
   @property() label?: string
 
   override render(): TemplateResult {

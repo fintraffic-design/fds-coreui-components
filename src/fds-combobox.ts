@@ -86,21 +86,16 @@ export default class FdsCombobox extends LitElement {
     `
 
     return html`
-      <div
-        @click=${() => (this._open = true)}
-        class=${`input-container ${this.getButtonCssClass()}`}
-        aria-haspopup=${true}
-        aria-expanded=${this._open}
-      >
+      <div @click=${() => (this._open = true)} class=${`input-container ${this.getInputCssClass()}`}>
         <input
-          id="input"
           type="text"
           class="ui-label-text"
           .value=${this._value}
           @input=${this.handleInput}
           @keydown=${this.handleInputKeydown}
-          ?disabled=${this.disabled}
           placeholder=${ifDefined(this.placeholder)}
+          aria-haspopup=${true}
+          aria-expanded=${this._open}
         />
         <fds-icon .icon=${this._open ? 'chevron-up' : 'chevron-down'}></fds-icon>
       </div>
@@ -175,7 +170,10 @@ export default class FdsCombobox extends LitElement {
     }
   }
 
-  private getButtonCssClass(): string {
+  private getInputCssClass(): string {
+    if (this.disabled) {
+      return 'disabled'
+    }
     if (this.error) {
       return 'error'
     }
@@ -226,7 +224,11 @@ export default class FdsCombobox extends LitElement {
       color: ${tokenVar(FdsColorText1000)};
     }
 
-    button:disabled {
+    .input-container.disabled {
+      pointer-events: none;
+    }
+
+    .input-container.disabled > input {
       cursor: default;
       background-color: ${tokenVar(FdsColorNeutral100)};
       color: ${tokenVar(FdsColorText300)};

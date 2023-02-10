@@ -234,15 +234,7 @@ export default class FdsCombobox extends LitElement {
       color: ${tokenVar(FdsColorText300)};
     }
 
-    button:disabled .chevron {
-      color: ${tokenVar(FdsColorText300)};
-    }
-
-    button.placeholder {
-      color: ${tokenVar(FdsColorText300)};
-    }
-
-    button.error {
+    .input-container.error > input {
       color: ${tokenVar(FdsColorDanger200)};
       border: 3px solid ${tokenVar(FdsColorDanger200)};
     }

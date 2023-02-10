@@ -31,6 +31,19 @@ export enum FdsAlertVariant {
  */
 @customElement('fds-alert')
 export default class FdsAlert extends LitElement {
+  @property() variant: FdsAlertVariant = FdsAlertVariant.error
+
+  override render(): TemplateResult {
+    return html`
+      <div class="alert alert--${this.variant}">
+        <div class="alert-icon">
+          <fds-icon .icon=${'alert-triangle'} .size="${FdsSize3}"></fds-icon>
+        </div>
+        <slot class="ui-helper-text messages"></slot>
+      </div>
+    `
+  }
+
   static override styles = css`
     .alert {
       padding: ${tokenVar(FdsSize1)} ${tokenVar(FdsSize1)} calc(${tokenVar(FdsSize1)} / 2);
@@ -70,19 +83,10 @@ export default class FdsAlert extends LitElement {
       margin-right: ${tokenVar(FdsSize1)};
       position: relative;
     }
+    .messages {
+      display: block;
+    }
+
     ${uiHelperTextClass}
   `
-
-  @property() variant: FdsAlertVariant = FdsAlertVariant.error
-
-  override render(): TemplateResult {
-    return html`
-      <div class="alert alert--${this.variant}">
-        <div class="alert-icon">
-          <fds-icon .icon=${'alert-triangle'} .size="${FdsSize3}"></fds-icon>
-        </div>
-        <slot class="ui-helper-text"></slot>
-      </div>
-    `
-  }
 }

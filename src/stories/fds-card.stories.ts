@@ -48,7 +48,9 @@ export const Card: Template = ({ elevation, headerTitle, content, footer }) => {
     <style>
       fds-card {
         cursor: pointer;
-        width: 35%;
+        max-width: 800px;
+        min-width: 400px;
+        width: 40%;
       }
 
       fds-action-sheet {
@@ -103,7 +105,9 @@ export const CardWithCustomHeader: Template = ({ elevation, content, footer }) =
     <style>
       fds-card {
         cursor: pointer;
-        width: 35%;
+        width: 40%;
+        min-width: 400px;
+        max-width: 800px;
       }
 
       fds-action-sheet {

@@ -2,7 +2,7 @@ import { html, TemplateResult } from 'lit'
 import { FdsButtonVariant } from '../fds-button'
 import '../fds-button'
 import '../fds-icon'
-import { FdsIcons } from '../fds-icon'
+import { FdsIconType } from '../fds-icon'
 
 export default {
   title: 'Button',
@@ -30,7 +30,7 @@ export default {
 type Template = (args: {
   variant: FdsButtonVariant
   disabled: boolean
-  icon?: keyof typeof FdsIcons
+  icon?: FdsIconType
   label?: string
 }) => TemplateResult
 

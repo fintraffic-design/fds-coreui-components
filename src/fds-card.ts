@@ -64,7 +64,6 @@ export class FdsCard extends LitElement {
       display: block;
       background: white;
       width: 100%;
-      height: 100%;
     }
 
     h4 {

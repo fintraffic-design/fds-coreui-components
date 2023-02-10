@@ -12,7 +12,7 @@ import {
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property, state } from 'lit/decorators.js'
-import { FdsIcons } from './fds-icon'
+import { FdsIconType } from './fds-icon'
 import './global-types'
 import { uiLabelTextClass } from './utils/css-utils'
 import { tokenVar } from './utils/token-utils'
@@ -23,7 +23,7 @@ type Label = string
 export interface DropdownOption {
   label: Label
   value: Value
-  icon?: keyof typeof FdsIcons
+  icon?: FdsIconType
 }
 
 /**

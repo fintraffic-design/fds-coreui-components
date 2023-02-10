@@ -1,5 +1,5 @@
 import { html, TemplateResult } from 'lit'
-import { FdsIcons } from '../fds-icon'
+import { FdsIcons, FdsIconType } from '../fds-icon'
 import '../fds-icon'
 import {
   FdsSize1,
@@ -46,7 +46,7 @@ export default {
   },
 }
 
-type Template = (args: { icon: keyof typeof FdsIcons; size: FdsSizeToken['name'] }) => TemplateResult
+type Template = (args: { icon: FdsIconType; size: FdsSizeToken['name'] }) => TemplateResult
 
 export const Icon: Template = ({ icon, size }) => {
   const sizeToken = sizes.find(s => s.name === size)

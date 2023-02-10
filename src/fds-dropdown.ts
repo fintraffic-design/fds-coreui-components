@@ -56,8 +56,8 @@ export default class FdsDropdown extends LitElement {
   @state() private _selectedOption?: DropdownOption = this.defaultOption
 
   override render(): TemplateResult {
-    const contents = html`
-      <div class="contents">
+    const optionsList = html`
+      <div class="options-list">
         ${this.options.map(
           option =>
             html`
@@ -86,7 +86,7 @@ export default class FdsDropdown extends LitElement {
         ${this.getLabel(this._selectedOption) || this.placeholder}
         <fds-icon .icon=${this._open ? 'chevron-up' : 'chevron-down'}></fds-icon>
       </button>
-      ${this._open ? contents : null}
+      ${this._open ? optionsList : null}
     `
   }
 
@@ -175,7 +175,7 @@ export default class FdsDropdown extends LitElement {
       border: 3px solid ${tokenVar(FdsColorDanger200)};
     }
 
-    .contents {
+    .options-list {
       cursor: pointer;
       display: block;
       position: absolute;
@@ -210,6 +210,7 @@ export default class FdsDropdown extends LitElement {
     .option {
       display: flex;
       align-items: center;
+      white-space: nowrap;
 
       /* TODO: what values? */
       height: 56px;

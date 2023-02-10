@@ -262,11 +262,12 @@ export default class FdsCombobox extends LitElement {
     .option {
       display: flex;
       align-items: center;
+      white-space: nowrap;
 
       /* TODO: what values? */
       height: 56px;
       padding-left: 16px;
-      //padding-right: 8px;
+      padding-right: 8px;
 
       background-color: ${tokenVar(FdsColorBrandWhite)};
       border-bottom: 1px solid ${tokenVar(FdsColorNeutral200)};

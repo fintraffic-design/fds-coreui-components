@@ -1,5 +1,6 @@
 import { html, TemplateResult } from 'lit'
 import '../fds-icon'
+import '../global-types'
 
 export default {
   title: 'Action Sheet',

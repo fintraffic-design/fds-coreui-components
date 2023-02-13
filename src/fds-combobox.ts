@@ -39,9 +39,7 @@ export default class FdsCombobox extends LitElement {
     // Set attributes to host element
     this.addEventListener('blur', () => {
       this._open = false
-      if (this.onSelect) {
-        this.onSelect(this._value)
-      }
+      this.onSelect?.(this._value)
     })
   }
 
@@ -63,9 +61,9 @@ export default class FdsCombobox extends LitElement {
 
     const addOptionRow = html`
       <div
-        @click=${() => this.handleSelectFromList(this._value)}
-        @keypress=${(e: KeyboardEvent) => this.handleOptionKeypress(e, this._value)}
-        @mouseenter=${(e: MouseEvent) => this.addSelectedTo(e.target as Element)}
+        @click=${(): void => this.handleSelectFromList(this._value)}
+        @keypress=${(e: KeyboardEvent): void => this.handleOptionKeypress(e, this._value)}
+        @mouseenter=${(e: MouseEvent): void => this.addSelectedTo(e.target as Element)}
         @mouseleave=${this.removeSelected}
         class="option new ui-label-text"
         tabindex=${0}
@@ -79,9 +77,9 @@ export default class FdsCombobox extends LitElement {
         ${filteredOptions.map(
           option => html`
             <div
-              @click=${() => this.handleSelectFromList(option)}
-              @keypress=${(e: KeyboardEvent) => this.handleOptionKeypress(e, option)}
-              @mouseenter=${(e: MouseEvent) => this.addSelectedTo(e.target as Element)}
+              @click=${(): void => this.handleSelectFromList(option)}
+              @keypress=${(e: KeyboardEvent): void => this.handleOptionKeypress(e, option)}
+              @mouseenter=${(e: MouseEvent): void => this.addSelectedTo(e.target as Element)}
               @mouseleave=${this.removeSelected}
               class="option ui-label-text"
               tabindex=${0}
@@ -96,7 +94,7 @@ export default class FdsCombobox extends LitElement {
     `
 
     return html`
-      <div @click=${() => (this._open = true)} class=${`input-container ${this.getInputCssClass()}`}>
+      <div @click=${(): boolean => (this._open = true)} class=${`input-container ${this.getInputCssClass()}`}>
         <input
           type="text"
           class="ui-label-text"

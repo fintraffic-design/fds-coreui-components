@@ -8,6 +8,7 @@ import {
   ChevronRight,
   ChevronUp,
   createElement,
+  Plus,
   PlusCircle,
   Trash2,
   X,
@@ -17,11 +18,12 @@ import {
  * Only the common icons needed in fds components are here to keep bundle size smaller
  */
 export const FdsIcons = {
+  'alert-circle': AlertCircle,
+  'alert-triangle': AlertTriangle,
+  'chevron-down': ChevronDown,
   'chevron-right': ChevronRight,
   'chevron-up': ChevronUp,
-  'chevron-down': ChevronDown,
-  'alert-triangle': AlertTriangle,
-  'alert-circle': AlertCircle,
+  plus: Plus,
   'plus-circle': PlusCircle,
   'trash-2': Trash2,
   x: X,

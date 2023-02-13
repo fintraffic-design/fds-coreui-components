@@ -30,7 +30,7 @@ export interface DropdownOption {
  * Single choice dropdown component.
  *
  * @property {DropdownOption[]} options - List of options to be shown in the menu.
- * @property {DropdownOption} defaultOption - Set option that is chosen as default.
+ * @property {DropdownOption} initialValue - Set value that is chosen as default.
  * @property {boolean} disabled - Disable dropdown.
  * @property {boolean} error - Display error indicator on dropdown.
  * @property {string} placeholder - Placeholder text while no option is selected.
@@ -41,7 +41,7 @@ export default class FdsDropdown extends LitElement {
   constructor() {
     super()
     // Set attributes to host element
-    this.addEventListener('blur', () => (this._isOpen = false))
+    this.addEventListener('blur', () => (this._open = false))
     this.tabIndex = 0
   }
 
@@ -49,15 +49,15 @@ export default class FdsDropdown extends LitElement {
   @property() disabled: boolean = false
   @property() error: boolean = false
   @property() placeholder?: string
-  @property() defaultOption?: DropdownOption
+  @property() initialValue?: DropdownOption
   @property() onSelect?: (selectedValue: Value) => void
 
-  @state() private _isOpen: boolean = false
-  @state() private _selectedOption?: DropdownOption = this.defaultOption
+  @state() private _open: boolean = false
+  @state() private _selectedOption?: DropdownOption = this.initialValue
 
   override render(): TemplateResult {
-    const contents = html`
-      <div class="contents">
+    const optionsList = html`
+      <div class="options-list">
         ${this.options.map(
           option =>
             html`
@@ -77,16 +77,16 @@ export default class FdsDropdown extends LitElement {
 
     return html`
       <button
-        @click=${(): boolean => (this._isOpen = !this._isOpen)}
+        @click=${(): boolean => (this._open = !this._open)}
         ?disabled=${this.disabled}
         class=${`ui-label-text ${this.getButtonCssClass()}`}
         aria-haspopup=${true}
-        aria-expanded=${this._isOpen}
+        aria-expanded=${this._open}
       >
         ${this.getLabel(this._selectedOption) || this.placeholder}
-        <fds-icon .icon=${this._isOpen ? 'chevron-up' : 'chevron-down'}></fds-icon>
+        <fds-icon .icon=${this._open ? 'chevron-up' : 'chevron-down'}></fds-icon>
       </button>
-      ${this._isOpen ? contents : null}
+      ${this._open ? optionsList : null}
     `
   }
 
@@ -98,7 +98,7 @@ export default class FdsDropdown extends LitElement {
 
   private handleSelect(selectedOption: DropdownOption): void {
     this._selectedOption = selectedOption
-    this._isOpen = false
+    this._open = false
 
     if (this.onSelect) {
       this.onSelect(selectedOption.value)
@@ -175,7 +175,7 @@ export default class FdsDropdown extends LitElement {
       border: 3px solid ${tokenVar(FdsColorDanger200)};
     }
 
-    .contents {
+    .options-list {
       cursor: pointer;
       display: block;
       position: absolute;
@@ -210,6 +210,7 @@ export default class FdsDropdown extends LitElement {
     .option {
       display: flex;
       align-items: center;
+      white-space: nowrap;
 
       /* TODO: what values? */
       height: 56px;

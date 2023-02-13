@@ -1,6 +1,6 @@
 import { html, TemplateResult } from 'lit'
 import '../fds-navigation'
-import { FdsNavigationVariant } from '../fds-navigation'
+import { FdsNavigationVariant, ItemPosition, NavigationItem } from '../fds-navigation'
 
 export default {
   title: 'Navigation',
@@ -17,14 +17,14 @@ export default {
 
 type Template = (args: { variant: FdsNavigationVariant }) => TemplateResult
 
-const items = [
+const items: NavigationItem[] = [
   { label: 'Areatool', value: 'home' },
   { label: 'History', value: 'history' },
-  { label: 'Settings', value: 'settings', position: 'right', icon: 'chevron-down' },
+  { label: 'Settings', value: 'settings', position: ItemPosition.right, icon: 'chevron-down' },
 ]
 
 export const Navigation: Template = ({ variant }) => {
-  const onSelect = (item: string) => console.log('Selected', item)
+  const onSelect = (item: string): void => console.log('Selected', item)
 
   return html`<div style="height: 300px;">
     <fds-navigation .variant=${variant} .items=${items} .onSelect=${onSelect} .defaultItem=${items[0]}>

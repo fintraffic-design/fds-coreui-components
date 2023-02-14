@@ -32,6 +32,15 @@ const variantColorMap: { [key in FdsButtonVariant]: FdsColorToken } = {
   danger: FdsColorBrandWhite,
 }
 
+/**
+ * A button
+ *
+ * @property {FdsButtonVariant} variant What kind of button
+ * @property {boolean} disabled Disabled button does not work
+ * @property {FdsIconType} icon Optional icon
+ * @property {string} label Text to show
+ *
+ */
 @customElement('fds-button')
 export default class FdsButton extends LitElement {
   @property() variant: FdsButtonVariant = FdsButtonVariant.primary

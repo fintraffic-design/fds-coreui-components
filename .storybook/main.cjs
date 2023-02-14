@@ -11,6 +11,10 @@ module.exports = {
     buildStoriesJson: true
   },
   async viteFinal(config) {
+    if (config.configType === 'DEVELOPMENT') {
+      console.log("DEVELOPMENT detected")
+      return config
+    }
     return mergeConfig(config, { base: "/coreui-components/" })
   },
 }

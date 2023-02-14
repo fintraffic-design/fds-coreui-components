@@ -3,6 +3,7 @@ import FdsAlert from './fds-alert'
 import FdsButton from './fds-button'
 import { FdsCard } from './fds-card'
 import FdsCheckbox from './fds-checkbox'
+import FdsCombobox from './fds-combobox'
 import FdsDialog from './fds-dialog'
 import FdsDivider from './fds-divider'
 import FdsDropdown from './fds-dropdown'
@@ -21,5 +22,6 @@ declare global {
     'fds-dropdown': FdsDropdown
     'fds-divider': FdsDivider
     'fds-checkbox': FdsCheckbox
+    'fds-combobox': FdsCombobox
   }
 }

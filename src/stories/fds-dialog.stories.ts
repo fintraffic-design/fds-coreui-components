@@ -18,10 +18,6 @@ type Template = (args: { modal: boolean }) => TemplateResult
 export const Dialog: Template = ({ modal }) => {
   return html`
     <style>
-      fds-dialog {
-        width: 35%;
-      }
-
       fds-action-sheet {
         padding: 32px;
       }
@@ -32,7 +28,7 @@ export const Dialog: Template = ({ modal }) => {
       }
     </style>
 
-    <fds-dialog .modal=${modal}>
+    <fds-dialog .modal=${modal} style="width: 50%; min-width: 30rem; max-width: 40rem">
       <fds-card elevation="${FdsCardElevation.NONE}">
         <h4 slot="header-title">Modal title</h4>
         <p>Modal message</p>

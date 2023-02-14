@@ -14,18 +14,18 @@ export default {
       { label: 'Icon', value: 'Icon', icon: 'alert-triangle' },
       { label: 'Icon 2', value: 'Icon 2', icon: 'alert-circle' },
     ],
-    defaultOption: undefined,
+    initialValue: undefined,
     disabled: false,
     error: false,
   },
 } as Meta
 
-const Template: Story = ({ options, defaultOption, disabled, error, placeholder, onSelect }) => {
+const Template: Story = ({ options, initialValue, disabled, error, placeholder, onSelect }) => {
   return html`
     <div style="width:284px">
       <fds-dropdown
         .options=${options}
-        .defaultOption=${defaultOption}
+        .initialValue=${initialValue}
         .disabled=${disabled}
         .error=${error}
         .placeholder=${placeholder}
@@ -40,7 +40,6 @@ export const Dropdown: Story = Template.bind({})
 export const LongText: Story = Template.bind({})
 
 LongText.args = {
-  placeholder: 'Options',
   options: [
     { label: 'Foooooooooooooooooooooooooooooooooooooooooooooo', value: 'Foo' },
     { label: 'Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar', value: 'Foo-Bar' },

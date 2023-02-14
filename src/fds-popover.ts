@@ -1,4 +1,4 @@
-import { css, html, LitElement } from 'lit'
+import { css, html, LitElement, PropertyValueMap, PropertyValues } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
 import './fds-card'
@@ -24,9 +24,20 @@ export default class FdsPopover extends LitElement {
 
   @state() private _popoverOpen: boolean = false
 
+  @state() private _elementHeight: number = 0
+  @state() private _elementWidth: number = 0
+
+  protected override willUpdate(): void {
+    const wrapper = this.shadowRoot?.querySelector('.wrapper')
+    if (wrapper) {
+      this._elementHeight = wrapper.clientHeight
+      this._elementWidth = wrapper.clientWidth
+    }
+  }
+
   override render(): TemplateResult {
     return html`
-      <div>
+      <div class="wrapper">
         <slot
           name="content"
           class="content ${this.openOnClick ? 'clickable' : ''}"
@@ -35,16 +46,27 @@ export default class FdsPopover extends LitElement {
           @mouseleave=${this.onMouseLeave}
         ></slot>
         <div
-          class="popover-container popover-container--${this.position} ${this._popoverOpen
-            ? 'popover--open'
-            : ''}"
+          class="container container--${this.position} ${this._popoverOpen ? 'popover--open' : ''}"
+          style=${this.getContainerStyle()}
         >
-          <div class="popover popover--${this.position}">
+          <div class="popover popover--${this.position}" style=${this.getPopoverStyle()}>
             <slot></slot>
           </div>
         </div>
       </div>
     `
+  }
+
+  getContainerStyle(): string {
+    return `bottom: ${this._elementHeight / 2}px;`
+  }
+
+  getPopoverStyle(): string {
+    return this.position === PopoverPosition.LEFT
+      ? `right: ${this._elementWidth}px;`
+      : this.position === PopoverPosition.RIGHT
+      ? `left: ${this._elementWidth}px;`
+      : ''
   }
 
   onMouseEnter(): void {
@@ -74,13 +96,20 @@ export default class FdsPopover extends LitElement {
       cursor: pointer;
     }
 
-    .popover-container {
+    .container {
       visibility: hidden;
       position: relative;
+      display: flex;
     }
 
-    .popover--open {
-      visibility: visible;
+    .container--above,
+    .container--below {
+      justify-content: center;
+    }
+
+    .container--left,
+    .container--right {
+      align-items: center;
     }
 
     .popover {
@@ -89,21 +118,28 @@ export default class FdsPopover extends LitElement {
       box-shadow: ${tokenVar(FdsStyleElevation200)};
       padding: 8px;
       background-color: ${tokenVar(FdsColorBrandWhite)};
+      text-align: center;
       z-index: 1;
     }
 
-    .popover-container--above,
-    .popover-container--below {
-      display: flex;
-      justify-content: center;
+    .popover--open {
+      visibility: visible;
     }
 
-    .popover-container--above .popover {
-      bottom: 30px;
+    .popover--above {
+      bottom: 25px;
     }
 
-    .popover-container--below .popover {
-      top: 10px;
+    .popover--below {
+      top: 20px;
+    }
+
+    .popover--left {
+      margin-right: 10px;
+    }
+
+    .popover--right {
+      margin-left: 10px;
     }
 
     .popover::after {
@@ -127,14 +163,14 @@ export default class FdsPopover extends LitElement {
       border-color: transparent transparent ${tokenVar(FdsColorBrandWhite)} transparent;
     }
 
-    .popover--right::after {
+    .popover--left::after {
       left: 100%;
       top: 50%;
       margin-top: -5px;
       border-color: transparent transparent transparent ${tokenVar(FdsColorBrandWhite)};
     }
 
-    .popover--left::after {
+    .popover--right::after {
       right: 100%;
       top: 50%;
       margin-top: -5px;

@@ -1,6 +1,6 @@
 import { html, TemplateResult } from 'lit'
 import '../fds-navigation'
-import { FdsNavigationVariant, ItemPosition, FdsNavigationItem } from '../fds-navigation'
+import { FdsNavigationItem, FdsNavigationVariant, ItemPosition } from '../fds-navigation'
 
 export default {
   title: 'Navigation',
@@ -24,10 +24,13 @@ const items: FdsNavigationItem[] = [
 ]
 
 export const Navigation: Template = ({ variant }) => {
-  const onSelect = (item: string): void => console.log('Selected', item)
-
   return html`<div style="height: 300px;">
-    <fds-navigation .variant=${variant} .items=${items} .onSelect=${onSelect} .selected=${items[0]}>
+    <fds-navigation
+      .variant=${variant}
+      .items=${items}
+      .selected=${items[0]}
+      @select="${(event: CustomEvent<FdsNavigationItem>): void => console.log('@select', event.detail)}"
+    >
       <div style="display: flex; align-items: center;">
         <fds-icon icon="plus-circle" style="padding-right: 5px;"></fds-icon>
         Header

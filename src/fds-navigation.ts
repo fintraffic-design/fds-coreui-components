@@ -34,9 +34,9 @@ export enum ItemPosition {
  * Navigation component.
  *
  * @property {FdsNavigationVariant} variant - Primary or secondary style
- * @property {FdsNavigationItem[]} items - List of destinations
+ * @property {FdsNavigationItem[]} items - List of navigation items
  * @property {FdsNavigationItem} selected - Currently selected value
- * @property {function} onSelect - Triggered when destination is clicked. The value of the selected destination is returned as parameter.
+ * @event select - Triggered when destination is clicked. The selected item is in event details field.
  */
 
 @customElement('fds-navigation')
@@ -44,9 +44,9 @@ export default class FdsNavigation extends LitElement {
   @property() variant: FdsNavigationVariant = FdsNavigationVariant.primary
   @property() items: FdsNavigationItem[] = []
   @property() selected?: FdsNavigationItem
-  @property() onSelect?: (item: FdsNavigationItem) => void
 
   override render(): TemplateResult {
+    console.log('render', this.selected)
     const itemsOnRight = this.items.filter(item => item.position === ItemPosition.right)
     const itemsOnLeft = this.items.filter(item => item.position !== ItemPosition.right)
     return html`<div class="navigation navigation--${this.variant}">
@@ -76,7 +76,11 @@ export default class FdsNavigation extends LitElement {
 
   handleSelect(item: FdsNavigationItem): void {
     this.selected = item
-    this.onSelect?.(item)
+    this.dispatchEvent(
+      new CustomEvent<FdsNavigationItem>('select', {
+        detail: item,
+      })
+    )
   }
 
   static override styles = css`

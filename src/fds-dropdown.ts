@@ -130,106 +130,108 @@ export default class FdsDropdown extends LitElement {
     return this._selectedOption === option ? 'selected' : ''
   }
 
-  static override styles = css`
-    :host {
-      width: 100%;
-      position: relative;
-    }
+  static override styles = [
+    uiLabelTextClass,
+    css`
+      :host {
+        width: 100%;
+        position: relative;
+      }
 
-    button {
-      cursor: pointer;
-      box-sizing: border-box;
-      display: inline-flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      white-space: nowrap;
+      button {
+        cursor: pointer;
+        box-sizing: border-box;
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        white-space: nowrap;
 
-      width: 100%;
-      /* TODO: what values? */
-      height: 48px;
-      padding-left: 16px;
-      padding-right: 8px;
-      gap: 10px;
+        width: 100%;
+        /* TODO: what values? */
+        height: 48px;
+        padding-left: 16px;
+        padding-right: 8px;
+        gap: 10px;
 
-      background-color: ${tokenVar(FdsColorBrandWhite)};
-      border: 1px solid ${tokenVar(FdsColorNeutral200)};
-    }
+        background-color: ${tokenVar(FdsColorBrandWhite)};
+        border: 1px solid ${tokenVar(FdsColorNeutral200)};
+      }
 
-    button:disabled {
-      cursor: default;
-      background-color: ${tokenVar(FdsColorNeutral100)};
-      color: ${tokenVar(FdsColorText300)};
-    }
+      button:disabled {
+        cursor: default;
+        background-color: ${tokenVar(FdsColorNeutral100)};
+        color: ${tokenVar(FdsColorText300)};
+      }
 
-    button:disabled .chevron {
-      color: ${tokenVar(FdsColorText300)};
-    }
+      button:disabled .chevron {
+        color: ${tokenVar(FdsColorText300)};
+      }
 
-    button.placeholder {
-      color: ${tokenVar(FdsColorText300)};
-    }
+      button.placeholder {
+        color: ${tokenVar(FdsColorText300)};
+      }
 
-    button.error {
-      color: ${tokenVar(FdsColorDanger200)};
-      border: 3px solid ${tokenVar(FdsColorDanger200)};
-    }
+      button.error {
+        color: ${tokenVar(FdsColorDanger200)};
+        border: 3px solid ${tokenVar(FdsColorDanger200)};
+      }
 
-    .options-list {
-      cursor: pointer;
-      display: block;
-      position: absolute;
-      overflow-y: scroll;
+      .options-list {
+        cursor: pointer;
+        display: block;
+        position: absolute;
+        overflow-y: scroll;
 
-      min-width: 100%;
-      max-width: fit-content;
-      /* TODO: what value? */
-      max-height: 80vw;
+        min-width: 100%;
+        max-width: fit-content;
+        /* TODO: what value? */
+        max-height: 80vw;
 
-      box-shadow: ${tokenVar(FdsStyleElevation200)};
-    }
+        box-shadow: ${tokenVar(FdsStyleElevation200)};
+      }
 
-    fds-icon {
-      position: static;
-      color: ${tokenVar(FdsColorText1000)};
-    }
+      fds-icon {
+        position: static;
+        color: ${tokenVar(FdsColorText1000)};
+      }
 
-    .icon-label {
-      display: flex;
-      align-items: center;
-      overflow: hidden;
+      .icon-label {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
 
-      gap: 0.5em;
-    }
+        gap: 0.5em;
+      }
 
-    .label {
-      text-overflow: ellipsis;
-      overflow: hidden;
-    }
+      .label {
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
 
-    .option {
-      display: flex;
-      align-items: center;
-      white-space: nowrap;
+      .option {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
 
-      /* TODO: what values? */
-      height: 56px;
-      padding-left: 16px;
-      padding-right: 8px;
+        /* TODO: what values? */
+        height: 56px;
+        padding-left: 16px;
+        padding-right: 8px;
 
-      background-color: ${tokenVar(FdsColorBrandWhite)};
-      border-bottom: 1px solid ${tokenVar(FdsColorNeutral200)};
-    }
+        background-color: ${tokenVar(FdsColorBrandWhite)};
+        border-bottom: 1px solid ${tokenVar(FdsColorNeutral200)};
+      }
 
-    .option:hover {
-      /* TODO: what color? */
-      background-color: ${tokenVar(FdsColorInteractive100)};
-    }
+      .option:hover {
+        /* TODO: what color? */
+        background-color: ${tokenVar(FdsColorInteractive100)};
+      }
 
-    .option.selected {
-      /* TODO: what color? */
-      background-color: ${tokenVar(FdsColorInteractive200)};
-    }
-    ${uiLabelTextClass}
-  `
+      .option.selected {
+        /* TODO: what color? */
+        background-color: ${tokenVar(FdsColorInteractive200)};
+      }
+    `,
+  ]
 }

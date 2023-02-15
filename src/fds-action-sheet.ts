@@ -8,7 +8,18 @@ import { FdsSize1, FdsSize6 } from '@fintraffic-design/coreui-css'
  * Fintraffic Design System Action Sheet Component
  */
 @customElement('fds-action-sheet')
-export class FdsActionSheet extends LitElement {
+export default class FdsActionSheet extends LitElement {
+  override render(): TemplateResult {
+    return html`
+      <div class="actions__separated">
+        <slot name="separated"></slot>
+      </div>
+      <div class="actions__content">
+        <slot></slot>
+      </div>
+    `
+  }
+
   static override styles = css`
     :host {
       display: flex;
@@ -63,15 +74,4 @@ export class FdsActionSheet extends LitElement {
       }
     }
   `
-
-  override render(): TemplateResult {
-    return html`
-      <div class="actions__separated">
-        <slot name="separated"></slot>
-      </div>
-      <div class="actions__content">
-        <slot></slot>
-      </div>
-    `
-  }
 }

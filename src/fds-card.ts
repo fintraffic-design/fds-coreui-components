@@ -18,7 +18,7 @@ export enum FdsCardElevation {
  * @property {function} onCornerClick - Triggered when top right corner is clicked.
  */
 @customElement('fds-card')
-export class FdsCard extends LitElement {
+export default class FdsCard extends LitElement {
   @property() elevation: FdsCardElevation = FdsCardElevation.LOW
   @property() onCornerClick?: () => void
 
@@ -59,32 +59,33 @@ export class FdsCard extends LitElement {
     }
   }
 
-  static override styles = css`
-    :host {
-      display: block;
-      background: white;
-      width: 100%;
-    }
+  static override styles = [
+    heading4SmallTextClass,
+    css`
+      :host {
+        display: block;
+        background: white;
+        width: 100%;
+      }
 
-    h4 {
-      margin: 0;
-    }
+      h4 {
+        margin: 0;
+      }
 
-    .card__header {
-      display: flex;
-      justify-content: space-between;
-      flex-direction: row;
-      align-items: center;
-      padding-left: 32px;
-      padding-right: 32px;
-      padding-top: 27px;
-      padding-bottom: 13px;
-    }
+      .card__header {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+        padding-left: 32px;
+        padding-right: 32px;
+        padding-top: 27px;
+        padding-bottom: 13px;
+      }
 
-    .card__content {
-      padding: 16px 32px;
-    }
-
-    ${heading4SmallTextClass}
-  `
+      .card__content {
+        padding: 16px 32px;
+      }
+    `,
+  ]
 }

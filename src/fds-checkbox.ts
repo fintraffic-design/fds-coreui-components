@@ -46,58 +46,59 @@ export default class FdsCheckbox extends LitElement {
     }
   }
 
-  static override styles = css`
-    :host {
-      user-select: none;
-    }
+  static override styles = [
+    uiLabelTextClass,
+    css`
+      :host {
+        user-select: none;
+      }
 
-    #checkbox {
-      appearance: none;
-    }
+      #checkbox {
+        appearance: none;
+      }
 
-    label {
-      padding: 0 16px;
-      position: relative;
-      right: 7px;
-    }
+      label {
+        padding: 0 16px;
+        position: relative;
+        right: 7px;
+      }
 
-    label,
-    #checkbox::before {
-      cursor: pointer;
-    }
+      label,
+      #checkbox::before {
+        cursor: pointer;
+      }
 
-    #checkbox::before {
-      content: '';
-      height: 16px;
-      width: 16px;
-      display: inline-block;
-      vertical-align: sub;
-      border: 2px solid ${tokenVar(FdsColorBrandBlack)};
-      border-radius: ${tokenVar(FdsRadiusCompact)};
-    }
+      #checkbox::before {
+        content: '';
+        height: 16px;
+        width: 16px;
+        display: inline-block;
+        vertical-align: sub;
+        border: 2px solid ${tokenVar(FdsColorBrandBlack)};
+        border-radius: ${tokenVar(FdsRadiusCompact)};
+      }
 
-    #checkbox:checked::before {
-      border-color: ${tokenVar(FdsColorInteractive200)};
-      background-image: url(src/assets/checkbox-checkmark.svg);
-      background-color: ${tokenVar(FdsColorInteractive200)};
-      background-repeat: no-repeat;
-      background-position: center;
-    }
+      #checkbox:checked::before {
+        border-color: ${tokenVar(FdsColorInteractive200)};
+        background-image: url(src/assets/checkbox-checkmark.svg);
+        background-color: ${tokenVar(FdsColorInteractive200)};
+        background-repeat: no-repeat;
+        background-position: center;
+      }
 
-    #checkbox:disabled::before,
-    #checkbox:disabled + label {
-      cursor: default;
-      color: ${tokenVar(FdsColorText300)};
-    }
+      #checkbox:disabled::before,
+      #checkbox:disabled + label {
+        cursor: default;
+        color: ${tokenVar(FdsColorText300)};
+      }
 
-    #checkbox:disabled::before {
-      border-color: ${tokenVar(FdsColorText300)};
-    }
+      #checkbox:disabled::before {
+        border-color: ${tokenVar(FdsColorText300)};
+      }
 
-    #checkbox:disabled#checkbox:checked::before {
-      background-color: ${tokenVar(FdsColorText300)};
-    }
-
-    ${uiLabelTextClass}
-  `
+      #checkbox:disabled#checkbox:checked::before {
+        background-color: ${tokenVar(FdsColorText300)};
+      }
+    `,
+  ]
 }

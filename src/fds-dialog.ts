@@ -13,22 +13,6 @@ import { FdsRadiusLarge, FdsStyleElevation400 } from '@fintraffic-design/coreui-
  */
 @customElement('fds-dialog')
 export default class FdsDialog extends LitElement {
-  static override styles = css`
-    :host {
-    }
-
-    dialog {
-      border-radius: ${tokenVar(FdsRadiusLarge)};
-      border: none;
-      box-shadow: ${tokenVar(FdsStyleElevation400)};
-      padding: 0;
-    }
-
-    dialog ::slotted(*) {
-      border-radius: ${tokenVar(FdsRadiusLarge)};
-    }
-  `
-
   @property() modal: boolean = false
 
   @query('dialog')
@@ -53,4 +37,20 @@ export default class FdsDialog extends LitElement {
       </dialog>
     `
   }
+
+  static override styles = css`
+    :host {
+    }
+
+    dialog {
+      border-radius: ${tokenVar(FdsRadiusLarge)};
+      border: none;
+      box-shadow: ${tokenVar(FdsStyleElevation400)};
+      padding: 0;
+    }
+
+    dialog ::slotted(*) {
+      border-radius: ${tokenVar(FdsRadiusLarge)};
+    }
+  `
 }

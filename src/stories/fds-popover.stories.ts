@@ -42,45 +42,25 @@ export const Popover: Template = ({ position, openOnClick, popoverText }) => {
   `
 }
 
-export const IconPopover: Template = ({ popoverText }) => {
+export const IconPopover: Template = ({ position, openOnClick, popoverText }) => {
   return html`
-    <div style="display: flex; justify-content: space-between; margin: 50px 150px; text-align: center;">
+    <div style="margin: 100px auto; width: max-content;">
       <div>
-        <fds-popover .position=${PopoverPosition.ABOVE} .openOnClick=${false}>
+        <fds-popover .position=${position} .openOnClick=${openOnClick}>
           <div slot="content"><fds-icon .icon="${'alert-circle'}"></fds-icon></div>
-          <div style="width: max-content; padding: 8px;">${popoverText}</div>
+          <div style="width: max-content; padding: 8px; max-width: 200px; text-align: center;">
+            ${popoverText}
+          </div>
         </fds-popover>
-        Above
-      </div>
-      <div>
-        <fds-popover .position=${PopoverPosition.BELOW} .openOnClick=${false}>
-          <div slot="content"><fds-icon .icon="${'alert-circle'}"></fds-icon></div>
-          <div style="width: max-content; padding: 8px;">${popoverText}</div>
-        </fds-popover>
-        Below
-      </div>
-      <div>
-        <fds-popover .position=${PopoverPosition.LEFT} .openOnClick=${false}>
-          <div slot="content"><fds-icon .icon="${'alert-circle'}"></fds-icon></div>
-          <div style="width: max-content; padding: 8px;">${popoverText}</div>
-        </fds-popover>
-        Left
-      </div>
-      <div>
-        <fds-popover .position=${PopoverPosition.RIGHT} .openOnClick=${false}>
-          <div slot="content"><fds-icon .icon="${'alert-circle'}"></fds-icon></div>
-          <div style="width: max-content; padding: 8px;">${popoverText}</div>
-        </fds-popover>
-        Right
       </div>
     </div>
   `
 }
 
-export const PopoverWithHeader: Template = ({ popoverText }) => {
+export const PopoverWithHeader: Template = ({ position, openOnClick, popoverText }) => {
   return html`
     <div style="width: fit-content; margin: 150px auto;">
-      <fds-popover .position=${PopoverPosition.LEFT} .openOnClick=${true}>
+      <fds-popover .position=${position} .openOnClick=${openOnClick}>
         <div slot="content"><fds-button .label=${'Open/close popover'}></fds-button></div>
         <div style="width: 300px; height: 150px; display: flex; flex-direction: column;">
           <div

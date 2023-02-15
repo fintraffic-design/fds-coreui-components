@@ -13,7 +13,8 @@ module.exports = {
   async viteFinal(config) {
     if (config.configType === 'DEVELOPMENT') {
       console.log("DEVELOPMENT detected")
-      return config
+      //en tiedä miksi joskus mulla vaatii tämän ja joskus ei...
+      //return config
     }
     return mergeConfig(config, { base: "/coreui-components/" })
   },

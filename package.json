@@ -51,7 +51,7 @@
     "stylecheck": "prettier --check src",
     "dev-bundle": "node dev-bundle.mjs",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "NODE_OPTIONS=--openssl-legacy-provider build-storybook"
   },
   "keywords": [],
   "author": "Fintraffic",

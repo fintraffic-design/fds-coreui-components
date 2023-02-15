@@ -50,7 +50,7 @@
     "test:watch": "wtr --watch",
     "stylecheck": "prettier --check src",
     "dev-bundle": "node dev-bundle.mjs",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
     "build-storybook": "NODE_OPTIONS=--openssl-legacy-provider build-storybook"
   },
   "keywords": [],

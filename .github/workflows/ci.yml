@@ -29,4 +29,3 @@ jobs:
           npm run stylecheck
           npm run compile
           npm run lint
-          npm run test

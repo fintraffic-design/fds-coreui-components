@@ -47,10 +47,9 @@ export default class FdsNavigation extends LitElement {
   @property() selected?: ItemValue
 
   override render(): TemplateResult {
-    console.log('render', this.selected)
     const itemsOnRight = this.items.filter(item => item.position === ItemPosition.right)
     const itemsOnLeft = this.items.filter(item => item.position !== ItemPosition.right)
-    return html`<div class="navigation navigation--${this.variant}">
+    return html`<div class="navigation navigation--${this.variant} ui-label-text">
       ${this.variant === FdsNavigationVariant.primary
         ? html`<div class="navigation__header">
             <slot></slot>
@@ -69,8 +68,8 @@ export default class FdsNavigation extends LitElement {
       class="item ${this.selected === item.value ? 'item--active' : ''}"
     >
       <div class="item__label">
-        <span class="ui-label-text">${item.label}</span>
-        ${item.icon && html`<fds-icon .icon="${item.icon}"></fds-icon>`}
+        ${item.icon && html`<fds-icon class="item__icon" .icon="${item.icon}"></fds-icon>`}
+        <span>${item.label}</span>
       </div>
     </div>`
   }
@@ -94,23 +93,13 @@ export default class FdsNavigation extends LitElement {
         user-select: none;
       }
 
-      .navigation--primary {
-        background-color: ${tokenVar(FdsColorBrandBlack)};
-        color: ${tokenVar(FdsColorBrandWhite)};
-      }
-
-      .navigation--secondary {
-        background-color: ${tokenVar(FdsColorBrandWhite)};
-        border-bottom: 1px solid ${tokenVar(FdsColorBrandBlack)};
-      }
-
       .navigation__header ::slotted(*) {
         padding: 8px ${tokenVar(FdsSize3)} 8px ${tokenVar(FdsSize4)};
       }
 
       .navigation__body {
         justify-content: space-between;
-        align-items: center;
+        align-items: end;
         width: 100%;
       }
 
@@ -129,6 +118,19 @@ export default class FdsNavigation extends LitElement {
         padding: ${tokenVar(FdsSize1)} ${tokenVar(FdsSize3)};
       }
 
+      .item__label {
+        align-items: center;
+      }
+
+      .item__icon {
+        margin-right: 6px;
+      }
+
+      .navigation--primary {
+        background-color: ${tokenVar(FdsColorBrandBlack)};
+        color: ${tokenVar(FdsColorBrandWhite)};
+      }
+
       .navigation--primary .item:hover {
         color: ${tokenVar(FdsColorText300)};
       }
@@ -140,6 +142,23 @@ export default class FdsNavigation extends LitElement {
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
         border-bottom: 8px solid ${tokenVar(FdsColorBrandWhite)};
+      }
+
+      .navigation--secondary {
+        background-color: ${tokenVar(FdsColorBrandWhite)};
+        border-bottom: 1px solid ${tokenVar(FdsColorBrandBlack)};
+      }
+
+      .navigation--secondary .item {
+        border-bottom: 3px solid white;
+      }
+
+      .navigation--secondary .item--active {
+        border-bottom: 3px solid black;
+      }
+
+      .navigation--secondary .item:hover {
+        color: ${tokenVar(FdsColorText300)};
       }
     `,
   ]

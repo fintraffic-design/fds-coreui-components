@@ -20,7 +20,7 @@ type Template = (args: { variant: FdsNavigationVariant }) => TemplateResult
 const items: FdsNavigationItem[] = [
   { label: 'Areatool', value: 'home' },
   { label: 'History', value: 'history' },
-  { label: 'Settings', value: 'settings', position: ItemPosition.right, icon: 'chevron-down' },
+  { label: 'Settings', value: 'settings', position: ItemPosition.right, icon: 'settings' },
 ]
 
 export const Navigation: Template = ({ variant }) => {
@@ -31,10 +31,7 @@ export const Navigation: Template = ({ variant }) => {
       .selected=${items[0].value}
       @select="${(event: CustomEvent<FdsNavigationItem>): void => console.log('@select', event.detail)}"
     >
-      <div style="display: flex; align-items: center;">
-        <fds-icon icon="plus-circle" style="padding-right: 5px;"></fds-icon>
-        Header
-      </div>
+      <div style="display: flex; align-items: center;">Header</div>
     </fds-navigation>
   </div>`
 }

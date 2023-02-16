@@ -12,6 +12,7 @@ import {
   PlusCircle,
   Trash2,
   X,
+  Settings,
 } from 'lucide'
 
 /**
@@ -27,6 +28,7 @@ export const FdsIcons = {
   'plus-circle': PlusCircle,
   'trash-2': Trash2,
   x: X,
+  settings: Settings,
 }
 
 export type FdsIconType = keyof typeof FdsIcons
@@ -43,6 +45,7 @@ export type FdsIconType = keyof typeof FdsIcons
  * - plus-circle
  * - trash-2
  * - x
+ * - settings
  * @property {string} size - FdsSizeToken
  */
 @customElement('fds-icon')

@@ -8,7 +8,7 @@ import {
 } from '@fintraffic-design/coreui-css'
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
-import { customElement, property, state } from 'lit/decorators.js'
+import { customElement, property } from 'lit/decorators.js'
 import { FdsIconType } from './fds-icon'
 import './global-types'
 import { uiLabelTextClass } from './utils/css-utils'
@@ -19,9 +19,9 @@ export enum FdsNavigationVariant {
   secondary = 'secondary',
 }
 
-export interface NavigationItem {
+export interface FdsNavigationItem<T = string> {
   label: string
-  value: string
+  value: T
   position?: ItemPosition
   icon?: FdsIconType
 }
@@ -34,32 +34,21 @@ export enum ItemPosition {
  * Navigation component.
  *
  * @property {FdsNavigationVariant} variant - Primary or secondary style
- * @property {NavigationItem[]} items - List of destinations
- * @property {NavigationItem} defaultItem - Default or initial destination
- * @property {function} onSelect - Triggered when destination is clicked. The value of the selected destination is returned as parameter.
+ * @property {FdsNavigationItem[]} items - List of navigation items
+ * @property {FdsNavigationItem} selected - Currently selected value
+ * @event select - Triggered when destination is clicked. The selected item is in event details field.
  */
 
 @customElement('fds-navigation')
 export default class FdsNavigation extends LitElement {
   @property() variant: FdsNavigationVariant = FdsNavigationVariant.primary
-  @property() items: NavigationItem[] = []
-  @property() defaultItem?: NavigationItem
-  @property() onSelect?: (value: string) => void
-
-  @state() private _activeItem?: NavigationItem = this.defaultItem
-  @state() private _itemsOnLeft: NavigationItem[] = []
-  @state() private _itemsOnRight: NavigationItem[] = []
-
-  override connectedCallback(): void {
-    super.connectedCallback()
-    this._itemsOnRight = this.items.filter(item => item.position === ItemPosition.right)
-    this._itemsOnLeft = this.items.filter(item => item.position !== ItemPosition.right)
-    if (this.defaultItem) {
-      this.handleSelect(this.defaultItem)
-    }
-  }
+  @property() items: FdsNavigationItem[] = []
+  @property() selected?: FdsNavigationItem
 
   override render(): TemplateResult {
+    console.log('render', this.selected)
+    const itemsOnRight = this.items.filter(item => item.position === ItemPosition.right)
+    const itemsOnLeft = this.items.filter(item => item.position !== ItemPosition.right)
     return html`<div class="navigation navigation--${this.variant}">
       ${this.variant === FdsNavigationVariant.primary
         ? html`<div class="navigation__header">
@@ -67,16 +56,16 @@ export default class FdsNavigation extends LitElement {
           </div>`
         : null}
       <div class="navigation__body">
-        <div class="navigation__items">${this._itemsOnLeft.map(item => this.renderItem(item))}</div>
-        <div class="navigation__items">${this._itemsOnRight.map(item => this.renderItem(item))}</div>
+        <div class="navigation__items">${itemsOnLeft.map(item => this.renderItem(item))}</div>
+        <div class="navigation__items">${itemsOnRight.map(item => this.renderItem(item))}</div>
       </div>
     </div>`
   }
 
-  renderItem(item: NavigationItem): TemplateResult {
+  renderItem(item: FdsNavigationItem): TemplateResult {
     return html` <div
       @click=${(): void => this.handleSelect(item)}
-      class="item ${this._activeItem?.value === item.value ? 'item--active' : ''}"
+      class="item ${this.selected === item ? 'item--active' : ''}"
     >
       <div class="item__label">
         <span class="ui-label-text">${item.label}</span>
@@ -85,11 +74,13 @@ export default class FdsNavigation extends LitElement {
     </div>`
   }
 
-  handleSelect(item: NavigationItem): void {
-    this._activeItem = item
-    if (this.onSelect) {
-      this.onSelect(item.value)
-    }
+  handleSelect(item: FdsNavigationItem): void {
+    this.selected = item
+    this.dispatchEvent(
+      new CustomEvent<FdsNavigationItem>('select', {
+        detail: item,
+      })
+    )
   }
 
   static override styles = [

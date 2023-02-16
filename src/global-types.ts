@@ -9,6 +9,7 @@ import FdsDivider from './fds-divider'
 import FdsDropdown from './fds-dropdown'
 import FdsIcon from './fds-icon'
 import FdsNavigation from './fds-navigation'
+import FdsPopover from './fds-popover'
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -23,5 +24,6 @@ declare global {
     'fds-divider': FdsDivider
     'fds-checkbox': FdsCheckbox
     'fds-combobox': FdsCombobox
+    'fds-popover': FdsPopover
   }
 }

@@ -28,7 +28,7 @@ export const Navigation: Template = ({ variant }) => {
     <fds-navigation
       .variant=${variant}
       .items=${items}
-      .selected=${items[0]}
+      .selected=${items[0].value}
       @select="${(event: CustomEvent<FdsNavigationItem>): void => console.log('@select', event.detail)}"
     >
       <div style="display: flex; align-items: center;">

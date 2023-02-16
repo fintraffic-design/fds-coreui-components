@@ -19,13 +19,14 @@ export enum FdsNavigationVariant {
   secondary = 'secondary',
 }
 
-export interface FdsNavigationItem<T = string> {
+export interface FdsNavigationItem {
   label: string
-  value: T
+  value: ItemValue
   position?: ItemPosition
   icon?: FdsIconType
 }
 
+export type ItemValue = string
 export enum ItemPosition {
   left = 'left',
   right = 'right',
@@ -43,7 +44,7 @@ export enum ItemPosition {
 export default class FdsNavigation extends LitElement {
   @property() variant: FdsNavigationVariant = FdsNavigationVariant.primary
   @property() items: FdsNavigationItem[] = []
-  @property() selected?: FdsNavigationItem
+  @property() selected?: ItemValue
 
   override render(): TemplateResult {
     console.log('render', this.selected)
@@ -65,7 +66,7 @@ export default class FdsNavigation extends LitElement {
   renderItem(item: FdsNavigationItem): TemplateResult {
     return html` <div
       @click=${(): void => this.handleSelect(item)}
-      class="item ${this.selected === item ? 'item--active' : ''}"
+      class="item ${this.selected === item.value ? 'item--active' : ''}"
     >
       <div class="item__label">
         <span class="ui-label-text">${item.label}</span>
@@ -75,7 +76,7 @@ export default class FdsNavigation extends LitElement {
   }
 
   handleSelect(item: FdsNavigationItem): void {
-    this.selected = item
+    this.selected = item.value
     this.dispatchEvent(
       new CustomEvent<FdsNavigationItem>('select', {
         detail: item,

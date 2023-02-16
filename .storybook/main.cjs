@@ -1,20 +1,21 @@
-const { mergeConfig } = require('vite');
+const { mergeConfig } = require('vite')
 
 module.exports = {
-  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(ts|mjs)'],
+  stories: ['../src/**/*.stories.ts'],
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
   framework: '@storybook/web-components',
   core: {
     builder: '@storybook/builder-vite',
   },
   features: {
-    buildStoriesJson: true
+    buildStoriesJson: true,
   },
   async viteFinal(config) {
     if (config.configType === 'DEVELOPMENT') {
       console.log("DEVELOPMENT detected")
-      return config
+      //en tiedä miksi joskus mulla vaatii tämän ja joskus ei...
+      //return config
     }
-    return mergeConfig(config, { base: "/coreui-components/" })
+    return mergeConfig(config, { base: '/coreui-components/' })
   },
 }

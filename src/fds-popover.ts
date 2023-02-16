@@ -6,7 +6,7 @@ import { tokenVar } from './utils/token-utils'
 import { FdsColorBrandWhite, FdsRadiusLarge, FdsStyleElevation200 } from '@fintraffic-design/coreui-css'
 import { uiHelperTextClass } from './utils/css-utils'
 
-export enum PopoverPosition {
+export enum FdsPopoverPosition {
   ABOVE = 'above',
   BELOW = 'below',
   LEFT = 'left',
@@ -20,7 +20,7 @@ export enum PopoverPosition {
  */
 @customElement('fds-popover')
 export default class FdsPopover extends LitElement {
-  @property() position: PopoverPosition = PopoverPosition.ABOVE
+  @property() position: FdsPopoverPosition = FdsPopoverPosition.ABOVE
   @property() openOnClick: boolean = false
 
   @state() private _popoverOpen: boolean = false
@@ -40,7 +40,6 @@ export default class FdsPopover extends LitElement {
     return html`
       <div class="wrapper ui-helper-text">
         <slot
-          name="content"
           class="content ${this.openOnClick ? 'clickable' : ''}"
           @click=${this.handleClick}
           @mouseenter=${this.onMouseEnter}
@@ -51,7 +50,7 @@ export default class FdsPopover extends LitElement {
             class="popover popover--${this.position} ${this._popoverOpen ? 'popover--open' : ''}"
             style=${this.getPopoverPositionStyle()}
           >
-            <slot></slot>
+            <slot name="popover"></slot>
           </div>
         </div>
       </div>
@@ -59,19 +58,19 @@ export default class FdsPopover extends LitElement {
   }
 
   getContainerPositionStyle(): string {
-    if (this.position === PopoverPosition.ABOVE) {
+    if (this.position === FdsPopoverPosition.ABOVE) {
       return `bottom: ${this._elementHeight}px;`
     }
-    if (this.position === PopoverPosition.LEFT || this.position === PopoverPosition.RIGHT) {
+    if (this.position === FdsPopoverPosition.LEFT || this.position === FdsPopoverPosition.RIGHT) {
       return `bottom: ${this._elementHeight / 2}px;`
     }
     return ''
   }
 
   getPopoverPositionStyle(): string {
-    return this.position === PopoverPosition.LEFT
+    return this.position === FdsPopoverPosition.LEFT
       ? `right: ${this._elementWidth}px;`
-      : this.position === PopoverPosition.RIGHT
+      : this.position === FdsPopoverPosition.RIGHT
       ? `left: ${this._elementWidth}px;`
       : ''
   }

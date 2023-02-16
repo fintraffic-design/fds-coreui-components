@@ -36,10 +36,8 @@ export default class FdsAlert extends LitElement {
   override render(): TemplateResult {
     return html`
       <div class="alert alert--${this.variant}">
-        <div class="alert-icon">
-          <fds-icon .icon=${'alert-triangle'} .size="${FdsSize3}"></fds-icon>
-        </div>
-        <slot class="ui-helper-text messages"></slot>
+        <fds-icon class="alert-icon" .icon=${'alert-triangle'} .size=${FdsSize3}></fds-icon>
+        <slot class="ui-helper-text content"></slot>
       </div>
     `
   }
@@ -48,7 +46,7 @@ export default class FdsAlert extends LitElement {
     uiHelperTextClass,
     css`
       .alert {
-        padding: ${tokenVar(FdsSize1)} ${tokenVar(FdsSize1)} calc(${tokenVar(FdsSize1)} / 2);
+        padding: 8px;
         border-bottom: 2px solid;
         display: flex;
         align-items: center;
@@ -85,8 +83,9 @@ export default class FdsAlert extends LitElement {
         margin-right: ${tokenVar(FdsSize1)};
         position: relative;
       }
-      .messages {
+      .content {
         display: block;
+        line-height: 150%;
       }
     `,
   ]

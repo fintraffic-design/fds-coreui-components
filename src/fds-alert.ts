@@ -44,49 +44,50 @@ export default class FdsAlert extends LitElement {
     `
   }
 
-  static override styles = css`
-    .alert {
-      padding: ${tokenVar(FdsSize1)} ${tokenVar(FdsSize1)} calc(${tokenVar(FdsSize1)} / 2);
-      border-bottom: 2px solid;
-      display: flex;
-      align-items: center;
-    }
-    .alert--error {
-      background-color: ${tokenVar(FdsColorDanger100)};
-      border-bottom-color: ${tokenVar(FdsColorDanger300)};
-    }
-    .alert--error .alert-icon {
-      color: ${tokenVar(FdsColorDanger300)};
-    }
-    .alert--warning {
-      background-color: ${tokenVar(FdsColorWarning100)};
-      border-bottom-color: ${tokenVar(FdsColorWarning300)};
-    }
-    .alert--warning .alert-icon {
-      color: ${tokenVar(FdsColorWarning300)};
-    }
-    .alert--info {
-      background-color: ${tokenVar(FdsColorInteractive100)};
-      border-bottom-color: ${tokenVar(FdsColorInteractive300)};
-    }
-    .alert--info .alert-icon {
-      color: ${tokenVar(FdsColorInteractive300)};
-    }
-    .alert--success {
-      background-color: ${tokenVar(FdsColorSuccess100)};
-      border-bottom-color: ${tokenVar(FdsColorSuccess300)};
-    }
-    .alert--success .alert-icon {
-      color: ${tokenVar(FdsColorSuccess300)};
-    }
-    .alert-icon {
-      margin-right: ${tokenVar(FdsSize1)};
-      position: relative;
-    }
-    .messages {
-      display: block;
-    }
-
-    ${uiHelperTextClass}
-  `
+  static override styles = [
+    uiHelperTextClass,
+    css`
+      .alert {
+        padding: ${tokenVar(FdsSize1)} ${tokenVar(FdsSize1)} calc(${tokenVar(FdsSize1)} / 2);
+        border-bottom: 2px solid;
+        display: flex;
+        align-items: center;
+      }
+      .alert--error {
+        background-color: ${tokenVar(FdsColorDanger100)};
+        border-bottom-color: ${tokenVar(FdsColorDanger300)};
+      }
+      .alert--error .alert-icon {
+        color: ${tokenVar(FdsColorDanger300)};
+      }
+      .alert--warning {
+        background-color: ${tokenVar(FdsColorWarning100)};
+        border-bottom-color: ${tokenVar(FdsColorWarning300)};
+      }
+      .alert--warning .alert-icon {
+        color: ${tokenVar(FdsColorWarning300)};
+      }
+      .alert--info {
+        background-color: ${tokenVar(FdsColorInteractive100)};
+        border-bottom-color: ${tokenVar(FdsColorInteractive300)};
+      }
+      .alert--info .alert-icon {
+        color: ${tokenVar(FdsColorInteractive300)};
+      }
+      .alert--success {
+        background-color: ${tokenVar(FdsColorSuccess100)};
+        border-bottom-color: ${tokenVar(FdsColorSuccess300)};
+      }
+      .alert--success .alert-icon {
+        color: ${tokenVar(FdsColorSuccess300)};
+      }
+      .alert-icon {
+        margin-right: ${tokenVar(FdsSize1)};
+        position: relative;
+      }
+      .messages {
+        display: block;
+      }
+    `,
+  ]
 }

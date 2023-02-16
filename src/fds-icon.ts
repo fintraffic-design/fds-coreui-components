@@ -47,12 +47,6 @@ export type FdsIconType = keyof typeof FdsIcons
  */
 @customElement('fds-icon')
 export default class FdsIcon extends LitElement {
-  static override styles = css`
-    :host {
-      display: inline-flex;
-    }
-  `
-
   @property() size: FdsSizeToken = FdsSize3
   @property() icon?: FdsIconType
 
@@ -67,4 +61,10 @@ export default class FdsIcon extends LitElement {
     svgElement.setAttribute('height', this.size.value)
     return svgElement
   }
+
+  static override styles = css`
+    :host {
+      display: inline-flex;
+    }
+  `
 }

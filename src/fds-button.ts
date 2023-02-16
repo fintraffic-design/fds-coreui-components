@@ -57,92 +57,93 @@ export default class FdsButton extends LitElement {
     `
   }
 
-  static override styles = css`
-    :host {
-      display: inline-flex;
-      justify-content: center;
-    }
+  static override styles = [
+    uiLabelTextClass,
+    css`
+      :host {
+        display: inline-flex;
+        justify-content: center;
+      }
 
-    button {
-      cursor: pointer;
-      display: flex;
-      border-radius: ${tokenVar(FdsRadiusLarge)};
-      padding: 13px 16px;
-      height: ${tokenVar(FdsSize6)};
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: all 200ms;
-      width: inherit;
-    }
+      button {
+        cursor: pointer;
+        display: flex;
+        border-radius: ${tokenVar(FdsRadiusLarge)};
+        padding: 13px 16px;
+        height: ${tokenVar(FdsSize6)};
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: all 200ms;
+        width: inherit;
+      }
 
-    button *,
-    button ::slotted(*) {
-      line-height: 1;
-    }
+      button *,
+      button ::slotted(*) {
+        line-height: 1;
+      }
 
-    .button--primary {
-      border: 2px solid ${tokenVar(FdsColorBrandBlack)};
-      background: ${tokenVar(FdsColorBrandBlack)};
-      color: ${tokenVar(variantColorMap[FdsButtonVariant.primary])};
-    }
+      .button--primary {
+        border: 2px solid ${tokenVar(FdsColorBrandBlack)};
+        background: ${tokenVar(FdsColorBrandBlack)};
+        color: ${tokenVar(variantColorMap[FdsButtonVariant.primary])};
+      }
 
-    .button--secondary {
-      border: 2px solid ${tokenVar(FdsColorBrandBlack)};
-      background: ${tokenVar(FdsColorBrandWhite)};
-      color: ${tokenVar(variantColorMap[FdsButtonVariant.secondary])};
-    }
+      .button--secondary {
+        border: 2px solid ${tokenVar(FdsColorBrandBlack)};
+        background: ${tokenVar(FdsColorBrandWhite)};
+        color: ${tokenVar(variantColorMap[FdsButtonVariant.secondary])};
+      }
 
-    .button--tertiary {
-      background: transparent;
-      border-color: transparent;
-      color: ${tokenVar(variantColorMap[FdsButtonVariant.tertiary])};
-    }
+      .button--tertiary {
+        background: transparent;
+        border-color: transparent;
+        color: ${tokenVar(variantColorMap[FdsButtonVariant.tertiary])};
+      }
 
-    .button--danger {
-      background: ${tokenVar(FdsColorDanger300)};
-      border-color: transparent;
-      color: ${tokenVar(variantColorMap[FdsButtonVariant.danger])};
-    }
+      .button--danger {
+        background: ${tokenVar(FdsColorDanger300)};
+        border-color: transparent;
+        color: ${tokenVar(variantColorMap[FdsButtonVariant.danger])};
+      }
 
-    .button--primary:hover,
-    .button--secondary:hover,
-    .button--tertiary:hover {
-      background: ${tokenVar(FdsColorInteractive200)};
-      border-color: transparent;
-      color: ${tokenVar(FdsColorBrandWhite)};
-    }
+      .button--primary:hover,
+      .button--secondary:hover,
+      .button--tertiary:hover {
+        background: ${tokenVar(FdsColorInteractive200)};
+        border-color: transparent;
+        color: ${tokenVar(FdsColorBrandWhite)};
+      }
 
-    .button--danger:hover {
-      background: ${tokenVar(FdsColorDanger400)};
-      border-color: ${tokenVar(FdsColorDanger400)};
-      color: ${tokenVar(FdsColorBrandWhite)};
-    }
+      .button--danger:hover {
+        background: ${tokenVar(FdsColorDanger400)};
+        border-color: ${tokenVar(FdsColorDanger400)};
+        color: ${tokenVar(FdsColorBrandWhite)};
+      }
 
-    .button--primary:disabled {
-      background: ${tokenVar(FdsColorNeutral100)};
-      border-color: ${tokenVar(FdsColorNeutral100)};
-      color: ${tokenVar(FdsColorText300)};
-    }
+      .button--primary:disabled {
+        background: ${tokenVar(FdsColorNeutral100)};
+        border-color: ${tokenVar(FdsColorNeutral100)};
+        color: ${tokenVar(FdsColorText300)};
+      }
 
-    .button--secondary:disabled {
-      background: transparent;
-      color: ${tokenVar(FdsColorNeutral100)};
-      border-color: ${tokenVar(FdsColorNeutral100)};
-    }
+      .button--secondary:disabled {
+        background: transparent;
+        color: ${tokenVar(FdsColorNeutral100)};
+        border-color: ${tokenVar(FdsColorNeutral100)};
+      }
 
-    .button--tertiary:disabled {
-      background: transparent;
-      border-color: transparent;
-      color: ${tokenVar(FdsColorNeutral100)};
-    }
+      .button--tertiary:disabled {
+        background: transparent;
+        border-color: transparent;
+        color: ${tokenVar(FdsColorNeutral100)};
+      }
 
-    .button--danger:disabled {
-      background: ${tokenVar(FdsColorNeutral100)};
-      border-color: transparent;
-      color: ${tokenVar(FdsColorText300)};
-    }
-
-    ${uiLabelTextClass}
-  `
+      .button--danger:disabled {
+        background: ${tokenVar(FdsColorNeutral100)};
+        border-color: transparent;
+        color: ${tokenVar(FdsColorText300)};
+      }
+    `,
+  ]
 }

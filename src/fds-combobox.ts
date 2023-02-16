@@ -211,96 +211,97 @@ export default class FdsCombobox extends LitElement {
     return ''
   }
 
-  static override styles = css`
-    :host {
-      width: 100%;
-      position: relative;
-    }
+  static override styles = [
+    uiLabelTextClass,
+    css`
+      :host {
+        width: 100%;
+        position: relative;
+      }
 
-    .input-container {
-      cursor: pointer;
-      box-sizing: border-box;
-      display: inline-flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      white-space: nowrap;
+      .input-container {
+        cursor: pointer;
+        box-sizing: border-box;
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        white-space: nowrap;
 
-      width: 100%;
-      /* TODO: what values? */
-      height: 48px;
-    }
+        width: 100%;
+        /* TODO: what values? */
+        height: 48px;
+      }
 
-    .input-container > input {
-      width: inherit;
-      height: inherit;
-      text-overflow: ellipsis;
-      padding-left: 16px;
-      padding-right: 40px; // icon 24px + 8px padding for left and right
-      background-color: ${tokenVar(FdsColorBrandWhite)};
-      border: 1px solid ${tokenVar(FdsColorNeutral200)};
-    }
+      .input-container > input {
+        width: inherit;
+        height: inherit;
+        text-overflow: ellipsis;
+        padding-left: 16px;
+        padding-right: 40px; // icon 24px + 8px padding for left and right
+        background-color: ${tokenVar(FdsColorBrandWhite)};
+        border: 1px solid ${tokenVar(FdsColorNeutral200)};
+      }
 
-    .input-container > fds-icon {
-      pointer-events: none;
-      position: absolute;
-      right: 8px;
-      color: ${tokenVar(FdsColorText1000)};
-    }
+      .input-container > fds-icon {
+        pointer-events: none;
+        position: absolute;
+        right: 8px;
+        color: ${tokenVar(FdsColorText1000)};
+      }
 
-    .input-container.disabled {
-      pointer-events: none;
-    }
+      .input-container.disabled {
+        pointer-events: none;
+      }
 
-    .input-container.disabled > input {
-      cursor: default;
-      background-color: ${tokenVar(FdsColorNeutral100)};
-      color: ${tokenVar(FdsColorText300)};
-    }
+      .input-container.disabled > input {
+        cursor: default;
+        background-color: ${tokenVar(FdsColorNeutral100)};
+        color: ${tokenVar(FdsColorText300)};
+      }
 
-    .input-container.error > input {
-      color: ${tokenVar(FdsColorDanger200)};
-      border: 3px solid ${tokenVar(FdsColorDanger200)};
-    }
+      .input-container.error > input {
+        color: ${tokenVar(FdsColorDanger200)};
+        border: 3px solid ${tokenVar(FdsColorDanger200)};
+      }
 
-    #options-list {
-      cursor: pointer;
-      display: block;
-      position: absolute;
-      overflow-y: scroll;
+      #options-list {
+        cursor: pointer;
+        display: block;
+        position: absolute;
+        overflow-y: scroll;
 
-      min-width: 100%;
-      max-width: fit-content;
-      /* TODO: what value? */
-      max-height: 80vw;
+        min-width: 100%;
+        max-width: fit-content;
+        /* TODO: what value? */
+        max-height: 80vw;
 
-      box-shadow: ${tokenVar(FdsStyleElevation200)};
-    }
+        box-shadow: ${tokenVar(FdsStyleElevation200)};
+      }
 
-    .option {
-      display: flex;
-      align-items: center;
-      white-space: nowrap;
+      .option {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
 
-      /* TODO: what values? */
-      height: 56px;
-      padding-left: 16px;
-      padding-right: 8px;
+        /* TODO: what values? */
+        height: 56px;
+        padding-left: 16px;
+        padding-right: 8px;
 
-      background-color: ${tokenVar(FdsColorBrandWhite)};
-      border-bottom: 1px solid ${tokenVar(FdsColorNeutral200)};
-    }
+        background-color: ${tokenVar(FdsColorBrandWhite)};
+        border-bottom: 1px solid ${tokenVar(FdsColorNeutral200)};
+      }
 
-    .option.selected {
-      /* TODO: what color? */
-      background-color: ${tokenVar(FdsColorInteractive100)};
-    }
+      .option.selected {
+        /* TODO: what color? */
+        background-color: ${tokenVar(FdsColorInteractive100)};
+      }
 
-    .option.new {
-      color: ${tokenVar(FdsColorInteractive300)};
-      gap: 10px;
-    }
-
-    ${uiLabelTextClass}
-  `
+      .option.new {
+        color: ${tokenVar(FdsColorInteractive300)};
+        gap: 10px;
+      }
+    `,
+  ]
 }

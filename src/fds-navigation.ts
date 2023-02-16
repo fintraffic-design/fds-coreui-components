@@ -83,62 +83,63 @@ export default class FdsNavigation extends LitElement {
     )
   }
 
-  static override styles = css`
-    .navigation {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      user-select: none;
-    }
+  static override styles = [
+    uiLabelTextClass,
+    css`
+      .navigation {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        user-select: none;
+      }
 
-    .navigation--primary {
-      background-color: ${tokenVar(FdsColorBrandBlack)};
-      color: ${tokenVar(FdsColorBrandWhite)};
-    }
+      .navigation--primary {
+        background-color: ${tokenVar(FdsColorBrandBlack)};
+        color: ${tokenVar(FdsColorBrandWhite)};
+      }
 
-    .navigation--secondary {
-      background-color: ${tokenVar(FdsColorBrandWhite)};
-      border-bottom: 1px solid ${tokenVar(FdsColorBrandBlack)};
-    }
+      .navigation--secondary {
+        background-color: ${tokenVar(FdsColorBrandWhite)};
+        border-bottom: 1px solid ${tokenVar(FdsColorBrandBlack)};
+      }
 
-    .navigation__header ::slotted(*) {
-      padding: 8px ${tokenVar(FdsSize3)} 8px ${tokenVar(FdsSize4)};
-    }
+      .navigation__header ::slotted(*) {
+        padding: 8px ${tokenVar(FdsSize3)} 8px ${tokenVar(FdsSize4)};
+      }
 
-    .navigation__body {
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-    }
+      .navigation__body {
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
 
-    .navigation__header,
-    .navigation__body,
-    .navigation__items,
-    .item__label {
-      display: flex;
-    }
+      .navigation__header,
+      .navigation__body,
+      .navigation__items,
+      .item__label {
+        display: flex;
+      }
 
-    .item {
-      cursor: pointer;
-      display: grid;
-      justify-items: center;
-      grid-template-rows: auto 0;
-      padding: ${tokenVar(FdsSize1)} ${tokenVar(FdsSize3)};
-    }
+      .item {
+        cursor: pointer;
+        display: grid;
+        justify-items: center;
+        grid-template-rows: auto 0;
+        padding: ${tokenVar(FdsSize1)} ${tokenVar(FdsSize3)};
+      }
 
-    .navigation--primary .item:hover {
-      color: ${tokenVar(FdsColorText300)};
-    }
+      .navigation--primary .item:hover {
+        color: ${tokenVar(FdsColorText300)};
+      }
 
-    .navigation--primary .item--active:after {
-      content: '';
-      position: relative;
-      top: 1px;
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
-      border-bottom: 8px solid ${tokenVar(FdsColorBrandWhite)};
-    }
-
-    ${uiLabelTextClass}
-  `
+      .navigation--primary .item--active:after {
+        content: '';
+        position: relative;
+        top: 1px;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 8px solid ${tokenVar(FdsColorBrandWhite)};
+      }
+    `,
+  ]
 }

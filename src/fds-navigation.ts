@@ -1,11 +1,4 @@
-import {
-  FdsColorBrandBlack,
-  FdsColorBrandWhite,
-  FdsColorText300,
-  FdsSize1,
-  FdsSize3,
-  FdsSize4,
-} from '@fintraffic-design/coreui-css'
+import { FdsColorBrandBlack, FdsColorBrandWhite, FdsColorText300 } from '@fintraffic-design/coreui-css'
 import { css, html, LitElement } from 'lit'
 import { nothing, TemplateResult } from 'lit-html'
 import { customElement, property } from 'lit/decorators.js'
@@ -19,14 +12,13 @@ export enum FdsNavigationVariant {
   secondary = 'secondary',
 }
 
-export interface FdsNavigationItem {
+export interface FdsNavigationItem<T = string> {
   label: string
-  value: ItemValue
+  value: T
   position?: ItemPosition
   icon?: FdsIconType
 }
 
-export type ItemValue = string
 export enum ItemPosition {
   left = 'left',
   right = 'right',
@@ -44,7 +36,7 @@ export enum ItemPosition {
 export default class FdsNavigation extends LitElement {
   @property() variant: FdsNavigationVariant = FdsNavigationVariant.primary
   @property() items: FdsNavigationItem[] = []
-  @property() selected?: ItemValue
+  @property() selected?: FdsNavigationItem
 
   override render(): TemplateResult {
     const itemsOnRight = this.items.filter(item => item.position === ItemPosition.right)
@@ -65,7 +57,7 @@ export default class FdsNavigation extends LitElement {
   renderItem(item: FdsNavigationItem): TemplateResult {
     return html` <div
       @click=${(): void => this.handleSelect(item)}
-      class="item ${this.selected === item.value ? 'item--active' : ''}"
+      class="item ${this.selected === item ? 'item--active' : ''}"
     >
       <div class="item__label">
         ${item.icon && html`<fds-icon class="item__icon" .icon="${item.icon}"></fds-icon>`}
@@ -75,7 +67,7 @@ export default class FdsNavigation extends LitElement {
   }
 
   handleSelect(item: FdsNavigationItem): void {
-    this.selected = item.value
+    this.selected = item
     this.dispatchEvent(
       new CustomEvent<FdsNavigationItem>('select', {
         detail: item,

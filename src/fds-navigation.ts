@@ -83,7 +83,6 @@ export default class FdsNavigation extends LitElement {
         align-items: center;
         width: 100%;
         user-select: none;
-        height: 40px;
       }
 
       .navigation__header ::slotted(*) {
@@ -93,6 +92,7 @@ export default class FdsNavigation extends LitElement {
       .navigation__body {
         justify-content: space-between;
         width: 100%;
+        height: 100%;
       }
 
       .navigation__items {
@@ -115,7 +115,7 @@ export default class FdsNavigation extends LitElement {
       }
 
       .item__label {
-        align-items: center;
+        align-items: end;
       }
 
       .item__icon {
@@ -125,6 +125,7 @@ export default class FdsNavigation extends LitElement {
       .navigation--primary {
         background-color: ${tokenVar(FdsColorBrandBlack)};
         color: ${tokenVar(FdsColorBrandWhite)};
+        height: 40px;
       }
 
       .navigation--primary .item:hover {
@@ -144,6 +145,10 @@ export default class FdsNavigation extends LitElement {
         background-color: ${tokenVar(FdsColorBrandWhite)};
         border-bottom: 1px solid ${tokenVar(FdsColorBrandBlack)};
         height: 56px;
+      }
+
+      .navigation--secondary .navigation__body {
+        padding: 0px 16px;
       }
 
       .navigation--secondary .item {

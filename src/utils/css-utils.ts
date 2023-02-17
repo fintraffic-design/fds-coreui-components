@@ -54,7 +54,7 @@ export const heading4SmallTextClass = css`
 `
 
 export const heading4LargeTextClass = css`
-  .heading-4-small-text {
+  .heading-4-large-text {
     font-family: ${tokenVar(FdsTypographyHeadingLargeHeading4FontFamily)};
     font-weight: ${tokenVar(FdsTypographyHeadingLargeHeading4FontWeight)};
     font-size: ${tokenVar(FdsTypographyHeadingLargeHeading4FontSize)};

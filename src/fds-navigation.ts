@@ -1,13 +1,6 @@
-import {
-  FdsColorBrandBlack,
-  FdsColorBrandWhite,
-  FdsColorText300,
-  FdsSize1,
-  FdsSize3,
-  FdsSize4,
-} from '@fintraffic-design/coreui-css'
+import { FdsColorBrandBlack, FdsColorBrandWhite, FdsColorText300 } from '@fintraffic-design/coreui-css'
 import { css, html, LitElement } from 'lit'
-import { TemplateResult } from 'lit-html'
+import { nothing, TemplateResult } from 'lit-html'
 import { customElement, property } from 'lit/decorators.js'
 import { FdsIconType } from './fds-icon'
 import './global-types'
@@ -46,15 +39,14 @@ export default class FdsNavigation extends LitElement {
   @property() selected?: FdsNavigationItem
 
   override render(): TemplateResult {
-    console.log('render', this.selected)
     const itemsOnRight = this.items.filter(item => item.position === ItemPosition.right)
     const itemsOnLeft = this.items.filter(item => item.position !== ItemPosition.right)
-    return html`<div class="navigation navigation--${this.variant}">
+    return html`<div class="navigation navigation--${this.variant} ui-label-text">
       ${this.variant === FdsNavigationVariant.primary
         ? html`<div class="navigation__header">
             <slot></slot>
           </div>`
-        : null}
+        : nothing}
       <div class="navigation__body">
         <div class="navigation__items">${itemsOnLeft.map(item => this.renderItem(item))}</div>
         <div class="navigation__items">${itemsOnRight.map(item => this.renderItem(item))}</div>
@@ -68,8 +60,8 @@ export default class FdsNavigation extends LitElement {
       class="item ${this.selected === item ? 'item--active' : ''}"
     >
       <div class="item__label">
-        <span class="ui-label-text">${item.label}</span>
-        ${item.icon && html`<fds-icon .icon="${item.icon}"></fds-icon>`}
+        ${item.icon && html`<fds-icon class="item__icon" .icon="${item.icon}"></fds-icon>`}
+        <span>${item.label}</span>
       </div>
     </div>`
   }
@@ -91,26 +83,20 @@ export default class FdsNavigation extends LitElement {
         align-items: center;
         width: 100%;
         user-select: none;
-      }
-
-      .navigation--primary {
-        background-color: ${tokenVar(FdsColorBrandBlack)};
-        color: ${tokenVar(FdsColorBrandWhite)};
-      }
-
-      .navigation--secondary {
-        background-color: ${tokenVar(FdsColorBrandWhite)};
-        border-bottom: 1px solid ${tokenVar(FdsColorBrandBlack)};
+        height: 40px;
       }
 
       .navigation__header ::slotted(*) {
-        padding: 8px ${tokenVar(FdsSize3)} 8px ${tokenVar(FdsSize4)};
+        padding: 9px 24px 9px 32px;
       }
 
       .navigation__body {
         justify-content: space-between;
-        align-items: center;
         width: 100%;
+      }
+
+      .navigation__items {
+        align-items: end;
       }
 
       .navigation__header,
@@ -125,7 +111,20 @@ export default class FdsNavigation extends LitElement {
         display: grid;
         justify-items: center;
         grid-template-rows: auto 0;
-        padding: ${tokenVar(FdsSize1)} ${tokenVar(FdsSize3)};
+        padding: 9px 20px;
+      }
+
+      .item__label {
+        align-items: center;
+      }
+
+      .item__icon {
+        margin-right: 6px;
+      }
+
+      .navigation--primary {
+        background-color: ${tokenVar(FdsColorBrandBlack)};
+        color: ${tokenVar(FdsColorBrandWhite)};
       }
 
       .navigation--primary .item:hover {
@@ -139,6 +138,25 @@ export default class FdsNavigation extends LitElement {
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
         border-bottom: 8px solid ${tokenVar(FdsColorBrandWhite)};
+      }
+
+      .navigation--secondary {
+        background-color: ${tokenVar(FdsColorBrandWhite)};
+        border-bottom: 1px solid ${tokenVar(FdsColorBrandBlack)};
+        height: 56px;
+      }
+
+      .navigation--secondary .item {
+        border-bottom: 3px solid white;
+        padding: 16px 16px 13px 16px;
+      }
+
+      .navigation--secondary .item--active {
+        border-bottom: 3px solid black;
+      }
+
+      .navigation--secondary .item:hover {
+        color: ${tokenVar(FdsColorText300)};
       }
     `,
   ]

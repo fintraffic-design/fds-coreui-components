@@ -7,7 +7,7 @@ import {
   FdsSize4,
 } from '@fintraffic-design/coreui-css'
 import { css, html, LitElement } from 'lit'
-import { TemplateResult } from 'lit-html'
+import { nothing, TemplateResult } from 'lit-html'
 import { customElement, property } from 'lit/decorators.js'
 import { FdsIconType } from './fds-icon'
 import './global-types'
@@ -54,7 +54,7 @@ export default class FdsNavigation extends LitElement {
         ? html`<div class="navigation__header">
             <slot></slot>
           </div>`
-        : null}
+        : nothing}
       <div class="navigation__body">
         <div class="navigation__items">${itemsOnLeft.map(item => this.renderItem(item))}</div>
         <div class="navigation__items">${itemsOnRight.map(item => this.renderItem(item))}</div>
@@ -91,16 +91,20 @@ export default class FdsNavigation extends LitElement {
         align-items: center;
         width: 100%;
         user-select: none;
+        height: 40px;
       }
 
       .navigation__header ::slotted(*) {
-        padding: 8px ${tokenVar(FdsSize3)} 8px ${tokenVar(FdsSize4)};
+        padding: 9px 24px 9px 32px;
       }
 
       .navigation__body {
         justify-content: space-between;
-        align-items: end;
         width: 100%;
+      }
+
+      .navigation__items {
+        align-items: end;
       }
 
       .navigation__header,
@@ -115,7 +119,7 @@ export default class FdsNavigation extends LitElement {
         display: grid;
         justify-items: center;
         grid-template-rows: auto 0;
-        padding: ${tokenVar(FdsSize1)} ${tokenVar(FdsSize3)};
+        padding: 9px 20px;
       }
 
       .item__label {
@@ -147,10 +151,12 @@ export default class FdsNavigation extends LitElement {
       .navigation--secondary {
         background-color: ${tokenVar(FdsColorBrandWhite)};
         border-bottom: 1px solid ${tokenVar(FdsColorBrandBlack)};
+        height: 56px;
       }
 
       .navigation--secondary .item {
         border-bottom: 3px solid white;
+        padding: 16px 16px 13px 16px;
       }
 
       .navigation--secondary .item--active {

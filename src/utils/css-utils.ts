@@ -1,4 +1,9 @@
 import {
+  FdsTypographyHeadingLargeHeading4FontFamily,
+  FdsTypographyHeadingLargeHeading4FontSize,
+  FdsTypographyHeadingLargeHeading4FontWeight,
+  FdsTypographyHeadingLargeHeading4LetterSpacing,
+  FdsTypographyHeadingLargeHeading4LineHeight,
   FdsTypographyHeadingSmallHeading4FontFamily,
   FdsTypographyHeadingSmallHeading4FontSize,
   FdsTypographyHeadingSmallHeading4FontWeight,
@@ -45,5 +50,15 @@ export const heading4SmallTextClass = css`
     font-size: ${tokenVar(FdsTypographyHeadingSmallHeading4FontSize)};
     line-height: ${tokenVar(FdsTypographyHeadingSmallHeading4LineHeight)};
     letter-spacing: ${tokenVar(FdsTypographyHeadingSmallHeading4LetterSpacing)};
+  }
+`
+
+export const heading4LargeTextClass = css`
+  .heading-4-small-text {
+    font-family: ${tokenVar(FdsTypographyHeadingLargeHeading4FontFamily)};
+    font-weight: ${tokenVar(FdsTypographyHeadingLargeHeading4FontWeight)};
+    font-size: ${tokenVar(FdsTypographyHeadingLargeHeading4FontSize)};
+    line-height: ${tokenVar(FdsTypographyHeadingLargeHeading4LineHeight)};
+    letter-spacing: ${tokenVar(FdsTypographyHeadingLargeHeading4LetterSpacing)};
   }
 `

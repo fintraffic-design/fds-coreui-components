@@ -13,6 +13,7 @@ import {
   Trash2,
   X,
   Settings,
+  Edit,
 } from 'lucide'
 
 /**
@@ -24,6 +25,7 @@ export const FdsIcons = {
   'chevron-down': ChevronDown,
   'chevron-right': ChevronRight,
   'chevron-up': ChevronUp,
+  edit: Edit,
   plus: Plus,
   'plus-circle': PlusCircle,
   'trash-2': Trash2,
@@ -42,6 +44,7 @@ export type FdsIconType = keyof typeof FdsIcons
  * - chevron-down
  * - chevron-right
  * - chevron-up
+ * - edit
  * - plus-circle
  * - trash-2
  * - x

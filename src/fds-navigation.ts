@@ -144,7 +144,7 @@ export default class FdsNavigation extends LitElement {
       .navigation--secondary {
         background-color: ${tokenVar(FdsColorBrandWhite)};
         border-bottom: 1px solid ${tokenVar(FdsColorBrandBlack)};
-        height: 56px;
+        height: 55px;
       }
 
       .navigation--secondary .navigation__body {

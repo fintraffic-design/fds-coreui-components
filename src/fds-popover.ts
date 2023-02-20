@@ -37,7 +37,7 @@ export default class FdsPopover extends LitElement {
   }
 
   override render(): TemplateResult {
-    const bg = getComputedStyle(this).backgroundColor
+    const backgroundColor = getComputedStyle(this).backgroundColor
     return html`
       <div class="wrapper">
         <slot
@@ -49,10 +49,10 @@ export default class FdsPopover extends LitElement {
         <div class="container ui-helper-text" style=${this.getContainerPositionStyle()}>
           <div
             class="popover popover--${this.position} ${this._popoverOpen ? 'popover--open' : ''}"
-            style="${this.getPopoverPositionStyle()} background-color: ${bg};"
+            style="${this.getPopoverPositionStyle()} background-color: ${backgroundColor};"
           >
             <slot name="popover"></slot>
-            <div class="arrow" style="border-color: ${bg};"></div>
+            <div class="arrow" style="border-color: ${backgroundColor};"></div>
           </div>
         </div>
       </div>

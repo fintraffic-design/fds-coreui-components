@@ -88,7 +88,7 @@ export default class FdsCombobox extends LitElement {
       </div>
     `
 
-    const contents = html`
+    const optionsList = html`
       <div id="options-list">
         ${filteredOptions.map(
           option => html`
@@ -123,7 +123,7 @@ export default class FdsCombobox extends LitElement {
         />
         <fds-icon .icon=${this._open ? 'chevron-up' : 'chevron-down'}></fds-icon>
       </div>
-      ${this._open ? contents : null}
+      ${this._open ? optionsList : null}
     `
   }
 
@@ -246,13 +246,15 @@ export default class FdsCombobox extends LitElement {
 
         width: 100%;
         /* TODO: what values? */
-        height: 48px;
+        height: 46px; // element should be total of 48px (same as dropdown), children has 1px border
       }
 
       .input-container > input {
         width: inherit;
         height: inherit;
         text-overflow: ellipsis;
+        padding-top: 0px;
+        padding-bottom: 0px;
         padding-left: 16px;
         padding-right: 40px; // icon 24px + 8px padding for left and right
         background-color: ${tokenVar(FdsColorBrandWhite)};
@@ -279,6 +281,10 @@ export default class FdsCombobox extends LitElement {
       .input-container.error > input {
         color: ${tokenVar(FdsColorDanger200)};
         border: 3px solid ${tokenVar(FdsColorDanger200)};
+      }
+
+      input::placeholder {
+        color: ${tokenVar(FdsColorText300)};
       }
 
       #options-list {

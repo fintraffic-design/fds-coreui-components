@@ -65,7 +65,7 @@ export default class FdsPopover extends LitElement {
     `
   }
 
-  getContainerPositionStyle(): string {
+  private getContainerPositionStyle(): string {
     if (this.position === FdsPopoverPosition.ABOVE) {
       return `bottom: ${this._elementHeight}px;`
     }
@@ -75,7 +75,7 @@ export default class FdsPopover extends LitElement {
     return ''
   }
 
-  getPopoverPositionStyle(): string {
+  private getPopoverPositionStyle(): string {
     return this.position === FdsPopoverPosition.LEFT
       ? `right: ${this._elementWidth}px;`
       : this.position === FdsPopoverPosition.RIGHT
@@ -83,33 +83,30 @@ export default class FdsPopover extends LitElement {
       : ''
   }
 
-  onMouseEnter(): void {
+  private onMouseEnter(): void {
     if (!this.openOnClick) {
-      this._popoverOpen = true
+      this._popoverOpen = this.isAssigned()
     }
   }
 
-  onMouseLeave(): void {
+  private onMouseLeave(): void {
     if (!this.openOnClick) {
       this._popoverOpen = false
     }
   }
 
-  handleClick(): void {
+  private handleClick(): void {
     if (this.openOnClick) {
-      this._popoverOpen = !this._popoverOpen
+      this._popoverOpen = !this._popoverOpen && this.isAssigned()
     }
   }
 
+  private isAssigned(): boolean {
+    const slot = this.shadowRoot?.querySelector('.container slot') as HTMLSlotElement
+    return Boolean(slot?.assignedElements()?.length)
+  }
+
   static override styles = css`
-    .content {
-      cursor: default;
-    }
-
-    .clickable {
-      cursor: pointer;
-    }
-
     .container {
       position: relative;
       display: flex;

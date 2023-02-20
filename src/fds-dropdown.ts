@@ -82,7 +82,7 @@ export default class FdsDropdown extends LitElement {
         aria-haspopup=${true}
         aria-expanded=${this._open}
       >
-        ${this.getLabel(this.value) || this.placeholder}
+        <div>${this.getLabel(this.value) || this.placeholder}</div>
         <fds-icon .icon=${this._open ? 'chevron-up' : 'chevron-down'}></fds-icon>
       </button>
       ${this._open ? optionsList : null}

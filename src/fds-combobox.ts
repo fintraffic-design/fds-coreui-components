@@ -21,16 +21,17 @@ import { uiLabelTextClass } from './utils/css-utils'
 /**
  * Combobox component.
  *
- * @property options: {string} - List of options to suggest to user.
- * @property disabled {boolean} - Disable combobox.
- * @property error {boolean} - Display error indicator on combobox.
- * @property placeholder {string} - Placeholder value to show while combobox has no input.
- * @property initialValue {string} - Set option that is chosen as default.
- * @property addNewIndicator {boolean} - Show a text indicator at options list telling user he can add the current value.
- * @property onSelect {function} - Triggered when combobox loses focus. Focus is lost on following scenarios:
+ * @event select - Dispatches an custom event when element loses focus. Focus is lost on following scenarios:
  * 1. User clicks outside the element
  * 2. User presses Enter
  * 3. User clicks an option from the menu
+ *
+ * @property {string} value - Set value for the component.
+ * @property {string} options - List of options to suggest to user.
+ * @property {boolean} disabled - Disable combobox.
+ * @property {boolean} error - Display error indicator on combobox.
+ * @property {string} placeholder - Placeholder value to show while combobox has no input.
+ * @property {boolean} addNewIndicator - Show a text indicator at options list telling user he can add the current value.
  */
 @customElement('fds-combobox')
 export default class FdsCombobox extends LitElement {
@@ -39,36 +40,51 @@ export default class FdsCombobox extends LitElement {
     // Set attributes to host element
     this.addEventListener('blur', () => {
       this._open = false
-      this.onSelect?.(this._value)
+      this.dispatchEvent(
+        new CustomEvent('select', {
+          detail: this.value,
+          bubbles: true,
+          cancelable: true,
+          composed: false, // Allows event to bubble through shadow dom - false for now, but could be re-evaluated later.
+        })
+      )
     })
   }
 
+  @property() value: string = ''
   @property() options: string[] = []
   @property() disabled: boolean = false
   @property() error: boolean = false
   @property() placeholder?: string
-  @property() initialValue?: string
   @property() addNewIndicator: boolean = false
   @property() onSelect?: (value: string) => void
 
   @state() private _open: boolean = false
-  @state() private _value: string = this.initialValue ?? ''
+
+  override connectedCallback(): void {
+    super.connectedCallback()
+    // This is needed incase the component is called with an explicitly undefined value property
+    if (this.value === undefined) {
+      this.value = ''
+    }
+  }
 
   override render(): TemplateResult {
+    console.log(this.value)
     const filteredOptions = this.options.filter((option: string) =>
-      option.toLowerCase().includes(this._value.toLowerCase())
+      option.toLowerCase().includes(this.value.toLowerCase())
     )
 
     const addOptionRow = html`
       <div
-        @click=${(): void => this.handleSelectFromList(this._value)}
-        @keypress=${(e: KeyboardEvent): void => this.handleOptionKeypress(e, this._value)}
+        @click=${(): void => this.handleSelectFromList(this.value)}
+        @keypress=${(e: KeyboardEvent): void => this.handleOptionKeypress(e, this.value)}
         @mouseenter=${(e: MouseEvent): void => this.addSelectedTo(e.target as Element)}
         @mouseleave=${this.removeSelected}
         class="option new ui-label-text"
         tabindex=${0}
       >
-        <fds-icon .icon=${'plus'}></fds-icon>Lisää "${this._value}"
+        <fds-icon .icon=${'plus'}></fds-icon>Lisää "${this.value}"
       </div>
     `
 
@@ -83,13 +99,13 @@ export default class FdsCombobox extends LitElement {
               @mouseleave=${this.removeSelected}
               class="option ui-label-text"
               tabindex=${0}
-              aria-selected=${this._value === option}
+              aria-selected=${this.value === option}
             >
               ${option}
             </div>
           `
         )}
-        ${this.addNewIndicator && this._value ? addOptionRow : null}
+        ${this.addNewIndicator && this.value ? addOptionRow : null}
       </div>
     `
 
@@ -98,7 +114,7 @@ export default class FdsCombobox extends LitElement {
         <input
           type="text"
           class="ui-label-text"
-          .value=${this._value}
+          .value=${this.value}
           @input=${this.handleInput}
           @keydown=${this.handleInputKeydown}
           placeholder=${ifDefined(this.placeholder)}
@@ -113,7 +129,7 @@ export default class FdsCombobox extends LitElement {
 
   private handleInput(e: InputEvent): void {
     const target = e.target as HTMLInputElement
-    this._value = target.value
+    this.value = target.value
   }
 
   /**
@@ -127,7 +143,7 @@ export default class FdsCombobox extends LitElement {
   }
 
   private handleSelectFromList(newValue: string): void {
-    this._value = newValue
+    this.value = newValue
     this.blur()
   }
 
@@ -149,7 +165,7 @@ export default class FdsCombobox extends LitElement {
 
     if (e.key === 'Enter') {
       if (selected && !selected.classList.contains('new') && selected.textContent) {
-        this._value = selected.textContent.trim()
+        this.value = selected.textContent.trim()
       }
       this.blur()
     }
@@ -205,7 +221,7 @@ export default class FdsCombobox extends LitElement {
     if (this.error) {
       return 'error'
     }
-    if (!this._value && this.placeholder) {
+    if (!this.value && this.placeholder) {
       return 'placeholder'
     }
     return ''

@@ -7,27 +7,24 @@ export default {
   args: {
     placeholder: 'Options',
     options: ['foo', 'foo2', 'foo 3', 'bar', 'bar2', 'bar 3'],
-    initialValue: undefined,
+    value: undefined,
     disabled: false,
     error: false,
     addNewIndicator: false,
   },
+  parameters: {
+    actions: {
+      handles: ['select'],
+    },
+  },
 } as Meta
 
-const Template: Story = ({
-  options,
-  initialValue,
-  disabled,
-  error,
-  placeholder,
-  onSelect,
-  addNewIndicator,
-}) => {
+const Template: Story = ({ options, value, disabled, error, placeholder, onSelect, addNewIndicator }) => {
   return html`
     <div style="width:284px">
       <fds-combobox
         .options=${options}
-        .initialValue=${initialValue}
+        .value=${value}
         .disabled=${disabled}
         .error=${error}
         .placeholder=${placeholder}

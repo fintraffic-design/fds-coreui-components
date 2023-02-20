@@ -70,7 +70,6 @@ export default class FdsCombobox extends LitElement {
   }
 
   override render(): TemplateResult {
-    console.log(this.value)
     const filteredOptions = this.options.filter((option: string) =>
       option.toLowerCase().includes(this.value.toLowerCase())
     )

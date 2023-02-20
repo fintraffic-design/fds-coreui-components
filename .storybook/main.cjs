@@ -12,7 +12,7 @@ module.exports = {
   },
   async viteFinal(config) {
     if (config.configType === 'DEVELOPMENT') {
-      console.log("DEVELOPMENT detected")
+      console.log('DEVELOPMENT detected')
       //en tiedä miksi joskus mulla vaatii tämän ja joskus ei...
       //return config
     }

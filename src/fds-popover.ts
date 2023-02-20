@@ -3,7 +3,12 @@ import { customElement, property, state } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
 import './fds-card'
 import { tokenVar } from './utils/token-utils'
-import { FdsColorBrandWhite, FdsRadiusLarge, FdsStyleElevation200 } from '@fintraffic-design/coreui-css'
+import {
+  FdsColorBrandWhite,
+  FdsColorToken,
+  FdsRadiusLarge,
+  FdsStyleElevation200,
+} from '@fintraffic-design/coreui-css'
 import { uiHelperTextClass } from './utils/css-utils'
 
 export enum FdsPopoverPosition {
@@ -17,11 +22,13 @@ export enum FdsPopoverPosition {
  *
  * @property {FdsPopoverPosition} position - Direction the popover opens
  * @property {boolean} openOnClick - Open popover by clicking
+ * @property {FdsColorToken} backgroundColor - Popover background color
  */
 @customElement('fds-popover')
 export default class FdsPopover extends LitElement {
   @property() position: FdsPopoverPosition = FdsPopoverPosition.ABOVE
   @property() openOnClick: boolean = false
+  @property() backgroundColor: FdsColorToken = FdsColorBrandWhite
 
   @state() private _popoverOpen: boolean = false
 
@@ -37,7 +44,6 @@ export default class FdsPopover extends LitElement {
   }
 
   override render(): TemplateResult {
-    const backgroundColor = getComputedStyle(this).backgroundColor
     return html`
       <div class="wrapper">
         <slot
@@ -49,10 +55,10 @@ export default class FdsPopover extends LitElement {
         <div class="container ui-helper-text" style=${this.getContainerPositionStyle()}>
           <div
             class="popover popover--${this.position} ${this._popoverOpen ? 'popover--open' : ''}"
-            style="${this.getPopoverPositionStyle()} background-color: ${backgroundColor};"
+            style="${this.getPopoverPositionStyle()} background-color: ${tokenVar(this.backgroundColor)};"
           >
             <slot name="popover"></slot>
-            <div class="arrow" style="border-color: ${backgroundColor};"></div>
+            <div class="arrow" style="border-color: ${tokenVar(this.backgroundColor)};"></div>
           </div>
         </div>
       </div>

@@ -15,7 +15,7 @@ export enum FdsPopoverPosition {
 /**
  * Popover component.
  *
- * @property {PopoverPosition} position - Direction the popover opens
+ * @property {FdsPopoverPosition} position - Direction the popover opens
  * @property {boolean} openOnClick - Open popover by clicking
  */
 @customElement('fds-popover')
@@ -37,20 +37,22 @@ export default class FdsPopover extends LitElement {
   }
 
   override render(): TemplateResult {
+    const bg = getComputedStyle(this).backgroundColor
     return html`
-      <div class="wrapper ui-helper-text">
+      <div class="wrapper">
         <slot
           class="content ${this.openOnClick ? 'clickable' : ''}"
           @click=${this.handleClick}
           @mouseenter=${this.onMouseEnter}
           @mouseleave=${this.onMouseLeave}
         ></slot>
-        <div class="container" style=${this.getContainerPositionStyle()}>
+        <div class="container ui-helper-text" style=${this.getContainerPositionStyle()}>
           <div
             class="popover popover--${this.position} ${this._popoverOpen ? 'popover--open' : ''}"
-            style=${this.getPopoverPositionStyle()}
+            style="${this.getPopoverPositionStyle()} background-color: ${bg};"
           >
             <slot name="popover"></slot>
+            <div class="arrow" style="border-color: ${bg};"></div>
           </div>
         </div>
       </div>
@@ -139,40 +141,47 @@ export default class FdsPopover extends LitElement {
     }
 
     /* Popover arrow styles */
-
-    .popover::after {
-      content: '';
+    .arrow {
       position: absolute;
       border-width: 5px;
       border-style: solid;
+      border-color: ${tokenVar(FdsColorBrandWhite)};
     }
 
-    .popover--above::after {
+    .popover--above .arrow {
       top: 100%;
       left: 50%;
       margin-left: -5px;
-      border-color: ${tokenVar(FdsColorBrandWhite)} transparent transparent transparent;
+      border-bottom-color: transparent !important;
+      border-left-color: transparent !important;
+      border-right-color: transparent !important;
     }
 
-    .popover--below::after {
+    .popover--below .arrow {
       bottom: 100%;
       left: 50%;
       margin-left: -5px;
-      border-color: transparent transparent ${tokenVar(FdsColorBrandWhite)} transparent;
+      border-top-color: transparent !important;
+      border-left-color: transparent !important;
+      border-right-color: transparent !important;
     }
 
-    .popover--left::after {
+    .popover--left .arrow {
       left: 100%;
       top: 50%;
       margin-top: -5px;
-      border-color: transparent transparent transparent ${tokenVar(FdsColorBrandWhite)};
+      border-top-color: transparent !important;
+      border-bottom-color: transparent !important;
+      border-right-color: transparent !important;
     }
 
-    .popover--right::after {
+    .popover--right .after {
       right: 100%;
       top: 50%;
       margin-top: -5px;
-      border-color: transparent ${tokenVar(FdsColorBrandWhite)} transparent transparent;
+      border-top-color: transparent !important;
+      border-bottom-color: transparent !important;
+      border-left-color: transparent !important;
     }
 
     ${uiHelperTextClass}

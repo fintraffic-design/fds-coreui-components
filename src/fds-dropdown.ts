@@ -17,13 +17,16 @@ import './global-types'
 import { uiLabelTextClass } from './utils/css-utils'
 import { tokenVar } from './utils/token-utils'
 
-type Value = string | number | undefined
-type Label = string
+type Value<T = string | number> = T
 
 export interface DropdownOption {
-  label: Label
+  label: string
   value: Value
   icon?: FdsIconType
+}
+
+export interface DropdownEvent<T = Value> extends CustomEvent {
+  detail: T
 }
 
 /**
@@ -101,11 +104,11 @@ export default class FdsDropdown extends LitElement {
 
     this.dispatchEvent(
       new CustomEvent('select', {
-        detail: this.value,
+        detail: selectedOption.value,
         bubbles: true,
         cancelable: true,
         composed: false, // Allows event to bubble through shadow dom - false for now, but could be re-evaluated later.
-      })
+      }) as DropdownEvent
     )
   }
 

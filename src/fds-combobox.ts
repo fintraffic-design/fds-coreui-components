@@ -61,17 +61,10 @@ export default class FdsCombobox extends LitElement {
 
   @state() private _open: boolean = false
 
-  override connectedCallback(): void {
-    super.connectedCallback()
-    // This is needed incase the component is called with an explicitly undefined value property
-    if (this.value === undefined) {
-      this.value = ''
-    }
-  }
-
   override render(): TemplateResult {
     const filteredOptions = this.options.filter((option: string) =>
-      option.toLowerCase().includes(this.value.toLowerCase())
+      // TypeScript optional checking is used incase the component is called with an explicitly undefined 'value' property
+      option.toLowerCase().includes(this.value?.toLowerCase())
     )
 
     const addOptionRow = html`

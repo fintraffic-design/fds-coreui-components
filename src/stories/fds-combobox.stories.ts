@@ -7,7 +7,7 @@ export default {
   args: {
     placeholder: 'Options',
     options: ['foo', 'foo2', 'foo 3', 'bar', 'bar2', 'bar 3'],
-    value: undefined,
+    value: '',
     disabled: false,
     error: false,
     addNewIndicator: false,

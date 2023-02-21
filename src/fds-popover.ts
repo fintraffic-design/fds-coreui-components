@@ -106,87 +106,93 @@ export default class FdsPopover extends LitElement {
     return Boolean(slot?.assignedElements()?.length)
   }
 
-  static override styles = css`
-    .container {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+  static override styles = [
+    uiHelperTextClass,
+    css`
+      .container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-    .popover {
-      visibility: hidden;
-      position: absolute;
-      border-radius: ${tokenVar(FdsRadiusLarge)};
-      box-shadow: ${tokenVar(FdsStyleElevation200)};
-      background-color: ${tokenVar(FdsColorBrandWhite)};
-      z-index: 1;
-    }
+      .wrapper {
+        height: 100%;
+        width: 100%;
+      }
 
-    .popover--open {
-      visibility: visible;
-    }
+      .popover {
+        visibility: hidden;
+        position: absolute;
+        border-radius: ${tokenVar(FdsRadiusLarge)};
+        box-shadow: ${tokenVar(FdsStyleElevation200)};
+        background-color: ${tokenVar(FdsColorBrandWhite)};
+        z-index: 1;
+      }
 
-    .popover--above {
-      bottom: 10px;
-    }
+      .popover--open {
+        visibility: visible;
+      }
 
-    .popover--below {
-      top: 10px;
-    }
+      .popover--above {
+        bottom: 10px;
+      }
 
-    .popover--left {
-      margin-right: 10px;
-    }
+      .popover--below {
+        top: 10px;
+      }
 
-    .popover--right {
-      margin-left: 10px;
-    }
+      .popover--left {
+        margin-right: 10px;
+      }
 
-    /* Popover arrow styles */
-    .arrow {
-      position: absolute;
-      border-width: 5px;
-      border-style: solid;
-      border-color: ${tokenVar(FdsColorBrandWhite)};
-    }
+      .popover--right {
+        margin-left: 10px;
+      }
 
-    .popover--above .arrow {
-      top: 100%;
-      left: 50%;
-      margin-left: -5px;
-      border-bottom-color: transparent !important;
-      border-left-color: transparent !important;
-      border-right-color: transparent !important;
-    }
+      /* Popover arrow styles */
+      .arrow {
+        position: absolute;
+        border-width: 5px;
+        border-style: solid;
+        border-color: ${tokenVar(FdsColorBrandWhite)};
+      }
 
-    .popover--below .arrow {
-      bottom: 100%;
-      left: 50%;
-      margin-left: -5px;
-      border-top-color: transparent !important;
-      border-left-color: transparent !important;
-      border-right-color: transparent !important;
-    }
+      .popover--above .arrow {
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-bottom-color: transparent !important;
+        border-left-color: transparent !important;
+        border-right-color: transparent !important;
+      }
 
-    .popover--left .arrow {
-      left: 100%;
-      top: 50%;
-      margin-top: -5px;
-      border-top-color: transparent !important;
-      border-bottom-color: transparent !important;
-      border-right-color: transparent !important;
-    }
+      .popover--below .arrow {
+        bottom: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-top-color: transparent !important;
+        border-left-color: transparent !important;
+        border-right-color: transparent !important;
+      }
 
-    .popover--right .after {
-      right: 100%;
-      top: 50%;
-      margin-top: -5px;
-      border-top-color: transparent !important;
-      border-bottom-color: transparent !important;
-      border-left-color: transparent !important;
-    }
+      .popover--left .arrow {
+        left: 100%;
+        top: 50%;
+        margin-top: -5px;
+        border-top-color: transparent !important;
+        border-bottom-color: transparent !important;
+        border-right-color: transparent !important;
+      }
 
-    ${uiHelperTextClass}
-  `
+      .popover--right .after {
+        right: 100%;
+        top: 50%;
+        margin-top: -5px;
+        border-top-color: transparent !important;
+        border-bottom-color: transparent !important;
+        border-left-color: transparent !important;
+      }
+    `,
+  ]
 }

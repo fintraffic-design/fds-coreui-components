@@ -38,6 +38,8 @@ export type FdsIconType = keyof typeof FdsIcons
 /**
  * Add interactible icon element. Icon library: https://lucide.dev/
  *
+ * @event click - Dispatches a MouseEvent on click.
+ *
  * @property {string} icon - Options:
  * - alert-circle
  * - alert-triangle

@@ -32,7 +32,7 @@ export default class FdsDialog extends LitElement {
 
   override render(): TemplateResult {
     return html`
-      <dialog style="${this.style.cssText}">
+      <dialog style="${this.style.cssText}" @cancel=${(e: Event): void => e.preventDefault()}>
         <slot></slot>
       </dialog>
     `

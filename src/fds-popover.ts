@@ -3,7 +3,12 @@ import { customElement, property, state } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
 import './fds-card'
 import { tokenVar } from './utils/token-utils'
-import { FdsColorBrandWhite, FdsRadiusLarge, FdsStyleElevation200 } from '@fintraffic-design/coreui-css'
+import {
+  FdsColorBrandWhite,
+  FdsColorToken,
+  FdsRadiusLarge,
+  FdsStyleElevation200,
+} from '@fintraffic-design/coreui-css'
 import { uiHelperTextClass } from './utils/css-utils'
 
 export enum FdsPopoverPosition {
@@ -15,13 +20,15 @@ export enum FdsPopoverPosition {
 /**
  * Popover component.
  *
- * @property {PopoverPosition} position - Direction the popover opens
+ * @property {FdsPopoverPosition} position - Direction the popover opens
  * @property {boolean} openOnClick - Open popover by clicking
+ * @property {FdsColorToken} backgroundColor - Popover background color
  */
 @customElement('fds-popover')
 export default class FdsPopover extends LitElement {
   @property() position: FdsPopoverPosition = FdsPopoverPosition.ABOVE
   @property() openOnClick: boolean = false
+  @property() backgroundColor: FdsColorToken = FdsColorBrandWhite
 
   @state() private _popoverOpen: boolean = false
 
@@ -38,26 +45,27 @@ export default class FdsPopover extends LitElement {
 
   override render(): TemplateResult {
     return html`
-      <div class="wrapper ui-helper-text">
+      <div class="wrapper">
         <slot
           class="content ${this.openOnClick ? 'clickable' : ''}"
           @click=${this.handleClick}
           @mouseenter=${this.onMouseEnter}
           @mouseleave=${this.onMouseLeave}
         ></slot>
-        <div class="container" style=${this.getContainerPositionStyle()}>
+        <div class="container ui-helper-text" style=${this.getContainerPositionStyle()}>
           <div
             class="popover popover--${this.position} ${this._popoverOpen ? 'popover--open' : ''}"
-            style=${this.getPopoverPositionStyle()}
+            style="${this.getPopoverPositionStyle()} background-color: ${tokenVar(this.backgroundColor)};"
           >
             <slot name="popover"></slot>
+            <div class="arrow" style="border-color: ${tokenVar(this.backgroundColor)};"></div>
           </div>
         </div>
       </div>
     `
   }
 
-  getContainerPositionStyle(): string {
+  private getContainerPositionStyle(): string {
     if (this.position === FdsPopoverPosition.ABOVE) {
       return `bottom: ${this._elementHeight}px;`
     }
@@ -67,7 +75,7 @@ export default class FdsPopover extends LitElement {
     return ''
   }
 
-  getPopoverPositionStyle(): string {
+  private getPopoverPositionStyle(): string {
     return this.position === FdsPopoverPosition.LEFT
       ? `right: ${this._elementWidth}px;`
       : this.position === FdsPopoverPosition.RIGHT
@@ -75,33 +83,30 @@ export default class FdsPopover extends LitElement {
       : ''
   }
 
-  onMouseEnter(): void {
+  private onMouseEnter(): void {
     if (!this.openOnClick) {
-      this._popoverOpen = true
+      this._popoverOpen = this.isAssigned()
     }
   }
 
-  onMouseLeave(): void {
+  private onMouseLeave(): void {
     if (!this.openOnClick) {
       this._popoverOpen = false
     }
   }
 
-  handleClick(): void {
+  private handleClick(): void {
     if (this.openOnClick) {
-      this._popoverOpen = !this._popoverOpen
+      this._popoverOpen = !this._popoverOpen && this.isAssigned()
     }
   }
 
+  private isAssigned(): boolean {
+    const slot = this.shadowRoot?.querySelector('.container slot') as HTMLSlotElement
+    return Boolean(slot?.assignedElements()?.length)
+  }
+
   static override styles = css`
-    .content {
-      cursor: default;
-    }
-
-    .clickable {
-      cursor: pointer;
-    }
-
     .container {
       position: relative;
       display: flex;
@@ -139,40 +144,47 @@ export default class FdsPopover extends LitElement {
     }
 
     /* Popover arrow styles */
-
-    .popover::after {
-      content: '';
+    .arrow {
       position: absolute;
       border-width: 5px;
       border-style: solid;
+      border-color: ${tokenVar(FdsColorBrandWhite)};
     }
 
-    .popover--above::after {
+    .popover--above .arrow {
       top: 100%;
       left: 50%;
       margin-left: -5px;
-      border-color: ${tokenVar(FdsColorBrandWhite)} transparent transparent transparent;
+      border-bottom-color: transparent !important;
+      border-left-color: transparent !important;
+      border-right-color: transparent !important;
     }
 
-    .popover--below::after {
+    .popover--below .arrow {
       bottom: 100%;
       left: 50%;
       margin-left: -5px;
-      border-color: transparent transparent ${tokenVar(FdsColorBrandWhite)} transparent;
+      border-top-color: transparent !important;
+      border-left-color: transparent !important;
+      border-right-color: transparent !important;
     }
 
-    .popover--left::after {
+    .popover--left .arrow {
       left: 100%;
       top: 50%;
       margin-top: -5px;
-      border-color: transparent transparent transparent ${tokenVar(FdsColorBrandWhite)};
+      border-top-color: transparent !important;
+      border-bottom-color: transparent !important;
+      border-right-color: transparent !important;
     }
 
-    .popover--right::after {
+    .popover--right .after {
       right: 100%;
       top: 50%;
       margin-top: -5px;
-      border-color: transparent ${tokenVar(FdsColorBrandWhite)} transparent transparent;
+      border-top-color: transparent !important;
+      border-bottom-color: transparent !important;
+      border-left-color: transparent !important;
     }
 
     ${uiHelperTextClass}

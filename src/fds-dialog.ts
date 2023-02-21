@@ -47,6 +47,7 @@ export default class FdsDialog extends LitElement {
       border: none;
       box-shadow: ${tokenVar(FdsStyleElevation400)};
       padding: 0;
+      overflow: visible;
     }
 
     dialog ::slotted(*) {

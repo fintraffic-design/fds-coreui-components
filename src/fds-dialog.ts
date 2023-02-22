@@ -39,19 +39,12 @@ export default class FdsDialog extends LitElement {
   }
 
   static override styles = css`
-    :host {
-    }
-
     dialog {
       border-radius: ${tokenVar(FdsRadiusLarge)};
       border: none;
       box-shadow: ${tokenVar(FdsStyleElevation400)};
-      padding: 0;
+      padding: calc(${tokenVar(FdsRadiusLarge)} / 2);
       overflow: visible;
-    }
-
-    dialog ::slotted(*) {
-      border-radius: ${tokenVar(FdsRadiusLarge)};
     }
   `
 }

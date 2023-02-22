@@ -185,7 +185,7 @@ export default class FdsPopover extends LitElement {
         border-right-color: transparent !important;
       }
 
-      .popover--right .after {
+      .popover--right .arrow {
         right: 100%;
         top: 50%;
         margin-top: -5px;

@@ -55,11 +55,12 @@ export default class FdsTable extends LitElement {
         background: ${tokenVar(FdsColorBrandWhite)};
       }
 
-      tr {
+      thead tr {
         height: 40px;
       }
 
       tbody tr {
+        height: 39px;
         border-bottom: 1px solid transparent;
       }
 

@@ -1,5 +1,5 @@
 import { css, html, LitElement } from 'lit'
-import { customElement, property, state } from 'lit/decorators.js'
+import { customElement, property, state, queryAssignedElements } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
 import './fds-card'
 import { tokenVar } from './utils/token-utils'
@@ -34,6 +34,9 @@ export default class FdsPopover extends LitElement {
 
   @state() private _elementHeight: number = 0
   @state() private _elementWidth: number = 0
+
+  @queryAssignedElements({ slot: 'popover' })
+  _assignedElements!: Array<HTMLElement>
 
   protected override willUpdate(): void {
     const wrapper = this.shadowRoot?.querySelector('.wrapper')
@@ -85,7 +88,7 @@ export default class FdsPopover extends LitElement {
 
   private onMouseEnter(): void {
     if (!this.openOnClick) {
-      this._popoverOpen = this.isAssigned()
+      this._popoverOpen = this._assignedElements.length > 0
     }
   }
 
@@ -97,13 +100,8 @@ export default class FdsPopover extends LitElement {
 
   private handleClick(): void {
     if (this.openOnClick) {
-      this._popoverOpen = !this._popoverOpen && this.isAssigned()
+      this._popoverOpen = !this._popoverOpen && this._assignedElements.length > 0
     }
-  }
-
-  private isAssigned(): boolean {
-    const slot = this.shadowRoot?.querySelector('.container slot') as HTMLSlotElement
-    return Boolean(slot?.assignedElements()?.length)
   }
 
   static override styles = [

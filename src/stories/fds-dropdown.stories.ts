@@ -14,22 +14,26 @@ export default {
       { label: 'Icon', value: 'Icon', icon: 'alert-triangle' },
       { label: 'Icon 2', value: 'Icon 2', icon: 'alert-circle' },
     ],
-    initialValue: undefined,
+    value: undefined,
     disabled: false,
     error: false,
   },
+  parameters: {
+    actions: {
+      handles: ['select'],
+    },
+  },
 } as Meta
 
-const Template: Story = ({ options, initialValue, disabled, error, placeholder, onSelect }) => {
+const Template: Story = ({ options, value, disabled, error, placeholder }) => {
   return html`
     <div style="width:284px">
       <fds-dropdown
         .options=${options}
-        .initialValue=${initialValue}
+        .value=${value}
         .disabled=${disabled}
         .error=${error}
         .placeholder=${placeholder}
-        .onSelect=${onSelect}
       ></fds-dropdown>
     </div>
   `

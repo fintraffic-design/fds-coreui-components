@@ -32,25 +32,19 @@ export default class FdsDialog extends LitElement {
 
   override render(): TemplateResult {
     return html`
-      <dialog style="${this.style.cssText}">
+      <dialog style="${this.style.cssText}" @cancel=${(e: Event): void => e.preventDefault()}>
         <slot></slot>
       </dialog>
     `
   }
 
   static override styles = css`
-    :host {
-    }
-
     dialog {
       border-radius: ${tokenVar(FdsRadiusLarge)};
       border: none;
       box-shadow: ${tokenVar(FdsStyleElevation400)};
-      padding: 0;
-    }
-
-    dialog ::slotted(*) {
-      border-radius: ${tokenVar(FdsRadiusLarge)};
+      padding: calc(${tokenVar(FdsRadiusLarge)} / 2);
+      overflow: visible;
     }
   `
 }

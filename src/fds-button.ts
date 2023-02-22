@@ -33,12 +33,14 @@ const variantColorMap: { [key in FdsButtonVariant]: FdsColorToken } = {
 }
 
 /**
- * A button
+ * Button component.
  *
- * @property {FdsButtonVariant} variant What kind of button
- * @property {boolean} disabled Disabled button does not work
- * @property {FdsIconType} icon Optional icon
- * @property {string} label Text to show
+ * @event click - Dispatches a MouseEvent on click.
+ *
+ * @property {FdsButtonVariant} variant - Button style.
+ * @property {boolean} disabled - Disable button.
+ * @property {FdsIconType} icon - Optional icon.
+ * @property {string} label - Text to show.
  *
  */
 @customElement('fds-button')

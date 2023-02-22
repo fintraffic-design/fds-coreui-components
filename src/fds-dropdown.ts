@@ -17,24 +17,28 @@ import './global-types'
 import { uiLabelTextClass } from './utils/css-utils'
 import { tokenVar } from './utils/token-utils'
 
-type Value = string | number | undefined
-type Label = string
+type Value<T = string | number> = T
 
 export interface DropdownOption {
-  label: Label
+  label: string
   value: Value
   icon?: FdsIconType
+}
+
+export interface DropdownEvent<T = Value> extends CustomEvent {
+  detail: T
 }
 
 /**
  * Single choice dropdown component.
  *
+ * @event select - Dispatches an custom event when option is selected from dropdown.
+ *
  * @property {DropdownOption[]} options - List of options to be shown in the menu.
- * @property {DropdownOption} initialValue - Set value that is chosen as default.
+ * @property {DropdownOption} value - Set value for the component.
  * @property {boolean} disabled - Disable dropdown.
  * @property {boolean} error - Display error indicator on dropdown.
  * @property {string} placeholder - Placeholder text while no option is selected.
- * @property {function} onSelect - Triggered when an option is selected. The selected value is given as parameter.
  */
 @customElement('fds-dropdown')
 export default class FdsDropdown extends LitElement {
@@ -49,11 +53,9 @@ export default class FdsDropdown extends LitElement {
   @property() disabled: boolean = false
   @property() error: boolean = false
   @property() placeholder?: string
-  @property() initialValue?: DropdownOption
-  @property() onSelect?: (selectedValue: Value) => void
+  @property() value?: DropdownOption
 
   @state() private _open: boolean = false
-  @state() private _selectedOption?: DropdownOption = this.initialValue
 
   override render(): TemplateResult {
     const optionsList = html`
@@ -66,7 +68,7 @@ export default class FdsDropdown extends LitElement {
                 @keypress=${(e: KeyboardEvent): void => this.handleKeypress(e, option)}
                 class=${`ui-label-text option ${this.getOptionCssClass(option)}`}
                 tabindex=${0}
-                aria-selected=${this._selectedOption === option}
+                aria-selected=${this.value === option}
               >
                 ${this.getLabel(option)}
               </div>
@@ -83,7 +85,7 @@ export default class FdsDropdown extends LitElement {
         aria-haspopup=${true}
         aria-expanded=${this._open}
       >
-        ${this.getLabel(this._selectedOption) || this.placeholder}
+        <div>${this.getLabel(this.value) || this.placeholder}</div>
         <fds-icon .icon=${this._open ? 'chevron-up' : 'chevron-down'}></fds-icon>
       </button>
       ${this._open ? optionsList : null}
@@ -97,12 +99,17 @@ export default class FdsDropdown extends LitElement {
   }
 
   private handleSelect(selectedOption: DropdownOption): void {
-    this._selectedOption = selectedOption
     this._open = false
+    this.value = selectedOption
 
-    if (this.onSelect) {
-      this.onSelect(selectedOption.value)
-    }
+    this.dispatchEvent(
+      new CustomEvent('select', {
+        detail: selectedOption.value,
+        bubbles: true,
+        cancelable: true,
+        composed: false, // Allows event to bubble through shadow dom - false for now, but could be re-evaluated later.
+      }) as DropdownEvent
+    )
   }
 
   private getLabel(option?: DropdownOption): TemplateResult | null {
@@ -120,14 +127,14 @@ export default class FdsDropdown extends LitElement {
     if (this.error) {
       return 'error'
     }
-    if (!this._selectedOption && this.placeholder) {
+    if (!this.value && this.placeholder) {
       return 'placeholder'
     }
     return ''
   }
 
   private getOptionCssClass(option: DropdownOption): string {
-    return this._selectedOption === option ? 'selected' : ''
+    return this.value === option ? 'selected' : ''
   }
 
   static override styles = [

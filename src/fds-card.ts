@@ -6,9 +6,9 @@ import './global-types'
 import { heading4SmallTextClass } from './utils/css-utils'
 
 export enum FdsCardElevation {
-  NONE = '0',
-  LOW = '1',
-  HIGH = '2',
+  NONE = 'NONE',
+  LOW = 'LOW',
+  HIGH = 'HIGH',
 }
 
 /**
@@ -77,10 +77,7 @@ export default class FdsCard extends LitElement {
         justify-content: space-between;
         flex-direction: row;
         align-items: center;
-        padding-left: 32px;
-        padding-right: 32px;
-        padding-top: 27px;
-        padding-bottom: 13px;
+        padding: 27px 32px 13px;
       }
 
       .card__content {

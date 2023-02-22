@@ -31,7 +31,7 @@ export default class FdsTable extends LitElement {
           ${this.renderHeader()}
         </thead>
         <tbody class="${this.striped ? 'table-rows--striped' : ''}">
-          ${this.items.map(item => html` ${this.renderItem(item)} `)}
+          ${this.items.map(item => this.renderItem(item))}
         </tbody>
       </table>
     `

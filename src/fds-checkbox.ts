@@ -17,14 +17,13 @@ import { uiLabelTextClass } from './utils/css-utils'
  * @property {string} label - Label for the checkbox.
  * @property {boolean} disabled - Disable checkbox.
  * @property {boolean} checked - Checkbox value.
- * @property {function} onSelect - Triggered when checkbox is clicked. The value is returned as parameter.
+ * @event select - Dispatches a custom event when checkbox is clicked. The value is in the event details field.
  */
 @customElement('fds-checkbox')
 export default class FdsCheckbox extends LitElement {
   @property() label: string = ''
   @property() disabled: boolean = false
   @property() checked: boolean = false
-  @property() onSelect?: (value: boolean) => void
 
   override render(): TemplateResult {
     return html`
@@ -41,8 +40,14 @@ export default class FdsCheckbox extends LitElement {
 
   private handleSelect(event: Event): void {
     event.preventDefault()
-    if (!this.disabled && this.onSelect) {
-      this.onSelect(!this.checked)
+    if (!this.disabled) {
+      const checkbox = event.target as FdsCheckbox
+      this.checked = checkbox.checked
+      this.dispatchEvent(
+        new CustomEvent<boolean>('select', {
+          detail: checkbox.checked,
+        })
+      )
     }
   }
 

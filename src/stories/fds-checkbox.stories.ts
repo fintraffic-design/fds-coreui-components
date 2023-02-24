@@ -8,13 +8,13 @@ type Template = (args: {
   onSelect: (value: boolean) => void
 }) => TemplateResult
 
-export const Checkbox: Template = ({ label, disabled, checked, onSelect }) => {
+export const Checkbox: Template = ({ label, disabled, checked }) => {
   return html`
     <fds-checkbox
       .label=${label}
       .checked=${checked}
       .disabled=${disabled}
-      .onSelect=${onSelect}
+      @select="${(event: CustomEvent<boolean>): void => console.log('@select', event.detail)}"
     ></fds-checkbox>
   `
 }

@@ -16,6 +16,7 @@ import {
 } from '@fintraffic-design/coreui-css'
 import './global-types'
 import { uiHelperTextClass } from './utils/css-utils'
+import { FdsIconType } from './fds-icon'
 
 export enum FdsAlertVariant {
   error = 'error',
@@ -32,11 +33,12 @@ export enum FdsAlertVariant {
 @customElement('fds-alert')
 export default class FdsAlert extends LitElement {
   @property() variant: FdsAlertVariant = FdsAlertVariant.error
+  @property() icon?: FdsIconType
 
   override render(): TemplateResult {
     return html`
       <div class="alert alert--${this.variant}">
-        <fds-icon class="alert-icon" .icon=${'alert-triangle'} .size=${FdsSize3}></fds-icon>
+        ${this.icon && html`<fds-icon class="alert-icon" .icon=${this.icon} .size=${FdsSize3}></fds-icon>`}
         <slot class="ui-helper-text content"></slot>
       </div>
     `

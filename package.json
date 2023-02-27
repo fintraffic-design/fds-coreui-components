@@ -9,7 +9,7 @@
     "src"
   ],
   "dependencies": {
-    "@fintraffic-design/coreui-css": "https://github.com/fintraffic-design/coreui-css.git#0350547887b9f14c6c476ff4886e14d2fe1598e7",
+    "@fintraffic-design/coreui-css": "https://github.com/fintraffic-design/coreui-css.git#5f94d2e1511a5a146cac691aad2f914657c4e584",
     "lit": "^2.5.0",
     "lucide": "^0.104.0"
   },
@@ -45,6 +45,7 @@
     "stylecheck": "prettier --check src",
     "dev-bundle": "node dev-bundle.mjs",
     "storybook": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
+    "storybook-w": "start-storybook -p 6006",
     "build-storybook": "NODE_OPTIONS=--openssl-legacy-provider build-storybook"
   },
   "keywords": [],

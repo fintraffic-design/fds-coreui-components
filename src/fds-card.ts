@@ -16,11 +16,13 @@ export enum FdsCardElevation {
  *
  * @property {FdsCardElevation} elevation - Depth of box shadow.
  * @property {function} onCornerClick - Triggered when top right corner is clicked.
+ *
+ * @event cornerClick - Triggered when top right corner of the card is clicked
+ *
  */
 @customElement('fds-card')
 export default class FdsCard extends LitElement {
   @property() elevation: FdsCardElevation = FdsCardElevation.LOW
-  @property() onCornerClick?: () => void
 
   override render(): TemplateResult {
     this.style.boxShadow = this.getElevationStyle()
@@ -52,11 +54,8 @@ export default class FdsCard extends LitElement {
     return FdsStyleElevation100.value
   }
 
-  onClick(event: Event): void {
-    if (this.onCornerClick) {
-      event.stopPropagation()
-      this.onCornerClick()
-    }
+  onClick(): void {
+    this.dispatchEvent(new CustomEvent<void>('cornerClick'))
   }
 
   static override styles = [

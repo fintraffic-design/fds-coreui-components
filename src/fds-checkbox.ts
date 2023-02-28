@@ -62,7 +62,7 @@ export default class FdsCheckbox extends LitElement {
         appearance: none;
       }
 
-      label {
+      label::slotted() {
         padding: 0 16px;
         position: relative;
         right: 7px;

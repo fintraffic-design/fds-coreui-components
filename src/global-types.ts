@@ -8,6 +8,7 @@ import FdsDialog from './fds-dialog'
 import FdsDivider from './fds-divider'
 import FdsDropdown from './fds-dropdown'
 import FdsIcon from './fds-icon'
+import FdsInput from './fds-input'
 import FdsNavigation from './fds-navigation'
 import FdsPopover from './fds-popover'
 import FdsTable from './fds-table'
@@ -27,5 +28,6 @@ declare global {
     'fds-combobox': FdsCombobox
     'fds-popover': FdsPopover
     'fds-table': FdsTable
+    'fds-input': FdsInput
   }
 }

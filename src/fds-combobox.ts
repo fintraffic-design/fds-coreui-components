@@ -57,7 +57,6 @@ export default class FdsCombobox extends LitElement {
   @property() error: boolean = false
   @property() placeholder?: string
   @property() addNewIndicator: boolean = false
-  @property() onSelect?: (value: string) => void
 
   @state() private _open: boolean = false
 

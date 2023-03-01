@@ -2,7 +2,12 @@ import { css, html, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { nothing, TemplateResult } from 'lit-html'
 import { tokenVar } from './utils/token-utils'
-import { FdsColorNeutral400, FdsColorBrandWhite, FdsColorNeutral50 } from '@fintraffic-design/coreui-css'
+import {
+  FdsColorNeutral400,
+  FdsColorBrandWhite,
+  FdsColorNeutral50,
+  FdsColorNeutral200,
+} from '@fintraffic-design/coreui-css'
 import './global-types'
 import { uiHelperTextClass } from './utils/css-utils'
 
@@ -61,7 +66,7 @@ export default class FdsTable extends LitElement {
 
       tbody tr {
         height: 39px;
-        border-bottom: 1px solid transparent;
+        border-bottom: 1px solid ${tokenVar(FdsColorNeutral200)};
       }
 
       th,
@@ -69,6 +74,10 @@ export default class FdsTable extends LitElement {
         text-align: left;
         padding: 0 8px;
         font-size: 16px;
+      }
+
+      .table-rows--striped tr {
+        border-bottom: 1px solid transparent;
       }
 
       .table-rows--striped tr:nth-child(even) {

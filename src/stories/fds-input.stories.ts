@@ -6,12 +6,13 @@ export default {
   args: {
     label: 'Label',
     message: 'Helper message',
+    placeholder: 'Placeholder',
   },
   argTypes: {},
 }
 
-type Template = (args: { label: string; message: string }) => TemplateResult
+type Template = (args: { label: string; message: string; placeholder: string }) => TemplateResult
 
-export const Input: Template = ({ label, message }) => {
-  return html`<fds-input .label=${label} .message=${message}></fds-input>`
+export const Input: Template = ({ label, message, placeholder }) => {
+  return html`<fds-input .label=${label} .message=${message} .placeholder=${placeholder}></fds-input>`
 }

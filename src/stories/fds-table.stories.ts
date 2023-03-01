@@ -59,7 +59,7 @@ export const TableWithCustomStyles: Template = ({ striped }) => {
 }
 
 function renderItemCustom(item: Item): TemplateResult {
-  return html`<tr style="border-bottom: 1px solid darkgray;">
+  return html`<tr style="border-bottom: 1px solid transparent;">
     <td style="background: white;">${item.column1}</td>
     <td>${item.column2}</td>
     <td>${item.column3}</td>

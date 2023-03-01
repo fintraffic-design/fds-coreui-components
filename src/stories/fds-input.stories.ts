@@ -31,7 +31,6 @@ export const Input: Template = ({ label, value, message, placeholder, invalid, d
     .invalid=${invalid}
     .disabled=${disabled}
     .value=${value}
-    @focus=${(): void => console.log('@focus')}
     @change="${(event: CustomEvent<string>): void => console.log('@change', event.detail)}"
   ></fds-input>`
 }

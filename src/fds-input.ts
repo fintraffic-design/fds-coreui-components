@@ -55,7 +55,7 @@ export default class FdsInput extends LitElement {
       >`}
     `
   }
-  private handleChange(event: Event) {
+  private handleChange(event: Event): void {
     const input = event.target as FdsInput
     this.dispatchEvent(
       new CustomEvent<string>('change', {

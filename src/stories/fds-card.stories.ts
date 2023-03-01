@@ -75,7 +75,7 @@ export const Card: Template = ({ elevation, headerTitle, content, footer }) => {
 
     <fds-card
       .elevation=${elevation}
-      @cornerClick=${(): void => console.log('clicked corner')}
+      @corner-click=${(): void => console.log('clicked corner')}
       @click=${(): void => console.log('clicked card')}
     >
       <div slot="header-title">${headerTitle}</div>
@@ -137,11 +137,7 @@ export const CardWithCustomHeader: Template = ({ elevation, content, footer }) =
       }
     </style>
 
-    <fds-card
-      .elevation=${elevation}
-      .onCornerClick=${(): void => console.log('clicked corner')}
-      @click=${(): void => console.log('clicked card')}
-    >
+    <fds-card .elevation=${elevation} @click=${(): void => console.log('clicked card')}>
       <div slot="header" class="custom-header">Customized header</div>
       <div class="content">${content}</div>
       ${footerEl}

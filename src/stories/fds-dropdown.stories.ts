@@ -1,6 +1,7 @@
 import { Meta, Story } from '@storybook/web-components'
 import { html } from 'lit'
 import '../fds-dropdown'
+import { DropdownEvent } from '../fds-dropdown'
 
 export default {
   title: 'Dropdown',
@@ -34,6 +35,7 @@ const Template: Story = ({ options, value, disabled, error, placeholder }) => {
         .disabled=${disabled}
         .error=${error}
         .placeholder=${placeholder}
+        @select="${(event: CustomEvent<DropdownEvent>): void => console.log('@select', event.detail)}"
       ></fds-dropdown>
     </div>
   `

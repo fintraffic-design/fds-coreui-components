@@ -37,7 +37,7 @@ export default class FdsInput extends LitElement {
 
   override render(): TemplateResult {
     return html`
-      <label for="input" class="input-label ui-label-text">${this.label}</label>
+      ${this.label && html`<label for="input" class="input-label ui-label-text">${this.label}</label>`}
       <div class="input-container ui-label-text">
         <input
           type="text"

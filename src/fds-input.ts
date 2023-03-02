@@ -37,11 +37,10 @@ export default class FdsInput extends LitElement {
 
   override render(): TemplateResult {
     return html`
-      ${this.label && html`<label for="input" class="input-label ui-label-text">${this.label}</label>`}
+      ${this.label && html`<label class="input-label ui-label-text">${this.label}</label>`}
       <div class="input-container ui-label-text">
         <input
           type="text"
-          name="input"
           placeholder=${ifDefined(this.placeholder)}
           class="ui-label-text ${this.invalid ? 'input--error' : ''}"
           value=${ifDefined(this.value)}

@@ -28,19 +28,20 @@ import { uiLabelTextClass, uiHelperTextClass } from './utils/css-utils'
  */
 @customElement('fds-input')
 export default class FdsInput extends LitElement {
-  @property() label?: string = ''
+  @property() label?: string
   @property() value?: string
-  @property() placeholder?: string = ''
+  @property() placeholder?: string
   @property() message?: string
-  @property() invalid?: boolean
-  @property() disabled?: boolean
+  @property() invalid: boolean = false
+  @property() disabled: boolean = false
 
   override render(): TemplateResult {
     return html`
-      ${this.label && html`<label class="input-label ui-label-text">${this.label}</label>`}
+      ${this.label && html`<label for="input" class="input-label ui-label-text">${this.label}</label>`}
       <div class="input-container ui-label-text">
         <input
           type="text"
+          id="input"
           placeholder=${ifDefined(this.placeholder)}
           class="ui-label-text ${this.invalid ? 'input--error' : ''}"
           value=${ifDefined(this.value)}
@@ -59,6 +60,9 @@ export default class FdsInput extends LitElement {
     this.dispatchEvent(
       new CustomEvent<string>('change', {
         detail: input.value,
+        bubbles: true,
+        cancelable: true,
+        composed: false, // Allows event to bubble through shadow dom - false for now, but could be re-evaluated later.
       })
     )
   }

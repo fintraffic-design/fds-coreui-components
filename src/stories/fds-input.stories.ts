@@ -11,7 +11,11 @@ export default {
     invalid: false,
     disabled: false,
   },
-  argTypes: {},
+  parameters: {
+    actions: {
+      handles: ['change'],
+    },
+  },
 }
 
 type Template = (args: {

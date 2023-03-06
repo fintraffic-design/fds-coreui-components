@@ -11,7 +11,9 @@ export default {
     componentSubtitle: 'Message bar for displaying error, info, alert or success messages.',
     docs: {
       description: {
-        component: 'Selector: `<fds-alert>`',
+        component:
+          '`import "@fintraffic-design/coreui-components/src/fds-alert"` <br> <br>\
+          Selector: `<fds-alert>`',
       },
     },
   },
@@ -66,4 +68,11 @@ export const MultiLineContent: Template = ({ variant, icon }) => {
       <div>Alert text 3</div>
     </fds-alert>
   `
+}
+MultiLineContent.parameters = {
+  docs: {
+    description: {
+      story: 'An example of multiple elements in default slot',
+    },
+  },
 }

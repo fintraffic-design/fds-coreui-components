@@ -6,27 +6,27 @@ import '../global-types'
 export default {
   title: 'Action Sheet',
   parameters: {
-    componentSubtitle: 'Container for displaying actions in horizontal direction.',
+    componentSubtitle: 'Container for displaying actions in horizontal direction',
     docs: {
       description: {
         component:
-          '`import "@fintraffic-design/coreui-components/src/fds-action-sheet"` <br> <br>\
-          Selector: `<fds-action-sheet>`',
+          "`import '@fintraffic-design/coreui-components/src/fds-action-sheet'` <br> <br>\
+          Selector: `<fds-action-sheet>`",
       },
     },
   },
   args: {
-    defaultSlot: undefined,
-    separated: undefined,
+    slotDefault: undefined,
+    slotSeparated: undefined,
   },
   argTypes: {
-    defaultSlot: {
+    slotDefault: {
       name: '',
       table: { category: 'Slots' },
       description: 'Default slot. Contents are positioned on the right side of the component.',
       control: false,
     },
-    separated: {
+    slotSeparated: {
       table: { category: 'Slots' },
       description:
         'Contents are positioned on the left side of the component, separated from content in default slot.',

@@ -8,12 +8,12 @@ import { FdsIconType } from '../fds-icon'
 export default {
   title: 'Alert',
   parameters: {
-    componentSubtitle: 'Message bar for displaying error, info, alert or success messages.',
+    componentSubtitle: 'Message bar for displaying error, info, alert or success messages',
     docs: {
       description: {
         component:
-          '`import "@fintraffic-design/coreui-components/src/fds-alert"` <br> <br>\
-          Selector: `<fds-alert>`',
+          "`import '@fintraffic-design/coreui-components/src/fds-alert'` <br> <br>\
+          Selector: `<fds-alert>`",
       },
     },
   },

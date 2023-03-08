@@ -6,9 +6,9 @@ import './global-types'
 import { heading4SmallTextClass } from './utils/css-utils'
 
 export enum FdsCardElevation {
-  NONE = 'NONE',
-  LOW = 'LOW',
-  HIGH = 'HIGH',
+  none = 'none',
+  low = 'low',
+  high = 'high',
 }
 
 /**
@@ -21,7 +21,7 @@ export enum FdsCardElevation {
  */
 @customElement('fds-card')
 export default class FdsCard extends LitElement {
-  @property() elevation: FdsCardElevation = FdsCardElevation.LOW
+  @property() elevation: FdsCardElevation = FdsCardElevation.low
 
   override render(): TemplateResult {
     this.style.boxShadow = this.getElevationStyle()
@@ -45,9 +45,9 @@ export default class FdsCard extends LitElement {
   }
 
   getElevationStyle(): string {
-    if (this.elevation === FdsCardElevation.NONE) {
+    if (this.elevation === FdsCardElevation.none) {
       return 'none'
-    } else if (this.elevation === FdsCardElevation.HIGH) {
+    } else if (this.elevation === FdsCardElevation.high) {
       return FdsStyleElevation200.value
     }
     return FdsStyleElevation100.value

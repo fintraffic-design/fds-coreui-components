@@ -29,7 +29,7 @@ export const Dialog: Template = ({ modal }) => {
     </style>
 
     <fds-dialog .modal=${modal} style="width: 50%; min-width: 30rem; max-width: 40rem">
-      <fds-card elevation="${FdsCardElevation.NONE}">
+      <fds-card elevation="${FdsCardElevation.none}">
         <h4 slot="header-title">Modal title</h4>
         <p>Modal message</p>
         <fds-action-sheet slot="footer">

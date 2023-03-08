@@ -4,33 +4,78 @@ import { FdsCardElevation } from '../fds-card'
 
 export default {
   title: 'Card',
+  parameters: {
+    componentSubtitle: 'Container for displaying short information with optional controls',
+    docs: {
+      description: {
+        component:
+          "`import '@fintraffic-design/coreui-components/src/fds-card'` <br> <br>\
+          Selector: `<fds-card>`",
+      },
+    },
+  },
   args: {
-    elevation: FdsCardElevation.LOW,
-    headerTitle: 'Title',
-    content: 'Content',
-    footer: true,
+    elevation: FdsCardElevation.low,
+    slotDefault: 'Content',
+    slotHeaderTitle: 'Title',
+    slotCorner: true,
+    slotFooter: true,
+    slotHeader: '',
   },
   argTypes: {
     elevation: {
       options: Object.values(FdsCardElevation),
       control: { type: 'select' },
+      description:
+        'Depth of box shadow. <br><br>\
+        `FdsCardElevation.none` `FdsCardElevation.low` `FdsCardElevation.high`',
+      defaultValue: { summary: FdsCardElevation.low },
+      table: {
+        category: 'Properties',
+      },
     },
-    footer: {
+    slotDefault: {
+      description: 'Default slot. Container for card content.',
+      table: { category: 'Slots' },
+      name: '',
+    },
+    slotHeaderTitle: {
+      description: 'Title slot. A title within the header.',
+      table: { category: 'Slots' },
+      name: 'header-title',
+    },
+    slotCorner: {
+      description: 'Action corner slot. Positioned on the top right corner of the card within the header.',
+      table: { category: 'Slots' },
+      name: 'header-corner',
       control: { type: 'boolean' },
+    },
+    slotFooter: {
+      description: 'Footer slot. Container that covers the bottom of the card.',
+      table: { category: 'Slots' },
+      name: 'footer',
+      control: { type: 'boolean' },
+    },
+    slotHeader: {
+      description:
+        'Header slot. Covers the top of the card and replaces header title and action corner slots. Use this slot if you want to create your own custom header, otherwise leave it out from your template.',
+      table: { category: 'Slots' },
+      name: 'header',
+      control: false,
     },
   },
 }
 
 type Template = (args: {
   elevation: FdsCardElevation
-  headerTitle: string
-  headerCorner: string
-  content: string
-  footer: boolean
+  slotHeaderTitle: string
+  slotCorner: string
+  slotDefault: string
+  slotFooter: boolean
 }) => TemplateResult
 
-export const Card: Template = ({ elevation, headerTitle, content, footer }) => {
-  const footerEl = footer
+export const Card: Template = ({ elevation, slotHeaderTitle, slotCorner, slotDefault, slotFooter }) => {
+  const footerEl = slotFooter
     ? html`
         <footer slot="footer">
           <fds-divider></fds-divider>
@@ -42,6 +87,10 @@ export const Card: Template = ({ elevation, headerTitle, content, footer }) => {
           </fds-action-sheet>
         </footer>
       `
+    : null
+
+  const cornerEl = slotCorner
+    ? html`<fds-icon slot="header-corner" .icon=${'chevron-right'}></fds-icon>`
     : null
 
   return html`
@@ -78,16 +127,16 @@ export const Card: Template = ({ elevation, headerTitle, content, footer }) => {
       @corner-click=${(): void => console.log('clicked corner')}
       @click=${(): void => console.log('clicked card')}
     >
-      <div slot="header-title">${headerTitle}</div>
-      <fds-icon slot="header-corner" .icon=${'chevron-right'}></fds-icon>
-      <div class="content">${content}</div>
+      <div slot="header-title">${slotHeaderTitle}</div>
+      ${cornerEl}
+      <div class="content">${slotDefault}</div>
       ${footerEl}
     </fds-card>
   `
 }
 
-export const CardWithCustomHeader: Template = ({ elevation, content, footer }) => {
-  const footerEl = footer
+export const CardWithCustomHeader: Template = ({ elevation, slotDefault, slotFooter }) => {
+  const footerEl = slotFooter
     ? html`
         <footer slot="footer">
           <fds-divider></fds-divider>
@@ -139,8 +188,16 @@ export const CardWithCustomHeader: Template = ({ elevation, content, footer }) =
 
     <fds-card .elevation=${elevation} @click=${(): void => console.log('clicked card')}>
       <div slot="header" class="custom-header">Customized header</div>
-      <div class="content">${content}</div>
+      <div class="content">${slotDefault}</div>
       ${footerEl}
     </fds-card>
   `
+}
+
+CardWithCustomHeader.parameters = {
+  docs: {
+    description: {
+      story: 'An example of a card with customized header.',
+    },
+  },
 }

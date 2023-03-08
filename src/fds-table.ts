@@ -5,7 +5,7 @@ import { tokenVar } from './utils/token-utils'
 import {
   FdsColorNeutral400,
   FdsColorBrandWhite,
-  FdsColorNeutral100,
+  FdsColorNeutral50,
   FdsColorNeutral200,
 } from '@fintraffic-design/coreui-css'
 import './global-types'
@@ -81,7 +81,7 @@ export default class FdsTable extends LitElement {
       }
 
       .table-rows--striped tr:nth-child(even) {
-        background: ${tokenVar(FdsColorNeutral100)};
+        background: ${tokenVar(FdsColorNeutral50)};
       }
 
       ${uiHelperTextClass}

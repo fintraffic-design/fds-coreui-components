@@ -4,7 +4,7 @@ import { ifDefined } from 'lit/directives/if-defined.js'
 import {
   FdsColorBrandWhite,
   FdsColorNeutral200,
-  FdsColorNeutral50,
+  FdsColorNeutral100,
   FdsColorDanger200,
   FdsColorText600,
   FdsColorText300,
@@ -103,7 +103,7 @@ export default class FdsInput extends LitElement {
       input:disabled {
         border-color: ${tokenVar(FdsColorNeutral200)};
         color: ${tokenVar(FdsColorText300)};
-        background-color: ${tokenVar(FdsColorNeutral50)};
+        background-color: ${tokenVar(FdsColorNeutral100)};
       }
 
       .input--error {

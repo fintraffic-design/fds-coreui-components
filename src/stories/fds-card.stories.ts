@@ -16,11 +16,12 @@ export default {
   },
   args: {
     elevation: FdsCardElevation.low,
+    cornerClick: undefined,
     slotDefault: 'Content',
     slotHeaderTitle: 'Title',
     slotCorner: true,
     slotFooter: true,
-    slotHeader: '',
+    slotHeader: undefined,
   },
   argTypes: {
     elevation: {
@@ -33,6 +34,14 @@ export default {
         category: 'Properties',
         defaultValue: { summary: `'${FdsCardElevation.low}'` },
       },
+    },
+    cornerClick: {
+      description:
+        'Click event handler for action corner. Dispatches CustomEvent. <br><br> \
+      `CustomEvent<void>`',
+      table: { category: 'Events' },
+      name: '@corner-click',
+      control: false,
     },
     slotDefault: {
       description: 'Default slot. Container for card content.',

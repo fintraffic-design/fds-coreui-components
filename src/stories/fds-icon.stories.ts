@@ -31,18 +31,52 @@ const sizes = [
 
 export default {
   title: 'Icon',
+  parameters: {
+    componentSubtitle: 'Icon component. Supports a pre-defined set of icons from Lucide',
+    docs: {
+      description: {
+        component:
+          "`import '@fintraffic-design/coreui-components/src/fds-icon'` <br><br>\
+          Selector: `<fds-icon>`",
+      },
+    },
+    actions: {
+      handles: ['click'],
+    },
+  },
   args: {
     icon: 'alert-circle',
     size: 'fds-size-3',
+    slot: undefined,
   },
   argTypes: {
     icon: {
       options: Object.keys(FdsIcons),
       control: { type: 'select' },
+      description:
+        'Icon name. <br><br>\
+        `FdsIconType`',
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: 'undefined' },
+      },
     },
     size: {
       options: sizes.map(size => size.name),
       control: { type: 'select' },
+      description:
+        'Icon size. <br><br>\
+        `FdsSizeToken`',
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: 'FdsSize3' },
+      },
+    },
+    slot: {
+      description: 'No slots',
+      table: { category: 'Slots' },
+      name: '',
+      control: false,
     },
   },
 }

@@ -12,7 +12,7 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-alert'` <br> <br>\
+          "`import '@fintraffic-design/coreui-components/src/fds-alert'` <br><br>\
           Selector: `<fds-alert>`",
       },
     },

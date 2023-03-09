@@ -9,7 +9,7 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-card'` <br> <br>\
+          "`import '@fintraffic-design/coreui-components/src/fds-card'` <br><br>\
           Selector: `<fds-card>`",
       },
     },
@@ -37,7 +37,7 @@ export default {
     },
     cornerClick: {
       description:
-        'Click event handler for action corner. Dispatches CustomEvent. <br><br> \
+        'Event that is dispatched when the action corner is clicked. Returns no value. <br><br> \
       `CustomEvent<void>`',
       table: { category: 'Events' },
       name: '@corner-click',

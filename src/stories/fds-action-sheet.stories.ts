@@ -10,7 +10,7 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-action-sheet'` <br> <br>\
+          "`import '@fintraffic-design/coreui-components/src/fds-action-sheet'` <br><br>\
           Selector: `<fds-action-sheet>`",
       },
     },

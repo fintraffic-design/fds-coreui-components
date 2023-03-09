@@ -9,7 +9,7 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-checkbox'` <br> <br>\
+          "`import '@fintraffic-design/coreui-components/src/fds-checkbox'` <br><br>\
           Selector: `<fds-checkbox>`",
       },
     },
@@ -51,7 +51,7 @@ export default {
     },
     select: {
       description:
-        "Select event handler for the checkbox. Dispatches CustomEvent. The value is in the event's details field. <br><br> \
+        "Event that is dispatched when the checkbox is checked/unchecked. The value is in the event's details field. <br><br> \
       `CustomEvent<boolean>`",
       table: { category: 'Events' },
       name: '@select',

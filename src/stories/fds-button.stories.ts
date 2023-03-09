@@ -7,7 +7,7 @@ import { FdsIconType } from '../fds-icon'
 export default {
   title: 'Button',
   parameters: {
-    componentSubtitle: 'Button element with styling',
+    componentSubtitle: 'Button element with FDS styling',
     docs: {
       description: {
         component:
@@ -33,9 +33,9 @@ export default {
       description:
         'Button type. <br><br> \
       `FdsButtonVariant.primary` `FdsButtonVariant.secondary` `FdsButtonVariant.tertiary` `FdsButtonVariant.danger`',
-      defaultValue: { summary: FdsButtonVariant.primary },
       table: {
         category: 'Properties',
+        defaultValue: { summary: `'${FdsButtonVariant.primary}'` },
       },
     },
     disabled: {
@@ -43,9 +43,9 @@ export default {
       description:
         'Whether the component is disabled. <br><br> \
       `boolean`',
-      defaultValue: { summary: false },
       table: {
         category: 'Properties',
+        defaultValue: { summary: false },
       },
     },
     icon: {
@@ -54,18 +54,18 @@ export default {
       description:
         'Icon displayed on the button. Accepts icon name as value. <br><br>\
     value of `FdsIconType`',
-      defaultValue: { summary: 'undefined' },
       table: {
         category: 'Properties',
+        defaultValue: { summary: 'undefined' },
       },
     },
     label: {
       description:
         'Label for the button. <br><br>\
       `string`',
-      defaultValue: { summary: 'undefined' },
       table: {
         category: 'Properties',
+        defaultValue: { summary: 'undefined' },
       },
     },
     slot: {

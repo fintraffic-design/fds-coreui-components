@@ -31,9 +31,9 @@ export default {
       description:
         'Type or color theme for the message. <br><br>\
         `FdsAlertVariant.error` `FdsAlertVariant.warning` `FdsAlertVariant.info` `FdsAlertVariant.success`',
-      defaultValue: { summary: FdsAlertVariant.error },
       table: {
         category: 'Properties',
+        defaultValue: { summary: `'${FdsAlertVariant.error}'` },
       },
     },
     icon: {
@@ -42,8 +42,10 @@ export default {
       description:
         'Icon displayed on the left side of the message. Accepts icon name as value. <br><br>\
       value of `FdsIconType`',
-      defaultValue: { summary: 'undefined' },
-      table: { category: 'Properties' },
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: 'undefined' },
+      },
     },
     slot: {
       description: 'Default slot',

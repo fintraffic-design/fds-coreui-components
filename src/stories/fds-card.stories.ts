@@ -29,9 +29,9 @@ export default {
       description:
         'Depth of box shadow. <br><br>\
         `FdsCardElevation.none` `FdsCardElevation.low` `FdsCardElevation.high`',
-      defaultValue: { summary: FdsCardElevation.low },
       table: {
         category: 'Properties',
+        defaultValue: { summary: `'${FdsCardElevation.low}'` },
       },
     },
     slotDefault: {

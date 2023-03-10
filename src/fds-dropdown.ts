@@ -3,8 +3,8 @@ import {
   FdsColorDanger200,
   FdsColorInteractive100,
   FdsColorInteractive200,
-  FdsColorNeutral100,
   FdsColorNeutral200,
+  FdsColorNeutral50,
   FdsColorText1000,
   FdsColorText300,
   FdsStyleElevation200,
@@ -167,7 +167,7 @@ export default class FdsDropdown extends LitElement {
 
       button:disabled {
         cursor: default;
-        background-color: ${tokenVar(FdsColorNeutral100)};
+        background-color: ${tokenVar(FdsColorNeutral50)};
         color: ${tokenVar(FdsColorText300)};
       }
 

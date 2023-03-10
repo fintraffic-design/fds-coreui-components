@@ -6,7 +6,7 @@ import { DropdownEvent } from '../fds-dropdown'
 export default {
   title: 'Combobox',
   parameters: {
-    componentSubtitle: 'Dropdown with input filtering',
+    componentSubtitle: 'List of options with input filtering',
     docs: {
       description: {
         component:
@@ -67,7 +67,7 @@ export default {
     },
     error: {
       description:
-        'Whether the component is in error state. <br><br>\
+        'Whether the combobox is in error state. <br><br>\
         `boolean`',
       table: {
         category: 'Properties',

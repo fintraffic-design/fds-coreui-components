@@ -8,8 +8,36 @@ import '../fds-icon'
 
 export default {
   title: 'Dialog',
+  parameters: {
+    componentSubtitle: 'Dialog component',
+    docs: {
+      description: {
+        component:
+          "`import '@fintraffic-design/coreui-components/src/fds-dialog'` <br><br>\
+          Selector: `<fds-dialog>`",
+      },
+    },
+  },
   args: {
     modal: false,
+    slot: undefined,
+  },
+  argTypes: {
+    modal: {
+      description:
+        'Whether the dialog opens as a modal. Modal does not allow interaction with background elements. <br><br>\
+        `boolean`',
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: 'false' },
+      },
+    },
+    slot: {
+      description: 'Default slot. Container for the dialog content.',
+      table: { category: 'Slots' },
+      name: '',
+      control: false,
+    },
   },
 }
 

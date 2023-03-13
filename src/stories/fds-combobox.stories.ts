@@ -102,7 +102,7 @@ export default {
 
 const Template: Story = ({ options, value, disabled, error, placeholder, addNewIndicator }) => {
   return html`
-    <div style="width:284px">
+    <div style="width:284px; height: 260px;">
       <fds-combobox
         .options=${options}
         .value=${value}

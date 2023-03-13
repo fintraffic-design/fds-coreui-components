@@ -101,7 +101,7 @@ export default {
 
 const Template: Story = ({ options, value, disabled, error, placeholder }) => {
   return html`
-    <div style="width:284px">
+    <div style="width:284px; height: 260px;">
       <fds-dropdown
         .options=${options}
         .value=${value}

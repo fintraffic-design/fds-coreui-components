@@ -55,18 +55,20 @@ const Template: Story = ({ modal }) => {
       }
     </style>
 
-    <fds-dialog .modal=${modal} style="width: 50%; min-width: 30rem; max-width: 40rem">
-      <fds-card elevation="${FdsCardElevation.none}">
-        <h4 slot="header-title">Modal title</h4>
-        <p>Modal message</p>
-        <fds-action-sheet slot="footer">
-          <fds-button slot="separated" variant="danger" label="Button"></fds-button>
-          <fds-button variant="tertiary" label="Button"></fds-button>
-          <fds-button variant="secondary" label="Button"></fds-button>
-          <fds-button label="Button"></fds-button>
-        </fds-action-sheet>
-      </fds-card>
-    </fds-dialog>
+    <div style="height: 260px;">
+      <fds-dialog .modal=${modal} style="width: 50%; min-width: 30rem; max-width: 40rem">
+        <fds-card elevation="${FdsCardElevation.none}">
+          <h4 slot="header-title">Modal title</h4>
+          <p>Modal message</p>
+          <fds-action-sheet slot="footer">
+            <fds-button slot="separated" variant="danger" label="Close modal"></fds-button>
+            <fds-button variant="tertiary" label="Button"></fds-button>
+            <fds-button variant="secondary" label="Button"></fds-button>
+            <fds-button label="Button"></fds-button>
+          </fds-action-sheet>
+        </fds-card>
+      </fds-dialog>
+    </div>
   `
 }
 

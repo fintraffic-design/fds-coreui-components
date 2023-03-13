@@ -1,3 +1,4 @@
+import { Story } from '@storybook/web-components'
 import { html, TemplateResult } from 'lit'
 import '../fds-navigation'
 import { FdsNavigationItem, FdsNavigationVariant, FdsNavigationItemPosition } from '../fds-navigation'
@@ -70,16 +71,14 @@ export default {
       control: false,
     },
     slot: {
-      description: 'Default slot. Slot for navigation header, e.g. a logo.',
+      description: 'Default slot. Container for navigation header, e.g. a logo.',
       table: { category: 'Slots' },
       name: '',
     },
   },
 }
 
-type Template = (args: { variant: FdsNavigationVariant; slot: boolean }) => TemplateResult
-
-export const Navigation: Template = ({ variant, slot }) => {
+const Template: Story = ({ variant, slot }) => {
   const headerEl = slot ? html`<div style="display: flex; align-items: center;">Header</div>` : null
   return html`<div style="height: 300px;">
     <fds-navigation
@@ -92,3 +91,5 @@ export const Navigation: Template = ({ variant, slot }) => {
     </fds-navigation>
   </div>`
 }
+
+export const Navigation: Story = Template.bind({})

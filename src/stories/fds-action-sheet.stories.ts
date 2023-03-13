@@ -1,5 +1,5 @@
-import { Meta } from '@storybook/web-components'
-import { html, TemplateResult } from 'lit'
+import { Meta, Story } from '@storybook/web-components'
+import { html } from 'lit'
 import '../fds-icon'
 import '../global-types'
 
@@ -30,15 +30,13 @@ export default {
       name: 'separated',
       table: { category: 'Slots' },
       description:
-        'Contents are positioned on the left side of the component, separated from content in default slot.',
+        'Separated slot. Contents are positioned on the left side of the component, separated from the content in default slot.',
       control: false,
     },
   },
 } as Meta
 
-type Template = (args: object) => TemplateResult
-
-export const ActionSheet: Template = ({}) => {
+const Template: Story = ({}) => {
   return html`<fds-action-sheet style="max-width: 800px">
     <fds-button slot="separated" icon="x" variant="danger" label="Danger"></fds-button>
     <fds-button variant="tertiary" icon="alert-circle"></fds-button>
@@ -47,3 +45,5 @@ export const ActionSheet: Template = ({}) => {
     <fds-button label="Primary"></fds-button>
   </fds-action-sheet>`
 }
+
+export const ActionSheet: Story = Template.bind({})

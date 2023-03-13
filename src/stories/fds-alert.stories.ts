@@ -1,9 +1,8 @@
-import { Meta } from '@storybook/web-components'
-import { html, TemplateResult } from 'lit'
+import { Meta, Story } from '@storybook/web-components'
+import { html } from 'lit'
 import { FdsAlertVariant } from '../fds-alert'
 import '../fds-icon'
 import '../fds-alert'
-import { FdsIconType } from '../fds-icon'
 
 export default {
   title: 'Alert',
@@ -42,7 +41,7 @@ export default {
       control: { type: 'select' },
       description:
         'Icon displayed on the left side of the message. Accepts icon name as value. <br><br>\
-      value of `FdsIconType`',
+      `FdsIconType`',
       table: {
         category: 'Properties',
         defaultValue: { summary: 'undefined' },
@@ -57,13 +56,11 @@ export default {
   },
 } as Meta
 
-type Template = (args: { variant: FdsAlertVariant; icon: FdsIconType }) => TemplateResult
-
-export const Alert: Template = ({ variant, icon }) => {
+const Template: Story = ({ variant, icon }) => {
   return html`<fds-alert .variant=${variant} .icon=${icon}>Alert text</fds-alert>`
 }
 
-export const MultiLineContent: Template = ({ variant, icon }) => {
+const TemplateMultiLine: Story = ({ variant, icon }) => {
   return html`
     <fds-alert .variant=${variant} .icon=${icon}>
       <div>Alert text</div>
@@ -72,6 +69,10 @@ export const MultiLineContent: Template = ({ variant, icon }) => {
     </fds-alert>
   `
 }
+
+export const Alert: Story = Template.bind({})
+export const MultiLineContent: Story = TemplateMultiLine.bind({})
+
 MultiLineContent.parameters = {
   docs: {
     description: {

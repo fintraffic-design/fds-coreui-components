@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/web-components'
+import { Meta, Story } from '@storybook/web-components'
 import { html, TemplateResult } from 'lit'
 import { FdsButtonVariant } from '../fds-button'
 import '../fds-table'
@@ -40,6 +40,7 @@ export default {
           Selector: `<fds-table>`",
       },
       source: {
+        // Source code is written here because functions are not visible in "show code" feature in Storybook.
         code:
           '<fds-table .items=${items} .renderHeader=${renderHeader} .renderItem=${renderItem}>\n</fds-table>' +
           `\n${renderHeader}\n${renderItem}`,
@@ -100,9 +101,7 @@ export default {
   },
 } as Meta
 
-type Template = (args: { striped: boolean }) => TemplateResult
-
-export const Table: Template = ({ striped }) => {
+const Template: Story = ({ striped }) => {
   return html`<fds-table
     .striped=${striped}
     .items=${items}
@@ -112,7 +111,7 @@ export const Table: Template = ({ striped }) => {
   </fds-table>`
 }
 
-export const TableWithCheckboxAndButton: Template = ({ striped }) => {
+const TemplateTableWithCheckboxAndButton: Story = ({ striped }) => {
   return html`<fds-table
     .striped=${striped}
     .items=${items}
@@ -142,12 +141,16 @@ function renderItemWithCheckboxAndButton(item: Item): TemplateResult {
   </tr>`
 }
 
+export const Table: Story = Template.bind({})
+export const TableWithCheckboxAndButton: Story = TemplateTableWithCheckboxAndButton.bind({})
+
 TableWithCheckboxAndButton.parameters = {
   docs: {
     description: {
       story: 'An example of a table that has checkboxes and buttons and custom styles for the columns.',
     },
     source: {
+      // Source code is written here because functions are not visible in "show code" feature in Storybook.
       code:
         '<fds-table .items=${items} .renderHeader=${renderHeaderWithCheckboxAndButton} .renderItem=${renderItemWithCheckboxAndButton}>\n</fds-table>' +
         `\n${renderHeaderWithCheckboxAndButton}\n${renderItemWithCheckboxAndButton}`,

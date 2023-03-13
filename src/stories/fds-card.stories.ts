@@ -1,4 +1,5 @@
-import { html, TemplateResult } from 'lit'
+import { Story } from '@storybook/web-components'
+import { html } from 'lit'
 import '../fds-card'
 import { FdsCardElevation } from '../fds-card'
 
@@ -38,7 +39,7 @@ export default {
     },
     cornerClick: {
       description:
-        'Event that is dispatched when the action corner is clicked. Returns no value. <br><br> \
+        'Event that is dispatched when action corner is clicked. Returns no value. <br><br> \
       `CustomEvent<void>`',
       table: { category: 'Events' },
       name: '@corner-click',
@@ -76,15 +77,7 @@ export default {
   },
 }
 
-type Template = (args: {
-  elevation: FdsCardElevation
-  slotHeaderTitle: string
-  slotCorner: string
-  slotDefault: string
-  slotFooter: boolean
-}) => TemplateResult
-
-export const Card: Template = ({ elevation, slotHeaderTitle, slotCorner, slotDefault, slotFooter }) => {
+const Template: Story = ({ elevation, slotHeaderTitle, slotCorner, slotDefault, slotFooter }) => {
   const footerEl = slotFooter
     ? html`
         <footer slot="footer">
@@ -145,7 +138,7 @@ export const Card: Template = ({ elevation, slotHeaderTitle, slotCorner, slotDef
   `
 }
 
-export const CardWithCustomHeader: Template = ({ elevation, slotDefault, slotFooter }) => {
+const TemplateCardWithCustomHeader: Story = ({ elevation, slotDefault, slotFooter }) => {
   const footerEl = slotFooter
     ? html`
         <footer slot="footer">
@@ -203,6 +196,10 @@ export const CardWithCustomHeader: Template = ({ elevation, slotDefault, slotFoo
     </fds-card>
   `
 }
+
+export const Card: Story = Template.bind({})
+
+export const CardWithCustomHeader: Story = TemplateCardWithCustomHeader.bind({})
 
 CardWithCustomHeader.parameters = {
   docs: {

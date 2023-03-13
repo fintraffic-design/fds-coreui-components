@@ -1,8 +1,8 @@
-import { html, TemplateResult } from 'lit'
+import { html } from 'lit'
 import { FdsButtonVariant } from '../fds-button'
 import '../fds-button'
 import '../fds-icon'
-import { FdsIconType } from '../fds-icon'
+import { Story } from '@storybook/web-components'
 
 export default {
   title: 'Button',
@@ -54,7 +54,7 @@ export default {
       control: { type: 'select' },
       description:
         'Icon displayed on the button. Accepts icon name as value. <br><br>\
-    value of `FdsIconType`',
+      `FdsIconType`',
       table: {
         category: 'Properties',
         defaultValue: { summary: 'undefined' },
@@ -78,14 +78,7 @@ export default {
   },
 }
 
-type Template = (args: {
-  variant: FdsButtonVariant
-  disabled: boolean
-  icon?: FdsIconType
-  label?: string
-}) => TemplateResult
-
-export const Button: Template = ({ variant, disabled, icon, label }) => {
+const Template: Story = ({ variant, disabled, icon, label }) => {
   return html`<fds-button
     .variant=${variant}
     .disabled=${disabled}
@@ -93,3 +86,5 @@ export const Button: Template = ({ variant, disabled, icon, label }) => {
     .label="${label}"
   ></fds-button>`
 }
+
+export const Button: Story = Template.bind({})

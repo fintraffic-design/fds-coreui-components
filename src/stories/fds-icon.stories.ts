@@ -15,6 +15,7 @@ import {
   FdsSize8,
   FdsSizeToken,
 } from '@fintraffic-design/coreui-css'
+import { Story } from '@storybook/web-components'
 
 const sizes = [
   FdsSize1,
@@ -82,9 +83,7 @@ export default {
   },
 }
 
-type Template = (args: { icon: FdsIconType; size: FdsSizeToken['name'] }) => TemplateResult
-
-export const Icon: Template = ({ icon, size }) => {
+export const Icon: Story = ({ icon, size }) => {
   const sizeToken = sizes.find(s => s.name === size) as FdsSizeToken
   return html`<fds-icon .icon=${icon} .size=${sizeToken}></fds-icon>`
 }

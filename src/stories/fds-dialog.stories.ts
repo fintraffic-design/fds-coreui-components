@@ -1,3 +1,4 @@
+import { Story } from '@storybook/web-components'
 import { html, TemplateResult } from 'lit'
 import '../fds-action-sheet'
 import '../fds-button'
@@ -41,9 +42,7 @@ export default {
   },
 }
 
-type Template = (args: { modal: boolean }) => TemplateResult
-
-export const Dialog: Template = ({ modal }) => {
+const Template: Story = ({ modal }) => {
   return html`
     <style>
       fds-action-sheet {
@@ -70,3 +69,5 @@ export const Dialog: Template = ({ modal }) => {
     </fds-dialog>
   `
 }
+
+export const Dialog: Story = Template.bind({})

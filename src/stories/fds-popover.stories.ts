@@ -1,14 +1,10 @@
-import { html, TemplateResult } from 'lit'
+import { html } from 'lit'
 
 import '../fds-popover'
 import '../fds-button'
 import { FdsPopoverPosition } from '../fds-popover'
-import {
-  FdsColorBrandWhite,
-  FdsColorDanger100,
-  FdsColorNeutral300,
-  FdsColorToken,
-} from '@fintraffic-design/coreui-css'
+import { FdsColorBrandWhite, FdsColorDanger100, FdsColorNeutral300 } from '@fintraffic-design/coreui-css'
+import { Story } from '@storybook/web-components'
 
 const colorOptions = {
   [FdsColorBrandWhite.name]: FdsColorBrandWhite,
@@ -88,14 +84,7 @@ export default {
   },
 }
 
-type Template = (args: {
-  position: FdsPopoverPosition
-  openOnClick: boolean
-  popoverText: string
-  backgroundColor: FdsColorToken['name']
-}) => TemplateResult
-
-export const Popover: Template = ({ position, openOnClick, popoverText, backgroundColor }) => {
+const Template: Story = ({ position, openOnClick, popoverText, backgroundColor }) => {
   const text = openOnClick ? 'Click me' : 'Hover over me'
   return html`
     <div style="padding: 8px; width: fit-content; margin: 100px auto; background-color: lightgray;">
@@ -117,7 +106,7 @@ export const Popover: Template = ({ position, openOnClick, popoverText, backgrou
   `
 }
 
-export const IconPopover: Template = ({ position, openOnClick, popoverText, backgroundColor }) => {
+const TemplateIconPopover: Story = ({ position, openOnClick, popoverText, backgroundColor }) => {
   return html`
     <div style="margin: 100px auto; width: max-content;">
       <div>
@@ -136,15 +125,7 @@ export const IconPopover: Template = ({ position, openOnClick, popoverText, back
   `
 }
 
-IconPopover.parameters = {
-  docs: {
-    description: {
-      story: 'An example of a popover connected to an icon.',
-    },
-  },
-}
-
-export const PopoverWithHeader: Template = ({ position, openOnClick, popoverText, backgroundColor }) => {
+const TemplatePopoverWithHeader: Story = ({ position, openOnClick, popoverText, backgroundColor }) => {
   return html`
     <div style="width: fit-content; margin: 150px auto;">
       <fds-popover
@@ -170,6 +151,17 @@ export const PopoverWithHeader: Template = ({ position, openOnClick, popoverText
   `
 }
 
+export const Popover: Story = Template.bind({})
+export const IconPopover: Story = TemplateIconPopover.bind({})
+export const PopoverWithHeader: Story = TemplatePopoverWithHeader.bind({})
+
+IconPopover.parameters = {
+  docs: {
+    description: {
+      story: 'An example of a popover connected to an icon.',
+    },
+  },
+}
 PopoverWithHeader.parameters = {
   docs: {
     description: {

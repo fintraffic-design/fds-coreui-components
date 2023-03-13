@@ -20,7 +20,7 @@ import { uiLabelTextClass, uiHelperTextClass } from './utils/css-utils'
  * @property {string} value - Input value the user has entered.
  * @property {string} placeholder - Placeholder for the input when there is no value.
  * @property {string} message - Helper/error message. Additional information or instructions about the purpose of the input field or the expected user input.
- * @property {boolean} invalid - Display invalid input.
+ * @property {boolean} error - Display error state.
  * @property {boolean} disabled - Disable input.
  *
  * @event change Dispatches a custom event when input value is changed. The value is in the event details field.
@@ -32,7 +32,7 @@ export default class FdsInput extends LitElement {
   @property() value?: string
   @property() placeholder?: string
   @property() message?: string
-  @property() invalid: boolean = false
+  @property() error: boolean = false
   @property() disabled: boolean = false
 
   override render(): TemplateResult {
@@ -43,14 +43,14 @@ export default class FdsInput extends LitElement {
           type="text"
           id="input"
           placeholder=${ifDefined(this.placeholder)}
-          class="ui-label-text ${this.invalid ? 'input--error' : ''}"
+          class="ui-label-text ${this.error ? 'input--error' : ''}"
           value=${ifDefined(this.value)}
           ?disabled=${this.disabled}
           @input=${this.handleChange}
         />
       </div>
       ${this.message &&
-      html`<span class="input-message ui-helper-text ${this.invalid ? 'input-message--error' : ''}"
+      html`<span class="input-message ui-helper-text ${this.error ? 'input-message--error' : ''}"
         >${this.message}</span
       >`}
     `

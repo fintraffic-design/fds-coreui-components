@@ -1,11 +1,11 @@
 import { html, TemplateResult } from 'lit'
 import '../fds-navigation'
-import { FdsNavigationItem, FdsNavigationVariant, ItemPosition } from '../fds-navigation'
+import { FdsNavigationItem, FdsNavigationVariant, FdsNavigationItemPosition } from '../fds-navigation'
 
 const items: FdsNavigationItem[] = [
   { label: 'Areatool', value: 'home' },
   { label: 'History', value: 'history' },
-  { label: 'Settings', value: 'settings', position: ItemPosition.right, icon: 'settings' },
+  { label: 'Settings', value: 'settings', position: FdsNavigationItemPosition.right, icon: 'settings' },
 ]
 
 export default {

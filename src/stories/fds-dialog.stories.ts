@@ -1,5 +1,5 @@
 import { Story } from '@storybook/web-components'
-import { html, TemplateResult } from 'lit'
+import { html } from 'lit'
 import '../fds-action-sheet'
 import '../fds-button'
 import '../fds-card'

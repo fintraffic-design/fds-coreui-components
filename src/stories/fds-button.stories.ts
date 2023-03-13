@@ -33,7 +33,7 @@ export default {
       control: { type: 'select' },
       description:
         'Button type. <br><br> \
-      `FdsButtonVariant.primary` `FdsButtonVariant.secondary` `FdsButtonVariant.tertiary` `FdsButtonVariant.danger`',
+      `FdsButtonVariant`',
       table: {
         category: 'Properties',
         defaultValue: { summary: `'${FdsButtonVariant.primary}'` },

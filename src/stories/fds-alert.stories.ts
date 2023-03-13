@@ -30,7 +30,7 @@ export default {
       },
       description:
         'Type or color theme for the message. <br><br>\
-        `FdsAlertVariant.error` `FdsAlertVariant.warning` `FdsAlertVariant.info` `FdsAlertVariant.success`',
+        `FdsAlertVariant`',
       table: {
         category: 'Properties',
         defaultValue: { summary: `'${FdsAlertVariant.error}'` },

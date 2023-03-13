@@ -111,7 +111,7 @@ const Template: Story = ({ striped }) => {
   </fds-table>`
 }
 
-const TemplateTableWithCheckboxAndButton: Story = ({ striped }) => {
+const TemplateTableWithCustomStyles: Story = ({ striped }) => {
   return html`<fds-table
     .striped=${striped}
     .items=${items}
@@ -142,9 +142,9 @@ function renderItemWithCheckboxAndButton(item: Item): TemplateResult {
 }
 
 export const Table: Story = Template.bind({})
-export const TableWithCheckboxAndButton: Story = TemplateTableWithCheckboxAndButton.bind({})
+export const TableWithCustomStyles: Story = TemplateTableWithCustomStyles.bind({})
 
-TableWithCheckboxAndButton.parameters = {
+TableWithCustomStyles.parameters = {
   docs: {
     description: {
       story: 'An example of a table that has checkboxes and buttons and custom styles for the columns.',

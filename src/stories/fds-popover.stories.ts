@@ -42,7 +42,7 @@ export default {
       control: { type: 'select' },
       description:
         'Direction the popover opens. <br><br>\
-        `FdsPopoverPosition.above` `FdsPopoverPosition.below` `FdsPopoverPosition.left` `FdsPopoverPosition.right`',
+        `FdsPopoverPosition`',
       table: {
         category: 'Properties',
         defaultValue: { summary: `'${FdsPopoverPosition.above}'` },

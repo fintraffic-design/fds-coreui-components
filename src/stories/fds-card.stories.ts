@@ -31,7 +31,7 @@ export default {
       control: { type: 'select' },
       description:
         'Depth of box shadow. <br><br>\
-        `FdsCardElevation.none` `FdsCardElevation.low` `FdsCardElevation.high`',
+        `FdsCardElevation`',
       table: {
         category: 'Properties',
         defaultValue: { summary: `'${FdsCardElevation.low}'` },

@@ -1,5 +1,5 @@
-import { html, TemplateResult } from 'lit'
-import { FdsIcons, FdsIconType } from '../fds-icon'
+import { html } from 'lit'
+import { FdsIcons } from '../fds-icon'
 import '../fds-icon'
 import '../global-types'
 import {

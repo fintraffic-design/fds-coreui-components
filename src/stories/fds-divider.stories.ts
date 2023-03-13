@@ -1,10 +1,9 @@
-import { html, TemplateResult } from 'lit'
+import { html } from 'lit'
 import {
   FdsColorNeutral100,
   FdsColorNeutral200,
   FdsColorNeutral300,
   FdsColorNeutral400,
-  FdsColorToken,
 } from '@fintraffic-design/coreui-css'
 import '../fds-divider'
 import { Story } from '@storybook/web-components'
@@ -53,4 +52,4 @@ const Template: Story = ({ color }) => {
   return html`<fds-divider .color=${colorToken}></fds-divider>`
 }
 
-export const Dialog: Story = Template.bind({})
+export const Divider: Story = Template.bind({})

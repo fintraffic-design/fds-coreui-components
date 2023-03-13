@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/web-components'
-import { html, TemplateResult } from 'lit'
+import { html } from 'lit'
 import '../fds-checkbox'
 
 export default {

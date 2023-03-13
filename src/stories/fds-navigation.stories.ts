@@ -1,5 +1,5 @@
 import { Story } from '@storybook/web-components'
-import { html, TemplateResult } from 'lit'
+import { html } from 'lit'
 import '../fds-navigation'
 import { FdsNavigationItem, FdsNavigationVariant, FdsNavigationItemPosition } from '../fds-navigation'
 
@@ -12,7 +12,7 @@ const items: FdsNavigationItem[] = [
 export default {
   title: 'Navigation',
   parameters: {
-    componentSubtitle: 'Navigation headers',
+    componentSubtitle: 'Primary and secondary navigation headers',
     docs: {
       description: {
         component:
@@ -38,7 +38,7 @@ export default {
       control: { type: 'select' },
       description:
         'Type of navigation header. <br><br>\
-        `FdsNavigationVariant.primary` `FdsNavigationVariant.secondary`',
+        `FdsNavigationVariant`',
       table: {
         category: 'Properties',
         defaultValue: { summary: `'${FdsNavigationVariant.primary}'` },

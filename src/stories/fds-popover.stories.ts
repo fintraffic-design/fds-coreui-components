@@ -23,7 +23,8 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-popover'` <br><br>\
+          "`import '@fintraffic-design/coreui-components/src/fds-popover'` <br>\
+          `import { FdsPopoverPosition } from '@fintraffic-design/coreui-components/src/fds-popover'`<br><br>\
           Selector: `<fds-popover>`",
       },
     },

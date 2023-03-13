@@ -10,7 +10,8 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-dropdown'` <br><br>\
+          "`import '@fintraffic-design/coreui-components/src/fds-dropdown'`<br>\
+          `import { DropdownEvent, DropdownOption } from '@fintraffic-design/coreui-components/src/fds-dropdown'`<br><br>\
           Selector: `<fds-dropdown>`",
       },
     },

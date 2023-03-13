@@ -27,6 +27,7 @@ export default {
       control: false,
     },
     slotSeparated: {
+      name: 'separated',
       table: { category: 'Slots' },
       description:
         'Contents are positioned on the left side of the component, separated from content in default slot.',

@@ -48,7 +48,7 @@ export default {
       },
     },
     slot: {
-      description: 'Default slot',
+      description: 'Default slot. Container for the content.',
       table: { category: 'Slots' },
       name: '',
       control: false,

@@ -1,14 +1,14 @@
-import { Canvas, Meta, Title, IconGallery, IconItem, Subtitle } from '@storybook/addon-docs';
+import { Meta, Title, IconGallery, IconItem, Subtitle } from '@storybook/addon-docs'
 import '../fds-icon'
 import { FdsIcons } from '../fds-icon'
 
-<Meta title="Assets/Icons" />
+<Meta title='Assets/Icons' />
 
 <Title>FDS Icons</Title>
 <Subtitle>Icons from Lucide</Subtitle>
 
 <IconGallery>
-  {Object.keys(FdsIcons).map(icon => 
+  {Object.keys(FdsIcons).map(icon =>
     <IconItem name={icon} key={icon}>
       <fds-icon icon={icon}></fds-icon>
     </IconItem>

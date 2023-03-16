@@ -1,14 +1,10 @@
-import { html, TemplateResult } from 'lit'
+import { html } from 'lit'
 
 import '../fds-popover'
 import '../fds-button'
 import { FdsPopoverPosition } from '../fds-popover'
-import {
-  FdsColorBrandWhite,
-  FdsColorDanger100,
-  FdsColorNeutral300,
-  FdsColorToken,
-} from '@fintraffic-design/coreui-css'
+import { FdsColorBrandWhite, FdsColorDanger100, FdsColorNeutral300 } from '@fintraffic-design/coreui-css'
+import { Story } from '@storybook/web-components'
 
 const colorOptions = {
   [FdsColorBrandWhite.name]: FdsColorBrandWhite,
@@ -18,32 +14,77 @@ const colorOptions = {
 
 export default {
   title: 'Popover',
+  parameters: {
+    componentSubtitle: 'Content that is displayed when the user hovers or clicks an element',
+    docs: {
+      description: {
+        component:
+          "`import '@fintraffic-design/coreui-components/src/fds-popover'` <br>\
+          `import { FdsPopoverPosition } from '@fintraffic-design/coreui-components/src/fds-popover'`<br><br>\
+          Selector: `<fds-popover>`",
+      },
+    },
+  },
   args: {
-    position: FdsPopoverPosition.ABOVE,
-    openOnClick: false,
     popoverText: 'Popover content',
+    position: FdsPopoverPosition.above,
+    openOnClick: false,
     backgroundColor: Object.keys(colorOptions)[0],
+    slotDefault: undefined,
+    slotPopover: undefined,
   },
   argTypes: {
+    popoverText: {
+      description: 'Only for Storybook presentation purposes.',
+    },
     position: {
       options: Object.values(FdsPopoverPosition),
       control: { type: 'select' },
+      description:
+        'Direction the popover opens. <br><br>\
+        `FdsPopoverPosition`',
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: `'${FdsPopoverPosition.above}'` },
+      },
     },
     backgroundColor: {
       options: Object.keys(colorOptions),
       control: { type: 'select' },
+      description:
+        'Background color for the popover. <br><br>\
+        `FdsColorToken`',
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: 'FdsColorBrandWhite' },
+      },
+    },
+    openOnClick: {
+      description:
+        'Whether the popover opens by clicking the element. <br><br>\
+        `boolean`',
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: 'false' },
+      },
+    },
+    slotDefault: {
+      description:
+        'Default slot. Container for the hoverable/clickable element that is always visible and connected to the popover.',
+      table: { category: 'Slots' },
+      name: '',
+      control: false,
+    },
+    slotPopover: {
+      description: 'Popover slot. Container for the content in popover.',
+      table: { category: 'Slots' },
+      name: 'popover',
+      control: false,
     },
   },
 }
 
-type Template = (args: {
-  position: FdsPopoverPosition
-  openOnClick: boolean
-  popoverText: string
-  backgroundColor: FdsColorToken['name']
-}) => TemplateResult
-
-export const Popover: Template = ({ position, openOnClick, popoverText, backgroundColor }) => {
+const Template: Story = ({ position, openOnClick, popoverText, backgroundColor }) => {
   const text = openOnClick ? 'Click me' : 'Hover over me'
   return html`
     <div style="padding: 8px; width: fit-content; margin: 100px auto; background-color: lightgray;">
@@ -65,7 +106,7 @@ export const Popover: Template = ({ position, openOnClick, popoverText, backgrou
   `
 }
 
-export const IconPopover: Template = ({ position, openOnClick, popoverText, backgroundColor }) => {
+const TemplateIconPopover: Story = ({ position, openOnClick, popoverText, backgroundColor }) => {
   return html`
     <div style="margin: 100px auto; width: max-content;">
       <div>
@@ -84,7 +125,7 @@ export const IconPopover: Template = ({ position, openOnClick, popoverText, back
   `
 }
 
-export const PopoverWithHeader: Template = ({ position, openOnClick, popoverText, backgroundColor }) => {
+const TemplatePopoverWithHeader: Story = ({ position, openOnClick, popoverText, backgroundColor }) => {
   return html`
     <div style="width: fit-content; margin: 150px auto;">
       <fds-popover
@@ -108,4 +149,23 @@ export const PopoverWithHeader: Template = ({ position, openOnClick, popoverText
       </fds-popover>
     </div>
   `
+}
+
+export const Popover: Story = Template.bind({})
+export const IconPopover: Story = TemplateIconPopover.bind({})
+export const PopoverWithHeader: Story = TemplatePopoverWithHeader.bind({})
+
+IconPopover.parameters = {
+  docs: {
+    description: {
+      story: 'An example of a popover connected to an icon.',
+    },
+  },
+}
+PopoverWithHeader.parameters = {
+  docs: {
+    description: {
+      story: 'An example of a large popover with a header.',
+    },
+  },
 }

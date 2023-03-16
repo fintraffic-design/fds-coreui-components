@@ -15,11 +15,11 @@ export enum FdsNavigationVariant {
 export interface FdsNavigationItem<T = string> {
   label: string
   value: T
-  position?: ItemPosition
+  position?: FdsNavigationItemPosition
   icon?: FdsIconType
 }
 
-export enum ItemPosition {
+export enum FdsNavigationItemPosition {
   left = 'left',
   right = 'right',
 }
@@ -39,8 +39,8 @@ export default class FdsNavigation extends LitElement {
   @property() selected?: FdsNavigationItem
 
   override render(): TemplateResult {
-    const itemsOnRight = this.items.filter(item => item.position === ItemPosition.right)
-    const itemsOnLeft = this.items.filter(item => item.position !== ItemPosition.right)
+    const itemsOnRight = this.items.filter(item => item.position === FdsNavigationItemPosition.right)
+    const itemsOnLeft = this.items.filter(item => item.position !== FdsNavigationItemPosition.right)
     return html`<div class="navigation navigation--${this.variant} ui-label-text">
       ${this.variant === FdsNavigationVariant.primary
         ? html`<div class="navigation__header">

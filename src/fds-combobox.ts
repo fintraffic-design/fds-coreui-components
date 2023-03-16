@@ -3,8 +3,8 @@ import {
   FdsColorDanger200,
   FdsColorInteractive100,
   FdsColorInteractive300,
-  FdsColorNeutral100,
   FdsColorNeutral200,
+  FdsColorNeutral50,
   FdsColorText1000,
   FdsColorText300,
   FdsStyleElevation200,
@@ -265,7 +265,7 @@ export default class FdsCombobox extends LitElement {
 
       .input-container.disabled > input {
         cursor: default;
-        background-color: ${tokenVar(FdsColorNeutral100)};
+        background-color: ${tokenVar(FdsColorNeutral50)};
         color: ${tokenVar(FdsColorText300)};
       }
 

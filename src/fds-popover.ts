@@ -12,10 +12,10 @@ import {
 import { uiHelperTextClass } from './utils/css-utils'
 
 export enum FdsPopoverPosition {
-  ABOVE = 'above',
-  BELOW = 'below',
-  LEFT = 'left',
-  RIGHT = 'right',
+  above = 'above',
+  below = 'below',
+  left = 'left',
+  right = 'right',
 }
 /**
  * Popover component.
@@ -26,7 +26,7 @@ export enum FdsPopoverPosition {
  */
 @customElement('fds-popover')
 export default class FdsPopover extends LitElement {
-  @property() position: FdsPopoverPosition = FdsPopoverPosition.ABOVE
+  @property() position: FdsPopoverPosition = FdsPopoverPosition.above
   @property() openOnClick: boolean = false
   @property() backgroundColor: FdsColorToken = FdsColorBrandWhite
 
@@ -69,19 +69,19 @@ export default class FdsPopover extends LitElement {
   }
 
   private getContainerPositionStyle(): string {
-    if (this.position === FdsPopoverPosition.ABOVE) {
+    if (this.position === FdsPopoverPosition.above) {
       return `bottom: ${this._elementHeight}px;`
     }
-    if (this.position === FdsPopoverPosition.LEFT || this.position === FdsPopoverPosition.RIGHT) {
+    if (this.position === FdsPopoverPosition.left || this.position === FdsPopoverPosition.right) {
       return `bottom: ${this._elementHeight / 2}px;`
     }
     return ''
   }
 
   private getPopoverPositionStyle(): string {
-    return this.position === FdsPopoverPosition.LEFT
+    return this.position === FdsPopoverPosition.left
       ? `right: ${this._elementWidth}px;`
-      : this.position === FdsPopoverPosition.RIGHT
+      : this.position === FdsPopoverPosition.right
       ? `left: ${this._elementWidth}px;`
       : ''
   }

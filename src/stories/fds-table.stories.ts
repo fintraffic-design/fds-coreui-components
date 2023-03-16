@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/web-components'
+import { Meta, Story } from '@storybook/web-components'
 import { html, TemplateResult } from 'lit'
 import { FdsButtonVariant } from '../fds-button'
 import '../fds-table'
@@ -15,25 +15,6 @@ const items: Item[] = [
 
 const headers = ['Column 1', 'Column 2', 'Column 3']
 
-export default {
-  title: 'Table',
-  args: {
-    striped: true,
-  },
-} as Meta
-
-type Template = (args: { striped: boolean }) => TemplateResult
-
-export const Table: Template = ({ striped }) => {
-  return html`<fds-table
-    .striped=${striped}
-    .items=${items}
-    .renderHeader=${renderHeader}
-    .renderItem=${renderItem}
-  >
-  </fds-table>`
-}
-
 function renderHeader(): TemplateResult {
   return html`<tr>
     ${headers.map(header => html`<th>${header}</th>`)}
@@ -48,25 +29,89 @@ function renderItem(item: Item): TemplateResult {
   </tr> `
 }
 
-export const TableWithCustomStyles: Template = ({ striped }) => {
+export default {
+  title: 'Table',
+  parameters: {
+    componentSubtitle: 'Data table for displaying rows of data',
+    docs: {
+      description: {
+        component:
+          "`import '@fintraffic-design/coreui-components/src/fds-table'` <br><br>\
+          Selector: `<fds-table>`",
+      },
+      source: {
+        // Source code is written here because functions are not visible in "show code" feature in Storybook.
+        code:
+          '<fds-table .items=${items} .renderHeader=${renderHeader} .renderItem=${renderItem}>\n</fds-table>' +
+          `\n${renderHeader}\n${renderItem}`,
+        language: 'typescript',
+      },
+    },
+  },
+  args: {
+    striped: true,
+    items: items,
+    renderHeader: undefined,
+    renderItem: undefined,
+    slot: undefined,
+  },
+  argTypes: {
+    striped: {
+      description:
+        'Whether the table has a zebra-striped style for the table rows. <br><br>\
+        `boolean`',
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: `true` },
+      },
+    },
+    items: {
+      description:
+        'Data array for the table. <br><br>\
+      `object[]`',
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: '[]' },
+      },
+    },
+    renderHeader: {
+      description:
+        'Render function for the table header row. Use tr and th tags in the function to render headers for the table.<br><br>\
+        `TemplateResult`',
+      control: false,
+      table: {
+        category: 'Properties',
+      },
+    },
+    renderItem: {
+      description:
+        'Render function for a table row. The function must have an item as a parameter. Use tr and td tags in the function. <br><br>\
+      `TemplateResult`',
+      control: false,
+      table: {
+        category: 'Properties',
+      },
+    },
+    slot: {
+      description: 'No slots',
+      table: { category: 'Slots' },
+      name: '',
+      control: false,
+    },
+  },
+} as Meta
+
+const Template: Story = ({ striped }) => {
   return html`<fds-table
     .striped=${striped}
     .items=${items}
     .renderHeader=${renderHeader}
-    .renderItem=${renderItemCustom}
+    .renderItem=${renderItem}
   >
   </fds-table>`
 }
 
-function renderItemCustom(item: Item): TemplateResult {
-  return html`<tr style="border-bottom: 1px solid transparent;">
-    <td style="background: white;">${item.column1}</td>
-    <td>${item.column2}</td>
-    <td>${item.column3}</td>
-  </tr>`
-}
-
-export const TableWithCheckboxAndButton: Template = ({ striped }) => {
+const TemplateTableWithCustomStyles: Story = ({ striped }) => {
   return html`<fds-table
     .striped=${striped}
     .items=${items}
@@ -94,4 +139,22 @@ function renderItemWithCheckboxAndButton(item: Item): TemplateResult {
       <fds-button .variant=${FdsButtonVariant.tertiary} .icon=${'trash-2'}></fds-button>
     </td>
   </tr>`
+}
+
+export const Table: Story = Template.bind({})
+export const TableWithCustomStyles: Story = TemplateTableWithCustomStyles.bind({})
+
+TableWithCustomStyles.parameters = {
+  docs: {
+    description: {
+      story: 'An example of a table that has checkboxes and buttons and custom styles for the columns.',
+    },
+    source: {
+      // Source code is written here because functions are not visible in "show code" feature in Storybook.
+      code:
+        '<fds-table .items=${items} .renderHeader=${renderHeaderWithCheckboxAndButton} .renderItem=${renderItemWithCheckboxAndButton}>\n</fds-table>' +
+        `\n${renderHeaderWithCheckboxAndButton}\n${renderItemWithCheckboxAndButton}`,
+      language: 'typescript',
+    },
+  },
 }

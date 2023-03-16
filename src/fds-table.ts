@@ -35,7 +35,7 @@ export default class FdsTable extends LitElement {
         <thead>
           ${this.renderHeader()}
         </thead>
-        <tbody class="${this.striped ? 'table-rows--striped' : ''}">
+        <tbody class="${this.striped ? 'table-rows--striped' : 'table-rows--separator'}">
           ${this.items.map(item => this.renderItem(item))}
         </tbody>
       </table>
@@ -66,7 +66,7 @@ export default class FdsTable extends LitElement {
 
       tbody tr {
         height: 39px;
-        border-bottom: 1px solid ${tokenVar(FdsColorNeutral200)};
+        border-bottom: 1px solid transparent;
       }
 
       th,
@@ -76,8 +76,8 @@ export default class FdsTable extends LitElement {
         font-size: 16px;
       }
 
-      .table-rows--striped tr {
-        border-bottom: 1px solid transparent;
+      .table-rows--separator tr {
+        border-bottom: 1px solid ${tokenVar(FdsColorNeutral200)};
       }
 
       .table-rows--striped tr:nth-child(even) {

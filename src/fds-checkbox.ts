@@ -34,7 +34,7 @@ export default class FdsCheckbox extends LitElement {
         ?checked=${this.checked}
         @click=${this.handleSelect}
       />
-      <label for="checkbox" class="ui-label-text">${this.label}</label>
+      ${this.label && html`<label for="checkbox" class="ui-label-text">${this.label}</label>`}
     `
   }
 
@@ -62,7 +62,7 @@ export default class FdsCheckbox extends LitElement {
         appearance: none;
       }
 
-      label::slotted() {
+      label {
         padding: 0 16px;
         position: relative;
         right: 7px;

@@ -1,4 +1,5 @@
-import { html, TemplateResult } from 'lit'
+import { Story } from '@storybook/web-components'
+import { html } from 'lit'
 import '../fds-action-sheet'
 import '../fds-button'
 import '../fds-card'
@@ -8,14 +9,40 @@ import '../fds-icon'
 
 export default {
   title: 'Dialog',
+  parameters: {
+    componentSubtitle: 'Dialog component',
+    docs: {
+      description: {
+        component:
+          "`import '@fintraffic-design/coreui-components/src/fds-dialog'` <br><br>\
+          Selector: `<fds-dialog>`",
+      },
+    },
+  },
   args: {
     modal: false,
+    slot: undefined,
+  },
+  argTypes: {
+    modal: {
+      description:
+        'Whether the dialog opens as a modal. Modal does not allow interaction with background elements. <br><br>\
+        `boolean`',
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: 'false' },
+      },
+    },
+    slot: {
+      description: 'Default slot. Container for the dialog content.',
+      table: { category: 'Slots' },
+      name: '',
+      control: false,
+    },
   },
 }
 
-type Template = (args: { modal: boolean }) => TemplateResult
-
-export const Dialog: Template = ({ modal }) => {
+const Template: Story = ({ modal }) => {
   return html`
     <style>
       fds-action-sheet {
@@ -28,17 +55,21 @@ export const Dialog: Template = ({ modal }) => {
       }
     </style>
 
-    <fds-dialog .modal=${modal} style="width: 50%; min-width: 30rem; max-width: 40rem">
-      <fds-card elevation="${FdsCardElevation.NONE}">
-        <h4 slot="header-title">Modal title</h4>
-        <p>Modal message</p>
-        <fds-action-sheet slot="footer">
-          <fds-button slot="separated" variant="danger" label="Button"></fds-button>
-          <fds-button variant="tertiary" label="Button"></fds-button>
-          <fds-button variant="secondary" label="Button"></fds-button>
-          <fds-button label="Button"></fds-button>
-        </fds-action-sheet>
-      </fds-card>
-    </fds-dialog>
+    <div style="height: 260px;">
+      <fds-dialog .modal=${modal} style="width: 50%; min-width: 30rem; max-width: 40rem">
+        <fds-card .elevation="${FdsCardElevation.none}">
+          <h4 slot="header-title">Modal title</h4>
+          <p>Modal message</p>
+          <fds-action-sheet slot="footer">
+            <fds-button slot="separated" .variant=${'danger'} .label=${'Button'}></fds-button>
+            <fds-button .variant=${'tertiary'} .label=${'Button'}></fds-button>
+            <fds-button .variant=${'secondary'} .label=${'Button'}></fds-button>
+            <fds-button .label=${'Button'}></fds-button>
+          </fds-action-sheet>
+        </fds-card>
+      </fds-dialog>
+    </div>
   `
 }
+
+export const Dialog: Story = Template.bind({})

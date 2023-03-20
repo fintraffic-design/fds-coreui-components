@@ -1,9 +1,16 @@
-import { FdsStyleElevation100, FdsStyleElevation200 } from '@fintraffic-design/coreui-css'
+import {
+  FdsSize2,
+  FdsSize3,
+  FdsSize4,
+  FdsStyleElevation100,
+  FdsStyleElevation200,
+} from '@fintraffic-design/coreui-css'
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property } from 'lit/decorators.js'
 import './global-types'
 import { heading4SmallTextClass } from './utils/css-utils'
+import { tokenVar } from './utils/token-utils'
 
 export enum FdsCardElevation {
   none = 'none',
@@ -75,11 +82,11 @@ export default class FdsCard extends LitElement {
         justify-content: space-between;
         flex-direction: row;
         align-items: center;
-        padding: 27px 32px 13px;
+        padding: ${tokenVar(FdsSize3)} ${tokenVar(FdsSize4)} ${tokenVar(FdsSize2)};
       }
 
       .card__content {
-        padding: 16px 32px;
+        padding: ${tokenVar(FdsSize2)} ${tokenVar(FdsSize4)};
       }
     `,
   ]

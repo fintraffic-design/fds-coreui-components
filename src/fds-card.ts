@@ -1,4 +1,5 @@
 import {
+  FdsSize1,
   FdsSize2,
   FdsSize3,
   FdsSize4,
@@ -82,7 +83,7 @@ export default class FdsCard extends LitElement {
         justify-content: space-between;
         flex-direction: row;
         align-items: center;
-        padding: ${tokenVar(FdsSize3)} ${tokenVar(FdsSize4)} ${tokenVar(FdsSize2)};
+        padding: ${tokenVar(FdsSize3)} ${tokenVar(FdsSize4)} ${tokenVar(FdsSize1)};
       }
 
       .card__content {

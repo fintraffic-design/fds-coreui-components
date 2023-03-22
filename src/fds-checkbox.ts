@@ -1,7 +1,7 @@
 import {
-  FdsColorText300,
-  FdsColorInteractive200,
   FdsColorBrandBlack,
+  FdsColorInteractive200,
+  FdsColorText300,
   FdsRadiusCompact,
 } from '@fintraffic-design/coreui-css'
 import { css, html, LitElement } from 'lit'
@@ -26,28 +26,26 @@ export default class FdsCheckbox extends LitElement {
   @property() checked: boolean = false
 
   override render(): TemplateResult {
+    console.log('render checkbox', this.checked)
     return html`
       <input
         type="checkbox"
         id="checkbox"
-        ?disabled=${this.disabled}
-        ?checked=${this.checked}
-        @click=${this.handleSelect}
+        .disabled=${this.disabled}
+        .checked="${this.checked}"
+        @change=${this.handleSelect}
       />
       ${this.label && html`<label for="checkbox" class="ui-label-text">${this.label}</label>`}
     `
   }
 
   private handleSelect(event: Event): void {
-    event.preventDefault()
+    console.log(event)
     if (!this.disabled) {
-      const checkbox = event.target as FdsCheckbox
-      this.checked = checkbox.checked
-      this.dispatchEvent(
-        new CustomEvent<boolean>('select', {
-          detail: checkbox.checked,
-        })
-      )
+      this.checked = !this.checked
+      setTimeout(() => {
+        this.dispatchEvent(new CustomEvent<boolean>('select', { detail: this.checked }))
+      })
     }
   }
 

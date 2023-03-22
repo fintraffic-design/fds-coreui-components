@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/web-components'
 import { html } from 'lit'
 import '../fds-combobox'
-import { DropdownEvent } from '../fds-dropdown'
+import { FdsComboboxEvent } from '../fds-combobox'
 
 export default {
   title: 'Combobox',
@@ -110,7 +110,7 @@ const Template: Story = ({ options, value, disabled, error, placeholder, addNewI
         .error=${error}
         .placeholder=${placeholder}
         .addNewIndicator=${addNewIndicator}
-        @select="${(event: CustomEvent<DropdownEvent>): void => console.log('@select', event.detail)}"
+        @select="${(event: FdsComboboxEvent): void => console.log('@select', event.detail)}"
       ></fds-combobox>
     </div>
   `

@@ -22,7 +22,7 @@ declare global {
     'fds-action-sheet': FdsActionSheet
     'fds-alert': FdsAlert
     'fds-navigation': FdsNavigation
-    'fds-dropdown': FdsDropdown
+    'fds-dropdown': FdsDropdown<never>
     'fds-divider': FdsDivider
     'fds-checkbox': FdsCheckbox
     'fds-combobox': FdsCombobox

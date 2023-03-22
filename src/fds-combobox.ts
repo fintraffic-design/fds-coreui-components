@@ -18,6 +18,13 @@ import { tokenVar } from './utils/token-utils'
 import './global-types'
 import { uiLabelTextClass } from './utils/css-utils'
 
+export class FdsComboboxEvent extends CustomEvent<string> {
+  constructor(detail: string) {
+    // composed allows event to bubble through shadow dom - false for now, but could be re-evaluated later.
+    super('select', { detail, bubbles: true, cancelable: true, composed: false })
+  }
+}
+
 /**
  * Combobox component.
  *
@@ -40,14 +47,7 @@ export default class FdsCombobox extends LitElement {
     // Set attributes to host element
     this.addEventListener('blur', () => {
       this._open = false
-      this.dispatchEvent(
-        new CustomEvent('select', {
-          detail: this.value,
-          bubbles: true,
-          cancelable: true,
-          composed: false, // Allows event to bubble through shadow dom - false for now, but could be re-evaluated later.
-        })
-      )
+      this.dispatchEvent(new FdsComboboxEvent(this.value))
     })
   }
 

@@ -46,8 +46,8 @@
     "build": "npm run compile && npm run lint && npm run stylecheck",
     "stylecheck": "prettier --check src",
     "dev-bundle": "node dev-bundle.mjs",
-    "storybook": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
-    "storybook-w": "start-storybook -p 6006",
+    "storybook": "NODE_OPTIONS=--openssl-legacy-provider start-storybook --no-manager-cache -p 6006",
+    "storybook-w": "start-storybook --no-manager-cache -p 6006",
     "build-storybook": "NODE_OPTIONS=--openssl-legacy-provider build-storybook"
   },
   "keywords": [],

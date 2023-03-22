@@ -17,16 +17,17 @@ import './global-types'
 import { uiLabelTextClass } from './utils/css-utils'
 import { tokenVar } from './utils/token-utils'
 
-type Value<T = string | number> = T
-
-export interface DropdownOption {
+export interface FdsDropdownOption<T> {
   label: string
-  value: Value
+  value: T
   icon?: FdsIconType
 }
 
-export interface DropdownEvent<T = Value> extends CustomEvent {
-  detail: T
+export class FdsDropdownEvent<T> extends CustomEvent<FdsDropdownOption<T>> {
+  constructor(detail: FdsDropdownOption<T>) {
+    // composed allows event to bubble through shadow dom - false for now, but could be re-evaluated later.
+    super('select', { detail, bubbles: true, cancelable: true, composed: false })
+  }
 }
 
 /**
@@ -34,14 +35,14 @@ export interface DropdownEvent<T = Value> extends CustomEvent {
  *
  * @event select - Dispatches an custom event when option is selected from dropdown.
  *
- * @property {DropdownOption[]} options - List of options to be shown in the menu.
- * @property {DropdownOption} value - Set value for the component.
+ * @property {FdsDropdownOption[]} options - List of options to be shown in the menu.
+ * @property {FdsDropdownOption} value - Set value for the component.
  * @property {boolean} disabled - Disable dropdown.
  * @property {boolean} error - Display error indicator on dropdown.
  * @property {string} placeholder - Placeholder text while no option is selected.
  */
 @customElement('fds-dropdown')
-export default class FdsDropdown extends LitElement {
+export default class FdsDropdown<T> extends LitElement {
   constructor() {
     super()
     // Set attributes to host element
@@ -49,11 +50,11 @@ export default class FdsDropdown extends LitElement {
     this.tabIndex = 0
   }
 
-  @property() options: DropdownOption[] = []
+  @property() options: FdsDropdownOption<T>[] = []
   @property() disabled: boolean = false
   @property() error: boolean = false
   @property() placeholder?: string
-  @property() value?: DropdownOption
+  @property() value?: FdsDropdownOption<T>
 
   @state() private _open: boolean = false
 
@@ -92,27 +93,19 @@ export default class FdsDropdown extends LitElement {
     `
   }
 
-  private handleKeypress(event: KeyboardEvent, selectedOption: DropdownOption): void {
+  private handleKeypress(event: KeyboardEvent, selectedOption: FdsDropdownOption<T>): void {
     if (event.key === 'Enter') {
       this.handleSelect(selectedOption)
     }
   }
 
-  private handleSelect(selectedOption: DropdownOption): void {
+  private handleSelect(selectedOption: FdsDropdownOption<T>): void {
     this._open = false
     this.value = selectedOption
-
-    this.dispatchEvent(
-      new CustomEvent('select', {
-        detail: selectedOption.value,
-        bubbles: true,
-        cancelable: true,
-        composed: false, // Allows event to bubble through shadow dom - false for now, but could be re-evaluated later.
-      }) as DropdownEvent
-    )
+    this.dispatchEvent(new FdsDropdownEvent(selectedOption))
   }
 
-  private getLabel(option?: DropdownOption): TemplateResult | null {
+  private getLabel(option?: FdsDropdownOption<T>): TemplateResult | null {
     if (!option) {
       return null
     }
@@ -133,7 +126,7 @@ export default class FdsDropdown extends LitElement {
     return ''
   }
 
-  private getOptionCssClass(option: DropdownOption): string {
+  private getOptionCssClass(option: FdsDropdownOption<T>): string {
     return this.value === option ? 'selected' : ''
   }
 

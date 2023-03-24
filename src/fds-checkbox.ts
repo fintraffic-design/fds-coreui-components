@@ -26,7 +26,6 @@ export default class FdsCheckbox extends LitElement {
   @property() checked: boolean = false
 
   override render(): TemplateResult {
-    console.log('render checkbox', this.checked)
     return html`
       <input
         type="checkbox"

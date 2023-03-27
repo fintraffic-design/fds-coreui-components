@@ -1,8 +1,7 @@
-import { css, html, LitElement } from 'lit'
-import { customElement, property, state, queryAssignedElements } from 'lit/decorators.js'
+import { css, html, LitElement, PropertyValues } from 'lit'
+import { customElement, property, state } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
 import './fds-card'
-import { tokenVar } from './utils/token-utils'
 import {
   FdsColorBrandWhite,
   FdsColorToken,
@@ -10,6 +9,8 @@ import {
   FdsStyleElevation200,
 } from '@fintraffic-design/coreui-css'
 import { uiHelperTextClass } from './utils/css-utils'
+import { bottom, createPopper, Instance, left, Placement, right, top } from '@popperjs/core'
+import { tokenVar } from './utils/token-utils'
 
 export enum FdsPopoverPosition {
   above = 'above',
@@ -30,167 +31,145 @@ export default class FdsPopover extends LitElement {
   @property() openOnClick: boolean = false
   @property() backgroundColor: FdsColorToken = FdsColorBrandWhite
 
-  @state() private _popoverOpen: boolean = false
+  @state() private _open: boolean = false
+  private _popper?: Instance
 
-  @state() private _elementHeight: number = 0
-  @state() private _elementWidth: number = 0
-
-  @queryAssignedElements({ slot: 'popover' })
-  _assignedElements!: Array<HTMLElement>
-
-  protected override willUpdate(): void {
-    const wrapper = this.shadowRoot?.querySelector('.wrapper')
-    if (wrapper) {
-      this._elementHeight = wrapper.clientHeight
-      this._elementWidth = wrapper.clientWidth
+  protected override updated(changed: PropertyValues<FdsPopover>): void {
+    super.updated(changed)
+    const child = this.shadowRoot?.children?.item(0) as HTMLElement
+    if (!this._popper) {
+      this._popper = createPopper(this.parentElement as HTMLElement, child, {
+        modifiers: [
+          {
+            name: 'offset',
+            options: {
+              offset: [0, 8],
+            },
+            enabled: true,
+          },
+        ],
+        strategy: 'fixed',
+        placement: fdsPlacement(this.position),
+      })
+      child.style.backgroundColor = tokenVar(this.backgroundColor).toString()
+      this.addListeners()
+    } else {
+      if (changed.get('position')) {
+        this._popper?.setOptions({
+          placement: fdsPlacement(this.position),
+        })
+      }
+      if (changed.get('openOnClick') != null) {
+        this.removeListeners()
+        this.addListeners()
+      }
+      if (changed.get('backgroundColor')) {
+        child.style.backgroundColor = tokenVar(this.backgroundColor).toString()
+      }
     }
+    this._popper.update()
+    console.log('popover updated', child)
   }
 
-  override render(): TemplateResult {
-    return html`
-      <div class="wrapper">
-        <slot
-          class="content ${this.openOnClick ? 'clickable' : ''}"
-          @click=${this.handleClick}
-          @mouseenter=${this.onMouseEnter}
-          @mouseleave=${this.onMouseLeave}
-        ></slot>
-        <div class="container ui-helper-text" style=${this.getContainerPositionStyle()}>
-          <div
-            class="popover popover--${this.position} ${this._popoverOpen ? 'popover--open' : ''}"
-            style="${this.getPopoverPositionStyle()} background-color: ${tokenVar(this.backgroundColor)};"
-          >
-            <slot name="popover"></slot>
-            <div class="arrow" style="border-color: ${tokenVar(this.backgroundColor)};"></div>
-          </div>
-        </div>
-      </div>
-    `
+  override disconnectedCallback(): void {
+    super.disconnectedCallback()
+    this._popper?.destroy()
   }
 
-  private getContainerPositionStyle(): string {
-    if (this.position === FdsPopoverPosition.above) {
-      return `bottom: ${this._elementHeight}px;`
-    }
-    if (this.position === FdsPopoverPosition.left || this.position === FdsPopoverPosition.right) {
-      return `bottom: ${this._elementHeight / 2}px;`
-    }
-    return ''
-  }
-
-  private getPopoverPositionStyle(): string {
-    return this.position === FdsPopoverPosition.left
-      ? `right: ${this._elementWidth}px;`
-      : this.position === FdsPopoverPosition.right
-      ? `left: ${this._elementWidth}px;`
-      : ''
-  }
-
-  private onMouseEnter(): void {
-    if (!this.openOnClick) {
-      this._popoverOpen = this._assignedElements.length > 0
-    }
-  }
-
-  private onMouseLeave(): void {
-    if (!this.openOnClick) {
-      this._popoverOpen = false
-    }
-  }
-
-  private handleClick(): void {
+  private addListeners(): void {
     if (this.openOnClick) {
-      this._popoverOpen = !this._popoverOpen && this._assignedElements.length > 0
+      this.parentElement?.addEventListener('click', this._clickListener)
+    } else {
+      this.parentElement?.addEventListener('mouseenter', this._mouseEnterListener)
+      this.parentElement?.addEventListener('mouseleave', this._mouseLeaveListener)
     }
+  }
+
+  private removeListeners(): void {
+    this.parentElement?.removeEventListener('click', this._clickListener)
+    this.parentElement?.removeEventListener('mouseenter', this._mouseEnterListener)
+    this.parentElement?.removeEventListener('mouseleave', this._mouseLeaveListener)
+  }
+
+  private _clickListener: (event: MouseEvent) => void = () => {
+    this._open = !this._open
+  }
+
+  private _mouseEnterListener: (event: MouseEvent) => void = () => {
+    this._open = true
+  }
+
+  private _mouseLeaveListener: (event: MouseEvent) => void = () => {
+    this._open = false
+  }
+
+  override render(): TemplateResult | null {
+    return html`<div class="ui-helper-text popover${this._open ? ' popover-open' : ''}">
+      <slot></slot>
+      <div class="arrow" data-popper-arrow></div>
+    </div>`
   }
 
   static override styles = [
     uiHelperTextClass,
     css`
-      .container {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .wrapper {
-        height: 100%;
-        width: 100%;
-      }
-
       .popover {
-        visibility: hidden;
-        position: absolute;
+        display: none;
         border-radius: ${tokenVar(FdsRadiusLarge)};
         box-shadow: ${tokenVar(FdsStyleElevation200)};
         background-color: ${tokenVar(FdsColorBrandWhite)};
-        z-index: 1;
       }
 
-      .popover--open {
-        visibility: visible;
+      .popover-open {
+        display: inline !important;
       }
 
-      .popover--above {
-        bottom: 10px;
-      }
-
-      .popover--below {
-        top: 10px;
-      }
-
-      .popover--left {
-        margin-right: 10px;
-      }
-
-      .popover--right {
-        margin-left: 10px;
-      }
-
-      /* Popover arrow styles */
-      .arrow {
+      .arrow,
+      .arrow::before {
         position: absolute;
-        border-width: 5px;
-        border-style: solid;
-        border-color: ${tokenVar(FdsColorBrandWhite)};
+        width: 8px;
+        height: 8px;
+        background: inherit;
       }
 
-      .popover--above .arrow {
-        top: 100%;
-        left: 50%;
-        margin-left: -5px;
-        border-bottom-color: transparent !important;
-        border-left-color: transparent !important;
-        border-right-color: transparent !important;
+      .arrow {
+        visibility: hidden;
       }
 
-      .popover--below .arrow {
-        bottom: 100%;
-        left: 50%;
-        margin-left: -5px;
-        border-top-color: transparent !important;
-        border-left-color: transparent !important;
-        border-right-color: transparent !important;
+      .arrow::before {
+        visibility: visible;
+        content: '';
+        transform: rotate(45deg);
       }
 
-      .popover--left .arrow {
-        left: 100%;
-        top: 50%;
-        margin-top: -5px;
-        border-top-color: transparent !important;
-        border-bottom-color: transparent !important;
-        border-right-color: transparent !important;
+      .popover[data-popper-placement^='top'] > .arrow {
+        bottom: -4px;
       }
 
-      .popover--right .arrow {
-        right: 100%;
-        top: 50%;
-        margin-top: -5px;
-        border-top-color: transparent !important;
-        border-bottom-color: transparent !important;
-        border-left-color: transparent !important;
+      .popover[data-popper-placement^='bottom'] > .arrow {
+        top: -4px;
+      }
+
+      .popover[data-popper-placement^='left'] > .arrow {
+        right: -4px;
+      }
+
+      .popover[data-popper-placement^='right'] > .arrow {
+        left: -4px;
       }
     `,
   ]
+}
+
+function fdsPlacement(position: FdsPopoverPosition): Placement {
+  switch (position) {
+    case FdsPopoverPosition.above:
+      return top
+    case FdsPopoverPosition.below:
+      return bottom
+    case FdsPopoverPosition.left:
+      return left
+    default:
+      return right
+  }
 }

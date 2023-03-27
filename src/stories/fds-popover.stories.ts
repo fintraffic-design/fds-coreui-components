@@ -2,6 +2,7 @@ import { html } from 'lit'
 
 import '../fds-popover'
 import '../fds-button'
+import '../fds-dialog'
 import { FdsPopoverPosition } from '../fds-popover'
 import { FdsColorBrandWhite, FdsColorDanger100, FdsColorNeutral300 } from '@fintraffic-design/coreui-css'
 import { Story } from '@storybook/web-components'
@@ -88,20 +89,13 @@ const Template: Story = ({ position, openOnClick, popoverText, backgroundColor }
   const text = openOnClick ? 'Click me' : 'Hover over me'
   return html`
     <div style="padding: 8px; width: fit-content; margin: 100px auto; background-color: lightgray;">
+      ${text}
       <fds-popover
         .position=${position}
-        .openOnClick=${openOnClick}
+        .openOnClick="${openOnClick}"
         .backgroundColor="${colorOptions[backgroundColor]}"
+        ><div style="padding: 8px;">${popoverText}</div></fds-popover
       >
-        <div>${text}</div>
-        <div
-          slot="popover"
-          style="display: flex; align-items: center; width: max-content; max-width: 300px; padding: 16px;"
-        >
-          <fds-icon .icon="${'alert-circle'}"></fds-icon>
-          <span style="padding-left: 8px;">${popoverText}</span>
-        </div>
-      </fds-popover>
     </div>
   `
 }
@@ -110,15 +104,13 @@ const TemplateIconPopover: Story = ({ position, openOnClick, popoverText, backgr
   return html`
     <div style="margin: 100px auto; width: max-content;">
       <div>
+        <fds-icon .icon="${'alert-circle'}"></fds-icon>
         <fds-popover
           .position=${position}
           .openOnClick=${openOnClick}
           .backgroundColor="${colorOptions[backgroundColor]}"
         >
-          <div><fds-icon .icon="${'alert-circle'}"></fds-icon></div>
-          <div slot="popover" style="width: max-content; padding: 8px; max-width: 200px; text-align: center;">
-            ${popoverText}
-          </div>
+          <div style="padding: 8px;">${popoverText}</div>
         </fds-popover>
       </div>
     </div>
@@ -128,32 +120,47 @@ const TemplateIconPopover: Story = ({ position, openOnClick, popoverText, backgr
 const TemplatePopoverWithHeader: Story = ({ position, openOnClick, popoverText, backgroundColor }) => {
   return html`
     <div style="width: fit-content; margin: 150px auto;">
-      <fds-popover
-        .position=${position}
-        .openOnClick=${openOnClick}
-        .backgroundColor="${colorOptions[backgroundColor]}"
-      >
-        <div>
           <fds-button .label=${'Open/close popover'}></fds-button>
-        </div>
-        <div slot="popover" style="width: 300px; height: 150px; display: flex; flex-direction: column;">
-          <div
-            style="background: black; color: white; border-top-left-radius: 8px; border-top-right-radius: 8px;"
-          >
-            <div style="padding: 16px;">Title</div>
-          </div>
-          <div style="display: flex; justify-content: center; height: 100%; align-items: center;">
-            ${popoverText}
-          </div>
-        </div>
+          <fds-popover .position=${position}
+                       .openOnClick=${openOnClick}
+                       .backgroundColor="${colorOptions[backgroundColor]}">
+              <div">
+                  <div
+                          style="background: black; color: white; border-top-left-radius: 8px; border-top-right-radius: 8px;"
+                  >
+                      <div style="padding: 8px;">Title</div>
+                  </div>
+                  <div style="padding: 8px">
+                      ${popoverText}
+                  </div>
+              </div>
+          </fds-popover>
       </fds-popover>
     </div>
+  `
+}
+
+const TemplatePopoverInDialog: Story = ({ position, openOnClick, popoverText, backgroundColor }) => {
+  return html`
+    <fds-dialog style="top: 100px; padding: 20px">
+      <div>
+        <fds-button .label=${'Open/close popover'}> </fds-button>
+        <fds-popover
+          .position=${position}
+          .openOnClick=${openOnClick}
+          .backgroundColor="${colorOptions[backgroundColor]}"
+          ><div style="padding: 8px">${popoverText}</div></fds-popover
+        >
+      </div>
+    </fds-dialog>
   `
 }
 
 export const Popover: Story = Template.bind({})
 export const IconPopover: Story = TemplateIconPopover.bind({})
 export const PopoverWithHeader: Story = TemplatePopoverWithHeader.bind({})
+
+export const PopoverInDialog: Story = TemplatePopoverInDialog.bind({})
 
 IconPopover.parameters = {
   docs: {

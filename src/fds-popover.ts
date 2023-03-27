@@ -68,7 +68,6 @@ export default class FdsPopover extends LitElement {
       }
     }
     this._popper.update()
-    console.log('popover updated', child)
   }
 
   override disconnectedCallback(): void {

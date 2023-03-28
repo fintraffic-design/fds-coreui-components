@@ -17,13 +17,15 @@ import './global-types'
 import { uiLabelTextClass } from './utils/css-utils'
 import { tokenVar } from './utils/token-utils'
 
-export interface FdsDropdownOption<T> {
+type Value = string
+
+export interface FdsDropdownOption<T = Value> {
   label: string
   value: T
   icon?: FdsIconType
 }
 
-export class FdsDropdownEvent<T> extends CustomEvent<FdsDropdownOption<T>> {
+export class FdsDropdownEvent<T = Value> extends CustomEvent<FdsDropdownOption<T>> {
   constructor(detail: FdsDropdownOption<T>) {
     // composed allows event to bubble through shadow dom - false for now, but could be re-evaluated later.
     super('select', { detail, bubbles: true, cancelable: true, composed: false })
@@ -42,7 +44,7 @@ export class FdsDropdownEvent<T> extends CustomEvent<FdsDropdownOption<T>> {
  * @property {string} placeholder - Placeholder text while no option is selected.
  */
 @customElement('fds-dropdown')
-export default class FdsDropdown<T> extends LitElement {
+export default class FdsDropdown<T = Value> extends LitElement {
   constructor() {
     super()
     // Set attributes to host element

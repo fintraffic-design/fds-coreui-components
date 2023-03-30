@@ -38,8 +38,7 @@ export default class FdsCheckbox extends LitElement {
     `
   }
 
-  private handleSelect(event: Event): void {
-    console.log(event)
+  private handleSelect(): void {
     if (!this.disabled) {
       this.checked = !this.checked
       setTimeout(() => {

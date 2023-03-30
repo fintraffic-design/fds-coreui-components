@@ -47,6 +47,10 @@ export default class FdsAlert extends LitElement {
   static override styles = [
     uiHelperTextClass,
     css`
+      :host {
+        display: block;
+      }
+
       .alert {
         padding: 8px;
         border-bottom: 2px solid;

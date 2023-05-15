@@ -17,7 +17,7 @@ import { uiLabelTextClass, uiHelperTextClass } from './utils/css-utils'
  * Input component.
  *
  * @property {string} label - Label for the input.
- * @property {string} value - Input value the user has entered.
+ * @property {string} value - Set value for the input.
  * @property {string} placeholder - Placeholder for the input when there is no value.
  * @property {string} message - Helper/error message. Additional information or instructions about the purpose of the input field or the expected user input.
  * @property {boolean} error - Display error state.
@@ -28,8 +28,8 @@ import { uiLabelTextClass, uiHelperTextClass } from './utils/css-utils'
  */
 @customElement('fds-input')
 export default class FdsInput extends LitElement {
+  @property() value: string = ''
   @property() label?: string
-  @property() value?: string
   @property() placeholder?: string
   @property() message?: string
   @property() error: boolean = false
@@ -44,7 +44,7 @@ export default class FdsInput extends LitElement {
           id="input"
           placeholder=${ifDefined(this.placeholder)}
           class="ui-label-text ${this.error ? 'input--error' : ''}"
-          value=${ifDefined(this.value)}
+          .value=${this.value}
           ?disabled=${this.disabled}
           @input=${this.handleChange}
         />

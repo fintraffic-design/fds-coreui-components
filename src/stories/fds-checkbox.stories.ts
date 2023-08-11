@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/web-components'
+import { Meta, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
 import '../fds-checkbox'
 
@@ -66,7 +66,7 @@ export default {
   },
 } as Meta
 
-const Template: Story = ({ label, disabled, checked }) => {
+const Template: StoryFn = ({ label, disabled, checked }) => {
   return html`
     <fds-checkbox
       .label=${label}
@@ -77,4 +77,6 @@ const Template: Story = ({ label, disabled, checked }) => {
   `
 }
 
-export const Checkbox = Template.bind({})
+export const Checkbox = {
+  render: Template,
+}

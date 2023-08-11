@@ -1,4 +1,4 @@
-import { Story } from '@storybook/web-components'
+import { StoryObj, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
 import '../fds-card'
 import { FdsCardElevation } from '../fds-card'
@@ -77,7 +77,7 @@ export default {
   },
 }
 
-const Template: Story = ({ elevation, slotHeaderTitle, slotCorner, slotDefault, slotFooter }) => {
+const Template: StoryFn = ({ elevation, slotHeaderTitle, slotCorner, slotDefault, slotFooter }) => {
   const footerEl = slotFooter
     ? html`
         <footer slot="footer">
@@ -138,7 +138,7 @@ const Template: Story = ({ elevation, slotHeaderTitle, slotCorner, slotDefault, 
   `
 }
 
-const TemplateCardWithCustomHeader: Story = ({ elevation, slotDefault, slotFooter }) => {
+const TemplateCardWithCustomHeader: StoryFn = ({ elevation, slotDefault, slotFooter }) => {
   const footerEl = slotFooter
     ? html`
         <footer slot="footer">
@@ -197,14 +197,18 @@ const TemplateCardWithCustomHeader: Story = ({ elevation, slotDefault, slotFoote
   `
 }
 
-export const Card: Story = Template.bind({})
+export const Card: StoryObj = {
+  render: Template,
+}
 
-export const CardWithCustomHeader: Story = TemplateCardWithCustomHeader.bind({})
+export const CardWithCustomHeader: StoryObj = {
+  render: TemplateCardWithCustomHeader,
 
-CardWithCustomHeader.parameters = {
-  docs: {
-    description: {
-      story: 'An example of a card with customized header.',
+  parameters: {
+    docs: {
+      description: {
+        story: 'An example of a card with customized header.',
+      },
     },
   },
 }

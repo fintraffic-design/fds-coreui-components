@@ -5,7 +5,7 @@ import '../fds-button'
 import '../fds-dialog'
 import { FdsPopoverPosition } from '../fds-popover'
 import { FdsColorBrandWhite, FdsColorDanger100, FdsColorNeutral300 } from '@fintraffic-design/coreui-css'
-import { Story } from '@storybook/web-components'
+import { StoryObj, StoryFn } from '@storybook/web-components'
 
 const colorOptions = {
   [FdsColorBrandWhite.name]: FdsColorBrandWhite,
@@ -85,7 +85,7 @@ export default {
   },
 }
 
-const Template: Story = ({ position, openOnClick, popoverText, backgroundColor }) => {
+const Template: StoryFn = ({ position, openOnClick, popoverText, backgroundColor }) => {
   const text = openOnClick ? 'Click me' : 'Hover over me'
   return html`
     <div style="padding: 8px; width: fit-content; margin: 100px auto; background-color: lightgray;">
@@ -100,7 +100,7 @@ const Template: Story = ({ position, openOnClick, popoverText, backgroundColor }
   `
 }
 
-const TemplateIconPopover: Story = ({ position, openOnClick, popoverText, backgroundColor }) => {
+const TemplateIconPopover: StoryFn = ({ position, openOnClick, popoverText, backgroundColor }) => {
   return html`
     <div style="margin: 100px auto; width: max-content;">
       <div>
@@ -117,7 +117,7 @@ const TemplateIconPopover: Story = ({ position, openOnClick, popoverText, backgr
   `
 }
 
-const TemplatePopoverWithHeader: Story = ({ position, openOnClick, popoverText, backgroundColor }) => {
+const TemplatePopoverWithHeader: StoryFn = ({ position, openOnClick, popoverText, backgroundColor }) => {
   return html`
     <div style="width: fit-content; margin: 150px auto;">
           <fds-button .label=${'Open/close popover'}></fds-button>
@@ -140,7 +140,7 @@ const TemplatePopoverWithHeader: Story = ({ position, openOnClick, popoverText, 
   `
 }
 
-const TemplatePopoverInDialog: Story = ({ position, openOnClick, popoverText, backgroundColor }) => {
+const TemplatePopoverInDialog: StoryFn = ({ position, openOnClick, popoverText, backgroundColor }) => {
   return html`
     <fds-dialog style="top: 100px; padding: 20px">
       <div>
@@ -156,23 +156,34 @@ const TemplatePopoverInDialog: Story = ({ position, openOnClick, popoverText, ba
   `
 }
 
-export const Popover: Story = Template.bind({})
-export const IconPopover: Story = TemplateIconPopover.bind({})
-export const PopoverWithHeader: Story = TemplatePopoverWithHeader.bind({})
+export const Popover: StoryObj = {
+  render: Template,
+}
 
-export const PopoverInDialog: Story = TemplatePopoverInDialog.bind({})
+export const IconPopover: StoryObj = {
+  render: TemplateIconPopover,
 
-IconPopover.parameters = {
-  docs: {
-    description: {
-      story: 'An example of a popover connected to an icon.',
+  parameters: {
+    docs: {
+      description: {
+        story: 'An example of a popover connected to an icon.',
+      },
     },
   },
 }
-PopoverWithHeader.parameters = {
-  docs: {
-    description: {
-      story: 'An example of a large popover with a header.',
+
+export const PopoverWithHeader: StoryObj = {
+  render: TemplatePopoverWithHeader,
+
+  parameters: {
+    docs: {
+      description: {
+        story: 'An example of a large popover with a header.',
+      },
     },
   },
+}
+
+export const PopoverInDialog: StoryObj = {
+  render: TemplatePopoverInDialog,
 }

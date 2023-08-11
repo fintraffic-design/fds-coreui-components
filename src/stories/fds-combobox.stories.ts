@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/web-components'
+import { StoryObj, Meta, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
 import '../fds-combobox'
 import { FdsComboboxEvent } from '../fds-combobox'
@@ -100,7 +100,7 @@ export default {
   },
 } as Meta
 
-const Template: Story = ({ options, value, disabled, error, placeholder, addNewIndicator }) => {
+const Template: StoryFn = ({ options, value, disabled, error, placeholder, addNewIndicator }) => {
   return html`
     <div style="width:284px; height: 260px;">
       <fds-combobox
@@ -116,37 +116,44 @@ const Template: Story = ({ options, value, disabled, error, placeholder, addNewI
   `
 }
 
-export const Combobox: Story = Template.bind({})
+export const Combobox: StoryObj = {
+  render: Template,
+}
 
-export const LongText: Story = Template.bind({})
+export const LongText: StoryObj = {
+  render: Template,
 
-LongText.parameters = {
-  docs: {
-    description: {
-      story: 'An example of a combobox with long values in options.',
+  parameters: {
+    docs: {
+      description: {
+        story: 'An example of a combobox with long values in options.',
+      },
     },
   },
-}
-LongText.args = {
-  options: [
-    'Foooooooooooooooooooooooooooooooooooooooooooooo',
-    'Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar',
-    'Foo Bar Foo Bar Foo Bar Foo Bar Foo Bar Foo Bar Foo Bar Foo Bar',
-  ],
-}
 
-export const BigList: Story = Template.bind({})
-
-BigList.parameters = {
-  docs: {
-    description: {
-      story: 'An example of a combobox with a long list of options.',
-    },
+  args: {
+    options: [
+      'Foooooooooooooooooooooooooooooooooooooooooooooo',
+      'Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar',
+      'Foo Bar Foo Bar Foo Bar Foo Bar Foo Bar Foo Bar Foo Bar Foo Bar',
+    ],
   },
 }
 
-BigList.args = {
-  options: getNames(),
+export const BigList: StoryObj = {
+  render: Template,
+
+  parameters: {
+    docs: {
+      description: {
+        story: 'An example of a combobox with a long list of options.',
+      },
+    },
+  },
+
+  args: {
+    options: getNames(),
+  },
 }
 
 function getNames(): string[] {

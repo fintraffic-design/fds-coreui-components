@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/web-components'
+import { StoryObj, Meta, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
 import { FdsAlertVariant } from '../fds-alert'
 import '../fds-icon'
@@ -56,11 +56,11 @@ export default {
   },
 } as Meta
 
-const Template: Story = ({ variant, icon }) => {
+const Template: StoryFn = ({ variant, icon }) => {
   return html`<fds-alert .variant=${variant} .icon=${icon}>Alert text</fds-alert>`
 }
 
-const TemplateMultiLine: Story = ({ variant, icon }) => {
+const TemplateMultiLine: StoryFn = ({ variant, icon }) => {
   return html`
     <fds-alert .variant=${variant} .icon=${icon}>
       <div>Alert text</div>
@@ -70,13 +70,18 @@ const TemplateMultiLine: Story = ({ variant, icon }) => {
   `
 }
 
-export const Alert: Story = Template.bind({})
-export const MultiLineContent: Story = TemplateMultiLine.bind({})
+export const Alert: StoryObj = {
+  render: Template,
+}
 
-MultiLineContent.parameters = {
-  docs: {
-    description: {
-      story: 'An example of multiple elements in default slot',
+export const MultiLineContent: StoryObj = {
+  render: TemplateMultiLine,
+
+  parameters: {
+    docs: {
+      description: {
+        story: 'An example of multiple elements in default slot',
+      },
     },
   },
 }

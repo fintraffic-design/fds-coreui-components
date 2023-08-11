@@ -1,4 +1,4 @@
-import { Story } from '@storybook/web-components'
+import { StoryObj, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
 import '../fds-input'
 
@@ -90,7 +90,7 @@ export default {
   },
 }
 
-const Template: Story = ({ label, value, message, placeholder, error, disabled }) => {
+const Template: StoryFn = ({ label, value, message, placeholder, error, disabled }) => {
   return html`<fds-input
     .label=${label}
     .message=${message}
@@ -102,4 +102,6 @@ const Template: Story = ({ label, value, message, placeholder, error, disabled }
   ></fds-input>`
 }
 
-export const Input: Story = Template.bind({})
+export const Input: StoryObj = {
+  render: Template,
+}

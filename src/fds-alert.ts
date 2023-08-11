@@ -28,12 +28,15 @@ export enum FdsAlertVariant {
 /**
  * Alert component.
  *
- * @property {FdsAlertVariant} variant
+ * @property {FdsAlertVariant} variant - Variant of the alert.
+ * @property {FdsIconType} icon - Icon to be displayed in the alert.
+ * @property {boolean} dismissible - If true, alert can be dismissed by clicking the close button.
  */
 @customElement('fds-alert')
 export default class FdsAlert extends LitElement {
   @property() variant: FdsAlertVariant = FdsAlertVariant.error
   @property() icon?: FdsIconType
+  @property() dismissible: boolean = false
 
   override render(): TemplateResult {
     return html`
@@ -52,8 +55,8 @@ export default class FdsAlert extends LitElement {
       }
 
       .alert {
-        padding: 8px;
-        border-bottom: 2px solid;
+        padding: ${tokenVar(FdsSize1)};
+        border: 1px solid;
         display: flex;
         align-items: center;
       }

@@ -1,4 +1,4 @@
-import { Story } from '@storybook/web-components'
+import { StoryObj, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
 import '../fds-navigation'
 import { FdsNavigationItem, FdsNavigationVariant, FdsNavigationItemPosition } from '../fds-navigation'
@@ -78,7 +78,7 @@ export default {
   },
 }
 
-const Template: Story = ({ variant, slot }) => {
+const Template: StoryFn = ({ variant, slot }) => {
   const headerEl = slot ? html`<div style="display: flex; align-items: center;">Header</div>` : null
   return html`<div style="height: 300px;">
     <fds-navigation
@@ -92,4 +92,6 @@ const Template: Story = ({ variant, slot }) => {
   </div>`
 }
 
-export const Navigation: Story = Template.bind({})
+export const Navigation: StoryObj = {
+  render: Template,
+}

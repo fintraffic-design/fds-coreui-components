@@ -1,8 +1,7 @@
 import { StoryObj, Meta, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
 import { FdsAlertVariant } from '../fds-alert'
-import '../fds-icon'
-import '../fds-alert'
+import { FdsIcons } from '../fds-icon'
 
 export default {
   title: 'Alert',
@@ -20,14 +19,13 @@ export default {
   args: {
     variant: FdsAlertVariant.error,
     icon: 'alert-triangle',
+    dismissible: true,
     slot: undefined,
   },
   argTypes: {
     variant: {
       options: Object.values(FdsAlertVariant),
-      control: {
-        type: 'select',
-      },
+      control: { type: 'select' },
       description:
         'Type or color theme for the message. <br><br>\
         `FdsAlertVariant`',
@@ -37,7 +35,7 @@ export default {
       },
     },
     icon: {
-      options: ['alert-triangle', 'check-circle', 'alert-circle', undefined],
+      options: ['', ...Object.keys(FdsIcons)],
       control: { type: 'select' },
       description:
         'Icon displayed on the left side of the message. Accepts icon name as value. <br><br>\
@@ -47,41 +45,41 @@ export default {
         defaultValue: { summary: 'undefined' },
       },
     },
+    dismissible: {
+      control: { type: 'boolean' },
+      description: 'If true, alert can be dismissed by clicking the close button.',
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: false },
+      },
+    },
     slot: {
       description: 'Default slot. Container for the content.',
       table: { category: 'Slots' },
       name: '',
       control: false,
     },
+    dismiss: {
+      description:
+        'Event that is dispatched when the alert is dismissed. <br><br> \
+      `CustomEvent`',
+      table: { category: 'Events' },
+      name: '@dismiss',
+      control: false,
+    },
   },
 } as Meta
 
-const Template: StoryFn = ({ variant, icon }) => {
-  return html`<fds-alert .variant=${variant} .icon=${icon}>Alert text</fds-alert>`
-}
-
-const TemplateMultiLine: StoryFn = ({ variant, icon }) => {
-  return html`
-    <fds-alert .variant=${variant} .icon=${icon}>
-      <div>Alert text</div>
-      <div>Alert text 2</div>
-      <div>Alert text 3</div>
-    </fds-alert>
-  `
+const Template: StoryFn = ({ variant, icon, dismissible }) => {
+  return html`<fds-alert
+    .variant=${variant}
+    .icon=${icon}
+    .dismissible=${dismissible}
+    @dismissed="${(): void => console.log('dismissed')}"
+    >Alert text</fds-alert
+  >`
 }
 
 export const Alert: StoryObj = {
   render: Template,
-}
-
-export const MultiLineContent: StoryObj = {
-  render: TemplateMultiLine,
-
-  parameters: {
-    docs: {
-      description: {
-        story: 'An example of multiple elements in default slot',
-      },
-    },
-  },
 }

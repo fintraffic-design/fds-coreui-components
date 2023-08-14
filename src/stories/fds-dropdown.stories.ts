@@ -1,6 +1,5 @@
 import { StoryObj, Meta, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
-import '../fds-dropdown'
 import { FdsDropdownEvent } from '../fds-dropdown'
 
 export default {
@@ -11,7 +10,7 @@ export default {
       description: {
         component:
           "`import '@fintraffic-design/coreui-components/src/fds-dropdown'`<br>\
-          `import { DropdownEvent, DropdownOption } from '@fintraffic-design/coreui-components/src/fds-dropdown'`<br><br>\
+          `import { FdsDropdownEvent, FdsDropdownOption } from '@fintraffic-design/coreui-components/src/fds-dropdown'`<br><br>\
           Selector: `<fds-dropdown>`",
       },
     },
@@ -48,7 +47,7 @@ export default {
     options: {
       description:
         'Options listed in the dropdown. <br><br>\
-        `DropdownOption[]`',
+        `FdsDropdownOption[]`',
       table: {
         category: 'Properties',
         defaultValue: { summary: '[]' },
@@ -57,7 +56,7 @@ export default {
     value: {
       description:
         'Selected option. <br><br>\
-        `DropdownOption`',
+        `FdsDropdownOption`',
       control: false,
       table: {
         category: 'Properties',

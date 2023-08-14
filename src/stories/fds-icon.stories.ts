@@ -1,6 +1,5 @@
 import { html } from 'lit'
 import { FdsIcons } from '../fds-icon'
-import '../fds-icon'
 import '../global-types'
 import {
   FdsSize1,

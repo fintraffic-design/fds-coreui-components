@@ -13,7 +13,7 @@ import {
   Trash2,
   X,
   Settings,
-  Edit,
+  Pencil,
   CheckCircle,
 } from 'lucide'
 
@@ -26,7 +26,7 @@ export const FdsIcons = {
   'chevron-down': ChevronDown,
   'chevron-right': ChevronRight,
   'chevron-up': ChevronUp,
-  edit: Edit,
+  pencil: Pencil,
   plus: Plus,
   'plus-circle': PlusCircle,
   'trash-2': Trash2,

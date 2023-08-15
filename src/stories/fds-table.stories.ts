@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/web-components'
+import { StoryObj, Meta, StoryFn } from '@storybook/web-components'
 import { html, TemplateResult } from 'lit'
 import { FdsButtonVariant } from '../fds-button'
 import '../fds-table'
@@ -101,7 +101,7 @@ export default {
   },
 } as Meta
 
-const Template: Story = ({ striped }) => {
+const Template: StoryFn = ({ striped }) => {
   return html`<fds-table
     .striped=${striped}
     .items=${items}
@@ -111,7 +111,7 @@ const Template: Story = ({ striped }) => {
   </fds-table>`
 }
 
-const TemplateTableWithCustomStyles: Story = ({ striped }) => {
+const TemplateTableWithCustomStyles: StoryFn = ({ striped }) => {
   return html`<fds-table
     .striped=${striped}
     .items=${items}
@@ -141,20 +141,25 @@ function renderItemWithCheckboxAndButton(item: Item): TemplateResult {
   </tr>`
 }
 
-export const Table: Story = Template.bind({})
-export const TableWithCustomStyles: Story = TemplateTableWithCustomStyles.bind({})
+export const Table: StoryObj = {
+  render: Template,
+}
 
-TableWithCustomStyles.parameters = {
-  docs: {
-    description: {
-      story: 'An example of a table that has checkboxes and buttons and custom styles for the columns.',
-    },
-    source: {
-      // Source code is written here because functions are not visible in "show code" feature in Storybook.
-      code:
-        '<fds-table .items=${items} .renderHeader=${renderHeaderWithCheckboxAndButton} .renderItem=${renderItemWithCheckboxAndButton}>\n</fds-table>' +
-        `\n${renderHeaderWithCheckboxAndButton}\n${renderItemWithCheckboxAndButton}`,
-      language: 'typescript',
+export const TableWithCustomStyles: StoryObj = {
+  render: TemplateTableWithCustomStyles,
+
+  parameters: {
+    docs: {
+      description: {
+        story: 'An example of a table that has checkboxes and buttons and custom styles for the columns.',
+      },
+      source: {
+        // Source code is written here because functions are not visible in "show code" feature in Storybook.
+        code:
+          '<fds-table .items=${items} .renderHeader=${renderHeaderWithCheckboxAndButton} .renderItem=${renderItemWithCheckboxAndButton}>\n</fds-table>' +
+          `\n${renderHeaderWithCheckboxAndButton}\n${renderItemWithCheckboxAndButton}`,
+        language: 'typescript',
+      },
     },
   },
 }

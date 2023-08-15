@@ -17,15 +17,13 @@ import './global-types'
 import { uiLabelTextClass } from './utils/css-utils'
 import { tokenVar } from './utils/token-utils'
 
-type Value = string
-
-export interface FdsDropdownOption<T = Value> {
+export interface FdsDropdownOption<T> {
   label: string
   value: T
   icon?: FdsIconType
 }
 
-export class FdsDropdownEvent<T = Value> extends CustomEvent<FdsDropdownOption<T>> {
+export class FdsDropdownEvent<T> extends CustomEvent<FdsDropdownOption<T>> {
   constructor(detail: FdsDropdownOption<T>) {
     // composed allows event to bubble through shadow dom - false for now, but could be re-evaluated later.
     super('select', { detail, bubbles: true, cancelable: true, composed: false })
@@ -44,7 +42,7 @@ export class FdsDropdownEvent<T = Value> extends CustomEvent<FdsDropdownOption<T
  * @property {string} placeholder - Placeholder text while no option is selected.
  */
 @customElement('fds-dropdown')
-export default class FdsDropdown<T = Value> extends LitElement {
+export default class FdsDropdown<T> extends LitElement {
   constructor() {
     super()
     // Set attributes to host element
@@ -64,18 +62,17 @@ export default class FdsDropdown<T = Value> extends LitElement {
     const optionsList = html`
       <div class="options-list">
         ${this.options.map(
-          option =>
-            html`
-              <div
-                @click=${(): void => this.handleSelect(option)}
-                @keypress=${(e: KeyboardEvent): void => this.handleKeypress(e, option)}
-                class=${`ui-label-text option ${this.getOptionCssClass(option)}`}
-                tabindex=${0}
-                aria-selected=${this.value === option}
-              >
-                ${this.getLabel(option)}
-              </div>
-            `
+          option => html`
+            <div
+              @click=${(): void => this.handleSelect(option)}
+              @keypress=${(e: KeyboardEvent): void => this.handleKeypress(e, option)}
+              class=${`ui-label-text option ${this.getOptionCssClass(option)}`}
+              tabindex=${0}
+              aria-selected=${this.value === option}
+            >
+              ${this.getLabel(option)}
+            </div>
+          `
         )}
       </div>
     `
@@ -88,7 +85,7 @@ export default class FdsDropdown<T = Value> extends LitElement {
         aria-haspopup=${true}
         aria-expanded=${this._open}
       >
-        <div>${this.getLabel(this.value) || this.placeholder}</div>
+        <div>${this.getLabel(this.value) ?? this.placeholder}</div>
         <fds-icon .icon=${this._open ? 'chevron-up' : 'chevron-down'}></fds-icon>
       </button>
       ${this._open ? optionsList : null}

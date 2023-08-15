@@ -3,15 +3,16 @@ import { customElement, property } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
 import { tokenVar } from './utils/token-utils'
 import {
-  FdsColorDanger100,
   FdsColorDanger300,
-  FdsColorInteractive100,
+  FdsColorDanger50,
   FdsColorInteractive300,
-  FdsColorSuccess100,
+  FdsColorInteractive50,
   FdsColorSuccess300,
-  FdsColorWarning100,
-  FdsColorWarning300,
+  FdsColorSuccess50,
+  FdsColorWarning400,
+  FdsColorWarning50,
   FdsSize1,
+  FdsSize2,
   FdsSize3,
 } from '@fintraffic-design/coreui-css'
 import './global-types'
@@ -27,21 +28,44 @@ export enum FdsAlertVariant {
 
 /**
  * Alert component.
+ * @event dismissed - Dispatches a CustomEvent when alert is dismissed.
  *
- * @property {FdsAlertVariant} variant
+ * @property {FdsAlertVariant} variant - Variant of the alert.
+ * @property {FdsIconType} icon - Icon to be displayed in the alert.
+ * @property {boolean} dismissible - If true, alert can be dismissed by clicking the close button.
  */
 @customElement('fds-alert')
 export default class FdsAlert extends LitElement {
   @property() variant: FdsAlertVariant = FdsAlertVariant.error
   @property() icon?: FdsIconType
+  @property() dismissible: boolean = false
 
   override render(): TemplateResult {
     return html`
       <div class="alert alert--${this.variant}">
-        ${this.icon && html`<fds-icon class="alert-icon" .icon=${this.icon} .size=${FdsSize3}></fds-icon>`}
-        <slot class="ui-helper-text content"></slot>
+        <div class="alert-content">
+          ${this.icon && html`<fds-icon class="alert-icon" .icon=${this.icon} .size=${FdsSize3}></fds-icon>`}
+          <slot class="ui-helper-text"></slot>
+        </div>
+        ${this.renderDismissButton()}
       </div>
     `
+  }
+
+  private renderDismissButton(): TemplateResult | null {
+    if (this.dismissible) {
+      return html`<fds-icon
+        class="alert-close"
+        .icon=${'x'}
+        .size=${FdsSize3}
+        @click=${(): void => this.handleDismiss()}
+      ></fds-icon>`
+    }
+    return null
+  }
+
+  private handleDismiss(): void {
+    this.dispatchEvent(new CustomEvent('dismissed'))
   }
 
   static override styles = [
@@ -52,46 +76,48 @@ export default class FdsAlert extends LitElement {
       }
 
       .alert {
-        padding: 8px;
-        border-bottom: 2px solid;
+        border: 1px solid;
+        border-radius: ${tokenVar(FdsSize1)};
         display: flex;
-        align-items: center;
       }
       .alert--error {
-        background-color: ${tokenVar(FdsColorDanger100)};
-        border-bottom-color: ${tokenVar(FdsColorDanger300)};
-      }
-      .alert--error .alert-icon {
+        background-color: ${tokenVar(FdsColorDanger50)};
+        border-color: ${tokenVar(FdsColorDanger300)};
         color: ${tokenVar(FdsColorDanger300)};
       }
       .alert--warning {
-        background-color: ${tokenVar(FdsColorWarning100)};
-        border-bottom-color: ${tokenVar(FdsColorWarning300)};
-      }
-      .alert--warning .alert-icon {
-        color: ${tokenVar(FdsColorWarning300)};
+        background-color: ${tokenVar(FdsColorWarning50)};
+        color: ${tokenVar(FdsColorWarning400)};
+        border-color: ${tokenVar(FdsColorWarning400)};
       }
       .alert--info {
-        background-color: ${tokenVar(FdsColorInteractive100)};
-        border-bottom-color: ${tokenVar(FdsColorInteractive300)};
-      }
-      .alert--info .alert-icon {
+        background-color: ${tokenVar(FdsColorInteractive50)};
+        border-color: ${tokenVar(FdsColorInteractive300)};
         color: ${tokenVar(FdsColorInteractive300)};
       }
       .alert--success {
-        background-color: ${tokenVar(FdsColorSuccess100)};
+        background-color: ${tokenVar(FdsColorSuccess50)};
         border-bottom-color: ${tokenVar(FdsColorSuccess300)};
-      }
-      .alert--success .alert-icon {
         color: ${tokenVar(FdsColorSuccess300)};
       }
       .alert-icon {
-        margin-right: ${tokenVar(FdsSize1)};
-        position: relative;
+        margin: 0 ${tokenVar(FdsSize2)} 0 ${tokenVar(FdsSize1)};
       }
-      .content {
-        display: block;
-        line-height: 150%;
+
+      .alert-content {
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        padding: ${tokenVar(FdsSize1)};
+        justify-content: center;
+      }
+
+      .alert-close {
+        cursor: pointer;
+        border-left: 1px solid;
+        border-radius: 0 ${tokenVar(FdsSize1)} ${tokenVar(FdsSize1)} 0;
+        padding: ${tokenVar(FdsSize1)};
+        margin-left: ${tokenVar(FdsSize1)};
       }
     `,
   ]

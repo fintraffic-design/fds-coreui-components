@@ -70,6 +70,7 @@ export default class FdsButton extends LitElement {
       button {
         cursor: pointer;
         display: flex;
+        border: 2px solid ${tokenVar(FdsColorBrandBlack)};
         border-radius: ${tokenVar(FdsRadiusLarge)};
         padding: 13px 16px;
         height: ${tokenVar(FdsSize6)};
@@ -86,7 +87,7 @@ export default class FdsButton extends LitElement {
       }
 
       .button--primary {
-        border: 2px solid ${tokenVar(FdsColorBrandBlack)};
+        border-color: ${tokenVar(FdsColorBrandBlack)};
         background: ${tokenVar(FdsColorBrandBlack)};
         color: ${tokenVar(variantColorMap[FdsButtonVariant.primary])};
       }

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/web-components'
+import { StoryObj, Meta, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
 import '../fds-icon'
 import '../global-types'
@@ -6,7 +6,8 @@ import '../global-types'
 export default {
   title: 'Action Sheet',
   parameters: {
-    componentSubtitle: 'Container for displaying actions in horizontal direction',
+    componentSubtitle:
+      'Container for displaying actions in horizontal direction when enough space is available and vertical direction when space is limited.',
     docs: {
       description: {
         component:
@@ -23,20 +24,21 @@ export default {
     slotDefault: {
       name: '',
       table: { category: 'Slots' },
-      description: 'Default slot. Contents are positioned on the right side of the component.',
+      description:
+        'Default slot. Contents are positioned on the end (horizontal) or top (vertical) of the component.',
       control: false,
     },
     slotSeparated: {
       name: 'separated',
       table: { category: 'Slots' },
       description:
-        'Separated slot. Contents are positioned on the left side of the component, separated from the content in default slot.',
+        'Separated slot. Contents are positioned on the beginning (horizontal) or bottom (vertical) of the component, separated from the content in default slot.',
       control: false,
     },
   },
 } as Meta
 
-const Template: Story = ({}) => {
+const Template: StoryFn = () => {
   return html`<fds-action-sheet style="max-width: 800px">
     <fds-button slot="separated" icon="x" variant="danger" label="Danger"></fds-button>
     <fds-button variant="tertiary" icon="alert-circle"></fds-button>
@@ -46,4 +48,6 @@ const Template: Story = ({}) => {
   </fds-action-sheet>`
 }
 
-export const ActionSheet: Story = Template.bind({})
+export const ActionSheet: StoryObj = {
+  render: Template,
+}

@@ -1,6 +1,5 @@
-import { Meta, Story } from '@storybook/web-components'
+import { StoryObj, Meta, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
-import '../fds-dropdown'
 import { FdsDropdownEvent } from '../fds-dropdown'
 
 export default {
@@ -11,7 +10,7 @@ export default {
       description: {
         component:
           "`import '@fintraffic-design/coreui-components/src/fds-dropdown'`<br>\
-          `import { DropdownEvent, DropdownOption } from '@fintraffic-design/coreui-components/src/fds-dropdown'`<br><br>\
+          `import { FdsDropdownEvent, FdsDropdownOption } from '@fintraffic-design/coreui-components/src/fds-dropdown'`<br><br>\
           Selector: `<fds-dropdown>`",
       },
     },
@@ -48,7 +47,7 @@ export default {
     options: {
       description:
         'Options listed in the dropdown. <br><br>\
-        `DropdownOption[]`',
+        `FdsDropdownOption[]`',
       table: {
         category: 'Properties',
         defaultValue: { summary: '[]' },
@@ -57,7 +56,7 @@ export default {
     value: {
       description:
         'Selected option. <br><br>\
-        `DropdownOption`',
+        `FdsDropdownOption`',
       control: false,
       table: {
         category: 'Properties',
@@ -99,7 +98,7 @@ export default {
   },
 } as Meta
 
-const Template: Story = ({ options, value, disabled, error, placeholder }) => {
+const Template: StoryFn = ({ options, value, disabled, error, placeholder }) => {
   return html`
     <div style="width:284px; height: 260px;">
       <fds-dropdown
@@ -114,27 +113,31 @@ const Template: Story = ({ options, value, disabled, error, placeholder }) => {
   `
 }
 
-export const Dropdown: Story = Template.bind({})
-
-export const LongText: Story = Template.bind({})
-
-LongText.args = {
-  options: [
-    { label: 'Foooooooooooooooooooooooooooooooooooooooooooooo', value: 'Foo' },
-    { label: 'Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar', value: 'Foo-Bar' },
-    { label: 'Foo Bar Foo Bar Foo Bar Foo Bar Foo Bar Foo Bar Foo Bar Foo Bar', value: 'Foo Bar' },
-    {
-      label: 'Alert Alert Alert Alert Alert Alert Alert Alert Alert Alert Alert',
-      value: 'Alert',
-      icon: 'alert-triangle',
-    },
-  ],
+export const Dropdown: StoryObj = {
+  render: Template,
 }
 
-LongText.parameters = {
-  docs: {
-    description: {
-      story: 'An example of a combobox with long values in options.',
+export const LongText: StoryObj = {
+  render: Template,
+
+  args: {
+    options: [
+      { label: 'Foooooooooooooooooooooooooooooooooooooooooooooo', value: 'Foo' },
+      { label: 'Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar-Foo-Bar', value: 'Foo-Bar' },
+      { label: 'Foo Bar Foo Bar Foo Bar Foo Bar Foo Bar Foo Bar Foo Bar Foo Bar', value: 'Foo Bar' },
+      {
+        label: 'Alert Alert Alert Alert Alert Alert Alert Alert Alert Alert Alert',
+        value: 'Alert',
+        icon: 'alert-triangle',
+      },
+    ],
+  },
+
+  parameters: {
+    docs: {
+      description: {
+        story: 'An example of a combobox with long values in options.',
+      },
     },
   },
 }

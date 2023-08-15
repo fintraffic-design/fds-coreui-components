@@ -1,6 +1,5 @@
 import { html } from 'lit'
 import { FdsIcons } from '../fds-icon'
-import '../fds-icon'
 import '../global-types'
 import {
   FdsSize1,
@@ -15,7 +14,7 @@ import {
   FdsSize8,
   FdsSizeToken,
 } from '@fintraffic-design/coreui-css'
-import { Story } from '@storybook/web-components'
+import { StoryObj } from '@storybook/web-components'
 
 const sizes = [
   FdsSize1,
@@ -83,7 +82,9 @@ export default {
   },
 }
 
-export const Icon: Story = ({ icon, size }) => {
-  const sizeToken = sizes.find(s => s.name === size) as FdsSizeToken
-  return html`<fds-icon .icon=${icon} .size=${sizeToken}></fds-icon>`
+export const Icon: StoryObj = {
+  render: ({ icon, size }) => {
+    const sizeToken = sizes.find(s => s.name === size) as FdsSizeToken
+    return html`<fds-icon .icon=${icon} .size=${sizeToken}></fds-icon>`
+  },
 }

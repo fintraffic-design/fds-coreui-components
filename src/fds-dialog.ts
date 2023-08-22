@@ -8,6 +8,8 @@ import { FdsRadiusLarge, FdsStyleElevation400 } from '@fintraffic-design/coreui-
 /**
  * Dialog component.
  *
+ * @event outside-modal-click - Dispatches a custom event when the dialog is a modal dialog and user clicks outside of it.
+ *
  * @property {boolean} modal
  * Dialog is a modal dialog: Does not allow interaction with background elements.
  */
@@ -17,6 +19,16 @@ export default class FdsDialog extends LitElement {
 
   @query('dialog')
   private readonly dialog: HTMLDialogElement | undefined
+
+  constructor() {
+    super()
+
+    this.addEventListener('click', ({ target }) => {
+      if (this.modal && target === this) {
+        this.dispatchEvent(new CustomEvent('outside-modal-click'))
+      }
+    })
+  }
 
   override updated(changes: PropertyValues<FdsDialog>): void {
     super.updated(changes)

@@ -24,6 +24,7 @@ export default {
   },
   args: {
     modal: false,
+    overlay: false,
     outsideModalClick: undefined,
     slot: undefined,
   },
@@ -31,6 +32,15 @@ export default {
     modal: {
       description:
         'Whether the dialog opens as a modal. Modal does not allow interaction with background elements. <br><br>\
+        `boolean`',
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: 'false' },
+      },
+    },
+    overlay: {
+      description:
+        'Whether the dialog shows an overlay. Overlay does not allow interaction with the dialog. <br><br>\
         `boolean`',
       table: {
         category: 'Properties',
@@ -54,7 +64,7 @@ export default {
   },
 }
 
-const Template: StoryFn = ({ modal }) => {
+const Template: StoryFn = ({ modal, overlay }) => {
   return html`
     <style>
       fds-action-sheet {
@@ -70,6 +80,7 @@ const Template: StoryFn = ({ modal }) => {
     <div style="height: 260px;">
       <fds-dialog
         .modal=${modal}
+        .overlay=${overlay}
         @outside-modal-click=${(): void => console.log('@outside-modal-click')}
         style="width: 50%; min-width: 30rem; max-width: 40rem"
       >

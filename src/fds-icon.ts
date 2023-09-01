@@ -62,8 +62,8 @@ export default class FdsIcon extends LitElement {
   @property() icon?: FdsIconType
 
   override render(): SVGElement | null {
-    if (!this.icon) {
-      console.error('icon not defined')
+    if (!this.icon || !FdsIcons[this.icon]) {
+      console.error(`invalid icon: '${this.icon}'`)
       return null
     }
 

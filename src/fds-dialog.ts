@@ -42,7 +42,7 @@ export default class FdsDialog extends LitElement {
 
   override updated(changes: PropertyValues<FdsDialog>): void {
     super.updated(changes)
-    if (this.modal !== changes.get('modal')) {
+    if (changes.has('modal') && this.modal !== changes.get('modal')) {
       this.dialog?.close()
       if (this.modal) {
         this.dialog?.showModal()

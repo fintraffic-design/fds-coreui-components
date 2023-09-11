@@ -1,15 +1,15 @@
 import { css, html, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { nothing, TemplateResult } from 'lit-html'
-import { tokenVar } from './utils/token-utils'
 import {
   FdsColorNeutral400,
   FdsColorBrandWhite,
   FdsColorNeutral50,
   FdsColorNeutral200,
+  tokenVar,
+  uiHelperTextClass,
 } from '@fintraffic-design/coreui-css'
 import './global-types'
-import { uiHelperTextClass } from './utils/css-utils'
 
 export type FdsTableItem = object
 

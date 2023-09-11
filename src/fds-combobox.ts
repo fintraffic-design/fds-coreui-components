@@ -13,10 +13,9 @@ import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property, state } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
-import { tokenVar } from './utils/token-utils'
-
+import { tokenVar } from '@fintraffic-design/coreui-css'
+import { uiLabelTextClass } from '@fintraffic-design/coreui-css'
 import './global-types'
-import { uiLabelTextClass } from './utils/css-utils'
 
 export class FdsComboboxEvent extends CustomEvent<string> {
   constructor(detail: string) {

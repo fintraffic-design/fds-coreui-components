@@ -9,9 +9,10 @@ import {
   FdsColorText600,
   FdsColorText300,
   FdsColorText1000,
+  tokenVar,
+  uiHelperTextClass,
+  uiLabelTextClass,
 } from '@fintraffic-design/coreui-css'
-import { tokenVar } from './utils/token-utils'
-import { uiLabelTextClass, uiHelperTextClass } from './utils/css-utils'
 
 /**
  * Input component.

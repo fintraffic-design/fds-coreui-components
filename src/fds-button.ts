@@ -9,14 +9,14 @@ import {
   FdsColorToken,
   FdsRadiusLarge,
   FdsSize6,
+  tokenVar,
+  uiLabelTextClass,
 } from '@fintraffic-design/coreui-css'
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property } from 'lit/decorators.js'
 import { FdsIconType } from './fds-icon'
 import './global-types'
-import { uiLabelTextClass } from './utils/css-utils'
-import { tokenVar } from './utils/token-utils'
 
 export enum FdsButtonVariant {
   primary = 'primary',

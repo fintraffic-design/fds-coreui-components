@@ -3,13 +3,13 @@ import {
   FdsColorInteractive200,
   FdsColorText300,
   FdsRadiusCompact,
+  tokenVar,
+  uiLabelTextClass,
 } from '@fintraffic-design/coreui-css'
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property } from 'lit/decorators.js'
-import { tokenVar } from './utils/token-utils'
 import './global-types'
-import { uiLabelTextClass } from './utils/css-utils'
 
 /**
  * Checkbox component.

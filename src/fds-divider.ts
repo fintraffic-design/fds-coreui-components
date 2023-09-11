@@ -1,7 +1,6 @@
 import { html, LitElement, TemplateResult } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import { FdsColorNeutral200, FdsColorToken } from '@fintraffic-design/coreui-css'
-import { tokenVar } from './utils/token-utils'
+import { FdsColorNeutral200, FdsColorToken, tokenVar } from '@fintraffic-design/coreui-css'
 
 /**
  * Divider component.

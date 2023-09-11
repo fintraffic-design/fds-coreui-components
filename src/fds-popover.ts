@@ -7,10 +7,10 @@ import {
   FdsColorToken,
   FdsRadiusLarge,
   FdsStyleElevation200,
+  tokenVar,
+  uiHelperTextClass,
 } from '@fintraffic-design/coreui-css'
-import { uiHelperTextClass } from './utils/css-utils'
 import { bottom, createPopper, Instance, left, Placement, right, top } from '@popperjs/core'
-import { tokenVar } from './utils/token-utils'
 
 export enum FdsPopoverPosition {
   above = 'above',

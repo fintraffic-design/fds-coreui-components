@@ -1,7 +1,6 @@
 import { css, html, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
-import { tokenVar } from './utils/token-utils'
 import {
   FdsColorDanger300,
   FdsColorDanger50,
@@ -14,9 +13,10 @@ import {
   FdsSize1,
   FdsSize2,
   FdsSize3,
+  tokenVar,
+  uiHelperTextClass,
 } from '@fintraffic-design/coreui-css'
 import './global-types'
-import { uiHelperTextClass } from './utils/css-utils'
 import { FdsIconType } from './fds-icon'
 
 export enum FdsAlertVariant {

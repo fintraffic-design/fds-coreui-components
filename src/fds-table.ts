@@ -44,6 +44,10 @@ export default class FdsTable extends LitElement {
 
   static override styles = [
     css`
+      :host {
+        --fds-typography-ui-helper-display: table;
+      }
+
       table {
         width: 100%;
         border-collapse: collapse;

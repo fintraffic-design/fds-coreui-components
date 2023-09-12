@@ -1,7 +1,11 @@
 import { StoryObj, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
-import '../fds-card'
 import { FdsCardElevation } from '../fds-card'
+import '../fds-action-sheet'
+import '../fds-button'
+import '../fds-card'
+import '../fds-divider'
+import '../fds-icon'
 
 export default {
   title: 'Card',

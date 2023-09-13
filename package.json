@@ -9,7 +9,7 @@
     "src"
   ],
   "dependencies": {
-    "@fintraffic-design/coreui-css": "https://github.com/fintraffic-design/coreui-css.git#d24e766feebd02ee3314396d4eddf959919ba15f",
+    "@fintraffic-design/coreui-css": "https://github.com/fintraffic-design/coreui-css.git#f31286216b0d2077d7232d23a13ef4ffc68ddff6",
     "@popperjs/core": "^2.11.8",
     "lit": "^2.8.0",
     "lucide": "^0.265.0"

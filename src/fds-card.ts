@@ -1,14 +1,5 @@
-import {
-  FdsSize1,
-  FdsSize2,
-  FdsSize3,
-  FdsSize4,
-  FdsStyleElevation100,
-  FdsStyleElevation200,
-  tokenVar,
-  headingSmall4TextClass,
-} from '@fintraffic-design/coreui-css'
-import { css, html, LitElement } from 'lit'
+import { FdsProperty, headingSmall4TextClass } from '@fintraffic-design/coreui-css'
+import { css, CSSResult, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property } from 'lit/decorators.js'
 import './global-types'
@@ -56,9 +47,9 @@ export default class FdsCard extends LitElement {
     if (this.elevation === FdsCardElevation.none) {
       return 'none'
     } else if (this.elevation === FdsCardElevation.high) {
-      return FdsStyleElevation200.value
+      return FdsProperty.StyleElevation200.toString()
     }
-    return FdsStyleElevation100.value
+    return FdsProperty.StyleElevation100.toString()
   }
 
   onClick(): void {
@@ -83,11 +74,11 @@ export default class FdsCard extends LitElement {
         justify-content: space-between;
         flex-direction: row;
         align-items: center;
-        padding: ${tokenVar(FdsSize3)} ${tokenVar(FdsSize4)} ${tokenVar(FdsSize1)};
+        padding: ${FdsProperty.Size3} ${FdsProperty.Size4} ${FdsProperty.Size1};
       }
 
       .card__content {
-        padding: ${tokenVar(FdsSize2)} ${tokenVar(FdsSize4)};
+        padding: ${FdsProperty.Size2} ${FdsProperty.Size4};
       }
     `,
   ]

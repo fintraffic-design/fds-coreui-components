@@ -9,7 +9,7 @@
     "src"
   ],
   "dependencies": {
-    "@fintraffic-design/coreui-css": "https://github.com/fintraffic-design/coreui-css.git#c0d2d8f2f84b7c37201745e6dabdb6f060760de6",
+    "@fintraffic-design/coreui-css": "https://github.com/fintraffic-design/coreui-css.git#d24e766feebd02ee3314396d4eddf959919ba15f",
     "@popperjs/core": "^2.11.8",
     "lit": "^2.8.0",
     "lucide": "^0.265.0"
@@ -24,6 +24,7 @@
     "@storybook/addon-essentials": "^7.3.0",
     "@storybook/addon-links": "^7.3.0",
     "@storybook/blocks": "^7.3.0",
+    "@storybook/client-api": "^7.4.1",
     "@storybook/web-components": "^7.3.0",
     "@storybook/web-components-vite": "^7.3.0",
     "@types/estree": "^1.0.1",

@@ -1,4 +1,5 @@
 import { StoryObj, StoryFn } from '@storybook/web-components'
+import { useArgs } from '@storybook/client-api'
 import { html } from 'lit'
 import '../fds-action-sheet'
 import '../fds-button'
@@ -65,6 +66,7 @@ export default {
 }
 
 const Template: StoryFn = ({ modal, overlay }) => {
+  const [args, setArgs] = useArgs()
   return html`
     <style>
       fds-action-sheet {
@@ -81,7 +83,10 @@ const Template: StoryFn = ({ modal, overlay }) => {
       <fds-dialog
         .modal=${modal}
         .overlay=${overlay}
-        @outside-modal-click=${(): void => console.log('@outside-modal-click')}
+        @outside-modal-click=${(): void => {
+          console.log('@outside-modal-click')
+          setArgs({ ...args, modal: false })
+        }}
         style="width: 50%; min-width: 30rem; max-width: 40rem"
       >
         <fds-card .elevation="${FdsCardElevation.none}">

@@ -1,5 +1,5 @@
 import { FdsProperty, headingSmall4TextClass } from '@fintraffic-design/coreui-css'
-import { css, CSSResult, html, LitElement } from 'lit'
+import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property } from 'lit/decorators.js'
 import './global-types'

@@ -1,5 +1,18 @@
-import { FdsProperty, uiLabelTextClass } from '@fintraffic-design/coreui-css'
-import { css, CSSResult, html, LitElement } from 'lit'
+import {
+  FdsColorBrandBlack,
+  FdsColorBrandWhite,
+  FdsColorDanger300,
+  FdsColorDanger400,
+  FdsColorInteractive200,
+  FdsColorNeutral100,
+  FdsColorText300,
+  FdsColorToken,
+  FdsRadiusLarge,
+  FdsSize6,
+  tokenVar,
+  uiLabelTextClass,
+} from '@fintraffic-design/coreui-css'
+import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property } from 'lit/decorators.js'
 import { FdsIconType } from './fds-icon'
@@ -12,11 +25,11 @@ export enum FdsButtonVariant {
   danger = 'danger',
 }
 
-const variantColorMap: Record<FdsButtonVariant, CSSResult> = {
-  primary: FdsProperty.ColorBrandWhite,
-  secondary: FdsProperty.ColorBrandBlack,
-  tertiary: FdsProperty.ColorBrandBlack,
-  danger: FdsProperty.ColorBrandWhite,
+const variantColorMap: Record<FdsButtonVariant, FdsColorToken> = {
+  primary: FdsColorBrandWhite,
+  secondary: FdsColorBrandBlack,
+  tertiary: FdsColorBrandBlack,
+  danger: FdsColorBrandWhite,
 }
 
 /**
@@ -57,10 +70,10 @@ export default class FdsButton extends LitElement {
       button {
         cursor: pointer;
         display: flex;
-        border: 2px solid ${FdsProperty.ColorBrandBlack};
-        border-radius: ${FdsProperty.RadiusLarge};
+        border: 2px solid ${tokenVar(FdsColorBrandBlack)};
+        border-radius: ${tokenVar(FdsRadiusLarge)};
         padding: 13px 16px;
-        height: ${FdsProperty.Size6};
+        height: ${tokenVar(FdsSize6)};
         align-items: center;
         justify-content: center;
         gap: 8px;
@@ -74,65 +87,65 @@ export default class FdsButton extends LitElement {
       }
 
       .button--primary {
-        border-color: ${FdsProperty.ColorBrandBlack};
-        background: ${FdsProperty.ColorBrandBlack};
-        color: ${variantColorMap[FdsButtonVariant.primary]};
+        border-color: ${tokenVar(FdsColorBrandBlack)};
+        background: ${tokenVar(FdsColorBrandBlack)};
+        color: ${tokenVar(variantColorMap[FdsButtonVariant.primary])};
       }
 
       .button--secondary {
-        border: 2px solid ${FdsProperty.ColorBrandBlack};
-        background: ${FdsProperty.ColorBrandWhite};
-        color: ${variantColorMap[FdsButtonVariant.secondary]};
+        border: 2px solid ${tokenVar(FdsColorBrandBlack)};
+        background: ${tokenVar(FdsColorBrandWhite)};
+        color: ${tokenVar(variantColorMap[FdsButtonVariant.secondary])};
       }
 
       .button--tertiary {
         background: transparent;
         border-color: transparent;
-        color: ${variantColorMap[FdsButtonVariant.tertiary]};
+        color: ${tokenVar(variantColorMap[FdsButtonVariant.tertiary])};
       }
 
       .button--danger {
-        background: ${FdsProperty.ColorDanger300};
+        background: ${tokenVar(FdsColorDanger300)};
         border-color: transparent;
-        color: ${variantColorMap[FdsButtonVariant.danger]};
+        color: ${tokenVar(variantColorMap[FdsButtonVariant.danger])};
       }
 
       .button--primary:hover,
       .button--secondary:hover,
       .button--tertiary:hover {
-        background: ${FdsProperty.ColorInteractive200};
+        background: ${tokenVar(FdsColorInteractive200)};
         border-color: transparent;
-        color: ${FdsProperty.ColorBrandWhite};
+        color: ${tokenVar(FdsColorBrandWhite)};
       }
 
       .button--danger:hover {
-        background: ${FdsProperty.ColorDanger400};
-        border-color: ${FdsProperty.ColorDanger400};
-        color: ${FdsProperty.ColorBrandWhite};
+        background: ${tokenVar(FdsColorDanger400)};
+        border-color: ${tokenVar(FdsColorDanger400)};
+        color: ${tokenVar(FdsColorBrandWhite)};
       }
 
       .button--primary:disabled {
-        background: ${FdsProperty.ColorNeutral100};
-        border-color: ${FdsProperty.ColorNeutral100};
-        color: ${FdsProperty.ColorText300};
+        background: ${tokenVar(FdsColorNeutral100)};
+        border-color: ${tokenVar(FdsColorNeutral100)};
+        color: ${tokenVar(FdsColorText300)};
       }
 
       .button--secondary:disabled {
         background: transparent;
-        color: ${FdsProperty.ColorNeutral100};
-        border-color: ${FdsProperty.ColorNeutral100};
+        color: ${tokenVar(FdsColorNeutral100)};
+        border-color: ${tokenVar(FdsColorNeutral100)};
       }
 
       .button--tertiary:disabled {
         background: transparent;
         border-color: transparent;
-        color: ${FdsProperty.ColorNeutral100};
+        color: ${tokenVar(FdsColorNeutral100)};
       }
 
       .button--danger:disabled {
-        background: ${FdsProperty.ColorNeutral100};
+        background: ${tokenVar(FdsColorNeutral100)};
         border-color: transparent;
-        color: ${FdsProperty.ColorText300};
+        color: ${tokenVar(FdsColorText300)};
       }
     `,
   ]

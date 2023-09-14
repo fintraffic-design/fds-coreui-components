@@ -1,7 +1,14 @@
 import { css, html, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { nothing, TemplateResult } from 'lit-html'
-import { FdsProperty, uiHelperTextClass } from '@fintraffic-design/coreui-css'
+import {
+  FdsColorNeutral400,
+  FdsColorBrandWhite,
+  FdsColorNeutral50,
+  FdsColorNeutral200,
+  tokenVar,
+  uiHelperTextClass,
+} from '@fintraffic-design/coreui-css'
 import './global-types'
 
 export type FdsTableItem = object
@@ -47,14 +54,14 @@ export default class FdsTable extends LitElement {
       }
 
       thead {
-        background: ${FdsProperty.ColorNeutral400};
-        color: ${FdsProperty.ColorBrandWhite};
+        background: ${tokenVar(FdsColorNeutral400)};
+        color: ${tokenVar(FdsColorBrandWhite)};
         position: sticky;
         top: 0;
       }
 
       tbody {
-        background: ${FdsProperty.ColorBrandWhite};
+        background: ${tokenVar(FdsColorBrandWhite)};
       }
 
       thead tr {
@@ -74,11 +81,11 @@ export default class FdsTable extends LitElement {
       }
 
       .table-rows--separator tr {
-        border-bottom: 1px solid ${FdsProperty.ColorNeutral200};
+        border-bottom: 1px solid ${tokenVar(FdsColorNeutral200)};
       }
 
       .table-rows--striped tr:nth-child(even) {
-        background: ${FdsProperty.ColorNeutral50};
+        background: ${tokenVar(FdsColorNeutral50)};
       }
 
       ${uiHelperTextClass}

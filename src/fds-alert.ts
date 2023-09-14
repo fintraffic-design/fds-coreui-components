@@ -1,7 +1,21 @@
 import { css, html, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
-import { FdsProperty, FdsSize3, uiHelperTextClass } from '@fintraffic-design/coreui-css'
+import {
+  FdsColorDanger300,
+  FdsColorDanger50,
+  FdsColorInteractive300,
+  FdsColorInteractive50,
+  FdsColorSuccess300,
+  FdsColorSuccess50,
+  FdsColorWarning400,
+  FdsColorWarning50,
+  FdsSize1,
+  FdsSize2,
+  FdsSize3,
+  tokenVar,
+  uiHelperTextClass,
+} from '@fintraffic-design/coreui-css'
 import './global-types'
 import { FdsIconType } from './fds-icon'
 
@@ -63,49 +77,47 @@ export default class FdsAlert extends LitElement {
 
       .alert {
         border: 1px solid;
-        border-radius: ${FdsProperty.Size1};
+        border-radius: ${tokenVar(FdsSize1)};
         display: flex;
       }
       .alert--error {
-        background-color: ${FdsProperty.ColorDanger50};
-        border-color: ${FdsProperty.ColorDanger300};
-        color: ${FdsProperty.ColorDanger300};
+        background-color: ${tokenVar(FdsColorDanger50)};
+        border-color: ${tokenVar(FdsColorDanger300)};
+        color: ${tokenVar(FdsColorDanger300)};
       }
       .alert--warning {
-        background-color: ${FdsProperty.ColorWarning50};
-        color: ${FdsProperty.ColorWarning400};
-        border-color: ${FdsProperty.ColorWarning400};
+        background-color: ${tokenVar(FdsColorWarning50)};
+        color: ${tokenVar(FdsColorWarning400)};
+        border-color: ${tokenVar(FdsColorWarning400)};
       }
       .alert--info {
-        background-color: ${FdsProperty.ColorInteractive50};
-        border-color: ${FdsProperty.ColorInteractive300};
-        color: ${FdsProperty.ColorInteractive300};
+        background-color: ${tokenVar(FdsColorInteractive50)};
+        border-color: ${tokenVar(FdsColorInteractive300)};
+        color: ${tokenVar(FdsColorInteractive300)};
       }
       .alert--success {
-        background-color: ${FdsProperty.ColorSuccess50};
-        border-bottom-color: ${FdsProperty.ColorSuccess300};
-        color: ${FdsProperty.ColorSuccess300};
+        background-color: ${tokenVar(FdsColorSuccess50)};
+        border-bottom-color: ${tokenVar(FdsColorSuccess300)};
+        color: ${tokenVar(FdsColorSuccess300)};
       }
       .alert-icon {
-        margin: 0;
-        margin-left: ${FdsProperty.Size1};
-        margin-right: ${FdsProperty.Size2};
+        margin: 0 ${tokenVar(FdsSize2)} 0 ${tokenVar(FdsSize1)};
       }
 
       .alert-content {
         flex: 1;
         display: inline-flex;
         align-items: center;
-        padding: ${FdsProperty.Size1};
+        padding: ${tokenVar(FdsSize1)};
         justify-content: center;
       }
 
       .alert-close {
         cursor: pointer;
         border-left: 1px solid;
-        border-radius: 0 ${FdsProperty.Size1} ${FdsProperty.Size1} 0;
-        padding: ${FdsProperty.Size1};
-        margin-left: ${FdsProperty.Size1};
+        border-radius: 0 ${tokenVar(FdsSize1)} ${tokenVar(FdsSize1)} 0;
+        padding: ${tokenVar(FdsSize1)};
+        margin-left: ${tokenVar(FdsSize1)};
       }
     `,
   ]

@@ -1,8 +1,19 @@
-import { FdsProperty } from '@fintraffic-design/coreui-css'
+import {
+  FdsColorBrandWhite,
+  FdsColorDanger200,
+  FdsColorInteractive100,
+  FdsColorInteractive300,
+  FdsColorNeutral200,
+  FdsColorNeutral50,
+  FdsColorText1000,
+  FdsColorText300,
+  FdsStyleElevation200,
+} from '@fintraffic-design/coreui-css'
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property, state } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
+import { tokenVar } from '@fintraffic-design/coreui-css'
 import { uiLabelTextClass } from '@fintraffic-design/coreui-css'
 import './global-types'
 
@@ -236,15 +247,15 @@ export default class FdsCombobox extends LitElement {
         padding-bottom: 0px;
         padding-left: 16px;
         padding-right: 40px; // icon 24px + 8px padding for left and right
-        background-color: ${FdsProperty.ColorBrandWhite};
-        border: 1px solid ${FdsProperty.ColorNeutral200};
+        background-color: ${tokenVar(FdsColorBrandWhite)};
+        border: 1px solid ${tokenVar(FdsColorNeutral200)};
       }
 
       .input-container > fds-icon {
         pointer-events: none;
         position: absolute;
         right: 8px;
-        color: ${FdsProperty.ColorText1000};
+        color: ${tokenVar(FdsColorText1000)};
       }
 
       .input-container.disabled {
@@ -253,17 +264,17 @@ export default class FdsCombobox extends LitElement {
 
       .input-container.disabled > input {
         cursor: default;
-        background-color: ${FdsProperty.ColorNeutral50};
-        color: ${FdsProperty.ColorText300};
+        background-color: ${tokenVar(FdsColorNeutral50)};
+        color: ${tokenVar(FdsColorText300)};
       }
 
       .input-container.error > input {
-        color: ${FdsProperty.ColorDanger200};
-        border: 3px solid ${FdsProperty.ColorDanger200};
+        color: ${tokenVar(FdsColorDanger200)};
+        border: 3px solid ${tokenVar(FdsColorDanger200)};
       }
 
       input::placeholder {
-        color: ${FdsProperty.ColorText300};
+        color: ${tokenVar(FdsColorText300)};
       }
 
       #options-list {
@@ -277,7 +288,7 @@ export default class FdsCombobox extends LitElement {
         /* TODO: what value? */
         max-height: 80vw;
 
-        box-shadow: ${FdsProperty.StyleElevation200};
+        box-shadow: ${tokenVar(FdsStyleElevation200)};
       }
 
       .option {
@@ -290,17 +301,17 @@ export default class FdsCombobox extends LitElement {
         padding-left: 16px;
         padding-right: 8px;
 
-        background-color: ${FdsProperty.ColorBrandWhite};
-        border-bottom: 1px solid ${FdsProperty.ColorNeutral200};
+        background-color: ${tokenVar(FdsColorBrandWhite)};
+        border-bottom: 1px solid ${tokenVar(FdsColorNeutral200)};
       }
 
       .option.selected {
         /* TODO: what color? */
-        background-color: ${FdsProperty.ColorInteractive100};
+        background-color: ${tokenVar(FdsColorInteractive100)};
       }
 
       .option.new {
-        color: ${FdsProperty.ColorInteractive300};
+        color: ${tokenVar(FdsColorInteractive300)};
         gap: 10px;
       }
     `,

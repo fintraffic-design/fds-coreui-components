@@ -105,105 +105,8 @@ export default class FdsNavigation extends LitElement {
     super.connectedCallback();
     adoptStyles(this.shadowRoot as ShadowRoot, [
       uiLabelTextClass,
+      FdsNavigation.mobileStyles,
       css`
-        .navigation {
-          display: flex;
-          flex-wrap: wrap;
-          align-items: center;
-          width: 100%;
-          user-select: none;
-        }
-        .navigation__header,
-        .navigation__body,
-        .item__label {
-          display: flex;
-        }
-
-        .item {
-          cursor: pointer;
-          display: grid;
-          grid-template-rows: auto 0;
-          padding: 9px 20px;
-        }
-        
-        .navigation__header ::slotted(*) {
-          padding: 9px 24px 9px 32px;
-          height: 40px;
-        }
-        .navigation__body {
-          order: 2;
-          align-items: stretch;
-          flex-direction: column;
-          list-style: none;
-          margin: 0;
-          padding: 0;
-        }
-        .navigation__body {
-          height: 1px;
-          width: 1px;
-          visibility: hidden;
-          opacity: 0;
-          overflow-y: hidden;
-          margin-left: -1px;
-          margin-top: -1px;
-          white-space: nowrap;
-        }
-
-        .navigation--primary {
-          background-color: ${tokenVar(FdsColorBrandBlack)};
-          color: ${tokenVar(FdsColorBrandWhite)};
-        }
-
-        .navigation--primary .item:hover {
-          color: ${tokenVar(FdsColorText300)};
-        }
-        
-        .navigation__open {
-          height: auto;
-          width: 100%;
-          visibility: visible;
-          opacity: 1;
-          overflow-y: visible;
-          margin-left: 0;
-          margin-top: 0;
-
-          border-top: 1px solid ${tokenVar(FdsColorNeutral100)};
-        }
-        .navigation__button-wrapper {
-          flex-grow: 1;
-          display: flex;
-          justify-content: flex-end;
-        }
-        .navigation__button {
-          background-color: ${tokenVar(FdsColorBrandWhite)};
-          border: none;
-          border-radius: 4px;
-          color: ${tokenVar(FdsColorBrandBlack)};
-          cursor: pointer;
-          font-weight: 600;
-          text-align: center;
-          user-select: none;
-          white-space: nowrap;
-        }
-        .navigation__button:hover {
-          background-color: ${tokenVar(FdsColorNeutral50)};
-        }
-        .navigation__button--primary {
-          background-color: ${tokenVar(FdsColorBrandBlack)};
-          color: ${tokenVar(FdsColorBrandWhite)};
-        }
-
-        .navigation__label {
-          margin-right: 10px;
-        }
-        /*
-        Apply styles to the list items that do not have a nested list i.e. the last level of the navigation
-        */
-        li:not(:has(ul)) {
-          /*padding: 1rem;*/
-          border-bottom: 1px solid var(--fds-color-neutral-100);
-          width: 100%;
-        }
       @media (min-width: ${unsafeCSS(this.mobileWidth)}px) {
         .navigation {
           flex-wrap: nowrap;
@@ -232,10 +135,6 @@ export default class FdsNavigation extends LitElement {
         
         .item {
           justify-items: center;
-        }
-
-        .item__label {
-          align-items: end;
         }
 
         .item__icon {
@@ -286,4 +185,128 @@ export default class FdsNavigation extends LitElement {
       }`,
     ])
   }
+
+  static mobileStyles = css`
+    .navigation {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      width: 100%;
+      user-select: none;
+    }
+
+    .navigation__header,
+    .navigation__body,
+    .item__label {
+      display: flex;
+    }
+
+    .item {
+      cursor: pointer;
+      display: grid;
+      grid-template-rows: auto 0;
+      padding: 9px 0 9px 20px;
+    }
+
+    .item__label {
+      align-items: end;
+    }
+
+    .navigation__header ::slotted(*) {
+      padding: 9px 24px 9px 32px;
+      height: 40px;
+    }
+
+    .navigation__body {
+      order: 2;
+      align-items: stretch;
+      flex-direction: column;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navigation__body {
+      height: 1px;
+      width: 1px;
+      visibility: hidden;
+      opacity: 0;
+      overflow-y: hidden;
+      margin-left: -1px;
+      margin-top: -1px;
+      white-space: nowrap;
+    }
+
+    .navigation--primary {
+      background-color: ${tokenVar(FdsColorBrandBlack)};
+      color: ${tokenVar(FdsColorBrandWhite)};
+    }
+
+    .navigation--primary .item:hover {
+      color: ${tokenVar(FdsColorText300)};
+    }
+
+    .navigation--primary .item--active .item__label:after {
+      content: '';
+      position: relative;
+      align-self: center;
+      height: 0;
+      margin-left: auto;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-right: 8px solid ${tokenVar(FdsColorBrandWhite)};
+    }
+
+    .navigation__open {
+      height: auto;
+      width: 100%;
+      visibility: visible;
+      opacity: 1;
+      overflow-y: visible;
+      margin-left: 0;
+      margin-top: 0;
+
+      border-top: 1px solid ${tokenVar(FdsColorNeutral100)};
+    }
+
+    .navigation__button-wrapper {
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .navigation__button {
+      background-color: ${tokenVar(FdsColorBrandWhite)};
+      border: none;
+      border-radius: 4px;
+      color: ${tokenVar(FdsColorBrandBlack)};
+      cursor: pointer;
+      font-weight: 600;
+      text-align: center;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .navigation__button:hover {
+      background-color: ${tokenVar(FdsColorNeutral50)};
+    }
+
+    .navigation__button--primary {
+      background-color: ${tokenVar(FdsColorBrandBlack)};
+      color: ${tokenVar(FdsColorBrandWhite)};
+    }
+
+    .navigation__label {
+      margin-right: 10px;
+    }
+
+    /*
+    Apply styles to the list items that do not have a nested list i.e. the last level of the navigation
+    */
+
+    li:not(:has(ul)) {
+      border-bottom: 1px solid var(--fds-color-neutral-100);
+      /*width: 100%;*/
+    }
+  `;
 }

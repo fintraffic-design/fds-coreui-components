@@ -1,17 +1,18 @@
 import {
   FdsColorBrandBlack,
-  FdsColorBrandWhite, FdsColorInteractive200,
+  FdsColorBrandWhite,
+  FdsColorInteractive200,
   FdsColorNeutral100,
-  FdsColorText300
+  FdsColorText300,
 } from '@fintraffic-design/coreui-css'
-import {css, html, LitElement, unsafeCSS, adoptStyles} from 'lit'
+import { css, html, LitElement, unsafeCSS, adoptStyles } from 'lit'
 import { nothing, TemplateResult } from 'lit-html'
-import {customElement, property, state} from 'lit/decorators.js'
+import { customElement, property, state } from 'lit/decorators.js'
 import { FdsIconType } from './fds-icon'
 import './global-types'
 import { uiLabelTextClass } from './utils/css-utils'
 import { tokenVar } from './utils/token-utils'
-import { styleMap } from 'lit/directives/style-map.js';
+import { styleMap } from 'lit/directives/style-map.js'
 
 export enum FdsNavigationVariant {
   primary = 'primary',
@@ -44,7 +45,7 @@ export default class FdsNavigation extends LitElement {
   @property() variant: FdsNavigationVariant = FdsNavigationVariant.primary
   @property() items: FdsNavigationItem[] = []
   @property() selected?: FdsNavigationItem
-  @property({type: Number}) mobileWidth = 768
+  @property({ type: Number }) mobileWidth = 768
 
   @state() open = false
 
@@ -60,42 +61,46 @@ export default class FdsNavigation extends LitElement {
       <ul class="navigation__body ${this.open ? 'navigation__open' : ''}">
         ${itemsOnLeft
           .map(item => this.renderItem(item))
-          .concat(itemsOnRight.map((item, index) => this.renderItem(item, index === 0 ? 'item__first-right' : '')))}
+          .concat(
+            itemsOnRight.map((item, index) => this.renderItem(item, index === 0 ? 'item__first-right' : ''))
+          )}
       </ul>
-      <div class="navigation__button-wrapper">
-        ${this.renderNavigationButton()}
-      </div>
+      <div class="navigation__button-wrapper">${this.renderNavigationButton()}</div>
     </div>`
   }
 
   renderNavigationButton() {
-    let icon;
+    let icon
     switch (this.variant) {
       case FdsNavigationVariant.primary:
         icon = this.open ? html`<fds-icon icon="chevron-up" />` : html`<fds-icon icon="chevron-down" />`
-        break;
+        break
       case FdsNavigationVariant.secondary:
         icon = html`<fds-icon icon="menu" />`
-        break;
+        break
     }
     return html`
-      <button class="navigation__button navigation__button--${this.variant}" type="button" @click=${this.handleNavigationClick}>
+      <button
+        class="navigation__button navigation__button--${this.variant}"
+        type="button"
+        @click=${this.handleNavigationClick}
+      >
         <span class="navigation__label">Valikko</span>
         ${icon}
       </button>
-      `
+    `
   }
 
   handleNavigationClick() {
-    this.open = !this.open;
+    this.open = !this.open
   }
 
   renderItem(item: FdsNavigationItem, clazz: string = ''): TemplateResult {
-    const mobileOrder = item.mobileOrder ?? 0;
+    const mobileOrder = item.mobileOrder ?? 0
     return html` <li
       @click=${(): void => this.handleSelect(item)}
       class="item ${this.selected === item ? 'item--active' : ''} ${clazz}"
-      style=${styleMap({order: mobileOrder})}
+      style=${styleMap({ order: mobileOrder })}
     >
       <div class="item__label">
         ${item.icon && html`<fds-icon class="item__icon" .icon="${item.icon}"></fds-icon>`}
@@ -114,76 +119,79 @@ export default class FdsNavigation extends LitElement {
   }
 
   override connectedCallback() {
-    super.connectedCallback();
+    super.connectedCallback()
     adoptStyles(this.shadowRoot as ShadowRoot, [
       FdsNavigation.cssVariables,
       uiLabelTextClass,
       FdsNavigation.mobileStyles,
       css`
-      @media (min-width: ${unsafeCSS(this.mobileWidth)}px) {
-        .navigation {
-          flex-wrap: nowrap;
-        }
+        @media (min-width: ${unsafeCSS(this.mobileWidth)}px) {
+          .navigation {
+            flex-wrap: nowrap;
+          }
 
-        .navigation__body {
-          width: 100%;
-          height: 100%;
-          order: 0;
-          align-items: end;
-          flex-direction: row;
-        }
-        
-        .navigation__body {
-          height: auto;
-          visibility: visible;
-          opacity: 1;
-          overflow-y: visible;
-          margin-left: 0;
-          margin-top: 0;
-        }
+          .navigation__body {
+            width: 100%;
+            height: 100%;
+            order: 0;
+            align-items: end;
+            flex-direction: row;
+          }
 
-        .item__first-right {
-          margin-left: auto;
-        }
-        
-        .item {
-          justify-items: center;
-          order: 0 !important;
-        }
+          .navigation__body {
+            height: auto;
+            visibility: visible;
+            opacity: 1;
+            overflow-y: visible;
+            margin-left: 0;
+            margin-top: 0;
+          }
 
-        .navigation--primary .item--active:after {
-          content: '';
-          position: relative;
-          top: 1px;
-          border-left: 6px solid transparent;
-          border-right: 6px solid transparent;
-          border-bottom: 8px solid ${tokenVar(FdsColorBrandWhite)};
-        }
-        /* Disable the arrow shown on mobile */
-        .navigation--primary .navigation__open .item--active .item__label:after {
-          content: '';
-          display: none;
-        }
+          .item__first-right {
+            margin-left: auto;
+          }
 
-        .navigation--secondary .item {
-          padding-bottom: calc(var(--element-vertical-padding--secondary) - var(--item-border-bottom-width--secondary));
-          border-bottom: var(--item-border-bottom-width--secondary) solid white;
-        }
+          .item {
+            justify-items: center;
+            order: 0 !important;
+          }
 
-        .navigation--secondary .item--active {
-          border-bottom: var(--item-border-bottom-width--secondary) solid black;
-        }
+          .navigation--primary .item--active:after {
+            content: '';
+            position: relative;
+            top: 1px;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 8px solid ${tokenVar(FdsColorBrandWhite)};
+          }
+          /* Disable the arrow shown on mobile */
+          .navigation--primary .navigation__open .item--active .item__label:after {
+            content: '';
+            display: none;
+          }
 
-        .navigation__button {
-          display: none;
-        }
+          .navigation--secondary .item {
+            padding-bottom: calc(
+              var(--element-vertical-padding--secondary) - var(--item-border-bottom-width--secondary)
+            );
+            border-bottom: var(--item-border-bottom-width--secondary) solid white;
+          }
 
-        li:not(:has(ul)) {
-          padding: 0;
-          border-bottom: none;
-          width: auto;
+          .navigation--secondary .item--active {
+            border-bottom: var(--item-border-bottom-width--secondary) solid black;
+          }
+
+          .navigation__button {
+            display: none;
+          }
+
+          li:not(:has(ul)) {
+            padding: 0;
+            border-bottom: none;
+            width: auto;
+          }
         }
-      }`,
+      `,
     ])
   }
 
@@ -303,7 +311,7 @@ export default class FdsNavigation extends LitElement {
     .navigation__button {
       display: flex;
       align-items: center;
-      
+
       border: none;
       border-radius: 4px;
       cursor: pointer;
@@ -341,5 +349,5 @@ export default class FdsNavigation extends LitElement {
       border-bottom: 1px solid var(--fds-color-neutral-100);
       /*width: 100%;*/
     }
-  `;
+  `
 }

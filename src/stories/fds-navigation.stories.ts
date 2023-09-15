@@ -29,6 +29,7 @@ export default {
     variant: FdsNavigationVariant.primary,
     items: items,
     selected: items[0],
+    mobileWidth: 768,
     select: undefined,
     slot: true,
   },
@@ -61,6 +62,15 @@ export default {
         category: 'Properties',
         defaultValue: { summary: 'undefined' },
       },
+    },
+    'mobile-width': {
+      description:
+        'Width of the viewport in pixels in which the navigation header is rendered as a mobile header. The value should be given as an attribute and it cannot be changed later. <br><br>\
+        `number`',
+      table: {
+        category: 'Attributes',
+        defaultValue: { summary: '768' },
+      }
     },
     select: {
       description:

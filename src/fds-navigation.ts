@@ -37,6 +37,7 @@ export enum FdsNavigationItemPosition {
  * @property {FdsNavigationVariant} variant - Primary or secondary style
  * @property {FdsNavigationItem[]} items - List of navigation items
  * @property {FdsNavigationItem} selected - Currently selected value
+ * @property {number} mobileWidth - Width in pixels when navigation is collapsed
  * @event select - Triggered when destination is clicked. The selected item is in event details field.
  */
 
@@ -45,11 +46,11 @@ export default class FdsNavigation extends LitElement {
   @property() variant: FdsNavigationVariant = FdsNavigationVariant.primary
   @property() items: FdsNavigationItem[] = []
   @property() selected?: FdsNavigationItem
-  @property({ type: Number }) mobileWidth = 768
+  @property({ type: Number, attribute: 'mobile-width' }) mobileWidth = 768
 
   @state() private _open = false
 
-  override connectedCallback() {
+  override connectedCallback():void {
     super.connectedCallback()
     adoptStyles(this.shadowRoot as ShadowRoot, [
       FdsNavigation.cssVariables,
@@ -330,6 +331,10 @@ export default class FdsNavigation extends LitElement {
 
         .item--active {
           padding-right: var(--element-horizontal-padding--primary);
+        }
+        
+        .navigation--primary {
+          height: 40px;
         }
 
         .navigation--primary .item--active:after {

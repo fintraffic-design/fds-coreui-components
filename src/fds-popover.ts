@@ -5,8 +5,9 @@ import './fds-card'
 import {
   FdsColorBrandWhite,
   FdsColorToken,
-  FdsRadiusLarge,
-  FdsStyleElevation200,
+  FdsCssColorBrandWhite,
+  FdsCssRadiusLarge,
+  FdsCssStyleElevation200,
   tokenVar,
   uiHelperTextClass,
 } from '@fintraffic-design/coreui-css'
@@ -114,9 +115,9 @@ export default class FdsPopover extends LitElement {
     css`
       .popover {
         display: none;
-        border-radius: ${tokenVar(FdsRadiusLarge)};
-        box-shadow: ${tokenVar(FdsStyleElevation200)};
-        background-color: ${tokenVar(FdsColorBrandWhite)};
+        border-radius: ${FdsCssRadiusLarge};
+        box-shadow: ${FdsCssStyleElevation200};
+        background-color: ${FdsCssColorBrandWhite};
       }
 
       .popover-open {

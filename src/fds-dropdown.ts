@@ -1,14 +1,13 @@
 import {
-  FdsColorBrandWhite,
-  FdsColorDanger200,
-  FdsColorInteractive100,
-  FdsColorInteractive200,
-  FdsColorNeutral200,
-  FdsColorNeutral50,
-  FdsColorText1000,
-  FdsColorText300,
-  FdsStyleElevation200,
-  tokenVar,
+  FdsCssColorBrandWhite,
+  FdsCssColorDanger200,
+  FdsCssColorInteractive100,
+  FdsCssColorInteractive200,
+  FdsCssColorNeutral200,
+  FdsCssColorNeutral50,
+  FdsCssColorText1000,
+  FdsCssColorText300,
+  FdsCssStyleElevation200,
   uiLabelTextClass,
 } from '@fintraffic-design/coreui-css'
 import { css, html, LitElement } from 'lit'
@@ -154,27 +153,27 @@ export default class FdsDropdown<T> extends LitElement {
         padding-right: 8px;
         gap: 10px;
 
-        background-color: ${tokenVar(FdsColorBrandWhite)};
-        border: 1px solid ${tokenVar(FdsColorNeutral200)};
+        background-color: ${FdsCssColorBrandWhite};
+        border: 1px solid ${FdsCssColorNeutral200};
       }
 
       button:disabled {
         cursor: default;
-        background-color: ${tokenVar(FdsColorNeutral50)};
-        color: ${tokenVar(FdsColorText300)};
+        background-color: ${FdsCssColorNeutral50};
+        color: ${FdsCssColorText300};
       }
 
       button:disabled .chevron {
-        color: ${tokenVar(FdsColorText300)};
+        color: ${FdsCssColorText300};
       }
 
       button.placeholder {
-        color: ${tokenVar(FdsColorText300)};
+        color: ${FdsCssColorText300};
       }
 
       button.error {
-        color: ${tokenVar(FdsColorDanger200)};
-        border: 3px solid ${tokenVar(FdsColorDanger200)};
+        color: ${FdsCssColorDanger200};
+        border: 3px solid ${FdsCssColorDanger200};
       }
 
       .options-list {
@@ -188,12 +187,12 @@ export default class FdsDropdown<T> extends LitElement {
         /* TODO: what value? */
         max-height: 80vw;
 
-        box-shadow: ${tokenVar(FdsStyleElevation200)};
+        box-shadow: ${FdsCssStyleElevation200};
       }
 
       fds-icon {
         position: static;
-        color: ${tokenVar(FdsColorText1000)};
+        color: ${FdsCssColorText1000};
       }
 
       .icon-label {
@@ -219,18 +218,18 @@ export default class FdsDropdown<T> extends LitElement {
         padding-left: 16px;
         padding-right: 8px;
 
-        background-color: ${tokenVar(FdsColorBrandWhite)};
-        border-bottom: 1px solid ${tokenVar(FdsColorNeutral200)};
+        background-color: ${FdsCssColorBrandWhite};
+        border-bottom: 1px solid ${FdsCssColorNeutral200};
       }
 
       .option:hover {
         /* TODO: what color? */
-        background-color: ${tokenVar(FdsColorInteractive100)};
+        background-color: ${FdsCssColorInteractive100};
       }
 
       .option.selected {
         /* TODO: what color? */
-        background-color: ${tokenVar(FdsColorInteractive200)};
+        background-color: ${FdsCssColorInteractive200};
       }
     `,
   ]

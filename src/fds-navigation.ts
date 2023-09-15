@@ -73,10 +73,10 @@ export default class FdsNavigation extends LitElement {
     let icon
     switch (this.variant) {
       case FdsNavigationVariant.primary:
-        icon = this.open ? html`<fds-icon icon="chevron-up" />` : html`<fds-icon icon="chevron-down" />`
+        icon = this.open ? html`<fds-icon icon="chevron-up">` : html`<fds-icon icon="chevron-down"></fds-icon>`
         break
       case FdsNavigationVariant.secondary:
-        icon = html`<fds-icon icon="menu" />`
+        icon = html`<fds-icon icon="menu"></fds-icon>`
         break
     }
     return html`

@@ -1,7 +1,7 @@
 import {
   FdsColorBrandBlack,
-  FdsColorBrandWhite,
-  FdsColorNeutral100, FdsColorNeutral50,
+  FdsColorBrandWhite, FdsColorInteractive200,
+  FdsColorNeutral100,
   FdsColorText300
 } from '@fintraffic-design/coreui-css'
 import {css, html, LitElement, unsafeCSS, adoptStyles} from 'lit'
@@ -71,7 +71,7 @@ export default class FdsNavigation extends LitElement {
     return html`
       <button class="navigation__button navigation__button--${this.variant}" type="button" @click=${this.handleNavigationClick}>
         <span class="navigation__label">Valikko</span>
-        <fds-icon icon="menu" />
+        ${this.open ? html`<fds-icon icon="chevron-up" />` : html`<fds-icon icon="chevron-down" />`}
       </button>
       `
   }
@@ -148,6 +148,11 @@ export default class FdsNavigation extends LitElement {
           border-left: 6px solid transparent;
           border-right: 6px solid transparent;
           border-bottom: 8px solid ${tokenVar(FdsColorBrandWhite)};
+        }
+        /* Disable the arrow shown on mobile */
+        .navigation--primary .navigation__open .item--active .item__label:after {
+          content: '';
+          display: none;
         }
 
         .navigation--secondary {
@@ -246,7 +251,7 @@ export default class FdsNavigation extends LitElement {
       color: ${tokenVar(FdsColorText300)};
     }
 
-    .navigation--primary .item--active .item__label:after {
+    .navigation--primary .navigation__open .item--active .item__label:after {
       content: '';
       position: relative;
       align-self: center;
@@ -276,6 +281,9 @@ export default class FdsNavigation extends LitElement {
     }
 
     .navigation__button {
+      display: flex;
+      align-items: center;
+      
       background-color: ${tokenVar(FdsColorBrandWhite)};
       border: none;
       border-radius: 4px;
@@ -287,13 +295,13 @@ export default class FdsNavigation extends LitElement {
       white-space: nowrap;
     }
 
-    .navigation__button:hover {
-      background-color: ${tokenVar(FdsColorNeutral50)};
-    }
-
     .navigation__button--primary {
       background-color: ${tokenVar(FdsColorBrandBlack)};
       color: ${tokenVar(FdsColorBrandWhite)};
+    }
+
+    .navigation__button--primary:hover {
+      background-color: ${tokenVar(FdsColorInteractive200)};
     }
 
     .navigation__label {

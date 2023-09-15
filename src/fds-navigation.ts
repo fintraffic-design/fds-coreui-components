@@ -5,7 +5,7 @@ import {
   FdsColorNeutral100,
   FdsColorText300,
 } from '@fintraffic-design/coreui-css'
-import { css, html, LitElement, unsafeCSS, adoptStyles } from 'lit'
+import { css, html, LitElement, unsafeCSS, adoptStyles, CSSResult } from 'lit'
 import { nothing, TemplateResult } from 'lit-html'
 import { customElement, property, state } from 'lit/decorators.js'
 import { FdsIconType } from './fds-icon'
@@ -47,7 +47,17 @@ export default class FdsNavigation extends LitElement {
   @property() selected?: FdsNavigationItem
   @property({ type: Number }) mobileWidth = 768
 
-  @state() open = false
+  @state() private _open = false
+
+  override connectedCallback() {
+    super.connectedCallback()
+    adoptStyles(this.shadowRoot as ShadowRoot, [
+      FdsNavigation.cssVariables,
+      uiLabelTextClass,
+      FdsNavigation.mobileStyles,
+      this.desktopStyles(),
+    ])
+  }
 
   override render(): TemplateResult {
     const itemsOnRight = this.items.filter(item => item.position === FdsNavigationItemPosition.right)
@@ -58,7 +68,7 @@ export default class FdsNavigation extends LitElement {
             <slot></slot>
           </div>`
         : nothing}
-      <ul class="navigation__body ${this.open ? 'navigation__open' : ''}">
+      <ul class="navigation__body ${this._open ? 'navigation__open' : ''}">
         ${itemsOnLeft
           .map(item => this.renderItem(item))
           .concat(
@@ -69,11 +79,11 @@ export default class FdsNavigation extends LitElement {
     </div>`
   }
 
-  renderNavigationButton() {
+  renderNavigationButton(): TemplateResult {
     let icon
     switch (this.variant) {
       case FdsNavigationVariant.primary:
-        icon = this.open
+        icon = this._open
           ? html`<fds-icon icon="chevron-up"></fds-icon>`
           : html`<fds-icon icon="chevron-down"></fds-icon>`
         break
@@ -93,8 +103,8 @@ export default class FdsNavigation extends LitElement {
     `
   }
 
-  handleNavigationClick() {
-    this.open = !this.open
+  handleNavigationClick(): void {
+    this._open = !this._open
   }
 
   renderItem(item: FdsNavigationItem, clazz: string = ''): TemplateResult {
@@ -118,83 +128,6 @@ export default class FdsNavigation extends LitElement {
         detail: item,
       })
     )
-  }
-
-  override connectedCallback() {
-    super.connectedCallback()
-    adoptStyles(this.shadowRoot as ShadowRoot, [
-      FdsNavigation.cssVariables,
-      uiLabelTextClass,
-      FdsNavigation.mobileStyles,
-      css`
-        @media (min-width: ${unsafeCSS(this.mobileWidth)}px) {
-          .navigation {
-            flex-wrap: nowrap;
-          }
-
-          .navigation__body {
-            width: 100%;
-            height: 100%;
-            order: 0;
-            align-items: end;
-            flex-direction: row;
-          }
-
-          .navigation__body {
-            height: auto;
-            visibility: visible;
-            opacity: 1;
-            overflow-y: visible;
-            margin-left: 0;
-            margin-top: 0;
-          }
-
-          .item__first-right {
-            margin-left: auto;
-          }
-
-          .item {
-            justify-items: center;
-            order: 0 !important;
-          }
-
-          .navigation--primary .item--active:after {
-            content: '';
-            position: relative;
-            top: 1px;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-bottom: 8px solid ${tokenVar(FdsColorBrandWhite)};
-          }
-          /* Disable the arrow shown on mobile */
-          .navigation--primary .navigation__open .item--active .item__label:after {
-            content: '';
-            display: none;
-          }
-
-          .navigation--secondary .item {
-            padding-bottom: calc(
-              var(--element-vertical-padding--secondary) - var(--item-border-bottom-width--secondary)
-            );
-            border-bottom: var(--item-border-bottom-width--secondary) solid white;
-          }
-
-          .navigation--secondary .item--active {
-            border-bottom: var(--item-border-bottom-width--secondary) solid black;
-          }
-
-          .navigation__button {
-            display: none;
-          }
-
-          li:not(:has(ul)) {
-            padding: 0;
-            border-bottom: none;
-            width: auto;
-          }
-        }
-      `,
-    ])
   }
 
   static cssVariables = css`
@@ -224,7 +157,7 @@ export default class FdsNavigation extends LitElement {
       cursor: pointer;
       display: grid;
       grid-template-rows: auto 0;
-      padding: var(--element-vertical-padding--primary) 0 var(--element-vertical-padding--primary) 20px;
+      padding: var(--element-vertical-padding--primary) 20px;
     }
 
     .navigation--secondary .item {
@@ -352,4 +285,82 @@ export default class FdsNavigation extends LitElement {
       /*width: 100%;*/
     }
   `
+
+  /**
+   * These styles are inside a function instead of being static because they depend on the mobileWidth property
+   * that the end user can change
+   */
+  desktopStyles(): CSSResult {
+    return css`
+      @media (min-width: ${unsafeCSS(this.mobileWidth)}px) {
+        .navigation {
+          flex-wrap: nowrap;
+        }
+
+        .navigation__body {
+          width: 100%;
+          height: 100%;
+          order: 0;
+          align-items: end;
+          flex-direction: row;
+        }
+
+        .navigation__body {
+          height: auto;
+          visibility: visible;
+          opacity: 1;
+          overflow-y: visible;
+          margin-left: 0;
+          margin-top: 0;
+        }
+
+        .item__first-right {
+          margin-left: auto;
+        }
+
+        .item {
+          justify-items: center;
+          order: 0 !important;
+        }
+
+        .navigation--primary .item--active:after {
+          content: '';
+          position: relative;
+          top: 1px;
+          border-left: 6px solid transparent;
+          border-right: 6px solid transparent;
+          border-bottom: 8px solid ${tokenVar(FdsColorBrandWhite)};
+        }
+
+        /* Disable the arrow shown on mobile */
+        .navigation--primary .navigation__open .item--active .item__label:after {
+          content: '';
+          display: none;
+        }
+
+        .navigation--secondary .item {
+          padding-bottom: calc(
+            var(--element-vertical-padding--secondary) - var(--item-border-bottom-width--secondary)
+          );
+          border-bottom: var(--item-border-bottom-width--secondary) solid white;
+        }
+
+        .navigation--secondary .item--active {
+          border-bottom: var(--item-border-bottom-width--secondary) solid black;
+        }
+
+        .navigation__button {
+          display: none;
+        }
+
+        li:not(:has(ul)) {
+          padding: 0;
+          border-bottom: none;
+          width: auto;
+        }
+      }
+    `
+  }
+
+  static override styles = [FdsNavigation.cssVariables, uiLabelTextClass, FdsNavigation.mobileStyles]
 }

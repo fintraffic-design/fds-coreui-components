@@ -134,6 +134,7 @@ export default class FdsNavigation extends LitElement {
     :host {
       --element-vertical-padding--primary: 9px;
       --element-vertical-padding--secondary: 16px;
+      --element-horizontal-padding--primary: 20px;
       --item-border-bottom-width--secondary: 3px;
     }
   `
@@ -157,7 +158,11 @@ export default class FdsNavigation extends LitElement {
       cursor: pointer;
       display: grid;
       grid-template-rows: auto 0;
-      padding: var(--element-vertical-padding--primary) 20px;
+      padding: var(--element-vertical-padding--primary) var(--element-horizontal-padding--primary);
+    }
+
+    .item--active {
+      padding-right: 0;
     }
 
     .navigation--secondary .item {
@@ -321,6 +326,10 @@ export default class FdsNavigation extends LitElement {
         .item {
           justify-items: center;
           order: 0 !important;
+        }
+
+        .item--active {
+          padding-right: var(--element-horizontal-padding--primary);
         }
 
         .navigation--primary .item--active:after {

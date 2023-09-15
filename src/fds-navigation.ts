@@ -147,10 +147,6 @@ export default class FdsNavigation extends LitElement {
           justify-items: center;
         }
 
-        .item__icon {
-          margin-right: 6px;
-        }
-
         .navigation--primary .item--active:after {
           content: '';
           position: relative;
@@ -223,6 +219,10 @@ export default class FdsNavigation extends LitElement {
 
     .item__label {
       align-items: end;
+    }
+
+    .item__icon {
+      margin-right: 6px;
     }
 
     .navigation__header ::slotted(*) {

@@ -70,7 +70,7 @@ export default {
       table: {
         category: 'Attributes',
         defaultValue: { summary: '768' },
-      }
+      },
     },
     select: {
       description:

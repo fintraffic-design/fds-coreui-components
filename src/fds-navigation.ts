@@ -50,7 +50,7 @@ export default class FdsNavigation extends LitElement {
 
   @state() private _open = false
 
-  override connectedCallback():void {
+  override connectedCallback(): void {
     super.connectedCallback()
     adoptStyles(this.shadowRoot as ShadowRoot, [
       FdsNavigation.cssVariables,
@@ -332,7 +332,7 @@ export default class FdsNavigation extends LitElement {
         .item--active {
           padding-right: var(--element-horizontal-padding--primary);
         }
-        
+
         .navigation--primary {
           height: 40px;
         }

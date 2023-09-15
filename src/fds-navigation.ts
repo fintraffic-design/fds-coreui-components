@@ -11,6 +11,7 @@ import { FdsIconType } from './fds-icon'
 import './global-types'
 import { uiLabelTextClass } from './utils/css-utils'
 import { tokenVar } from './utils/token-utils'
+import { styleMap } from 'lit/directives/style-map.js';
 
 export enum FdsNavigationVariant {
   primary = 'primary',
@@ -90,9 +91,11 @@ export default class FdsNavigation extends LitElement {
   }
 
   renderItem(item: FdsNavigationItem, clazz: string = ''): TemplateResult {
+    const mobileOrder = item.mobileOrder ?? 0;
     return html` <li
       @click=${(): void => this.handleSelect(item)}
       class="item ${this.selected === item ? 'item--active' : ''} ${clazz}"
+      style=${styleMap({order: mobileOrder})}
     >
       <div class="item__label">
         ${item.icon && html`<fds-icon class="item__icon" .icon="${item.icon}"></fds-icon>`}
@@ -145,6 +148,7 @@ export default class FdsNavigation extends LitElement {
         
         .item {
           justify-items: center;
+          order: 0 !important;
         }
 
         .navigation--primary .item--active:after {

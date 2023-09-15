@@ -1,6 +1,7 @@
 import { StoryObj, Meta, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
 import '../fds-action-sheet'
+import '../fds-button'
 import '../fds-icon'
 import '../global-types'
 

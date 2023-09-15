@@ -68,10 +68,19 @@ export default class FdsNavigation extends LitElement {
   }
 
   renderNavigationButton() {
+    let icon;
+    switch (this.variant) {
+      case FdsNavigationVariant.primary:
+        icon = this.open ? html`<fds-icon icon="chevron-up" />` : html`<fds-icon icon="chevron-down" />`
+        break;
+      case FdsNavigationVariant.secondary:
+        icon = html`<fds-icon icon="menu" />`
+        break;
+    }
     return html`
       <button class="navigation__button navigation__button--${this.variant}" type="button" @click=${this.handleNavigationClick}>
         <span class="navigation__label">Valikko</span>
-        ${this.open ? html`<fds-icon icon="chevron-up" />` : html`<fds-icon icon="chevron-down" />`}
+        ${icon}
       </button>
       `
   }
@@ -104,6 +113,7 @@ export default class FdsNavigation extends LitElement {
   override connectedCallback() {
     super.connectedCallback();
     adoptStyles(this.shadowRoot as ShadowRoot, [
+      FdsNavigation.cssVariables,
       uiLabelTextClass,
       FdsNavigation.mobileStyles,
       css`
@@ -155,27 +165,13 @@ export default class FdsNavigation extends LitElement {
           display: none;
         }
 
-        .navigation--secondary {
-          background-color: ${tokenVar(FdsColorBrandWhite)};
-          border-bottom: 1px solid ${tokenVar(FdsColorBrandBlack)};
-          height: 55px;
-        }
-
-        .navigation--secondary .navigation__body {
-          padding: 0px 16px;
-        }
-
         .navigation--secondary .item {
-          border-bottom: 3px solid white;
-          padding: 16px 16px 13px 16px;
+          padding-bottom: calc(var(--element-vertical-padding--secondary) - var(--item-border-bottom-width--secondary));
+          border-bottom: var(--item-border-bottom-width--secondary) solid white;
         }
 
         .navigation--secondary .item--active {
-          border-bottom: 3px solid black;
-        }
-
-        .navigation--secondary .item:hover {
-          color: ${tokenVar(FdsColorText300)};
+          border-bottom: var(--item-border-bottom-width--secondary) solid black;
         }
 
         .navigation__button {
@@ -190,6 +186,14 @@ export default class FdsNavigation extends LitElement {
       }`,
     ])
   }
+
+  static cssVariables = css`
+    :host {
+      --element-vertical-padding--primary: 9px;
+      --element-vertical-padding--secondary: 16px;
+      --item-border-bottom-width--secondary: 3px;
+    }
+  `
 
   static mobileStyles = css`
     .navigation {
@@ -210,7 +214,11 @@ export default class FdsNavigation extends LitElement {
       cursor: pointer;
       display: grid;
       grid-template-rows: auto 0;
-      padding: 9px 0 9px 20px;
+      padding: var(--element-vertical-padding--primary) 0 var(--element-vertical-padding--primary) 20px;
+    }
+
+    .navigation--secondary .item {
+      padding: var(--element-vertical-padding--secondary) 16px;
     }
 
     .item__label {
@@ -218,8 +226,7 @@ export default class FdsNavigation extends LitElement {
     }
 
     .navigation__header ::slotted(*) {
-      padding: 9px 24px 9px 32px;
-      height: 40px;
+      padding: var(--element-vertical-padding--primary) 24px var(--element-vertical-padding--primary) 32px;
     }
 
     .navigation__body {
@@ -262,6 +269,15 @@ export default class FdsNavigation extends LitElement {
       border-right: 8px solid ${tokenVar(FdsColorBrandWhite)};
     }
 
+    .navigation--secondary {
+      background-color: ${tokenVar(FdsColorBrandWhite)};
+      border-bottom: 1px solid ${tokenVar(FdsColorBrandBlack)};
+    }
+
+    .navigation--secondary .item:hover {
+      color: ${tokenVar(FdsColorText300)};
+    }
+
     .navigation__open {
       height: auto;
       width: 100%;
@@ -284,10 +300,8 @@ export default class FdsNavigation extends LitElement {
       display: flex;
       align-items: center;
       
-      background-color: ${tokenVar(FdsColorBrandWhite)};
       border: none;
       border-radius: 4px;
-      color: ${tokenVar(FdsColorBrandBlack)};
       cursor: pointer;
       font-weight: 600;
       text-align: center;
@@ -298,10 +312,17 @@ export default class FdsNavigation extends LitElement {
     .navigation__button--primary {
       background-color: ${tokenVar(FdsColorBrandBlack)};
       color: ${tokenVar(FdsColorBrandWhite)};
+      padding: var(--element-vertical-padding--primary);
     }
 
     .navigation__button--primary:hover {
       background-color: ${tokenVar(FdsColorInteractive200)};
+    }
+
+    .navigation__button--secondary {
+      background-color: ${tokenVar(FdsColorBrandWhite)};
+      color: ${tokenVar(FdsColorBrandBlack)};
+      padding: var(--element-vertical-padding--secondary);
     }
 
     .navigation__label {

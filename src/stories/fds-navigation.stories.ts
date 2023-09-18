@@ -29,7 +29,6 @@ export default {
     variant: FdsNavigationVariant.primary,
     items: items,
     selected: items[0],
-    mobileWidth: 768,
     select: undefined,
     slot: true,
   },

@@ -1,13 +1,13 @@
 import {
   FdsColorBrandBlack,
   FdsColorBrandWhite,
-  FdsColorInteractive200,
   FdsColorNeutral100,
   FdsColorText300,
 } from '@fintraffic-design/coreui-css'
 import { css, html, LitElement, unsafeCSS, adoptStyles, CSSResult } from 'lit'
 import { nothing, TemplateResult } from 'lit-html'
 import { customElement, property, state } from 'lit/decorators.js'
+import './fds-icon'
 import { FdsIconType } from './fds-icon'
 import './global-types'
 import { uiLabelTextClass } from './utils/css-utils'
@@ -269,13 +269,17 @@ export default class FdsNavigation extends LitElement {
     }
 
     .navigation__button--primary:hover {
-      background-color: ${tokenVar(FdsColorInteractive200)};
+      color: ${tokenVar(FdsColorText300)};
     }
 
     .navigation__button--secondary {
       background-color: ${tokenVar(FdsColorBrandWhite)};
       color: ${tokenVar(FdsColorBrandBlack)};
       padding: var(--element-vertical-padding--secondary);
+    }
+    
+    .navigation__button--secondary:hover {
+      color: ${tokenVar(FdsColorText300)};
     }
 
     .navigation__label {

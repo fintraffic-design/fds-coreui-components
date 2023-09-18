@@ -37,6 +37,7 @@ export enum FdsNavigationItemPosition {
  * @property {FdsNavigationVariant} variant - Primary or secondary style
  * @property {FdsNavigationItem[]} items - List of navigation items
  * @property {FdsNavigationItem} selected - Currently selected value
+ * @property {string} mobileNavText - Text for mobile navigation button
  * @property {number} mobileWidth - Width in pixels when navigation is collapsed
  * @event select - Triggered when destination is clicked. The selected item is in event details field.
  */
@@ -46,6 +47,7 @@ export default class FdsNavigation extends LitElement {
   @property() variant: FdsNavigationVariant = FdsNavigationVariant.primary
   @property() items: FdsNavigationItem[] = []
   @property() selected?: FdsNavigationItem
+  @property({ attribute: 'mobile-nav-text' }) mobileNavText: string = '';
   @property({ type: Number, attribute: 'mobile-width' }) mobileWidth = 768
 
   @state() private _open = false
@@ -98,7 +100,7 @@ export default class FdsNavigation extends LitElement {
         type="button"
         @click=${this.handleNavigationClick}
       >
-        <span class="navigation__label">Valikko</span>
+        <span class="navigation__label">${this.mobileNavText}</span>
         ${icon}
       </button>
     `

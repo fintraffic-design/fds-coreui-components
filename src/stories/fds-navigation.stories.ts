@@ -30,6 +30,7 @@ export default {
     items: items,
     selected: items[0],
     select: undefined,
+    mobileNavText: 'Menu',
     slot: true,
   },
   argTypes: {
@@ -62,6 +63,15 @@ export default {
         defaultValue: { summary: 'undefined' },
       },
     },
+    mobileNavText: {
+      description:
+        'Text for the mobile navigation button. <br><br>\
+        `string`',
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: '' },
+      },
+    },
     'mobile-width': {
       description:
         'Width of the viewport in pixels in which the navigation header is rendered as a mobile header. The value should be given as an attribute and it cannot be changed later. <br><br>\
@@ -87,13 +97,14 @@ export default {
   },
 }
 
-const Template: StoryFn = ({ variant, slot }) => {
+const Template: StoryFn = ({ variant, slot, mobileNavText }) => {
   const headerEl = slot ? html`<div style="display: flex; align-items: center;">Header</div>` : null
   return html`<div style="height: 300px;">
     <fds-navigation
       .variant=${variant}
       .items=${items}
       .selected=${items[0]}
+      .mobileNavText=${mobileNavText}
       @select="${(event: CustomEvent<FdsNavigationItem>): void => console.log('@select', event.detail)}"
     >
       ${headerEl}

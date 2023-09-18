@@ -47,7 +47,7 @@ export default class FdsNavigation extends LitElement {
   @property() variant: FdsNavigationVariant = FdsNavigationVariant.primary
   @property() items: FdsNavigationItem[] = []
   @property() selected?: FdsNavigationItem
-  @property({ attribute: 'mobile-nav-text' }) mobileNavText: string = '';
+  @property({ attribute: 'mobile-nav-text' }) mobileNavText: string = ''
   @property({ type: Number, attribute: 'mobile-width' }) mobileWidth = 768
 
   @state() private _open = false
@@ -279,7 +279,7 @@ export default class FdsNavigation extends LitElement {
       color: ${tokenVar(FdsColorBrandBlack)};
       padding: var(--element-vertical-padding--secondary);
     }
-    
+
     .navigation__button--secondary:hover {
       color: ${tokenVar(FdsColorText300)};
     }

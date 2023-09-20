@@ -18,9 +18,14 @@ export default {
           Selector: `<fds-dialog>`",
       },
     },
+    actions: {
+      handles: ['outside-modal-click'],
+    },
   },
   args: {
     modal: false,
+    overlay: false,
+    outsideModalClick: undefined,
     slot: undefined,
   },
   argTypes: {
@@ -33,6 +38,23 @@ export default {
         defaultValue: { summary: 'false' },
       },
     },
+    overlay: {
+      description:
+        'Whether the dialog shows an overlay. Overlay does not allow interaction with the dialog. <br><br>\
+        `boolean`',
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: 'false' },
+      },
+    },
+    outsideModalClick: {
+      description:
+        'Event that is dispatched when the dialog is a modal dialog and user clicks outside of it. <br><br> \
+      `CustomEvent<void>`',
+      table: { category: 'Events' },
+      name: '@outside-modal-click',
+      control: false,
+    },
     slot: {
       description: 'Default slot. Container for the dialog content.',
       table: { category: 'Slots' },
@@ -42,7 +64,7 @@ export default {
   },
 }
 
-const Template: StoryFn = ({ modal }) => {
+const Template: StoryFn = ({ modal, overlay }) => {
   return html`
     <style>
       fds-action-sheet {
@@ -56,7 +78,12 @@ const Template: StoryFn = ({ modal }) => {
     </style>
 
     <div style="height: 260px;">
-      <fds-dialog .modal=${modal} style="width: 50%; min-width: 30rem; max-width: 40rem">
+      <fds-dialog
+        .modal=${modal}
+        .overlay=${overlay}
+        @outside-modal-click=${(): void => console.log('@outside-modal-click')}
+        style="width: 50%; min-width: 30rem; max-width: 40rem"
+      >
         <fds-card .elevation="${FdsCardElevation.none}">
           <h4 slot="header-title">Modal title</h4>
           <p>Modal message</p>

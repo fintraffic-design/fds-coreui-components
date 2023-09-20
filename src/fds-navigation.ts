@@ -221,12 +221,16 @@ export default class FdsNavigation extends LitElement {
       margin-left: auto;
       border-top: 6px solid transparent;
       border-bottom: 6px solid transparent;
-      border-right: 8px solid ${tokenVar(FdsColorBrandWhite)};
+      border-right: var(--element-vertical-padding--primary) solid ${tokenVar(FdsColorBrandWhite)};
     }
 
     .navigation--secondary {
       background-color: ${tokenVar(FdsColorBrandWhite)};
       border-bottom: 1px solid ${tokenVar(FdsColorBrandBlack)};
+    }
+
+    .navigation--secondary .item {
+      border-bottom: 1px solid ${tokenVar(FdsColorNeutral100)};
     }
 
     .navigation--secondary .item:hover {
@@ -287,15 +291,6 @@ export default class FdsNavigation extends LitElement {
     .navigation__label {
       margin-right: 10px;
     }
-
-    /*
-    Apply styles to the list items that do not have a nested list i.e. the last level of the navigation
-    */
-
-    li:not(:has(ul)) {
-      border-bottom: 1px solid var(--fds-color-neutral-100);
-      /*width: 100%;*/
-    }
   `
 
   /**
@@ -349,7 +344,7 @@ export default class FdsNavigation extends LitElement {
           top: 1px;
           border-left: 6px solid transparent;
           border-right: 6px solid transparent;
-          border-bottom: 8px solid ${tokenVar(FdsColorBrandWhite)};
+          border-bottom: var(--element-vertical-padding--primary) solid ${tokenVar(FdsColorBrandWhite)};
         }
 
         /* Disable the arrow shown on mobile */

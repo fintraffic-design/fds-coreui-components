@@ -1,13 +1,13 @@
 import {
-  FdsCssColorBrandBlack,
-  FdsCssColorBrandWhite,
-  FdsCssColorDanger300,
-  FdsCssColorDanger400,
-  FdsCssColorInteractive200,
-  FdsCssColorNeutral100,
-  FdsCssColorText300,
-  FdsCssRadiusLarge,
-  FdsCssSize6,
+  FdsColorBrandBlack,
+  FdsColorBrandWhite,
+  FdsColorDanger300,
+  FdsColorDanger400,
+  FdsColorInteractive200,
+  FdsColorNeutral100,
+  FdsColorText300,
+  FdsRadiusLarge,
+  FdsSize6,
   uiLabelTextClass,
 } from '@fintraffic-design/coreui-css'
 import { css, CSSResult, html, LitElement } from 'lit'
@@ -24,10 +24,10 @@ export enum FdsButtonVariant {
 }
 
 const variantColorMap: Record<FdsButtonVariant, CSSResult> = {
-  primary: FdsCssColorBrandWhite,
-  secondary: FdsCssColorBrandBlack,
-  tertiary: FdsCssColorBrandBlack,
-  danger: FdsCssColorBrandWhite,
+  primary: FdsColorBrandWhite,
+  secondary: FdsColorBrandBlack,
+  tertiary: FdsColorBrandBlack,
+  danger: FdsColorBrandWhite,
 }
 
 /**
@@ -68,10 +68,10 @@ export default class FdsButton extends LitElement {
       button {
         cursor: pointer;
         display: flex;
-        border: 2px solid ${FdsCssColorBrandBlack};
-        border-radius: ${FdsCssRadiusLarge};
+        border: 2px solid ${FdsColorBrandBlack};
+        border-radius: ${FdsRadiusLarge};
         padding: 13px 16px;
-        height: ${FdsCssSize6};
+        height: ${FdsSize6};
         align-items: center;
         justify-content: center;
         gap: 8px;
@@ -85,14 +85,14 @@ export default class FdsButton extends LitElement {
       }
 
       .button--primary {
-        border-color: ${FdsCssColorBrandBlack};
-        background: ${FdsCssColorBrandBlack};
+        border-color: ${FdsColorBrandBlack};
+        background: ${FdsColorBrandBlack};
         color: ${variantColorMap[FdsButtonVariant.primary]};
       }
 
       .button--secondary {
-        border: 2px solid ${FdsCssColorBrandBlack};
-        background: ${FdsCssColorBrandWhite};
+        border: 2px solid ${FdsColorBrandBlack};
+        background: ${FdsColorBrandWhite};
         color: ${variantColorMap[FdsButtonVariant.secondary]};
       }
 
@@ -103,7 +103,7 @@ export default class FdsButton extends LitElement {
       }
 
       .button--danger {
-        background: ${FdsCssColorDanger300};
+        background: ${FdsColorDanger300};
         border-color: transparent;
         color: ${variantColorMap[FdsButtonVariant.danger]};
       }
@@ -111,39 +111,39 @@ export default class FdsButton extends LitElement {
       .button--primary:hover,
       .button--secondary:hover,
       .button--tertiary:hover {
-        background: ${FdsCssColorInteractive200};
+        background: ${FdsColorInteractive200};
         border-color: transparent;
-        color: ${FdsCssColorBrandWhite};
+        color: ${FdsColorBrandWhite};
       }
 
       .button--danger:hover {
-        background: ${FdsCssColorDanger400};
-        border-color: ${FdsCssColorDanger400};
-        color: ${FdsCssColorBrandWhite};
+        background: ${FdsColorDanger400};
+        border-color: ${FdsColorDanger400};
+        color: ${FdsColorBrandWhite};
       }
 
       .button--primary:disabled {
-        background: ${FdsCssColorNeutral100};
-        border-color: ${FdsCssColorNeutral100};
-        color: ${FdsCssColorText300};
+        background: ${FdsColorNeutral100};
+        border-color: ${FdsColorNeutral100};
+        color: ${FdsColorText300};
       }
 
       .button--secondary:disabled {
         background: transparent;
-        color: ${FdsCssColorNeutral100};
-        border-color: ${FdsCssColorNeutral100};
+        color: ${FdsColorNeutral100};
+        border-color: ${FdsColorNeutral100};
       }
 
       .button--tertiary:disabled {
         background: transparent;
         border-color: transparent;
-        color: ${FdsCssColorNeutral100};
+        color: ${FdsColorNeutral100};
       }
 
       .button--danger:disabled {
-        background: ${FdsCssColorNeutral100};
+        background: ${FdsColorNeutral100};
         border-color: transparent;
-        color: ${FdsCssColorText300};
+        color: ${FdsColorText300};
       }
     `,
   ]

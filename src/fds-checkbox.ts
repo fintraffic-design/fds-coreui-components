@@ -1,8 +1,8 @@
 import {
-  FdsCssColorBrandBlack,
-  FdsCssColorInteractive200,
-  FdsCssColorText300,
-  FdsCssRadiusCompact,
+  FdsColorBrandBlack,
+  FdsColorInteractive200,
+  FdsColorText300,
+  FdsRadiusCompact,
   uiLabelTextClass,
 } from '@fintraffic-design/coreui-css'
 import { css, html, LitElement } from 'lit'
@@ -74,14 +74,14 @@ export default class FdsCheckbox extends LitElement {
         width: 16px;
         display: inline-block;
         vertical-align: sub;
-        border: 2px solid ${FdsCssColorBrandBlack};
-        border-radius: ${FdsCssRadiusCompact};
+        border: 2px solid ${FdsColorBrandBlack};
+        border-radius: ${FdsRadiusCompact};
       }
 
       #checkbox:checked::before {
-        border-color: ${FdsCssColorInteractive200};
+        border-color: ${FdsColorInteractive200};
         background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDEwIDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0zLjM4Nzc2IDcuNDAzM0wwLjE0NjA2NiA0LjE2MTYxQy0wLjA0ODY4ODcgMy45NjY4NSAtMC4wNDg2ODg3IDMuNjUxMDggMC4xNDYwNjYgMy40NTYzMUwwLjg1MTM0OSAyLjc1MUMxLjA0NjEgMi41NTYyMyAxLjM2MTkgMi41NTYyMyAxLjU1NjY1IDIuNzUxTDMuNzQwNDEgNC45MzQ3NEw4LjQxNzc4IDAuMjU3Mzk0QzguNjEyNTQgMC4wNjI2Mzk0IDguOTI4MzMgMC4wNjI2Mzk0IDkuMTIzMDggMC4yNTczOTRMOS44MjgzNyAwLjk2MjY5NkMxMC4wMjMxIDEuMTU3NDUgMTAuMDIzMSAxLjQ3MzIyIDkuODI4MzcgMS42NjhMNC4wOTMwNiA3LjQwMzMyQzMuODk4MjkgNy41OTgwOCAzLjU4MjUxIDcuNTk4MDggMy4zODc3NiA3LjQwMzNWNy40MDMzWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==');
-        background-color: ${FdsCssColorInteractive200};
+        background-color: ${FdsColorInteractive200};
         background-repeat: no-repeat;
         background-position: center;
       }
@@ -89,15 +89,15 @@ export default class FdsCheckbox extends LitElement {
       #checkbox:disabled::before,
       #checkbox:disabled + label {
         cursor: default;
-        color: ${FdsCssColorText300};
+        color: ${FdsColorText300};
       }
 
       #checkbox:disabled::before {
-        border-color: ${FdsCssColorText300};
+        border-color: ${FdsColorText300};
       }
 
       #checkbox:disabled#checkbox:checked::before {
-        background-color: ${FdsCssColorText300};
+        background-color: ${FdsColorText300};
       }
     `,
   ]

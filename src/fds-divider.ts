@@ -1,6 +1,6 @@
 import { html, LitElement, TemplateResult } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import { FdsColorNeutral200, FdsColorToken, tokenVar } from '@fintraffic-design/coreui-css'
+import { FdsTokenColorNeutral200, FdsColorToken, tokenVar } from '@fintraffic-design/coreui-css'
 
 /**
  * Divider component.
@@ -9,7 +9,7 @@ import { FdsColorNeutral200, FdsColorToken, tokenVar } from '@fintraffic-design/
  */
 @customElement('fds-divider')
 export default class FdsDivider extends LitElement {
-  @property({ type: Object }) color: FdsColorToken = FdsColorNeutral200
+  @property({ type: Object }) color: FdsColorToken = FdsTokenColorNeutral200
 
   override render(): TemplateResult {
     return html`<div style="border-top: 1px solid ${tokenVar(this.color)}"></div>`

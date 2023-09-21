@@ -1,14 +1,19 @@
 import { html } from 'lit'
 import {
-  FdsColorNeutral100,
-  FdsColorNeutral200,
-  FdsColorNeutral300,
-  FdsColorNeutral400,
+  FdsTokenColorNeutral100,
+  FdsTokenColorNeutral200,
+  FdsTokenColorNeutral300,
+  FdsTokenColorNeutral400,
 } from '@fintraffic-design/coreui-css'
 import '../fds-divider'
 import { StoryObj, StoryFn } from '@storybook/web-components'
 
-const colors = [FdsColorNeutral100, FdsColorNeutral200, FdsColorNeutral300, FdsColorNeutral400]
+const colors = [
+  FdsTokenColorNeutral100,
+  FdsTokenColorNeutral200,
+  FdsTokenColorNeutral300,
+  FdsTokenColorNeutral400,
+]
 
 export default {
   title: 'Divider',
@@ -23,7 +28,7 @@ export default {
     },
   },
   args: {
-    color: FdsColorNeutral200.name,
+    color: FdsTokenColorNeutral200.name,
     slot: undefined,
   },
   argTypes: {
@@ -35,7 +40,7 @@ export default {
         `FdsColorToken`',
       table: {
         category: 'Properties',
-        defaultValue: { summary: 'FdsColorNeutral200' },
+        defaultValue: { summary: 'FdsTokenColorNeutral200' },
       },
     },
     slot: {

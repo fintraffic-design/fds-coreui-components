@@ -1,7 +1,7 @@
 import {
-  FdsCssColorBrandBlack,
-  FdsCssColorBrandWhite,
-  FdsCssColorText300,
+  FdsColorBrandBlack,
+  FdsColorBrandWhite,
+  FdsColorText300,
   uiLabelTextClass,
 } from '@fintraffic-design/coreui-css'
 import { css, html, LitElement } from 'lit'
@@ -126,13 +126,13 @@ export default class FdsNavigation extends LitElement {
       }
 
       .navigation--primary {
-        background-color: ${FdsCssColorBrandBlack};
-        color: ${FdsCssColorBrandWhite};
+        background-color: ${FdsColorBrandBlack};
+        color: ${FdsColorBrandWhite};
         height: 40px;
       }
 
       .navigation--primary .item:hover {
-        color: ${FdsCssColorText300};
+        color: ${FdsColorText300};
       }
 
       .navigation--primary .item--active:after {
@@ -141,12 +141,12 @@ export default class FdsNavigation extends LitElement {
         top: 1px;
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
-        border-bottom: 8px solid ${FdsCssColorBrandWhite};
+        border-bottom: 8px solid ${FdsColorBrandWhite};
       }
 
       .navigation--secondary {
-        background-color: ${FdsCssColorBrandWhite};
-        border-bottom: 1px solid ${FdsCssColorBrandBlack};
+        background-color: ${FdsColorBrandWhite};
+        border-bottom: 1px solid ${FdsColorBrandBlack};
         height: 55px;
       }
 
@@ -164,7 +164,7 @@ export default class FdsNavigation extends LitElement {
       }
 
       .navigation--secondary .item:hover {
-        color: ${FdsCssColorText300};
+        color: ${FdsColorText300};
       }
     `,
   ]

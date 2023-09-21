@@ -1,13 +1,13 @@
 import {
-  FdsCssColorBrandWhite,
-  FdsCssColorDanger200,
-  FdsCssColorInteractive100,
-  FdsCssColorInteractive200,
-  FdsCssColorNeutral200,
-  FdsCssColorNeutral50,
-  FdsCssColorText1000,
-  FdsCssColorText300,
-  FdsCssStyleElevation200,
+  FdsColorBrandWhite,
+  FdsColorDanger200,
+  FdsColorInteractive100,
+  FdsColorInteractive200,
+  FdsColorNeutral200,
+  FdsColorNeutral50,
+  FdsColorText1000,
+  FdsColorText300,
+  FdsStyleElevation200,
   uiLabelTextClass,
 } from '@fintraffic-design/coreui-css'
 import { css, html, LitElement } from 'lit'
@@ -153,27 +153,27 @@ export default class FdsDropdown<T> extends LitElement {
         padding-right: 8px;
         gap: 10px;
 
-        background-color: ${FdsCssColorBrandWhite};
-        border: 1px solid ${FdsCssColorNeutral200};
+        background-color: ${FdsColorBrandWhite};
+        border: 1px solid ${FdsColorNeutral200};
       }
 
       button:disabled {
         cursor: default;
-        background-color: ${FdsCssColorNeutral50};
-        color: ${FdsCssColorText300};
+        background-color: ${FdsColorNeutral50};
+        color: ${FdsColorText300};
       }
 
       button:disabled .chevron {
-        color: ${FdsCssColorText300};
+        color: ${FdsColorText300};
       }
 
       button.placeholder {
-        color: ${FdsCssColorText300};
+        color: ${FdsColorText300};
       }
 
       button.error {
-        color: ${FdsCssColorDanger200};
-        border: 3px solid ${FdsCssColorDanger200};
+        color: ${FdsColorDanger200};
+        border: 3px solid ${FdsColorDanger200};
       }
 
       .options-list {
@@ -187,12 +187,12 @@ export default class FdsDropdown<T> extends LitElement {
         /* TODO: what value? */
         max-height: 80vw;
 
-        box-shadow: ${FdsCssStyleElevation200};
+        box-shadow: ${FdsStyleElevation200};
       }
 
       fds-icon {
         position: static;
-        color: ${FdsCssColorText1000};
+        color: ${FdsColorText1000};
       }
 
       .icon-label {
@@ -218,18 +218,18 @@ export default class FdsDropdown<T> extends LitElement {
         padding-left: 16px;
         padding-right: 8px;
 
-        background-color: ${FdsCssColorBrandWhite};
-        border-bottom: 1px solid ${FdsCssColorNeutral200};
+        background-color: ${FdsColorBrandWhite};
+        border-bottom: 1px solid ${FdsColorNeutral200};
       }
 
       .option:hover {
         /* TODO: what color? */
-        background-color: ${FdsCssColorInteractive100};
+        background-color: ${FdsColorInteractive100};
       }
 
       .option.selected {
         /* TODO: what color? */
-        background-color: ${FdsCssColorInteractive200};
+        background-color: ${FdsColorInteractive200};
       }
     `,
   ]

@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
-import { FdsCssSize1, FdsCssSize6 } from '@fintraffic-design/coreui-css'
+import { FdsSize1, FdsSize6 } from '@fintraffic-design/coreui-css'
 
 /**
  * Fintraffic Design System Action Sheet Component
@@ -37,7 +37,7 @@ export default class FdsActionSheet extends LitElement {
       }
 
       .actions-separated {
-        margin-right: ${FdsCssSize6};
+        margin-right: ${FdsSize6};
       }
 
       .actions-content {
@@ -45,7 +45,7 @@ export default class FdsActionSheet extends LitElement {
       }
 
       ::slotted(:not(:last-child)) {
-        margin-right: ${FdsCssSize1};
+        margin-right: ${FdsSize1};
       }
     }
 
@@ -61,7 +61,7 @@ export default class FdsActionSheet extends LitElement {
 
       .actions__separated {
         width: 100%;
-        margin-top: ${FdsCssSize6};
+        margin-top: ${FdsSize6};
       }
 
       ::slotted(*) {
@@ -69,7 +69,7 @@ export default class FdsActionSheet extends LitElement {
       }
 
       ::slotted(:not(:last-child)) {
-        margin-top: ${FdsCssSize1};
+        margin-top: ${FdsSize1};
       }
     }
   `

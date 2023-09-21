@@ -5,9 +5,9 @@ import './fds-card'
 import {
   FdsColorBrandWhite,
   FdsColorToken,
-  FdsCssColorBrandWhite,
-  FdsCssRadiusLarge,
-  FdsCssStyleElevation200,
+  FdsRadiusLarge,
+  FdsStyleElevation200,
+  FdsTokenColorBrandWhite,
   tokenVar,
   uiHelperTextClass,
 } from '@fintraffic-design/coreui-css'
@@ -30,7 +30,7 @@ export enum FdsPopoverPosition {
 export default class FdsPopover extends LitElement {
   @property() position: FdsPopoverPosition = FdsPopoverPosition.above
   @property() openOnClick: boolean = false
-  @property() backgroundColor: FdsColorToken = FdsColorBrandWhite
+  @property() backgroundColor: FdsColorToken = FdsTokenColorBrandWhite
 
   @state() private _open: boolean = false
   private _popper?: Instance
@@ -115,9 +115,9 @@ export default class FdsPopover extends LitElement {
     css`
       .popover {
         display: none;
-        border-radius: ${FdsCssRadiusLarge};
-        box-shadow: ${FdsCssStyleElevation200};
-        background-color: ${FdsCssColorBrandWhite};
+        border-radius: ${FdsRadiusLarge};
+        box-shadow: ${FdsStyleElevation200};
+        background-color: ${FdsColorBrandWhite};
       }
 
       .popover-open {

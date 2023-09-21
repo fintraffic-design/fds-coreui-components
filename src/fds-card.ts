@@ -1,10 +1,10 @@
 import {
-  FdsCssSize1,
-  FdsCssSize2,
-  FdsCssSize3,
-  FdsCssSize4,
-  FdsStyleElevation100,
-  FdsStyleElevation200,
+  FdsSize1,
+  FdsSize2,
+  FdsSize3,
+  FdsSize4,
+  FdsTokenStyleElevation100,
+  FdsTokenStyleElevation200,
   headingSmall4TextClass,
 } from '@fintraffic-design/coreui-css'
 import { css, html, LitElement } from 'lit'
@@ -55,9 +55,9 @@ export default class FdsCard extends LitElement {
     if (this.elevation === FdsCardElevation.none) {
       return 'none'
     } else if (this.elevation === FdsCardElevation.high) {
-      return FdsStyleElevation200.value
+      return FdsTokenStyleElevation200.value
     }
-    return FdsStyleElevation100.value
+    return FdsTokenStyleElevation100.value
   }
 
   onClick(): void {
@@ -82,11 +82,11 @@ export default class FdsCard extends LitElement {
         justify-content: space-between;
         flex-direction: row;
         align-items: center;
-        padding: ${FdsCssSize3} ${FdsCssSize4} ${FdsCssSize1};
+        padding: ${FdsSize3} ${FdsSize4} ${FdsSize1};
       }
 
       .card__content {
-        padding: ${FdsCssSize2} ${FdsCssSize4};
+        padding: ${FdsSize2} ${FdsSize4};
       }
     `,
   ]

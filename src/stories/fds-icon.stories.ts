@@ -2,31 +2,31 @@ import { html } from 'lit'
 import { FdsIcons } from '../fds-icon'
 import '../global-types'
 import {
-  FdsSize1,
-  FdsSize12,
-  FdsSize16,
-  FdsSize2,
-  FdsSize24,
-  FdsSize3,
-  FdsSize32,
-  FdsSize4,
-  FdsSize6,
-  FdsSize8,
   FdsSizeToken,
+  FdsTokenSize1,
+  FdsTokenSize12,
+  FdsTokenSize16,
+  FdsTokenSize2,
+  FdsTokenSize24,
+  FdsTokenSize3,
+  FdsTokenSize32,
+  FdsTokenSize4,
+  FdsTokenSize6,
+  FdsTokenSize8,
 } from '@fintraffic-design/coreui-css'
 import { StoryObj } from '@storybook/web-components'
 
 const sizes = [
-  FdsSize1,
-  FdsSize2,
-  FdsSize3,
-  FdsSize4,
-  FdsSize6,
-  FdsSize8,
-  FdsSize12,
-  FdsSize16,
-  FdsSize24,
-  FdsSize32,
+  FdsTokenSize1,
+  FdsTokenSize2,
+  FdsTokenSize3,
+  FdsTokenSize4,
+  FdsTokenSize6,
+  FdsTokenSize8,
+  FdsTokenSize12,
+  FdsTokenSize16,
+  FdsTokenSize24,
+  FdsTokenSize32,
 ]
 
 export default {
@@ -70,7 +70,7 @@ export default {
         `FdsSizeToken`',
       table: {
         category: 'Properties',
-        defaultValue: { summary: 'FdsSize3' },
+        defaultValue: { summary: 'FdsTokenSize3' },
       },
     },
     slot: {

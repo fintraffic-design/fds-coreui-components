@@ -4,13 +4,13 @@ import { ifDefined } from 'lit/directives/if-defined.js'
 import {
   uiHelperTextClass,
   uiLabelTextClass,
-  FdsCssColorBrandWhite,
-  FdsCssColorDanger200,
-  FdsCssColorNeutral200,
-  FdsCssColorNeutral50,
-  FdsCssColorText1000,
-  FdsCssColorText300,
-  FdsCssColorText600,
+  FdsColorBrandWhite,
+  FdsColorDanger200,
+  FdsColorNeutral200,
+  FdsColorNeutral50,
+  FdsColorText1000,
+  FdsColorText300,
+  FdsColorText600,
 } from '@fintraffic-design/coreui-css'
 
 /**
@@ -78,7 +78,7 @@ export default class FdsInput extends LitElement {
 
       .input-label {
         padding-bottom: 8px;
-        color: ${FdsCssColorText1000};
+        color: ${FdsColorText1000};
       }
 
       .input-container {
@@ -90,34 +90,34 @@ export default class FdsInput extends LitElement {
         height: 46px;
         text-overflow: ellipsis;
         padding: 0px 16px;
-        background-color: ${FdsCssColorBrandWhite};
-        border: 1px solid ${FdsCssColorNeutral200};
+        background-color: ${FdsColorBrandWhite};
+        border: 1px solid ${FdsColorNeutral200};
         border-radius: 4px;
-        color: ${FdsCssColorText1000};
+        color: ${FdsColorText1000};
       }
 
       input ::placeholder {
-        color: ${FdsCssColorText300};
+        color: ${FdsColorText300};
       }
 
       input:disabled {
-        border-color: ${FdsCssColorNeutral200};
-        color: ${FdsCssColorText300};
-        background-color: ${FdsCssColorNeutral50};
+        border-color: ${FdsColorNeutral200};
+        color: ${FdsColorText300};
+        background-color: ${FdsColorNeutral50};
       }
 
       .input--error {
-        border: 3px solid ${FdsCssColorDanger200};
-        color: ${FdsCssColorDanger200};
+        border: 3px solid ${FdsColorDanger200};
+        color: ${FdsColorDanger200};
       }
 
       .input-message {
         padding-top: 8px;
-        color: ${FdsCssColorText600};
+        color: ${FdsColorText600};
       }
 
       .input-message--error {
-        color: ${FdsCssColorDanger200};
+        color: ${FdsColorDanger200};
       }
     `,
   ]

@@ -100,7 +100,7 @@ export default class FdsNavigation extends LitElement {
         type="button"
         @click=${this.handleNavigationClick}
       >
-        <span class="navigation__label">${this.mobileNavText}</span>
+        <span class="navigation__label ui-label-text">${this.mobileNavText}</span>
         ${icon}
       </button>
     `

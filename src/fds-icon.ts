@@ -1,4 +1,4 @@
-import { FdsSize3, FdsSizeToken } from '@fintraffic-design/coreui-css'
+import { FdsTokenSize3, FdsSizeToken } from '@fintraffic-design/coreui-css'
 import { css, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import {
@@ -61,7 +61,7 @@ export type FdsIconType = keyof typeof FdsIcons
  */
 @customElement('fds-icon')
 export default class FdsIcon extends LitElement {
-  @property() size: FdsSizeToken = FdsSize3
+  @property() size: FdsSizeToken = FdsTokenSize3
   @property() icon?: FdsIconType
 
   override render(): SVGElement | null {

@@ -1,7 +1,6 @@
 import { css, html, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
-import { tokenVar } from './utils/token-utils'
 import {
   FdsColorDanger300,
   FdsColorDanger50,
@@ -13,10 +12,10 @@ import {
   FdsColorWarning50,
   FdsSize1,
   FdsSize2,
-  FdsSize3,
+  FdsTokenSize3,
+  uiHelperTextClass,
 } from '@fintraffic-design/coreui-css'
 import './global-types'
-import { uiHelperTextClass } from './utils/css-utils'
 import { FdsIconType } from './fds-icon'
 
 export enum FdsAlertVariant {
@@ -38,13 +37,14 @@ export enum FdsAlertVariant {
 export default class FdsAlert extends LitElement {
   @property() variant: FdsAlertVariant = FdsAlertVariant.error
   @property() icon?: FdsIconType
-  @property() dismissible: boolean = false
+  @property({ type: Boolean }) dismissible: boolean = false
 
   override render(): TemplateResult {
     return html`
       <div class="alert alert--${this.variant}">
         <div class="alert-content">
-          ${this.icon && html`<fds-icon class="alert-icon" .icon=${this.icon} .size=${FdsSize3}></fds-icon>`}
+          ${this.icon &&
+          html`<fds-icon class="alert-icon" .icon=${this.icon} .size=${FdsTokenSize3}></fds-icon>`}
           <slot class="ui-helper-text"></slot>
         </div>
         ${this.renderDismissButton()}
@@ -57,7 +57,7 @@ export default class FdsAlert extends LitElement {
       return html`<fds-icon
         class="alert-close"
         .icon=${'x'}
-        .size=${FdsSize3}
+        .size=${FdsTokenSize3}
         @click=${(): void => this.handleDismiss()}
       ></fds-icon>`
     }
@@ -77,47 +77,47 @@ export default class FdsAlert extends LitElement {
 
       .alert {
         border: 1px solid;
-        border-radius: ${tokenVar(FdsSize1)};
+        border-radius: ${FdsSize1};
         display: flex;
       }
       .alert--error {
-        background-color: ${tokenVar(FdsColorDanger50)};
-        border-color: ${tokenVar(FdsColorDanger300)};
-        color: ${tokenVar(FdsColorDanger300)};
+        background-color: ${FdsColorDanger50};
+        border-color: ${FdsColorDanger300};
+        color: ${FdsColorDanger300};
       }
       .alert--warning {
-        background-color: ${tokenVar(FdsColorWarning50)};
-        color: ${tokenVar(FdsColorWarning400)};
-        border-color: ${tokenVar(FdsColorWarning400)};
+        background-color: ${FdsColorWarning50};
+        color: ${FdsColorWarning400};
+        border-color: ${FdsColorWarning400};
       }
       .alert--info {
-        background-color: ${tokenVar(FdsColorInteractive50)};
-        border-color: ${tokenVar(FdsColorInteractive300)};
-        color: ${tokenVar(FdsColorInteractive300)};
+        background-color: ${FdsColorInteractive50};
+        border-color: ${FdsColorInteractive300};
+        color: ${FdsColorInteractive300};
       }
       .alert--success {
-        background-color: ${tokenVar(FdsColorSuccess50)};
-        border-bottom-color: ${tokenVar(FdsColorSuccess300)};
-        color: ${tokenVar(FdsColorSuccess300)};
+        background-color: ${FdsColorSuccess50};
+        border-bottom-color: ${FdsColorSuccess300};
+        color: ${FdsColorSuccess300};
       }
       .alert-icon {
-        margin: 0 ${tokenVar(FdsSize2)} 0 ${tokenVar(FdsSize1)};
+        margin: 0 ${FdsSize2} 0 ${FdsSize1};
       }
 
       .alert-content {
         flex: 1;
         display: inline-flex;
         align-items: center;
-        padding: ${tokenVar(FdsSize1)};
+        padding: ${FdsSize1};
         justify-content: center;
       }
 
       .alert-close {
         cursor: pointer;
         border-left: 1px solid;
-        border-radius: 0 ${tokenVar(FdsSize1)} ${tokenVar(FdsSize1)} 0;
-        padding: ${tokenVar(FdsSize1)};
-        margin-left: ${tokenVar(FdsSize1)};
+        border-radius: 0 ${FdsSize1} ${FdsSize1} 0;
+        padding: ${FdsSize1};
+        margin-left: ${FdsSize1};
       }
     `,
   ]

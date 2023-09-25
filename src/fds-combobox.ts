@@ -13,10 +13,8 @@ import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property, state } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
-import { tokenVar } from './utils/token-utils'
-
+import { uiLabelTextClass } from '@fintraffic-design/coreui-css'
 import './global-types'
-import { uiLabelTextClass } from './utils/css-utils'
 
 export class FdsComboboxEvent extends CustomEvent<string> {
   constructor(detail: string) {
@@ -248,15 +246,15 @@ export default class FdsCombobox extends LitElement {
         padding-bottom: 0px;
         padding-left: 16px;
         padding-right: 40px; // icon 24px + 8px padding for left and right
-        background-color: ${tokenVar(FdsColorBrandWhite)};
-        border: 1px solid ${tokenVar(FdsColorNeutral200)};
+        background-color: ${FdsColorBrandWhite};
+        border: 1px solid ${FdsColorNeutral200};
       }
 
       .input-container > fds-icon {
         pointer-events: none;
         position: absolute;
         right: 8px;
-        color: ${tokenVar(FdsColorText1000)};
+        color: ${FdsColorText1000};
       }
 
       .input-container.disabled {
@@ -265,17 +263,17 @@ export default class FdsCombobox extends LitElement {
 
       .input-container.disabled > input {
         cursor: default;
-        background-color: ${tokenVar(FdsColorNeutral50)};
-        color: ${tokenVar(FdsColorText300)};
+        background-color: ${FdsColorNeutral50};
+        color: ${FdsColorText300};
       }
 
       .input-container.error > input {
-        color: ${tokenVar(FdsColorDanger200)};
-        border: 3px solid ${tokenVar(FdsColorDanger200)};
+        color: ${FdsColorDanger200};
+        border: 3px solid ${FdsColorDanger200};
       }
 
       input::placeholder {
-        color: ${tokenVar(FdsColorText300)};
+        color: ${FdsColorText300};
       }
 
       #options-list {
@@ -289,7 +287,7 @@ export default class FdsCombobox extends LitElement {
         /* TODO: what value? */
         max-height: 80vw;
 
-        box-shadow: ${tokenVar(FdsStyleElevation200)};
+        box-shadow: ${FdsStyleElevation200};
       }
 
       .option {
@@ -302,17 +300,17 @@ export default class FdsCombobox extends LitElement {
         padding-left: 16px;
         padding-right: 8px;
 
-        background-color: ${tokenVar(FdsColorBrandWhite)};
-        border-bottom: 1px solid ${tokenVar(FdsColorNeutral200)};
+        background-color: ${FdsColorBrandWhite};
+        border-bottom: 1px solid ${FdsColorNeutral200};
       }
 
       .option.selected {
         /* TODO: what color? */
-        background-color: ${tokenVar(FdsColorInteractive100)};
+        background-color: ${FdsColorInteractive100};
       }
 
       .option.new {
-        color: ${tokenVar(FdsColorInteractive300)};
+        color: ${FdsColorInteractive300};
         gap: 10px;
       }
     `,

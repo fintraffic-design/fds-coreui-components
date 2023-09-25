@@ -3,6 +3,7 @@ import {
   FdsColorBrandWhite,
   FdsColorNeutral100,
   FdsColorText300,
+  uiLabelTextClass,
 } from '@fintraffic-design/coreui-css'
 import { css, html, LitElement, unsafeCSS, adoptStyles, CSSResult } from 'lit'
 import { nothing, TemplateResult } from 'lit-html'
@@ -10,8 +11,6 @@ import { customElement, property, state } from 'lit/decorators.js'
 import './fds-icon'
 import { FdsIconType } from './fds-icon'
 import './global-types'
-import { uiLabelTextClass } from './utils/css-utils'
-import { tokenVar } from './utils/token-utils'
 import { styleMap } from 'lit/directives/style-map.js'
 
 export enum FdsNavigationVariant {
@@ -205,12 +204,12 @@ export default class FdsNavigation extends LitElement {
     }
 
     .navigation--primary {
-      background-color: ${tokenVar(FdsColorBrandBlack)};
-      color: ${tokenVar(FdsColorBrandWhite)};
+      background-color: ${FdsColorBrandBlack};
+      color: ${FdsColorBrandWhite};
     }
 
     .navigation--primary .item:hover {
-      color: ${tokenVar(FdsColorText300)};
+      color: ${FdsColorText300};
     }
 
     .navigation--primary .navigation__open .item--active .item__label:after {
@@ -221,20 +220,20 @@ export default class FdsNavigation extends LitElement {
       margin-left: auto;
       border-top: 6px solid transparent;
       border-bottom: 6px solid transparent;
-      border-right: var(--element-vertical-padding--primary) solid ${tokenVar(FdsColorBrandWhite)};
+      border-right: var(--element-vertical-padding--primary) solid ${FdsColorBrandWhite};
     }
 
     .navigation--secondary {
-      background-color: ${tokenVar(FdsColorBrandWhite)};
-      border-bottom: 1px solid ${tokenVar(FdsColorBrandBlack)};
+      background-color: ${FdsColorBrandWhite};
+      border-bottom: 1px solid ${FdsColorBrandBlack};
     }
 
     .navigation--secondary .item {
-      border-bottom: 1px solid ${tokenVar(FdsColorNeutral100)};
+      border-bottom: 1px solid ${FdsColorNeutral100};
     }
 
     .navigation--secondary .item:hover {
-      color: ${tokenVar(FdsColorText300)};
+      color: ${FdsColorText300};
     }
 
     .navigation__open {
@@ -246,7 +245,7 @@ export default class FdsNavigation extends LitElement {
       margin-left: 0;
       margin-top: 0;
 
-      border-top: 1px solid ${tokenVar(FdsColorNeutral100)};
+      border-top: 1px solid ${FdsColorNeutral100};
     }
 
     .navigation__button-wrapper {
@@ -269,23 +268,23 @@ export default class FdsNavigation extends LitElement {
     }
 
     .navigation__button--primary {
-      background-color: ${tokenVar(FdsColorBrandBlack)};
-      color: ${tokenVar(FdsColorBrandWhite)};
+      background-color: ${FdsColorBrandBlack};
+      color: ${FdsColorBrandWhite};
       padding: var(--element-vertical-padding--primary);
     }
 
     .navigation__button--primary:hover {
-      color: ${tokenVar(FdsColorText300)};
+      color: ${FdsColorText300};
     }
 
     .navigation__button--secondary {
-      background-color: ${tokenVar(FdsColorBrandWhite)};
-      color: ${tokenVar(FdsColorBrandBlack)};
+      background-color: ${FdsColorBrandWhite};
+      color: ${FdsColorBrandBlack};
       padding: var(--element-vertical-padding--secondary);
     }
 
     .navigation__button--secondary:hover {
-      color: ${tokenVar(FdsColorText300)};
+      color: ${FdsColorText300};
     }
 
     .navigation__label {
@@ -344,7 +343,7 @@ export default class FdsNavigation extends LitElement {
           top: 1px;
           border-left: 6px solid transparent;
           border-right: 6px solid transparent;
-          border-bottom: var(--element-vertical-padding--primary) solid ${tokenVar(FdsColorBrandWhite)};
+          border-bottom: var(--element-vertical-padding--primary) solid ${FdsColorBrandWhite};
         }
 
         /* Disable the arrow shown on mobile */

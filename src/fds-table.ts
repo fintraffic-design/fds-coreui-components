@@ -1,15 +1,14 @@
 import { css, html, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { nothing, TemplateResult } from 'lit-html'
-import { tokenVar } from './utils/token-utils'
 import {
-  FdsColorNeutral400,
+  uiHelperTextClass,
   FdsColorBrandWhite,
-  FdsColorNeutral50,
   FdsColorNeutral200,
+  FdsColorNeutral400,
+  FdsColorNeutral50,
 } from '@fintraffic-design/coreui-css'
 import './global-types'
-import { uiHelperTextClass } from './utils/css-utils'
 
 export type FdsTableItem = object
 
@@ -44,20 +43,24 @@ export default class FdsTable extends LitElement {
 
   static override styles = [
     css`
+      :host {
+        --fds-typography-ui-helper-display: table;
+      }
+
       table {
         width: 100%;
         border-collapse: collapse;
       }
 
       thead {
-        background: ${tokenVar(FdsColorNeutral400)};
-        color: ${tokenVar(FdsColorBrandWhite)};
+        background: ${FdsColorNeutral400};
+        color: ${FdsColorBrandWhite};
         position: sticky;
         top: 0;
       }
 
       tbody {
-        background: ${tokenVar(FdsColorBrandWhite)};
+        background: ${FdsColorBrandWhite};
       }
 
       thead tr {
@@ -77,11 +80,11 @@ export default class FdsTable extends LitElement {
       }
 
       .table-rows--separator tr {
-        border-bottom: 1px solid ${tokenVar(FdsColorNeutral200)};
+        border-bottom: 1px solid ${FdsColorNeutral200};
       }
 
       .table-rows--striped tr:nth-child(even) {
-        background: ${tokenVar(FdsColorNeutral50)};
+        background: ${FdsColorNeutral50};
       }
 
       ${uiHelperTextClass}

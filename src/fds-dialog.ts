@@ -2,7 +2,6 @@ import { css, html, LitElement, PropertyValues } from 'lit'
 import { customElement, property, query, queryAssignedElements, queryAsync } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
 import './fds-card'
-import { tokenVar } from './utils/token-utils'
 import { FdsColorBrandBlack, FdsRadiusLarge, FdsStyleElevation400 } from '@fintraffic-design/coreui-css'
 
 /**
@@ -75,24 +74,24 @@ export default class FdsDialog extends LitElement {
   }
 
   private overlaySizeStyle(size: number): string {
-    return `calc(${size}px + ${tokenVar(FdsRadiusLarge)})`
+    return `calc(${size}px + ${FdsRadiusLarge})`
   }
 
   static override styles = css`
     dialog {
-      border-radius: ${tokenVar(FdsRadiusLarge)};
+      border-radius: ${FdsRadiusLarge};
       border: none;
-      box-shadow: ${tokenVar(FdsStyleElevation400)};
-      padding: calc(${tokenVar(FdsRadiusLarge)} / 2);
+      box-shadow: ${FdsStyleElevation400};
+      padding: calc(${FdsRadiusLarge} / 2);
       overflow: visible;
       outline: none;
     }
 
     .overlay {
       position: fixed;
-      margin: calc(${tokenVar(FdsRadiusLarge)} / -2);
-      border-radius: ${tokenVar(FdsRadiusLarge)};
-      background-color: ${tokenVar(FdsColorBrandBlack)};
+      margin: calc(${FdsRadiusLarge} / -2);
+      border-radius: ${FdsRadiusLarge};
+      background-color: ${FdsColorBrandBlack};
       pointer-events: none;
       transition: opacity 0.2s ease;
       opacity: 0;

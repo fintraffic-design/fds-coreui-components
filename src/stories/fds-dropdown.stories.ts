@@ -1,6 +1,8 @@
 import { StoryObj, Meta, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
 import { FdsDropdownEvent } from '../fds-dropdown'
+import '../fds-dropdown'
+import '../fds-icon'
 
 export default {
   title: 'Dropdown',

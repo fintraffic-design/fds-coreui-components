@@ -2,16 +2,16 @@ import { css, html, LitElement, TemplateResult } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import {
+  uiHelperTextClass,
+  uiLabelTextClass,
   FdsColorBrandWhite,
+  FdsColorDanger200,
   FdsColorNeutral200,
   FdsColorNeutral50,
-  FdsColorDanger200,
-  FdsColorText600,
-  FdsColorText300,
   FdsColorText1000,
+  FdsColorText300,
+  FdsColorText600,
 } from '@fintraffic-design/coreui-css'
-import { tokenVar } from './utils/token-utils'
-import { uiLabelTextClass, uiHelperTextClass } from './utils/css-utils'
 
 /**
  * Input component.
@@ -78,7 +78,7 @@ export default class FdsInput extends LitElement {
 
       .input-label {
         padding-bottom: 8px;
-        color: ${tokenVar(FdsColorText1000)};
+        color: ${FdsColorText1000};
       }
 
       .input-container {
@@ -90,34 +90,34 @@ export default class FdsInput extends LitElement {
         height: 46px;
         text-overflow: ellipsis;
         padding: 0px 16px;
-        background-color: ${tokenVar(FdsColorBrandWhite)};
-        border: 1px solid ${tokenVar(FdsColorNeutral200)};
+        background-color: ${FdsColorBrandWhite};
+        border: 1px solid ${FdsColorNeutral200};
         border-radius: 4px;
-        color: ${tokenVar(FdsColorText1000)};
+        color: ${FdsColorText1000};
       }
 
       input ::placeholder {
-        color: ${tokenVar(FdsColorText300)};
+        color: ${FdsColorText300};
       }
 
       input:disabled {
-        border-color: ${tokenVar(FdsColorNeutral200)};
-        color: ${tokenVar(FdsColorText300)};
-        background-color: ${tokenVar(FdsColorNeutral50)};
+        border-color: ${FdsColorNeutral200};
+        color: ${FdsColorText300};
+        background-color: ${FdsColorNeutral50};
       }
 
       .input--error {
-        border: 3px solid ${tokenVar(FdsColorDanger200)};
-        color: ${tokenVar(FdsColorDanger200)};
+        border: 3px solid ${FdsColorDanger200};
+        color: ${FdsColorDanger200};
       }
 
       .input-message {
         padding-top: 8px;
-        color: ${tokenVar(FdsColorText600)};
+        color: ${FdsColorText600};
       }
 
       .input-message--error {
-        color: ${tokenVar(FdsColorDanger200)};
+        color: ${FdsColorDanger200};
       }
     `,
   ]

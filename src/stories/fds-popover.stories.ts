@@ -4,13 +4,17 @@ import '../fds-popover'
 import '../fds-button'
 import '../fds-dialog'
 import { FdsPopoverPosition } from '../fds-popover'
-import { FdsColorBrandWhite, FdsColorDanger100, FdsColorNeutral300 } from '@fintraffic-design/coreui-css'
+import {
+  FdsTokenColorBrandWhite,
+  FdsTokenColorDanger100,
+  FdsTokenColorNeutral300,
+} from '@fintraffic-design/coreui-css'
 import { StoryObj, StoryFn } from '@storybook/web-components'
 
 const colorOptions = {
-  [FdsColorBrandWhite.name]: FdsColorBrandWhite,
-  [FdsColorDanger100.name]: FdsColorDanger100,
-  [FdsColorNeutral300.name]: FdsColorNeutral300,
+  [FdsTokenColorBrandWhite.name]: FdsTokenColorBrandWhite,
+  [FdsTokenColorDanger100.name]: FdsTokenColorDanger100,
+  [FdsTokenColorNeutral300.name]: FdsTokenColorNeutral300,
 }
 
 export default {
@@ -57,7 +61,7 @@ export default {
         `FdsColorToken`',
       table: {
         category: 'Properties',
-        defaultValue: { summary: 'FdsColorBrandWhite' },
+        defaultValue: { summary: 'FdsTokenColorBrandWhite' },
       },
     },
     openOnClick: {

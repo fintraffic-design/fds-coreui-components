@@ -7,10 +7,11 @@ import {
   FdsColorToken,
   FdsRadiusLarge,
   FdsStyleElevation200,
+  FdsTokenColorBrandWhite,
+  tokenVar,
+  uiHelperTextClass,
 } from '@fintraffic-design/coreui-css'
-import { uiHelperTextClass } from './utils/css-utils'
 import { bottom, createPopper, Instance, left, Placement, right, top } from '@popperjs/core'
-import { tokenVar } from './utils/token-utils'
 
 export enum FdsPopoverPosition {
   above = 'above',
@@ -29,7 +30,7 @@ export enum FdsPopoverPosition {
 export default class FdsPopover extends LitElement {
   @property() position: FdsPopoverPosition = FdsPopoverPosition.above
   @property() openOnClick: boolean = false
-  @property() backgroundColor: FdsColorToken = FdsColorBrandWhite
+  @property() backgroundColor: FdsColorToken = FdsTokenColorBrandWhite
 
   @state() private _open: boolean = false
   private _popper?: Instance
@@ -114,9 +115,9 @@ export default class FdsPopover extends LitElement {
     css`
       .popover {
         display: none;
-        border-radius: ${tokenVar(FdsRadiusLarge)};
-        box-shadow: ${tokenVar(FdsStyleElevation200)};
-        background-color: ${tokenVar(FdsColorBrandWhite)};
+        border-radius: ${FdsRadiusLarge};
+        box-shadow: ${FdsStyleElevation200};
+        background-color: ${FdsColorBrandWhite};
       }
 
       .popover-open {

@@ -8,14 +8,13 @@ import {
   FdsColorText1000,
   FdsColorText300,
   FdsStyleElevation200,
+  uiLabelTextClass,
 } from '@fintraffic-design/coreui-css'
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property, state } from 'lit/decorators.js'
 import { FdsIconType } from './fds-icon'
 import './global-types'
-import { uiLabelTextClass } from './utils/css-utils'
-import { tokenVar } from './utils/token-utils'
 
 export interface FdsDropdownOption<T> {
   label: string
@@ -135,6 +134,7 @@ export default class FdsDropdown<T> extends LitElement {
       :host {
         width: 100%;
         position: relative;
+        --fds-typography-ui-label-display: flex;
       }
 
       button {
@@ -153,27 +153,27 @@ export default class FdsDropdown<T> extends LitElement {
         padding-right: 8px;
         gap: 10px;
 
-        background-color: ${tokenVar(FdsColorBrandWhite)};
-        border: 1px solid ${tokenVar(FdsColorNeutral200)};
+        background-color: ${FdsColorBrandWhite};
+        border: 1px solid ${FdsColorNeutral200};
       }
 
       button:disabled {
         cursor: default;
-        background-color: ${tokenVar(FdsColorNeutral50)};
-        color: ${tokenVar(FdsColorText300)};
+        background-color: ${FdsColorNeutral50};
+        color: ${FdsColorText300};
       }
 
       button:disabled .chevron {
-        color: ${tokenVar(FdsColorText300)};
+        color: ${FdsColorText300};
       }
 
       button.placeholder {
-        color: ${tokenVar(FdsColorText300)};
+        color: ${FdsColorText300};
       }
 
       button.error {
-        color: ${tokenVar(FdsColorDanger200)};
-        border: 3px solid ${tokenVar(FdsColorDanger200)};
+        color: ${FdsColorDanger200};
+        border: 3px solid ${FdsColorDanger200};
       }
 
       .options-list {
@@ -187,12 +187,12 @@ export default class FdsDropdown<T> extends LitElement {
         /* TODO: what value? */
         max-height: 80vw;
 
-        box-shadow: ${tokenVar(FdsStyleElevation200)};
+        box-shadow: ${FdsStyleElevation200};
       }
 
       fds-icon {
         position: static;
-        color: ${tokenVar(FdsColorText1000)};
+        color: ${FdsColorText1000};
       }
 
       .icon-label {
@@ -218,18 +218,18 @@ export default class FdsDropdown<T> extends LitElement {
         padding-left: 16px;
         padding-right: 8px;
 
-        background-color: ${tokenVar(FdsColorBrandWhite)};
-        border-bottom: 1px solid ${tokenVar(FdsColorNeutral200)};
+        background-color: ${FdsColorBrandWhite};
+        border-bottom: 1px solid ${FdsColorNeutral200};
       }
 
       .option:hover {
         /* TODO: what color? */
-        background-color: ${tokenVar(FdsColorInteractive100)};
+        background-color: ${FdsColorInteractive100};
       }
 
       .option.selected {
         /* TODO: what color? */
-        background-color: ${tokenVar(FdsColorInteractive200)};
+        background-color: ${FdsColorInteractive200};
       }
     `,
   ]

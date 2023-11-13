@@ -14,6 +14,7 @@ import { css, CSSResult, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property } from 'lit/decorators.js'
 import { FdsIconType } from './fds-icon'
+import './fds-icon'
 import './global-types'
 
 export enum FdsButtonVariant {
@@ -44,7 +45,7 @@ const variantColorMap: Record<FdsButtonVariant, CSSResult> = {
 @customElement('fds-button')
 export default class FdsButton extends LitElement {
   @property() variant: FdsButtonVariant = FdsButtonVariant.primary
-  @property() disabled: boolean = false
+  @property({ type: Boolean }) disabled: boolean = false
   @property() icon?: FdsIconType
   @property() label?: string
 

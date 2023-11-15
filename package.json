@@ -58,7 +58,7 @@
   },
   "keywords": [],
   "author": "Fintraffic",
-  "license": "",
+  "license": "EUPL-1.2",
   "volta": {
     "node": "18.12.1"
   }

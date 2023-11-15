@@ -38,4 +38,4 @@ https://fintraffic-design.github.io/coreui-components
 * Always write and update the <b>JSDocs</b>!
 
 # Licencing
-Source code of this program is licensed under the [EUPL v1.2] (/LICENCE-EUPL.txt)
+Source code of this program is licensed under the [EUPL v1.2] (./LICENCE-EUPL.txt)

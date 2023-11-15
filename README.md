@@ -39,4 +39,4 @@ https://fintraffic-design.github.io/coreui-components
 
 # Licencing
 Copyright © Fintraffic 2023
-Source code of this program is licensed under the [EUPL v1.2](./LICENCE-EUPL)
+Source code of this program is licensed under the [EUPL v1.2](./LICENCE)

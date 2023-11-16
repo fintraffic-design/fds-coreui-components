@@ -36,3 +36,7 @@ https://fintraffic-design.github.io/coreui-components
     - No plugin: Run at project root ```npx prettier -w src/```
 
 * Always write and update the <b>JSDocs</b>!
+
+# Licencing
+Copyright © Fintraffic 2023
+Source code of this program is licensed under the [EUPL v1.2](./LICENCE)

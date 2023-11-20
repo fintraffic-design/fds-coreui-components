@@ -1,3 +1,4 @@
+// Importing this will register all custom elements for the components
 import './fds-action-sheet'
 import './fds-alert'
 import './fds-button'

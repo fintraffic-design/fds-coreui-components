@@ -4,7 +4,7 @@ import {
   FdsTokenColorNeutral200,
   FdsTokenColorNeutral300,
   FdsTokenColorNeutral400,
-} from '@fintraffic-design/coreui-css'
+} from '@fintraffic/fds-coreui-css'
 import '../fds-divider'
 import { StoryObj, StoryFn } from '@storybook/web-components'
 
@@ -22,7 +22,7 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-divider'` <br><br>\
+          "`import '@fintraffic/fds-coreui-components/src/fds-divider'` <br><br>\
           Selector: `<fds-divider>`",
       },
     },

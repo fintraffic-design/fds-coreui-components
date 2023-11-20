@@ -9,7 +9,7 @@ import {
   FdsRadiusLarge,
   FdsSize6,
   uiLabelTextClass,
-} from '@fintraffic-design/coreui-css'
+} from '@fintraffic/fds-coreui-css'
 import { css, CSSResult, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property } from 'lit/decorators.js'

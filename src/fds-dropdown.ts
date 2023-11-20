@@ -9,7 +9,7 @@ import {
   FdsColorText300,
   FdsStyleElevation200,
   uiLabelTextClass,
-} from '@fintraffic-design/coreui-css'
+} from '@fintraffic/fds-coreui-css'
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property, state } from 'lit/decorators.js'

@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
-import { FdsSize1, FdsSize6 } from '@fintraffic-design/coreui-css'
+import { FdsSize1, FdsSize6 } from '@fintraffic/fds-coreui-css'
 
 /**
  * Fintraffic Design System Action Sheet Component

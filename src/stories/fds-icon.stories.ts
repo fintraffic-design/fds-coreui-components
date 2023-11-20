@@ -13,7 +13,7 @@ import {
   FdsTokenSize4,
   FdsTokenSize6,
   FdsTokenSize8,
-} from '@fintraffic-design/coreui-css'
+} from '@fintraffic/fds-coreui-css'
 import { StoryObj } from '@storybook/web-components'
 
 const sizes = [
@@ -36,8 +36,8 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-icon'` <br>\
-          `import { FdsIconType, FdsIcons } from '@fintraffic-design/coreui-components/src/fds-icon'`<br><br>\
+          "`import '@fintraffic/fds-coreui-components/src/fds-icon'` <br>\
+          `import { FdsIconType, FdsIcons } from '@fintraffic/fds-coreui-components/src/fds-icon'`<br><br>\
           Selector: `<fds-icon>`",
       },
     },

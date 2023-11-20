@@ -16,8 +16,8 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-navigation'`<br>\
-          `import { FdsNavigationItem, FdsNavigationItemPosition, FdsNavigationVariant } from '@fintraffic-design/coreui-components/src/fds-navigation'`<br><br>\
+          "`import '@fintraffic/fds-coreui-components/src/fds-navigation'`<br>\
+          `import { FdsNavigationItem, FdsNavigationItemPosition, FdsNavigationVariant } from '@fintraffic/fds-coreui-components/src/fds-navigation'`<br><br>\
           Selector: `<fds-navigation>`",
       },
     },

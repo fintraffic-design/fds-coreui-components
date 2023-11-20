@@ -2,7 +2,7 @@ import { css, html, LitElement, PropertyValues } from 'lit'
 import { customElement, property, query, queryAssignedElements, queryAsync } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
 import './fds-card'
-import { FdsColorBrandBlack, FdsRadiusLarge, FdsStyleElevation400 } from '@fintraffic-design/coreui-css'
+import { FdsColorBrandBlack, FdsRadiusLarge, FdsStyleElevation400 } from '@fintraffic/fds-coreui-css'
 
 /**
  * Dialog component.

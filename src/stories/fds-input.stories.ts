@@ -9,7 +9,7 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-input'` <br><br>\
+          "`import '@fintraffic/fds-coreui-components/src/fds-input'` <br><br>\
           Selector: `<fds-input>`",
       },
     },

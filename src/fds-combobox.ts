@@ -8,12 +8,12 @@ import {
   FdsColorText1000,
   FdsColorText300,
   FdsStyleElevation200,
-} from '@fintraffic-design/coreui-css'
+} from '@fintraffic/fds-coreui-css'
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property, state } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
-import { uiLabelTextClass } from '@fintraffic-design/coreui-css'
+import { uiLabelTextClass } from '@fintraffic/fds-coreui-css'
 import './global-types'
 
 export class FdsComboboxEvent extends CustomEvent<string> {

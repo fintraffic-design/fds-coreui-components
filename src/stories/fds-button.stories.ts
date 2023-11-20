@@ -10,8 +10,8 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-button'`<br> \
-          `import { FdsButtonVariant } from '@fintraffic-design/coreui-components/src/fds-button'`<br><br> \
+          "`import '@fintraffic/fds-coreui-components/src/fds-button'`<br> \
+          `import { FdsButtonVariant } from '@fintraffic/fds-coreui-components/src/fds-button'`<br><br> \
           Selector: `<fds-button>`",
       },
     },

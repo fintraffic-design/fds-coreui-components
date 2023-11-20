@@ -14,7 +14,7 @@ import {
   FdsSize2,
   FdsTokenSize3,
   uiHelperTextClass,
-} from '@fintraffic-design/coreui-css'
+} from '@fintraffic/fds-coreui-css'
 import './global-types'
 import { FdsIconType } from './fds-icon'
 

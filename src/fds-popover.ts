@@ -10,7 +10,7 @@ import {
   FdsTokenColorBrandWhite,
   tokenVar,
   uiHelperTextClass,
-} from '@fintraffic-design/coreui-css'
+} from '@fintraffic/fds-coreui-css'
 import { bottom, createPopper, Instance, left, Placement, right, top } from '@popperjs/core'
 
 export enum FdsPopoverPosition {

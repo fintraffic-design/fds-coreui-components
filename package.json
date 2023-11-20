@@ -1,15 +1,25 @@
 {
-  "name": "@fintraffic-design/coreui-components",
-  "private": true,
-  "version": "0.0.1",
+  "name": "@fintraffic/fds-coreui-components",
+  "version": "0.1.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Fintraffic Design System Core UI (Web) Components",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fintraffic-design/fds-coreui-components.git"
+  },
+  "homepage": "https://design.fintraffic.fi/",
+  "bugs": {
+    "url": "https://github.com/fintraffic-design/fds-coreui-components/issues"
+  },
   "type": "module",
   "files": [
     "dist",
     "src"
   ],
   "dependencies": {
-    "@fintraffic-design/coreui-css": "https://github.com/fintraffic-design/coreui-css.git#78becee4865f573c2dfc46cb1fb26921a300c696",
+    "@fintraffic/fds-coreui-css": "^0.1.0",
     "@popperjs/core": "^2.11.8",
     "lit": "^2.8.0",
     "lucide": "^0.265.0"

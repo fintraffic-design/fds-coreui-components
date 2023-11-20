@@ -18,6 +18,9 @@
     "dist",
     "src"
   ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "dependencies": {
     "@fintraffic/fds-coreui-css": "^0.1.0",
     "@popperjs/core": "^2.11.8",

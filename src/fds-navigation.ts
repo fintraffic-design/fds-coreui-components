@@ -36,7 +36,7 @@ export enum FdsNavigationItemPosition {
  */
 
 @customElement('fds-navigation')
-export default class FdsNavigation extends LitElement {
+export class FdsNavigation extends LitElement {
   @property() variant: FdsNavigationVariant = FdsNavigationVariant.primary
   @property() items: FdsNavigationItem[] = []
   @property() selected?: FdsNavigationItem

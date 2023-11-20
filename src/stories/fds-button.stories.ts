@@ -1,4 +1,4 @@
-import FdsButton, { FdsButtonVariant } from '../fds-button'
+import { FdsButton, FdsButtonVariant } from '../fds-button'
 import { FdsIcons } from '../fds-icon'
 import { Meta, StoryObj } from '@storybook/web-components'
 

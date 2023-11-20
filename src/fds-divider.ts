@@ -8,7 +8,7 @@ import { FdsTokenColorNeutral200, FdsColorToken, tokenVar } from '@fintraffic/fd
  * @property {FdsColorToken} color - FdsColorToken. Default color is neutral-200
  */
 @customElement('fds-divider')
-export default class FdsDivider extends LitElement {
+export class FdsDivider extends LitElement {
   @property({ type: Object }) color: FdsColorToken = FdsTokenColorNeutral200
 
   override render(): TemplateResult {

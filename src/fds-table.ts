@@ -22,7 +22,7 @@ export type FdsTableItem = object
  *
  */
 @customElement('fds-table')
-export default class FdsTable extends LitElement {
+export class FdsTable extends LitElement {
   @property() striped: boolean = true
   @property() items: FdsTableItem[] = []
   @property() renderHeader: () => TemplateResult | typeof nothing = () => nothing

@@ -43,7 +43,7 @@ const variantColorMap: Record<FdsButtonVariant, CSSResult> = {
  *
  */
 @customElement('fds-button')
-export default class FdsButton extends LitElement {
+export class FdsButton extends LitElement {
   @property() variant: FdsButtonVariant = FdsButtonVariant.primary
   @property({ type: Boolean }) disabled: boolean = false
   @property() icon?: FdsIconType

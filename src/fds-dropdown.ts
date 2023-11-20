@@ -41,7 +41,7 @@ export class FdsDropdownEvent<T> extends CustomEvent<FdsDropdownOption<T>> {
  * @property {string} placeholder - Placeholder text while no option is selected.
  */
 @customElement('fds-dropdown')
-export default class FdsDropdown<T> extends LitElement {
+export class FdsDropdown<T> extends LitElement {
   constructor() {
     super()
     // Set attributes to host element

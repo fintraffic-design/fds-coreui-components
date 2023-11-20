@@ -19,7 +19,7 @@ import './global-types'
  * @event select - Dispatches a custom event when checkbox is clicked. The value is in the event details field.
  */
 @customElement('fds-checkbox')
-export default class FdsCheckbox extends LitElement {
+export class FdsCheckbox extends LitElement {
   @property() label: string = ''
   @property() disabled: boolean = false
   @property() checked: boolean = false

@@ -16,7 +16,7 @@ import { FdsColorBrandBlack, FdsRadiusLarge, FdsStyleElevation400 } from '@fintr
  * Dialog shows an overlay: Does not allow interaction with the dialog.
  */
 @customElement('fds-dialog')
-export default class FdsDialog extends LitElement {
+export class FdsDialog extends LitElement {
   @property() modal: boolean = false
   @property() overlay: boolean = false
 

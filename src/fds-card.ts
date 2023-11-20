@@ -27,7 +27,7 @@ export enum FdsCardElevation {
  *
  */
 @customElement('fds-card')
-export default class FdsCard extends LitElement {
+export class FdsCard extends LitElement {
   @property() elevation: FdsCardElevation = FdsCardElevation.low
 
   override render(): TemplateResult {

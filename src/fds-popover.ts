@@ -27,7 +27,7 @@ export enum FdsPopoverPosition {
  * @property {FdsColorToken} backgroundColor - Popover background color
  */
 @customElement('fds-popover')
-export default class FdsPopover extends LitElement {
+export class FdsPopover extends LitElement {
   @property() position: FdsPopoverPosition = FdsPopoverPosition.above
   @property() openOnClick: boolean = false
   @property() backgroundColor: FdsColorToken = FdsTokenColorBrandWhite

@@ -34,7 +34,7 @@ export enum FdsAlertVariant {
  * @property {boolean} dismissible - If true, alert can be dismissed by clicking the close button.
  */
 @customElement('fds-alert')
-export default class FdsAlert extends LitElement {
+export class FdsAlert extends LitElement {
   @property() variant: FdsAlertVariant = FdsAlertVariant.error
   @property() icon?: FdsIconType
   @property({ type: Boolean }) dismissible: boolean = false

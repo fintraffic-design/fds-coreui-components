@@ -27,7 +27,7 @@ import {
  *
  */
 @customElement('fds-input')
-export default class FdsInput extends LitElement {
+export class FdsInput extends LitElement {
   @property() value: string = ''
   @property() label?: string
   @property() placeholder?: string

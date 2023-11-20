@@ -7,7 +7,7 @@ import { FdsSize1, FdsSize6 } from '@fintraffic/fds-coreui-css'
  * Fintraffic Design System Action Sheet Component
  */
 @customElement('fds-action-sheet')
-export default class FdsActionSheet extends LitElement {
+export class FdsActionSheet extends LitElement {
   override render(): TemplateResult {
     return html`
       <div class="actions__separated">

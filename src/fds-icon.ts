@@ -57,7 +57,7 @@ export type FdsIconType = keyof typeof FdsIcons
  * @property {string} size - FdsSizeToken
  */
 @customElement('fds-icon')
-export default class FdsIcon extends LitElement {
+export class FdsIcon extends LitElement {
   @property() size: FdsSizeToken = FdsTokenSize3
   @property() icon?: FdsIconType
 

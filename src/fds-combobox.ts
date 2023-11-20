@@ -39,7 +39,7 @@ export class FdsComboboxEvent extends CustomEvent<string> {
  * @property {boolean} addNewIndicator - Show a text indicator at options list telling user he can add the current value.
  */
 @customElement('fds-combobox')
-export default class FdsCombobox extends LitElement {
+export class FdsCombobox extends LitElement {
   constructor() {
     super()
     // Set attributes to host element

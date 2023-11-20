@@ -3,7 +3,7 @@ import {
   FdsColorBrandWhite,
   FdsColorText300,
   uiLabelTextClass,
-} from '@fintraffic-design/coreui-css'
+} from '@fintraffic/fds-coreui-css'
 import { css, html, LitElement } from 'lit'
 import { nothing, TemplateResult } from 'lit-html'
 import { customElement, property } from 'lit/decorators.js'

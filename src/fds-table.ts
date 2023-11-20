@@ -7,7 +7,7 @@ import {
   FdsColorNeutral200,
   FdsColorNeutral400,
   FdsColorNeutral50,
-} from '@fintraffic-design/coreui-css'
+} from '@fintraffic/fds-coreui-css'
 import './global-types'
 
 export type FdsTableItem = object

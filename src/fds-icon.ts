@@ -1,4 +1,4 @@
-import { FdsTokenSize3, FdsSizeToken } from '@fintraffic-design/coreui-css'
+import { FdsTokenSize3, FdsSizeToken } from '@fintraffic/fds-coreui-css'
 import { css, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import {

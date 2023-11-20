@@ -10,8 +10,8 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-alert'` <br>\
-          `import { FdsAlertVariant } from '@fintraffic-design/coreui-components/src/fds-alert'` <br><br> \
+          "`import '@fintraffic/fds-coreui-components/src/fds-alert'` <br>\
+          `import { FdsAlertVariant } from '@fintraffic/fds-coreui-components/src/fds-alert'` <br><br> \
           Selector: `<fds-alert>`",
       },
     },

@@ -15,7 +15,7 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-dialog'` <br><br>\
+          "`import '@fintraffic/fds-coreui-components/src/fds-dialog'` <br><br>\
           Selector: `<fds-dialog>`",
       },
     },

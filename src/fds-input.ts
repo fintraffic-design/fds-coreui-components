@@ -11,7 +11,7 @@ import {
   FdsColorText1000,
   FdsColorText300,
   FdsColorText600,
-} from '@fintraffic-design/coreui-css'
+} from '@fintraffic/fds-coreui-css'
 
 /**
  * Input component.

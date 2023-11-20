@@ -6,7 +6,7 @@ import {
   FdsTokenStyleElevation100,
   FdsTokenStyleElevation200,
   headingSmall4TextClass,
-} from '@fintraffic-design/coreui-css'
+} from '@fintraffic/fds-coreui-css'
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
 import { customElement, property } from 'lit/decorators.js'

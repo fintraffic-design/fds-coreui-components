@@ -1,5 +1,5 @@
 import { css, html, LitElement, TemplateResult } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import {
   uiHelperTextClass,
@@ -26,7 +26,6 @@ import {
  * @event change Dispatches a custom event when input value is changed. The value is in the event details field.
  *
  */
-@customElement('fds-input')
 export class FdsInput extends LitElement {
   @property() value: string = ''
   @property() label?: string

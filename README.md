@@ -9,6 +9,8 @@ https://fintraffic-design.github.io/fds-coreui-components
 
 # Code style guide
 
+* Implementation should follow the [component publishing](https://open-wc.org/guides/developing-components/publishing/) guidelines from Open Web Components.
+
 * Web component code should be ordered as follows:
   - Imports
   - TypeScript definitions

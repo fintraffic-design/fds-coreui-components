@@ -1,7 +1,9 @@
 import { StoryObj, Meta, StoryFn } from '@storybook/web-components'
 import { html, TemplateResult } from 'lit'
-import { FdsButtonVariant } from '../fds-button'
-import '../fds-table'
+import { FdsButtonVariant } from '../button.js'
+import '../define/fds-table.js'
+import '../define/fds-checkbox.js'
+import '../define/fds-button.js'
 interface Item {
   column1: string
   column2: string

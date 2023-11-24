@@ -6,9 +6,16 @@ import {
 } from '@fintraffic/fds-coreui-css'
 import { css, html, LitElement } from 'lit'
 import { nothing, TemplateResult } from 'lit-html'
-import { customElement, property } from 'lit/decorators.js'
-import { FdsIconType } from './fds-icon'
-import './global-types'
+import { property } from 'lit/decorators.js'
+import { FdsIcon, FdsIconType } from './icon.js'
+
+// Declare used elements to avoid lit-plugin(no-unknown-tag-name) warning
+// These components still need to be registered separately (by the importing app).
+declare global {
+  interface HTMLElementTagNameMap {
+    'fds-icon': FdsIcon
+  }
+}
 
 export enum FdsNavigationVariant {
   primary = 'primary',
@@ -34,8 +41,6 @@ export enum FdsNavigationItemPosition {
  * @property {FdsNavigationItem} selected - Currently selected value
  * @event select - Triggered when destination is clicked. The selected item is in event details field.
  */
-
-@customElement('fds-navigation')
 export class FdsNavigation extends LitElement {
   @property() variant: FdsNavigationVariant = FdsNavigationVariant.primary
   @property() items: FdsNavigationItem[] = []

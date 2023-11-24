@@ -1,11 +1,11 @@
 import { StoryObj, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
-import { FdsCardElevation } from '../fds-card'
-import '../fds-action-sheet'
-import '../fds-button'
-import '../fds-card'
-import '../fds-divider'
-import '../fds-icon'
+import { FdsCardElevation } from '../card'
+import '../define/fds-action-sheet.js'
+import '../define/fds-button.js'
+import '../define/fds-card.js'
+import '../define/fds-divider.js'
+import '../define/fds-icon.js'
 
 export default {
   title: 'Card',
@@ -14,9 +14,9 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic/fds-coreui-components/src/fds-card'` <br> \
-          `import { FdsCardElevation } from '@fintraffic/fds-coreui-components/src/fds-card'` <br><br>\
-          Selector: `<fds-card>`",
+          "`import '@fintraffic/fds-coreui-components/dist/define/fds-card'` <br> \
+          `import { FdsCardElevation } from '@fintraffic/fds-coreui-components'` <br><br>\
+          Element: `<fds-card>`",
       },
     },
   },

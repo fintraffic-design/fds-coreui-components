@@ -1,5 +1,5 @@
 import { css, html, LitElement } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
 import {
   FdsColorDanger300,
@@ -15,8 +15,15 @@ import {
   FdsTokenSize3,
   uiHelperTextClass,
 } from '@fintraffic/fds-coreui-css'
-import './global-types'
-import { FdsIconType } from './fds-icon'
+import { FdsIcon, FdsIconType } from './icon.js'
+
+// Declare used elements to avoid lit-plugin(no-unknown-tag-name) warning
+// These components still need to be registered separately (by the importing app).
+declare global {
+  interface HTMLElementTagNameMap {
+    'fds-icon': FdsIcon
+  }
+}
 
 export enum FdsAlertVariant {
   error = 'error',
@@ -33,7 +40,6 @@ export enum FdsAlertVariant {
  * @property {FdsIconType} icon - Icon to be displayed in the alert.
  * @property {boolean} dismissible - If true, alert can be dismissed by clicking the close button.
  */
-@customElement('fds-alert')
 export class FdsAlert extends LitElement {
   @property() variant: FdsAlertVariant = FdsAlertVariant.error
   @property() icon?: FdsIconType

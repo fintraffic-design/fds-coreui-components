@@ -1,7 +1,7 @@
 import { StoryObj, Meta, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
-import '../fds-combobox'
-import { FdsComboboxEvent } from '../fds-combobox'
+import '../define/fds-combobox.js'
+import { FdsComboboxEvent } from '../combobox.js'
 
 export default {
   title: 'Combobox',
@@ -10,7 +10,7 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic/fds-coreui-components/src/fds-combobox'` <br><br>\
+          "`import '@fintraffic/fds-coreui-components/dist/define/fds-combobox'` <br><br>\
           Selector: `<fds-combobox>`",
       },
     },

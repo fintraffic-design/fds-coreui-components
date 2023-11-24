@@ -1,5 +1,5 @@
 import { css, html, LitElement } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { nothing, TemplateResult } from 'lit-html'
 import {
   uiHelperTextClass,
@@ -8,7 +8,6 @@ import {
   FdsColorNeutral400,
   FdsColorNeutral50,
 } from '@fintraffic/fds-coreui-css'
-import './global-types'
 
 export type FdsTableItem = object
 
@@ -21,7 +20,6 @@ export type FdsTableItem = object
  * @property {function} renderItem - Render function for a table row. Item is given as a parameter. Use tr and td tags in the function.
  *
  */
-@customElement('fds-table')
 export class FdsTable extends LitElement {
   @property() striped: boolean = true
   @property() items: FdsTableItem[] = []

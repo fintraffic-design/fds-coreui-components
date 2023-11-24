@@ -1,6 +1,6 @@
 import { StoryObj, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
-import '../fds-input'
+import '../define/fds-input.js'
 
 export default {
   title: 'Input',

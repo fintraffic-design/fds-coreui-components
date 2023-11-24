@@ -1,9 +1,7 @@
 import { StoryObj, Meta, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
-import '../fds-action-sheet'
-import '../fds-button'
-import '../fds-icon'
-import '../global-types'
+import '../define/fds-action-sheet.js'
+import '../define/fds-button.js'
 
 export default {
   title: 'Action Sheet',
@@ -13,8 +11,8 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic/fds-coreui-components/src/fds-action-sheet'` <br><br>\
-          Selector: `<fds-action-sheet>`",
+          "`import '@fintraffic/fds-coreui-components/dist/define/fds-action-sheet.js'` <br><br>\
+          Element: `<fds-action-sheet>`",
       },
     },
   },

@@ -5,7 +5,7 @@ import {
   FdsTokenColorNeutral300,
   FdsTokenColorNeutral400,
 } from '@fintraffic/fds-coreui-css'
-import '../fds-divider'
+import '../define/fds-divider.js'
 import { StoryObj, StoryFn } from '@storybook/web-components'
 
 const colors = [
@@ -22,8 +22,8 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic/fds-coreui-components/src/fds-divider'` <br><br>\
-          Selector: `<fds-divider>`",
+          "`import '@fintraffic/fds-coreui-components/dist/define/fds-divider'` <br><br>\
+          Element: `<fds-divider>`",
       },
     },
   },
@@ -54,6 +54,7 @@ export default {
 
 const Template: StoryFn = ({ color }) => {
   const colorToken = colors.find(s => s.name === color)
+  if (!colorToken) return ''
   return html`<fds-divider .color=${colorToken}></fds-divider>`
 }
 

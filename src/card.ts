@@ -9,8 +9,7 @@ import {
 } from '@fintraffic/fds-coreui-css'
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
-import { customElement, property } from 'lit/decorators.js'
-import './global-types'
+import { property } from 'lit/decorators.js'
 
 export enum FdsCardElevation {
   none = 'none',
@@ -26,7 +25,6 @@ export enum FdsCardElevation {
  * @event corner-click - Triggered when top right corner of the card is clicked
  *
  */
-@customElement('fds-card')
 export class FdsCard extends LitElement {
   @property() elevation: FdsCardElevation = FdsCardElevation.low
 

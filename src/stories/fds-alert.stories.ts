@@ -1,7 +1,8 @@
 import { StoryObj, Meta, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
-import { FdsAlertVariant } from '../fds-alert'
-import { FdsIcons } from '../fds-icon'
+import { FdsAlertVariant } from '../alert'
+import { FdsIcons } from '../icon'
+import '../define/fds-alert.js'
 
 export default {
   title: 'Alert',
@@ -10,9 +11,9 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic/fds-coreui-components/src/fds-alert'` <br>\
-          `import { FdsAlertVariant } from '@fintraffic/fds-coreui-components/src/fds-alert'` <br><br> \
-          Selector: `<fds-alert>`",
+          "`import '@fintraffic/fds-coreui-components/dist/define/fds-alert'` <br>\
+          `import { FdsAlertVariant } from '@fintraffic/fds-coreui-components'` <br><br> \
+          Element: `<fds-alert>`",
       },
     },
   },

@@ -1,6 +1,4 @@
 import { html } from 'lit'
-import { FdsIcons } from '../fds-icon'
-import '../global-types'
 import {
   FdsSizeToken,
   FdsTokenSize1,
@@ -15,6 +13,8 @@ import {
   FdsTokenSize8,
 } from '@fintraffic/fds-coreui-css'
 import { StoryObj } from '@storybook/web-components'
+import { FdsIcons } from '../icon.js'
+import '../define/fds-icon.js'
 
 const sizes = [
   FdsTokenSize1,

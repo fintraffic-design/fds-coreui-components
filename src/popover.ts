@@ -1,7 +1,6 @@
 import { css, html, LitElement, PropertyValues } from 'lit'
-import { customElement, property, state } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
-import './fds-card'
 import {
   FdsColorBrandWhite,
   FdsColorToken,
@@ -26,7 +25,6 @@ export enum FdsPopoverPosition {
  * @property {boolean} openOnClick - Open popover by clicking
  * @property {FdsColorToken} backgroundColor - Popover background color
  */
-@customElement('fds-popover')
 export class FdsPopover extends LitElement {
   @property() position: FdsPopoverPosition = FdsPopoverPosition.above
   @property() openOnClick: boolean = false

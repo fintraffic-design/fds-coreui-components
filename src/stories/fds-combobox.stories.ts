@@ -10,7 +10,7 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic/fds-coreui-components/dist/define/fds-combobox'` <br><br>\
+          "`import '@fintraffic/fds-coreui-components/dist/define/fds-combobox.js'` <br><br>\
           Element: `<fds-combobox>`",
       },
     },

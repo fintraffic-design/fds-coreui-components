@@ -38,7 +38,7 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic/fds-coreui-components/src/fds-table'` <br><br>\
+          "`import '@fintraffic/fds-coreui-components/dist/define/fds-table.js'` <br><br>\
           Element: `<fds-table>`",
       },
       source: {

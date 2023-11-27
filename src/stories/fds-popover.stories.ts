@@ -24,8 +24,8 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic/fds-coreui-components/src/fds-popover'` <br>\
-          `import { FdsPopoverPosition } from '@fintraffic/fds-coreui-components/src/fds-popover'`<br><br>\
+          "`import '@fintraffic/fds-coreui-components/dist/define/fds-popover.js'` <br>\
+          `import { FdsPopoverPosition } from '@fintraffic/fds-coreui-components'`<br><br>\
           Element: `<fds-popover>`",
       },
     },

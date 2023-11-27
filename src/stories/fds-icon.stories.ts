@@ -36,8 +36,8 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic/fds-coreui-components/src/fds-icon'` <br>\
-          `import { FdsIconType, FdsIcons } from '@fintraffic/fds-coreui-components/src/fds-icon'`<br><br>\
+          "`import '@fintraffic/fds-coreui-components/dist/define/fds-icon.js'` <br>\
+          `import { FdsIconType, FdsIcons } from '@fintraffic/fds-coreui-components'`<br><br>\
           Element: `<fds-icon>`",
       },
     },

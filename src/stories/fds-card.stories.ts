@@ -14,7 +14,7 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic/fds-coreui-components/dist/define/fds-card'` <br> \
+          "`import '@fintraffic/fds-coreui-components/dist/define/fds-card.js'` <br> \
           `import { FdsCardElevation } from '@fintraffic/fds-coreui-components'` <br><br>\
           Element: `<fds-card>`",
       },

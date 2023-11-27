@@ -11,7 +11,7 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic/fds-coreui-components/dist/define/fds-alert'` <br>\
+          "`import '@fintraffic/fds-coreui-components/dist/define/fds-alert.js'` <br>\
           `import { FdsAlertVariant } from '@fintraffic/fds-coreui-components'` <br><br> \
           Element: `<fds-alert>`",
       },

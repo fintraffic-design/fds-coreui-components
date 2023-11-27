@@ -9,7 +9,7 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic/fds-coreui-components/dist/define/fds-checkbox'` <br><br>\
+          "`import '@fintraffic/fds-coreui-components/dist/define/fds-checkbox.js'` <br><br>\
           Element: `<fds-checkbox>`",
       },
     },

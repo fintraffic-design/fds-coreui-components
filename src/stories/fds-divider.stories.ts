@@ -22,7 +22,7 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic/fds-coreui-components/dist/define/fds-divider'` <br><br>\
+          "`import '@fintraffic/fds-coreui-components/dist/define/fds-divider.js'` <br><br>\
           Element: `<fds-divider>`",
       },
     },

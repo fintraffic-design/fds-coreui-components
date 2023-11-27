@@ -11,7 +11,7 @@ export default {
       description: {
         component:
           "`import '@fintraffic/fds-coreui-components/dist/define/fds-combobox'` <br><br>\
-          Selector: `<fds-combobox>`",
+          Element: `<fds-combobox>`",
       },
     },
     actions: {

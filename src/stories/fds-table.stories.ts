@@ -39,7 +39,7 @@ export default {
       description: {
         component:
           "`import '@fintraffic/fds-coreui-components/src/fds-table'` <br><br>\
-          Selector: `<fds-table>`",
+          Element: `<fds-table>`",
       },
       source: {
         // Source code is written here because functions are not visible in "show code" feature in Storybook.

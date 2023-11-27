@@ -12,7 +12,7 @@ export default {
         component:
           "`import '@fintraffic/fds-coreui-components/src/fds-dropdown'`<br>\
           `import { FdsDropdownEvent, FdsDropdownOption } from '@fintraffic/fds-coreui-components/src/fds-dropdown'`<br><br>\
-          Selector: `<fds-dropdown>`",
+          Element: `<fds-dropdown>`",
       },
     },
     actions: {

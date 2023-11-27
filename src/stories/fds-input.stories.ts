@@ -10,7 +10,7 @@ export default {
       description: {
         component:
           "`import '@fintraffic/fds-coreui-components/src/fds-input'` <br><br>\
-          Selector: `<fds-input>`",
+          Element: `<fds-input>`",
       },
     },
     actions: {

@@ -1,12 +1,11 @@
 import { StoryObj, StoryFn } from '@storybook/web-components'
 import { useArgs } from '@storybook/client-api'
 import { html } from 'lit'
-import '../fds-action-sheet'
-import '../fds-button'
-import '../fds-card'
-import { FdsCardElevation } from '../fds-card'
-import '../fds-dialog'
-import '../fds-icon'
+import '../define/fds-action-sheet.js'
+import '../define/fds-button.js'
+import '../define/fds-card.js'
+import { FdsCardElevation } from '../card.js'
+import '../define/fds-dialog.js'
 
 export default {
   title: 'Dialog',
@@ -15,8 +14,8 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-dialog'` <br><br>\
-          Selector: `<fds-dialog>`",
+          "`import '@fintraffic/fds-coreui-components/dist/define/fds-dialog.js'` <br><br>\
+          Element: `<fds-dialog>`",
       },
     },
     actions: {

@@ -1,7 +1,6 @@
 import { css, html, LitElement, PropertyValues } from 'lit'
-import { customElement, property, state } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
-import './fds-card'
 import {
   FdsColorBrandWhite,
   FdsColorToken,
@@ -10,7 +9,7 @@ import {
   FdsTokenColorBrandWhite,
   tokenVar,
   uiHelperTextClass,
-} from '@fintraffic-design/coreui-css'
+} from '@fintraffic/fds-coreui-css'
 import { bottom, createPopper, Instance, left, Placement, right, top } from '@popperjs/core'
 
 export enum FdsPopoverPosition {
@@ -26,8 +25,7 @@ export enum FdsPopoverPosition {
  * @property {boolean} openOnClick - Open popover by clicking
  * @property {FdsColorToken} backgroundColor - Popover background color
  */
-@customElement('fds-popover')
-export default class FdsPopover extends LitElement {
+export class FdsPopover extends LitElement {
   @property() position: FdsPopoverPosition = FdsPopoverPosition.above
   @property() openOnClick: boolean = false
   @property() backgroundColor: FdsColorToken = FdsTokenColorBrandWhite

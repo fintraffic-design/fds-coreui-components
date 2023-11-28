@@ -1,15 +1,15 @@
 import { html } from 'lit'
-
-import '../fds-popover'
-import '../fds-button'
-import '../fds-dialog'
-import { FdsPopoverPosition } from '../fds-popover'
 import {
   FdsTokenColorBrandWhite,
   FdsTokenColorDanger100,
   FdsTokenColorNeutral300,
-} from '@fintraffic-design/coreui-css'
+} from '@fintraffic/fds-coreui-css'
 import { StoryObj, StoryFn } from '@storybook/web-components'
+import '../define/fds-popover.js'
+import '../define/fds-icon.js'
+import '../define/fds-button.js'
+import '../define/fds-dialog.js'
+import { FdsPopoverPosition } from '../popover.js'
 
 const colorOptions = {
   [FdsTokenColorBrandWhite.name]: FdsTokenColorBrandWhite,
@@ -24,9 +24,9 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-popover'` <br>\
-          `import { FdsPopoverPosition } from '@fintraffic-design/coreui-components/src/fds-popover'`<br><br>\
-          Selector: `<fds-popover>`",
+          "`import '@fintraffic/fds-coreui-components/dist/define/fds-popover.js'` <br>\
+          `import { FdsPopoverPosition } from '@fintraffic/fds-coreui-components'`<br><br>\
+          Element: `<fds-popover>`",
       },
     },
   },
@@ -128,7 +128,7 @@ const TemplatePopoverWithHeader: StoryFn = ({ position, openOnClick, popoverText
           <fds-popover .position=${position}
                        .openOnClick=${openOnClick}
                        .backgroundColor="${colorOptions[backgroundColor]}">
-              <div">
+              <div>
                   <div
                           style="background: black; color: white; border-top-left-radius: 8px; border-top-right-radius: 8px;"
                   >

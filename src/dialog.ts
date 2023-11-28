@@ -1,8 +1,7 @@
 import { css, html, LitElement, PropertyValues } from 'lit'
-import { customElement, property, query, queryAssignedElements, queryAsync } from 'lit/decorators.js'
+import { property, query, queryAssignedElements, queryAsync } from 'lit/decorators.js'
 import { TemplateResult } from 'lit-html'
-import './fds-card'
-import { FdsColorBrandBlack, FdsRadiusLarge, FdsStyleElevation400 } from '@fintraffic-design/coreui-css'
+import { FdsColorBrandBlack, FdsRadiusLarge, FdsStyleElevation400 } from '@fintraffic/fds-coreui-css'
 
 /**
  * Dialog component.
@@ -15,8 +14,7 @@ import { FdsColorBrandBlack, FdsRadiusLarge, FdsStyleElevation400 } from '@fintr
  * @property {boolean} overlay
  * Dialog shows an overlay: Does not allow interaction with the dialog.
  */
-@customElement('fds-dialog')
-export default class FdsDialog extends LitElement {
+export class FdsDialog extends LitElement {
   @property() modal: boolean = false
   @property() overlay: boolean = false
 

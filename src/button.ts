@@ -9,13 +9,19 @@ import {
   FdsRadiusLarge,
   FdsSize6,
   uiLabelTextClass,
-} from '@fintraffic-design/coreui-css'
+} from '@fintraffic/fds-coreui-css'
 import { css, CSSResult, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
-import { customElement, property } from 'lit/decorators.js'
-import { FdsIconType } from './fds-icon'
-import './fds-icon'
-import './global-types'
+import { property } from 'lit/decorators.js'
+import { FdsIconType, FdsIcon } from './icon.js'
+
+// Declare used elements to avoid lit-plugin(no-unknown-tag-name) warning
+// These components still need to be registered separately (by the importing app).
+declare global {
+  interface HTMLElementTagNameMap {
+    'fds-icon': FdsIcon
+  }
+}
 
 export enum FdsButtonVariant {
   primary = 'primary',
@@ -42,8 +48,7 @@ const variantColorMap: Record<FdsButtonVariant, CSSResult> = {
  * @property {string} label - Text to show.
  *
  */
-@customElement('fds-button')
-export default class FdsButton extends LitElement {
+export class FdsButton extends LitElement {
   @property() variant: FdsButtonVariant = FdsButtonVariant.primary
   @property({ type: Boolean }) disabled: boolean = false
   @property() icon?: FdsIconType

@@ -1,8 +1,7 @@
 import { StoryObj, Meta, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
-import { FdsDropdownEvent } from '../fds-dropdown'
-import '../fds-dropdown'
-import '../fds-icon'
+import { FdsDropdownEvent } from '../dropdown.js'
+import '../define/fds-dropdown.js'
 
 export default {
   title: 'Dropdown',
@@ -11,9 +10,9 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-dropdown'`<br>\
-          `import { FdsDropdownEvent, FdsDropdownOption } from '@fintraffic-design/coreui-components/src/fds-dropdown'`<br><br>\
-          Selector: `<fds-dropdown>`",
+          "`import '@fintraffic/fds-coreui-components/src/fds-dropdown'`<br>\
+          `import { FdsDropdownEvent, FdsDropdownOption } from '@fintraffic/fds-coreui-components/src/fds-dropdown'`<br><br>\
+          Element: `<fds-dropdown>`",
       },
     },
     actions: {

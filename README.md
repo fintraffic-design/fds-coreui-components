@@ -4,9 +4,40 @@ Fintraffic Design System's Core UI Components. Work heavily in progress.
 Work is being done at Fintraffic Raide to get some basic web components added to this repository in the near future. After we've achieved some **good enough** baseline, we'll revisit governing and contribution guidelines and processes for the Design System's technical implementation.
 
 # Storybook
-https://fintraffic-design.github.io/coreui-components
+https://fintraffic-design.github.io/fds-coreui-components
+
+
+# Install
+
+```shell
+npm i --save @fintraffic/fds-coreui-components
+```
+
+# Usage
+
+Import and register a specific component
+
+```js
+import '@fintraffic/fds-coreui-components/dist/define/fds-button.js';
+```
+
+Import and register all components
+
+```js
+import '@fintraffic/fds-coreui-components/dist/define/all.js';
+```
+
+Extend a component
+
+```js
+import { FdsButton } from '@fintraffic/fds-coreui-components';
+class MyButton extends FdsButton { /* ... */ }
+customElements.define('my-button', MyButton);
+```
 
 # Code style guide
+
+* Implementation should follow the [component publishing](https://open-wc.org/guides/developing-components/publishing/) guidelines from Open Web Components.
 
 * Web component code should be ordered as follows:
   - Imports

@@ -1,6 +1,7 @@
-import FdsButton, { FdsButtonVariant } from '../fds-button'
-import { FdsIcons } from '../fds-icon'
 import { Meta, StoryObj } from '@storybook/web-components'
+import { FdsButton, FdsButtonVariant } from '../button.js'
+import { FdsIcons } from '../icon.js'
+import '../define/fds-button.js'
 
 export default {
   title: 'Button',
@@ -10,9 +11,9 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-button'`<br> \
-          `import { FdsButtonVariant } from '@fintraffic-design/coreui-components/src/fds-button'`<br><br> \
-          Selector: `<fds-button>`",
+          "`import '@fintraffic/fds-coreui-components/dist/define/fds-button'`<br> \
+          `import { FdsButtonVariant } from '@fintraffic/fds-coreui-components'`<br><br> \
+          Element: `<fds-button>`",
       },
     },
   },

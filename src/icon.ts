@@ -1,6 +1,6 @@
-import { FdsTokenSize3, FdsSizeToken } from '@fintraffic-design/coreui-css'
+import { FdsTokenSize3, FdsSizeToken } from '@fintraffic/fds-coreui-css'
 import { css, LitElement } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import {
   AlertCircle,
   AlertTriangle,
@@ -59,8 +59,7 @@ export type FdsIconType = keyof typeof FdsIcons
  * - check-circle
  * @property {string} size - FdsSizeToken
  */
-@customElement('fds-icon')
-export default class FdsIcon extends LitElement {
+export class FdsIcon extends LitElement {
   @property() size: FdsSizeToken = FdsTokenSize3
   @property() icon?: FdsIconType
 

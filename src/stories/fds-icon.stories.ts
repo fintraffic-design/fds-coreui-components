@@ -1,6 +1,4 @@
 import { html } from 'lit'
-import { FdsIcons } from '../fds-icon'
-import '../global-types'
 import {
   FdsSizeToken,
   FdsTokenSize1,
@@ -13,8 +11,10 @@ import {
   FdsTokenSize4,
   FdsTokenSize6,
   FdsTokenSize8,
-} from '@fintraffic-design/coreui-css'
+} from '@fintraffic/fds-coreui-css'
 import { StoryObj } from '@storybook/web-components'
+import { FdsIcons } from '../icon.js'
+import '../define/fds-icon.js'
 
 const sizes = [
   FdsTokenSize1,
@@ -36,9 +36,9 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-icon'` <br>\
-          `import { FdsIconType, FdsIcons } from '@fintraffic-design/coreui-components/src/fds-icon'`<br><br>\
-          Selector: `<fds-icon>`",
+          "`import '@fintraffic/fds-coreui-components/dist/define/fds-icon.js'` <br>\
+          `import { FdsIconType, FdsIcons } from '@fintraffic/fds-coreui-components'`<br><br>\
+          Element: `<fds-icon>`",
       },
     },
     actions: {

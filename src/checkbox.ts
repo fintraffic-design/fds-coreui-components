@@ -4,11 +4,10 @@ import {
   FdsColorText300,
   FdsRadiusCompact,
   uiLabelTextClass,
-} from '@fintraffic-design/coreui-css'
+} from '@fintraffic/fds-coreui-css'
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
-import { customElement, property } from 'lit/decorators.js'
-import './global-types'
+import { property } from 'lit/decorators.js'
 
 /**
  * Checkbox component.
@@ -18,8 +17,7 @@ import './global-types'
  * @property {boolean} checked - Checkbox value.
  * @event select - Dispatches a custom event when checkbox is clicked. The value is in the event details field.
  */
-@customElement('fds-checkbox')
-export default class FdsCheckbox extends LitElement {
+export class FdsCheckbox extends LitElement {
   @property() label: string = ''
   @property() disabled: boolean = false
   @property() checked: boolean = false

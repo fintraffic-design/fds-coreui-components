@@ -4,14 +4,20 @@ import {
   FdsColorNeutral100,
   FdsColorText300,
   uiLabelTextClass,
-} from '@fintraffic-design/coreui-css'
+} from '@fintraffic/fds-coreui-css'
 import { css, html, LitElement, unsafeCSS, adoptStyles, CSSResult } from 'lit'
 import { nothing, TemplateResult } from 'lit-html'
 import { customElement, property, state } from 'lit/decorators.js'
-import './fds-icon'
-import { FdsIconType } from './fds-icon'
-import './global-types'
+import { FdsIcon, FdsIconType } from './icon.js'
 import { styleMap } from 'lit/directives/style-map.js'
+
+// Declare used elements to avoid lit-plugin(no-unknown-tag-name) warning
+// These components still need to be registered separately (by the importing app).
+declare global {
+  interface HTMLElementTagNameMap {
+    'fds-icon': FdsIcon
+  }
+}
 
 export enum FdsNavigationVariant {
   primary = 'primary',
@@ -40,9 +46,7 @@ export enum FdsNavigationItemPosition {
  * @property {number} verticalMenuThreshold - Width in pixels when navigation is collapsed
  * @event select - Triggered when destination is clicked. The selected item is in event details field.
  */
-
-@customElement('fds-navigation')
-export default class FdsNavigation extends LitElement {
+export class FdsNavigation extends LitElement {
   @property() variant: FdsNavigationVariant = FdsNavigationVariant.primary
   @property() items: FdsNavigationItem[] = []
   @property() selected?: FdsNavigationItem

@@ -1,7 +1,9 @@
 import { StoryObj, Meta, StoryFn } from '@storybook/web-components'
 import { html, TemplateResult } from 'lit'
-import { FdsButtonVariant } from '../fds-button'
-import '../fds-table'
+import { FdsButtonVariant } from '../button.js'
+import '../define/fds-table.js'
+import '../define/fds-checkbox.js'
+import '../define/fds-button.js'
 interface Item {
   column1: string
   column2: string
@@ -36,8 +38,8 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-table'` <br><br>\
-          Selector: `<fds-table>`",
+          "`import '@fintraffic/fds-coreui-components/dist/define/fds-table.js'` <br><br>\
+          Element: `<fds-table>`",
       },
       source: {
         // Source code is written here because functions are not visible in "show code" feature in Storybook.

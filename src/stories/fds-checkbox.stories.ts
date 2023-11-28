@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
-import '../fds-checkbox'
+import '../define/fds-checkbox.js'
 
 export default {
   title: 'Checkbox',
@@ -9,8 +9,8 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-checkbox'` <br><br>\
-          Selector: `<fds-checkbox>`",
+          "`import '@fintraffic/fds-coreui-components/dist/define/fds-checkbox.js'` <br><br>\
+          Element: `<fds-checkbox>`",
       },
     },
   },

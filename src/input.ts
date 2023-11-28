@@ -1,5 +1,5 @@
 import { css, html, LitElement, TemplateResult } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import {
   uiHelperTextClass,
@@ -11,7 +11,7 @@ import {
   FdsColorText1000,
   FdsColorText300,
   FdsColorText600,
-} from '@fintraffic-design/coreui-css'
+} from '@fintraffic/fds-coreui-css'
 
 /**
  * Input component.
@@ -26,8 +26,7 @@ import {
  * @event change Dispatches a custom event when input value is changed. The value is in the event details field.
  *
  */
-@customElement('fds-input')
-export default class FdsInput extends LitElement {
+export class FdsInput extends LitElement {
   @property() value: string = ''
   @property() label?: string
   @property() placeholder?: string

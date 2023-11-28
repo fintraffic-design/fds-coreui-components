@@ -9,12 +9,19 @@ import {
   FdsColorText300,
   FdsStyleElevation200,
   uiLabelTextClass,
-} from '@fintraffic-design/coreui-css'
+} from '@fintraffic/fds-coreui-css'
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
-import { customElement, property, state } from 'lit/decorators.js'
-import { FdsIconType } from './fds-icon'
-import './global-types'
+import { property, state } from 'lit/decorators.js'
+import { FdsIcon, FdsIconType } from './icon.js'
+
+// Declare used elements to avoid lit-plugin(no-unknown-tag-name) warning
+// These components still need to be registered separately (by the importing app).
+declare global {
+  interface HTMLElementTagNameMap {
+    'fds-icon': FdsIcon
+  }
+}
 
 export interface FdsDropdownOption<T> {
   label: string
@@ -40,8 +47,7 @@ export class FdsDropdownEvent<T> extends CustomEvent<FdsDropdownOption<T>> {
  * @property {boolean} error - Display error indicator on dropdown.
  * @property {string} placeholder - Placeholder text while no option is selected.
  */
-@customElement('fds-dropdown')
-export default class FdsDropdown<T> extends LitElement {
+export class FdsDropdown<T> extends LitElement {
   constructor() {
     super()
     // Set attributes to host element

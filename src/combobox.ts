@@ -8,13 +8,21 @@ import {
   FdsColorText1000,
   FdsColorText300,
   FdsStyleElevation200,
-} from '@fintraffic-design/coreui-css'
+} from '@fintraffic/fds-coreui-css'
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
-import { customElement, property, state } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
-import { uiLabelTextClass } from '@fintraffic-design/coreui-css'
-import './global-types'
+import { uiLabelTextClass } from '@fintraffic/fds-coreui-css'
+
+// Declare used elements to avoid lit-plugin(no-unknown-tag-name) warning
+// These components still need to be registered separately (by the importing app).
+import { FdsIcon } from './icon.js'
+declare global {
+  interface HTMLElementTagNameMap {
+    'fds-icon': FdsIcon
+  }
+}
 
 export class FdsComboboxEvent extends CustomEvent<string> {
   constructor(detail: string) {
@@ -38,8 +46,7 @@ export class FdsComboboxEvent extends CustomEvent<string> {
  * @property {string} placeholder - Placeholder value to show while combobox has no input.
  * @property {boolean} addNewIndicator - Show a text indicator at options list telling user he can add the current value.
  */
-@customElement('fds-combobox')
-export default class FdsCombobox extends LitElement {
+export class FdsCombobox extends LitElement {
   constructor() {
     super()
     // Set attributes to host element

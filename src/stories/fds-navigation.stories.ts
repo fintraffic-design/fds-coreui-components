@@ -1,7 +1,7 @@
 import { StoryObj, StoryFn } from '@storybook/web-components'
 import { html } from 'lit'
-import '../fds-navigation'
-import { FdsNavigationItem, FdsNavigationVariant, FdsNavigationItemPosition } from '../fds-navigation'
+import '../define/fds-navigation.js'
+import { FdsNavigationItem, FdsNavigationVariant, FdsNavigationItemPosition } from '../navigation.js'
 
 const items: FdsNavigationItem[] = [
   { label: 'Areatool', value: 'home' },
@@ -16,9 +16,9 @@ export default {
     docs: {
       description: {
         component:
-          "`import '@fintraffic-design/coreui-components/src/fds-navigation'`<br>\
-          `import { FdsNavigationItem, FdsNavigationItemPosition, FdsNavigationVariant } from '@fintraffic-design/coreui-components/src/fds-navigation'`<br><br>\
-          Selector: `<fds-navigation>`",
+          "`import '@fintraffic/fds-coreui-components/dist/define/fds-navigation'`<br>\
+          `import { FdsNavigationItem, FdsNavigationItemPosition, FdsNavigationVariant } from '@fintraffic/fds-coreui-components'`<br><br>\
+          Element: `<fds-navigation>`",
       },
     },
     actions: {

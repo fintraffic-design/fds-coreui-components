@@ -7,7 +7,7 @@ import {
 } from '@fintraffic/fds-coreui-css'
 import { css, html, LitElement, unsafeCSS, adoptStyles, CSSResult } from 'lit'
 import { nothing, TemplateResult } from 'lit-html'
-import { customElement, property, state } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { FdsIcon, FdsIconType } from './icon.js'
 import { styleMap } from 'lit/directives/style-map.js'
 

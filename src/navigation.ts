@@ -68,21 +68,25 @@ export class FdsNavigation extends LitElement {
   override render(): TemplateResult {
     const itemsOnRight = this.items.filter(item => item.position === FdsNavigationItemPosition.right)
     const itemsOnLeft = this.items.filter(item => item.position !== FdsNavigationItemPosition.right)
-    return html`<div class="navigation navigation--${this.variant} ui-label-text">
-      ${this.variant === FdsNavigationVariant.primary
-        ? html`<div class="navigation__header">
-            <slot></slot>
-          </div>`
-        : nothing}
-      <ul class="navigation__body ${this._open ? 'navigation__open' : ''}">
-        ${itemsOnLeft
-          .map(item => this.renderItem(item))
-          .concat(
-            itemsOnRight.map((item, index) => this.renderItem(item, index === 0 ? 'item__first-right' : ''))
-          )}
-      </ul>
-      <div class="navigation__button-wrapper">${this.renderNavigationButton()}</div>
-    </div>`
+    return html`
+        <div class="navigation-wrapper">
+            <div class="navigation navigation--${this.variant} ui-label-text">
+                ${this.variant === FdsNavigationVariant.primary
+                        ? html`
+                            <div class="navigation__header">
+                                <slot></slot>
+                            </div>`
+                        : nothing}
+                <ul class="navigation__body ${this._open ? 'navigation__open' : ''}">
+                    ${itemsOnLeft
+                            .map(item => this.renderItem(item))
+                            .concat(
+                                    itemsOnRight.map((item, index) => this.renderItem(item, index === 0 ? 'item__first-right' : ''))
+                            )}
+                </ul>
+                <div class="navigation__button-wrapper">${this.renderNavigationButton()}</div>
+            </div>
+        </div>`
   }
 
   renderNavigationButton(): TemplateResult {
@@ -146,6 +150,10 @@ export class FdsNavigation extends LitElement {
   `
 
   static collapsedNavigationStyles = css`
+    .navigation-wrapper {
+      container-type: inline-size;
+      container-name: navigation-wrapper;
+    }
     .navigation {
       display: flex;
       flex-wrap: wrap;
@@ -302,7 +310,7 @@ export class FdsNavigation extends LitElement {
    */
   desktopStyles(): CSSResult {
     return css`
-      @media (min-width: ${unsafeCSS(this.verticalMenuThreshold)}px) {
+      @container navigation-wrapper (min-width: ${unsafeCSS(this.verticalMenuThreshold)}px) {
         .navigation {
           flex-wrap: nowrap;
         }

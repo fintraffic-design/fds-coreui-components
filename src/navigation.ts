@@ -68,25 +68,23 @@ export class FdsNavigation extends LitElement {
   override render(): TemplateResult {
     const itemsOnRight = this.items.filter(item => item.position === FdsNavigationItemPosition.right)
     const itemsOnLeft = this.items.filter(item => item.position !== FdsNavigationItemPosition.right)
-    return html`
-        <div class="navigation-wrapper">
-            <div class="navigation navigation--${this.variant} ui-label-text">
-                ${this.variant === FdsNavigationVariant.primary
-                        ? html`
-                            <div class="navigation__header">
-                                <slot></slot>
-                            </div>`
-                        : nothing}
-                <ul class="navigation__body ${this._open ? 'navigation__open' : ''}">
-                    ${itemsOnLeft
-                            .map(item => this.renderItem(item))
-                            .concat(
-                                    itemsOnRight.map((item, index) => this.renderItem(item, index === 0 ? 'item__first-right' : ''))
-                            )}
-                </ul>
-                <div class="navigation__button-wrapper">${this.renderNavigationButton()}</div>
-            </div>
-        </div>`
+    return html` <div class="navigation-wrapper">
+      <div class="navigation navigation--${this.variant} ui-label-text">
+        ${this.variant === FdsNavigationVariant.primary
+          ? html` <div class="navigation__header">
+              <slot></slot>
+            </div>`
+          : nothing}
+        <ul class="navigation__body ${this._open ? 'navigation__open' : ''}">
+          ${itemsOnLeft
+            .map(item => this.renderItem(item))
+            .concat(
+              itemsOnRight.map((item, index) => this.renderItem(item, index === 0 ? 'item__first-right' : ''))
+            )}
+        </ul>
+        <div class="navigation__button-wrapper">${this.renderNavigationButton()}</div>
+      </div>
+    </div>`
   }
 
   renderNavigationButton(): TemplateResult {
@@ -388,5 +386,9 @@ export class FdsNavigation extends LitElement {
     `
   }
 
-  static override styles = [FdsNavigation.cssVariables, uiLabelTextClass, FdsNavigation.collapsedNavigationStyles]
+  static override styles = [
+    FdsNavigation.cssVariables,
+    uiLabelTextClass,
+    FdsNavigation.collapsedNavigationStyles,
+  ]
 }

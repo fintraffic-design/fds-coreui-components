@@ -22,7 +22,7 @@ export interface FdsNavigationItem<T = string> {
   label: string
   value: T
   position?: FdsNavigationItemPosition
-  mobileOrder?: number
+  verticalMenuOrder?: number
   icon?: FdsIconType
 }
 
@@ -36,8 +36,8 @@ export enum FdsNavigationItemPosition {
  * @property {FdsNavigationVariant} variant - Primary or secondary style
  * @property {FdsNavigationItem[]} items - List of navigation items
  * @property {FdsNavigationItem} selected - Currently selected value
- * @property {string} mobileNavText - Text for mobile navigation button
- * @property {number} mobileWidth - Width in pixels when navigation is collapsed
+ * @property {string} verticalMenuNavText - Text for vertical menu navigation button
+ * @property {number} verticalMenuThreshold - Width in pixels when navigation is collapsed
  * @event select - Triggered when destination is clicked. The selected item is in event details field.
  */
 
@@ -46,8 +46,8 @@ export default class FdsNavigation extends LitElement {
   @property() variant: FdsNavigationVariant = FdsNavigationVariant.primary
   @property() items: FdsNavigationItem[] = []
   @property() selected?: FdsNavigationItem
-  @property({ attribute: 'mobile-nav-text' }) mobileNavText: string = ''
-  @property({ type: Number, attribute: 'mobile-width' }) mobileWidth = 768
+  @property({ attribute: 'vertical-menu-nav-text' }) verticalMenuNavText: string = ''
+  @property({ type: Number, attribute: 'vertical-menu-threshold' }) verticalMenuThreshold = 768
 
   @state() private _open = false
 
@@ -56,7 +56,7 @@ export default class FdsNavigation extends LitElement {
     adoptStyles(this.shadowRoot as ShadowRoot, [
       FdsNavigation.cssVariables,
       uiLabelTextClass,
-      FdsNavigation.mobileStyles,
+      FdsNavigation.collapsedNavigationStyles,
       this.desktopStyles(),
     ])
   }
@@ -99,7 +99,7 @@ export default class FdsNavigation extends LitElement {
         type="button"
         @click=${this.handleNavigationClick}
       >
-        <span class="navigation__label ui-label-text">${this.mobileNavText}</span>
+        <span class="navigation__label ui-label-text">${this.verticalMenuNavText}</span>
         ${icon}
       </button>
     `
@@ -110,11 +110,11 @@ export default class FdsNavigation extends LitElement {
   }
 
   renderItem(item: FdsNavigationItem, clazz: string = ''): TemplateResult {
-    const mobileOrder = item.mobileOrder ?? 0
+    const verticalMenuOrder = item.verticalMenuOrder ?? 0
     return html` <li
       @click=${(): void => this.handleSelect(item)}
       class="item ${this.selected === item ? 'item--active' : ''} ${clazz}"
-      style=${styleMap({ order: mobileOrder })}
+      style=${styleMap({ order: verticalMenuOrder })}
     >
       <div class="item__label">
         ${item.icon && html`<fds-icon class="item__icon" .icon="${item.icon}"></fds-icon>`}
@@ -141,7 +141,7 @@ export default class FdsNavigation extends LitElement {
     }
   `
 
-  static mobileStyles = css`
+  static collapsedNavigationStyles = css`
     .navigation {
       display: flex;
       flex-wrap: wrap;
@@ -293,12 +293,12 @@ export default class FdsNavigation extends LitElement {
   `
 
   /**
-   * These styles are inside a function instead of being static because they depend on the mobileWidth property
+   * These styles are inside a function instead of being static because they depend on the verticalMenuThreshold property
    * that the end user can change
    */
   desktopStyles(): CSSResult {
     return css`
-      @media (min-width: ${unsafeCSS(this.mobileWidth)}px) {
+      @media (min-width: ${unsafeCSS(this.verticalMenuThreshold)}px) {
         .navigation {
           flex-wrap: nowrap;
         }
@@ -346,7 +346,7 @@ export default class FdsNavigation extends LitElement {
           border-bottom: var(--element-vertical-padding--primary) solid ${FdsColorBrandWhite};
         }
 
-        /* Disable the arrow shown on mobile */
+        /* Disable the arrow shown on collapsed view */
         .navigation--primary .navigation__open .item--active .item__label:after {
           content: '';
           display: none;
@@ -376,5 +376,5 @@ export default class FdsNavigation extends LitElement {
     `
   }
 
-  static override styles = [FdsNavigation.cssVariables, uiLabelTextClass, FdsNavigation.mobileStyles]
+  static override styles = [FdsNavigation.cssVariables, uiLabelTextClass, FdsNavigation.collapsedNavigationStyles]
 }

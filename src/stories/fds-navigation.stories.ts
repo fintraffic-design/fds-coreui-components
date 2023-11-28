@@ -74,7 +74,7 @@ export default {
     },
     'vertical-menu-threshold': {
       description:
-        'Width of the viewport in pixels in which the navigation header is rendered as a vertical menu header. The value should be given as an attribute and it cannot be changed later. <br><br>\
+        'Width of this navigation element in pixels in which the navigation header is rendered as a vertical menu header. The value should be given as an attribute and it cannot be changed later. <br><br>\
         `number`',
       table: {
         category: 'Attributes',

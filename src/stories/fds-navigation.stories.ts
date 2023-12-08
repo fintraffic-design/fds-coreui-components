@@ -30,7 +30,7 @@ export default {
     items: items,
     selected: items[0],
     select: undefined,
-    verticalMenuText: 'Menu',
+    verticalMenuNavText: 'Menu',
     slot: true,
   },
   argTypes: {

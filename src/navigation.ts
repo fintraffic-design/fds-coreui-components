@@ -200,9 +200,7 @@ export class FdsNavigation extends LitElement {
       list-style: none;
       margin: 0;
       padding: 0;
-    }
 
-    .navigation__body {
       height: 1px;
       width: 1px;
       visibility: hidden;
@@ -315,13 +313,10 @@ export class FdsNavigation extends LitElement {
 
         .navigation__body {
           width: 100%;
-          height: 100%;
           order: 0;
           align-items: end;
           flex-direction: row;
-        }
-
-        .navigation__body {
+          
           height: auto;
           visibility: visible;
           opacity: 1;

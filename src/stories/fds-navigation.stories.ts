@@ -30,6 +30,7 @@ export default {
     items: items,
     selected: items[0],
     select: undefined,
+    verticalMenuNavText: 'Menu',
     slot: true,
   },
   argTypes: {
@@ -62,6 +63,24 @@ export default {
         defaultValue: { summary: 'undefined' },
       },
     },
+    verticalMenuNavText: {
+      description:
+        'Text for the vertical menu navigation button. <br><br>\
+        `string`',
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: '' },
+      },
+    },
+    'vertical-menu-threshold': {
+      description:
+        'Width of this navigation element in pixels in which the navigation header is rendered as a vertical menu header. The value should be given as an attribute and it cannot be changed later. <br><br>\
+        `number`',
+      table: {
+        category: 'Attributes',
+        defaultValue: { summary: '768' },
+      },
+    },
     select: {
       description:
         "Event that is dispatched when a destination is clicked. The value is in the event's details field. <br><br> \
@@ -78,13 +97,14 @@ export default {
   },
 }
 
-const Template: StoryFn = ({ variant, slot }) => {
+const Template: StoryFn = ({ variant, slot, verticalMenuNavText }) => {
   const headerEl = slot ? html`<div style="display: flex; align-items: center;">Header</div>` : null
   return html`<div style="height: 300px;">
     <fds-navigation
       .variant=${variant}
       .items=${items}
       .selected=${items[0]}
+      .verticalMenuNavText=${verticalMenuNavText}
       @select="${(event: CustomEvent<FdsNavigationItem>): void => console.log('@select', event.detail)}"
     >
       ${headerEl}

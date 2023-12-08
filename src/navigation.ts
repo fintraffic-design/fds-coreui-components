@@ -316,7 +316,7 @@ export class FdsNavigation extends LitElement {
           order: 0;
           align-items: end;
           flex-direction: row;
-          
+
           height: auto;
           visibility: visible;
           opacity: 1;

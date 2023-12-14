@@ -15,24 +15,48 @@ npm i --save @fintraffic/fds-coreui-components
 
 # Usage
 
-Import and register a specific component
+Usage as a native web component.
+
+Import and register a specific component.
 
 ```js
 import '@fintraffic/fds-coreui-components/dist/define/fds-button.js';
 ```
 
-Import and register all components
+Import and register all components.
 
 ```js
 import '@fintraffic/fds-coreui-components/dist/define/all.js';
 ```
 
-Extend a component
+Extend a component.
 
 ```js
 import { FdsButton } from '@fintraffic/fds-coreui-components';
 class MyButton extends FdsButton { /* ... */ }
 customElements.define('my-button', MyButton);
+```
+
+## React wrappers
+
+Usage of React component wrappers.
+
+Import and register a specific React component.
+This will also register the web component and the components used internally by it.
+
+```js
+import { FdsButton } from '@fintraffic/fds-coreui-components/dist/react/button.js'
+```
+
+> NOTE: when using React, make sure to import from the `dist/react` path to get the React components. Your IDE auto imports will probably try to import the web component by default from `@fintraffic/fds-coreui-components` so if you use auto imports to add these, you will probably need to manually fix the import paths.
+
+You can also import any of the React components from `@fintraffic/fds-coreui-components/dist/react/index.js` but this will cause all of the components to be loaded and registered (not just the ones you import).
+
+```js
+import {
+  FdsButton,
+  FdsInput,
+} from '@fintraffic/fds-coreui-components/dist/react/index.js'
 ```
 
 # Code style guide

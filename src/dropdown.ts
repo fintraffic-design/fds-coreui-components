@@ -50,9 +50,7 @@ export class FdsDropdownEvent<T> extends CustomEvent<FdsDropdownOption<T>> {
 export class FdsDropdown<T> extends LitElement {
   constructor() {
     super()
-    // Set attributes to host element
     this.addEventListener('blur', () => (this._open = false))
-    this.tabIndex = 0
   }
 
   @property() options: FdsDropdownOption<T>[] = []
@@ -62,6 +60,10 @@ export class FdsDropdown<T> extends LitElement {
   @property() value?: FdsDropdownOption<T>
 
   @state() private _open: boolean = false
+
+  override firstUpdated(): void {
+    this.tabIndex = 0
+  }
 
   override render(): TemplateResult {
     const optionsList = html`

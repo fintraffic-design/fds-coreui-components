@@ -287,6 +287,7 @@ export class FdsCombobox extends LitElement {
         cursor: pointer;
         display: block;
         position: absolute;
+        z-index: 1;
         overflow-y: scroll;
 
         min-width: 100%;

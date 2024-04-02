@@ -188,6 +188,7 @@ export class FdsDropdown<T> extends LitElement {
         cursor: pointer;
         display: block;
         position: absolute;
+        z-index: 1;
         overflow-y: scroll;
 
         min-width: 100%;

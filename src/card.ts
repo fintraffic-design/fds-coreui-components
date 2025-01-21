@@ -84,6 +84,7 @@ export class FdsCard extends LitElement {
       }
 
       .card__content {
+        height: 100%;
         padding: ${FdsSize2} ${FdsSize4};
       }
     `,

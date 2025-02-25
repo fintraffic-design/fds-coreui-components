@@ -63,6 +63,8 @@ export class FdsDropdown<T> extends LitElement {
 
   override firstUpdated(): void {
     this.tabIndex = 0
+    const rect = this.getBoundingClientRect()
+    this.style.setProperty('--dropdown-offset', `${rect.top + rect.height}px`)
   }
 
   override render(): TemplateResult {
@@ -193,8 +195,7 @@ export class FdsDropdown<T> extends LitElement {
 
         min-width: 100%;
         max-width: fit-content;
-        /* TODO: what value? */
-        max-height: 80vw;
+        max-height: calc(100vh - var(--dropdown-offset));
 
         box-shadow: ${FdsStyleElevation200};
       }

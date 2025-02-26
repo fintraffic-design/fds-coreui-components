@@ -67,7 +67,7 @@ export class FdsDropdown<T> extends LitElement {
 
   override render(): TemplateResult {
     const optionsList = html`
-      <div class="options-list">
+      <div part="options-list" class="options-list">
         ${this.options.map(
           option => html`
             <div
@@ -193,8 +193,7 @@ export class FdsDropdown<T> extends LitElement {
 
         min-width: 100%;
         max-width: fit-content;
-        /* TODO: what value? */
-        max-height: 80vw;
+        max-height: 80vh;
 
         box-shadow: ${FdsStyleElevation200};
       }

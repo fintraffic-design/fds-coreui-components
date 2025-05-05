@@ -23,7 +23,10 @@ declare global {
   }
 }
 
-export interface FdsDropdownOption<T> {
+// A type that can be used with structuredClone
+export type Cloneable = any
+
+export interface FdsDropdownOption<T extends Cloneable> {
   label: string
   value: T
   icon?: FdsIconType
@@ -50,7 +53,7 @@ export class FdsDropdownEvent<T> extends CustomEvent<FdsDropdownOption<T>> {
 export class FdsDropdown<T> extends LitElement {
   constructor() {
     super()
-    this.addEventListener('blur', () => (this._open = false))
+    this.addEventListener('blur', () => (this.getButton().ariaExpanded = 'false'))
   }
 
   @property() options: FdsDropdownOption<T>[] = []
@@ -58,19 +61,15 @@ export class FdsDropdown<T> extends LitElement {
   @property() error: boolean = false
   @property() placeholder?: string
   @property() value?: FdsDropdownOption<T>
-
-  @state() private _open: boolean = false
+  @property({type: Boolean}) multiple: boolean = false
 
   override firstUpdated(): void {
     this.tabIndex = 0
   }
 
   override render(): TemplateResult {
-    const optionsList = html`
-      <div part="options-list" class="options-list">
-        ${this.options.map(
-          option => html`
-            <div
+    const singleOptionItem = (option) => html`
+            <li
               @click=${(): void => this.handleSelect(option)}
               @keypress=${(e: KeyboardEvent): void => this.handleKeypress(e, option)}
               class=${`ui-label-text option ${this.getOptionCssClass(option)}`}
@@ -78,24 +77,47 @@ export class FdsDropdown<T> extends LitElement {
               aria-selected=${this.value === option}
             >
               ${this.getLabel(option)}
-            </div>
+            </li>
           `
+    const multipleOptionItem = (option) => html`
+            <li>
+                <label class="ui-label-text option option-multiple ${this.getOptionCssClass(option)}">
+                    <input type="checkbox"
+                           @change="${(): void => this.handleMultiSelect(option)}"
+                           ${this.name ? html`name="${this.name}"`:""}
+                           ${option.value ? html`value="${option.value}"`:""}>
+                    ${this.getLabel(option)}
+                </label>
+            </li>
+        `
+    const optionsList = html`
+      <ul part="options-list" id="options-list" role="listbox" aria-label="options" class="options-list" aria-multiselectable="true">
+        ${this.options.map(
+          option => this.multiple ? multipleOptionItem(option) : singleOptionItem(option)
         )}
-      </div>
+      </ul>
     `
+    const isFirstRender = this.renderRoot.children.length === 0
 
     return html`
-      <button
-        @click=${(): boolean => (this._open = !this._open)}
-        ?disabled=${this.disabled}
-        class=${`ui-label-text ${this.getButtonCssClass()}`}
-        aria-haspopup=${true}
-        aria-expanded=${this._open}
-      >
-        <div>${this.getLabel(this.value) ?? this.placeholder}</div>
-        <fds-icon .icon=${this._open ? 'chevron-up' : 'chevron-down'}></fds-icon>
-      </button>
-      ${this._open ? optionsList : null}
+      <div class="dropdown-wrapper">
+        <button
+          @click=${(): void => {
+            const buttonElement = this.getButton();
+            buttonElement.ariaExpanded = (!(buttonElement.ariaExpanded === 'true')).toString()
+          }}
+          ?disabled=${this.disabled}
+          class=${`ui-label-text ${this.getButtonCssClass()}`}
+          role="combobox"
+          aria-controls="options-list"
+          aria-expanded=${isFirstRender ? "false" : this.getButton().ariaExpanded}
+        >
+          <div>${this.getLabel(this.value) ?? this.placeholder}</div>
+          <fds-icon icon='chevron-up'></fds-icon>
+          <fds-icon icon='chevron-down'></fds-icon>
+        </button>
+        ${optionsList}
+      </div>
     `
   }
 
@@ -105,9 +127,24 @@ export class FdsDropdown<T> extends LitElement {
     }
   }
 
+  private getButton(): HTMLButtonElement {
+    const button = this.renderRoot.querySelector("button")
+
+    if (button === null) {
+        throw new Error('Button element not found')
+    }
+    return button
+  }
+
   private handleSelect(selectedOption: FdsDropdownOption<T>): void {
-    this._open = false
+    this.getButton().ariaExpanded = "false"
     this.value = selectedOption
+    this.dispatchEvent(new FdsDropdownEvent(selectedOption))
+  }
+
+  private handleMultiSelect(selectedOption: FdsDropdownOption<T>) {
+    const allValues = this.getValues()
+    this.value = allValues.length > 0 ? allValues[0] : undefined
     this.dispatchEvent(new FdsDropdownEvent(selectedOption))
   }
 
@@ -120,6 +157,37 @@ export class FdsDropdown<T> extends LitElement {
     return option.icon
       ? html`<span class="icon-label"><fds-icon .icon=${option.icon}></fds-icon>${label}</span>`
       : label
+  }
+
+  getValues():FdsDropdownOption<T>[] {
+    const findOption = (label: string) => {
+        return this.options.find((option) => option.label === label)
+    }
+    let selectedOptions:FdsDropdownOption<T>[] = []
+    if (this.multiple) {
+      const checkboxes = this.renderRoot.querySelectorAll('input[type="checkbox"]') as NodeListOf<HTMLInputElement>
+      selectedOptions = Array.from(checkboxes)
+        .filter((checkbox) => checkbox.checked)
+        .map((checkbox) => {
+          if (checkbox.labels === null || checkbox.labels[0].textContent === null) {
+            return undefined
+          }
+          const checkboxLabel = checkbox.labels[0].textContent.trim()
+          return findOption(checkboxLabel)
+        })
+        .filter((option) => option !== undefined)
+    } else {
+      const listItems = this.renderRoot.querySelectorAll('li')
+      const selectedItem = Array.from(listItems).find((item) => item.getAttribute('aria-selected') === 'true')
+      if (selectedItem !== undefined) {
+        const selectedLabel = selectedItem.textContent?.trim()
+        if (selectedLabel !== undefined) {
+          const selectedOption = findOption(selectedLabel)
+          selectedOptions = selectedOption ? [selectedOption] : []
+        }
+      }
+    }
+    return structuredClone(selectedOptions)
   }
 
   private getButtonCssClass(): string {
@@ -186,16 +254,33 @@ export class FdsDropdown<T> extends LitElement {
 
       .options-list {
         cursor: pointer;
-        display: block;
-        position: absolute;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        position: relative;
         z-index: 1;
         overflow-y: scroll;
-
-        min-width: 100%;
-        max-width: fit-content;
         max-height: 80vh;
-
         box-shadow: ${FdsStyleElevation200};
+        padding: 0;
+      }
+        
+      .dropdown-wrapper:has([aria-expanded='false']) {
+        .options-list {
+          display: none;
+        }
+        fds-icon[icon='chevron-up'] {
+          display: none;
+        }
+      }
+
+      .dropdown-wrapper:has([aria-expanded='true']) {
+        .options-list {
+          display: flex;
+        }
+        fds-icon[icon='chevron-down'] {
+          display: none;
+        }
       }
 
       fds-icon {
@@ -228,6 +313,12 @@ export class FdsDropdown<T> extends LitElement {
 
         background-color: ${FdsColorBrandWhite};
         border-bottom: 1px solid ${FdsColorNeutral200};
+          
+        &.option-multiple {
+          cursor: pointer;
+          gap: 10px;
+          flex-wrap: nowrap;
+        }
       }
 
       .option:hover {

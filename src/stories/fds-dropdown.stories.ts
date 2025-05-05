@@ -11,13 +11,11 @@ const storyDecorator: Decorator = (story, { parameters }) => {
           ${story()}
           <input type="text" name="name" value="John Doe" hidden />
           <button type="submit" data-testid="submit-button">Submit</button>
-      </form>\`
-    `
+      </form>`
   return html`
     <div style="width:284px; height: 260px;">
         ${parameters.isFormUsed ? formTemplate(story):html`${story()}`}
-    </div>
-  `
+    </div>`
 }
 
 export default {

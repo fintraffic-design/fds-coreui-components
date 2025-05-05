@@ -35,9 +35,12 @@
     "@mdx-js/react": "^2.3.0",
     "@storybook/addon-actions": "^8.6.12",
     "@storybook/addon-essentials": "^8.6.12",
+    "@storybook/addon-interactions": "^8.6.12",
     "@storybook/addon-links": "^8.6.12",
     "@storybook/blocks": "^8.6.12",
     "@storybook/preview-api": "^8.6.12",
+    "@storybook/test": "^8.6.12",
+    "@storybook/test-runner": "^0.22.0",
     "@storybook/web-components": "^8.6.12",
     "@storybook/web-components-vite": "^8.6.12",
     "@types/estree": "^1.0.5",
@@ -68,7 +71,8 @@
     "dev-bundle": "node dev-bundle.mjs",
     "storybook": "storybook dev -p 6006",
     "storybook-w": "storybook dev --no-manager-cache -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test-storybook": "test-storybook"
   },
   "keywords": [],
   "author": "Fintraffic",

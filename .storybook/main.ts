@@ -7,7 +7,7 @@ const config: StorybookConfig = {
   },
   stories: ['../src/stories/*.stories.ts',
     '../src/stories/*.mdx'],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-docs'],
+  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-docs', '@storybook/addon-interactions'],
   features: {
     buildStoriesJson: true,
   },

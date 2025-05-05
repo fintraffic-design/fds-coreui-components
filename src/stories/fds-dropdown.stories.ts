@@ -1,10 +1,28 @@
-import { StoryObj, Meta, StoryFn } from '@storybook/web-components'
+import { StoryObj, Meta, StoryFn, Decorator } from '@storybook/web-components'
+import { userEvent, within, expect } from '@storybook/test';
 import { html } from 'lit'
 import { FdsDropdownEvent } from '../dropdown.js'
 import '../define/fds-dropdown.js'
 
+const storyDecorator: Decorator = (story, { parameters }) => {
+  type PartialStoryFn = typeof story
+  const formTemplate = (story: PartialStoryFn) => html`
+      <form action="" method="get" data-testid="form">
+          ${story()}
+          <input type="text" name="name" value="John Doe" hidden />
+          <button type="submit" data-testid="submit-button">Submit</button>
+      </form>\`
+    `
+  return html`
+    <div style="width:284px; height: 260px;">
+        ${parameters.isFormUsed ? formTemplate(story):html`${story()}`}
+    </div>
+  `
+}
+
 export default {
   title: 'Dropdown',
+  decorators: [storyDecorator],
   parameters: {
     componentSubtitle: 'List of options for selecting single choice input',
     docs: {
@@ -31,9 +49,12 @@ export default {
     ],
     value: undefined,
     disabled: false,
+    required: false,
     error: false,
     select: undefined,
     slot: undefined,
+    name: undefined,
+    multiple: false,
   },
   argTypes: {
     placeholder: {
@@ -73,6 +94,33 @@ export default {
         defaultValue: { summary: 'false' },
       },
     },
+    required: {
+      description:
+        'Whether the dropdown value is required. <br><br>\
+        `boolean`',
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: 'false' },
+      },
+    },
+    name: {
+      description:
+        'Key name to use when sending with form. <br><br>\
+        `string`',
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: 'false' },
+      },
+    },
+    multiple: {
+      description:
+        'Whether the multiple values can be selected. <br><br>\
+        `boolean`',
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: 'false' },
+      },
+    },
     error: {
       description:
         'Whether the dropdown is in error state. <br><br>\
@@ -99,18 +147,22 @@ export default {
   },
 } as Meta
 
-const Template: StoryFn = ({ options, value, disabled, error, placeholder }) => {
+const Template: StoryFn = ({ options, value, disabled, error, required, placeholder, multiple, name }) => {
   return html`
-    <div style="width:284px; height: 260px;">
+      <label for="the-dropdown">Dropdown</label>
       <fds-dropdown
+         id="the-dropdown"
+         data-testid="fds-dropdown"
         .options=${options}
         .value=${value}
         .disabled=${disabled}
+        .required=${required}
         .error=${error}
-        .placeholder=${placeholder}
+        .multiple=${multiple}
+        .placeholder=${placeholder} 
+        .name=${name}
         @select="${(event: FdsDropdownEvent<string>): void => console.log('@select', event.detail)}"
       ></fds-dropdown>
-    </div>
   `
 }
 
@@ -141,4 +193,50 @@ export const LongText: StoryObj = {
       },
     },
   },
+}
+
+export const MultipleDropdownFormSend: StoryObj = {
+  args: {
+    multiple: true,
+    name: 'dropdown-values',
+  },
+  render: Template,
+  parameters: {
+    isFormUsed: true,
+  },
+  play: async ({ canvasElement }) => {
+
+    const canvas = within(canvasElement);
+
+    // Find elements outside the shadow DOM
+    const submitButton = await canvas.getByTestId('submit-button')
+    const form = await canvas.getByTestId('form')
+
+    // Find the shadow root
+    const fdsDropdownShadowRoot = await canvas.getByTestId("fds-dropdown").shadowRoot;
+
+    if (fdsDropdownShadowRoot === null) {
+        throw new Error('Shadow root not found');
+    }
+
+    // Find elements inside the web component
+    const dropdownButton = fdsDropdownShadowRoot.querySelector('[role="combobox"]') as HTMLElement
+    const dropdonwList = fdsDropdownShadowRoot.querySelector('[role="listbox"]') as HTMLElement
+
+    // Select multiple options
+    await userEvent.click(dropdownButton);
+    await userEvent.click(within(dropdonwList).getByText("Foo"));
+    await userEvent.click(within(dropdonwList).getByText("Bar"));
+    await userEvent.click(within(dropdonwList).getByText("Icon"));
+
+    // Catch the submit event
+    form.addEventListener('submit', async (event: Event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target as HTMLFormElement);
+        await expect(formData.getAll("dropdown-values")).toEqual(["Foo", "Bar", "Icon"])
+    })
+
+    // Submit the form
+    await userEvent.click(submitButton);
+  }
 }

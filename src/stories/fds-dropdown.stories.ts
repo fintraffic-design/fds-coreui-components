@@ -9,7 +9,6 @@ const storyDecorator: Decorator = (story, { parameters }) => {
   const formTemplate = (story: PartialStoryFn) => html`
       <form action="" method="get" data-testid="form">
           ${story()}
-          <input type="text" name="name" value="John Doe" hidden />
           <button type="submit" data-testid="submit-button">Submit</button>
       </form>`
   return html`

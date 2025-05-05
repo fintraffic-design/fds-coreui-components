@@ -5,8 +5,9 @@ const config: StorybookConfig = {
     name: '@storybook/web-components-vite',
     options: {},
   },
-  stories: ['../src/stories/*.stories.@(ts|mdx)'],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+  stories: ['../src/stories/*.stories.ts',
+    '../src/stories/*.mdx'],
+  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-docs'],
   features: {
     buildStoriesJson: true,
   },

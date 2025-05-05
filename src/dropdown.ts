@@ -51,20 +51,28 @@ export class FdsDropdownEvent<T> extends CustomEvent<FdsDropdownOption<T>> {
  * @property {string} placeholder - Placeholder text while no option is selected.
  */
 export class FdsDropdown<T> extends LitElement {
+  static formAssociated = true;
+  static override shadowRootOptions = {...LitElement.shadowRootOptions, delegatesFocus: true};
+  private _internals: ElementInternals;
+
   constructor() {
     super()
     this.addEventListener('blur', () => (this.getButton().ariaExpanded = 'false'))
+    this._internals = this.attachInternals();
   }
 
   @property() options: FdsDropdownOption<T>[] = []
-  @property() disabled: boolean = false
-  @property() error: boolean = false
+  @property({type: Boolean}) disabled: boolean = false
+  @property({type: Boolean}) error: boolean = false
   @property() placeholder?: string
   @property() value?: FdsDropdownOption<T>
   @property({type: Boolean}) multiple: boolean = false
+  @property({type: Boolean}) required: boolean = false
+  @property() name?: string
 
   override firstUpdated(): void {
     this.tabIndex = 0
+    this.setValidity();
   }
 
   override render(): TemplateResult {
@@ -139,12 +147,16 @@ export class FdsDropdown<T> extends LitElement {
   private handleSelect(selectedOption: FdsDropdownOption<T>): void {
     this.getButton().ariaExpanded = "false"
     this.value = selectedOption
+    this.setValidity();
+    this.setFormValue();
     this.dispatchEvent(new FdsDropdownEvent(selectedOption))
   }
 
   private handleMultiSelect(selectedOption: FdsDropdownOption<T>) {
     const allValues = this.getValues()
     this.value = allValues.length > 0 ? allValues[0] : undefined
+    this.setValidity();
+    this.setFormValue();
     this.dispatchEvent(new FdsDropdownEvent(selectedOption))
   }
 
@@ -203,6 +215,42 @@ export class FdsDropdown<T> extends LitElement {
   private getOptionCssClass(option: FdsDropdownOption<T>): string {
     return this.value === option ? 'selected' : ''
   }
+
+  public checkValidity(): boolean {
+    return this._internals.checkValidity();
+  }
+
+  public reportValidity(): boolean {
+    return this._internals.reportValidity();
+  }
+
+  public get validity(): ValidityState {
+    return this._internals.validity;
+  }
+
+  public get validationMessage(): string {
+    return this._internals.validationMessage;
+  }
+
+  private setValidity():void {
+    const valueMissing = this.required ? this.value === undefined : false
+    this._internals.setValidity({ valueMissing, customError: this.error }, 'Invalid state');
+  }
+
+  private setFormValue():void {
+    const dropdownName = this.name
+    if (dropdownName !== undefined) {
+      const formData = new FormData();
+      const values = this.getValues();
+      values.forEach((option) => {
+        if (option.value) {
+          formData.append(dropdownName, option.value.toString());
+        }
+      })
+      this._internals.setFormValue(formData);
+    }
+  }
+
 
   static override styles = [
     uiLabelTextClass,

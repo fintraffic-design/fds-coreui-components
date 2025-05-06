@@ -19,12 +19,12 @@ import { FdsIcon, FdsIconType } from './icon.js'
 // These components still need to be registered separately (by the importing app).
 declare global {
   interface HTMLElementTagNameMap {
-    'fds-icon': FdsIcon,
+    'fds-icon': FdsIcon
   }
 }
 
 // A type that can be used with structuredClone
-export type Cloneable = any
+export type Cloneable = unknown
 
 export interface FdsDropdownOption<T extends Cloneable> {
   label: string
@@ -51,56 +51,60 @@ export class FdsDropdownEvent<T> extends CustomEvent<FdsDropdownOption<T>> {
  * @property {string} placeholder - Placeholder text while no option is selected.
  */
 export class FdsDropdown<T> extends LitElement {
-  static formAssociated = true;
-  static override shadowRootOptions = {...LitElement.shadowRootOptions, delegatesFocus: true};
-  private _internals: ElementInternals;
+  static formAssociated = true
+  static override shadowRootOptions = { ...LitElement.shadowRootOptions, delegatesFocus: true }
+  private _internals: ElementInternals
 
   constructor() {
     super()
     this.addEventListener('blur', () => (this.getButton().ariaExpanded = 'false'))
-    this._internals = this.attachInternals();
+    this._internals = this.attachInternals()
   }
 
   @property() options: FdsDropdownOption<T>[] = []
-  @property({type: Boolean}) disabled: boolean = false
-  @property({type: Boolean}) error: boolean = false
+  @property({ type: Boolean }) disabled: boolean = false
+  @property({ type: Boolean }) error: boolean = false
   @property() placeholder?: string
   @property() value?: FdsDropdownOption<T>
-  @property({type: Boolean}) multiple: boolean = false
-  @property({type: Boolean}) required: boolean = false
+  @property({ type: Boolean }) multiple: boolean = false
+  @property({ type: Boolean }) required: boolean = false
   @property() name?: string
 
   override firstUpdated(): void {
     this.tabIndex = 0
-    this.setValidity();
+    this.setValidity()
   }
 
   override render(): TemplateResult {
-    const singleOptionItem = (option: FdsDropdownOption<T>) => html`
-            <li
-              @click=${(): void => this.handleSelect(option)}
-              @keypress=${(e: KeyboardEvent): void => this.handleKeypress(e, option)}
-              class=${`ui-label-text option ${this.getOptionCssClass(option)}`}
-              tabindex=${0}
-              aria-selected=${this.value === option}
-            >
-              ${this.getLabel(option)}
-            </li>
-          `
-    const multipleOptionItem = (option: FdsDropdownOption<T>) => html`
-            <li>
-                <label class="ui-label-text option option-multiple ${this.getOptionCssClass(option)}">
-                  <fds-checkbox @select="${(): void => this.handleMultiSelect(option)}">
-                  </fds-checkbox>
-                  ${this.getLabel(option)}
-                </label>
-            </li>
-        `
+    const singleOptionItem = (option: FdsDropdownOption<T>): TemplateResult => html`
+      <li
+        @click=${(): void => this.handleSelect(option)}
+        @keypress=${(e: KeyboardEvent): void => this.handleKeypress(e, option)}
+        class=${`ui-label-text option ${this.getOptionCssClass(option)}`}
+        tabindex=${0}
+        aria-selected=${this.value === option}
+      >
+        ${this.getLabel(option)}
+      </li>
+    `
+    const multipleOptionItem = (option: FdsDropdownOption<T>): TemplateResult => html`
+      <li>
+        <label class="ui-label-text option option-multiple ${this.getOptionCssClass(option)}">
+          <fds-checkbox @select="${(): void => this.handleMultiSelect(option)}"> </fds-checkbox>
+          ${this.getLabel(option)}
+        </label>
+      </li>
+    `
     const optionsList = html`
-      <ul part="options-list" id="options-list" role="listbox" aria-label="options" class="options-list" aria-multiselectable="true">
-        ${this.options.map(
-          option => this.multiple ? multipleOptionItem(option) : singleOptionItem(option)
-        )}
+      <ul
+        part="options-list"
+        id="options-list"
+        role="listbox"
+        aria-label="options"
+        class="options-list"
+        aria-multiselectable="true"
+      >
+        ${this.options.map(option => (this.multiple ? multipleOptionItem(option) : singleOptionItem(option)))}
       </ul>
     `
     const isFirstRender = this.renderRoot.children.length === 0
@@ -109,18 +113,18 @@ export class FdsDropdown<T> extends LitElement {
       <div class="dropdown-wrapper">
         <button
           @click=${(): void => {
-            const buttonElement = this.getButton();
+            const buttonElement = this.getButton()
             buttonElement.ariaExpanded = (!(buttonElement.ariaExpanded === 'true')).toString()
           }}
           ?disabled=${this.disabled}
           class=${`ui-label-text ${this.getButtonCssClass()}`}
           role="combobox"
           aria-controls="options-list"
-          aria-expanded=${isFirstRender ? "false" : this.getButton().ariaExpanded}
+          aria-expanded=${isFirstRender ? 'false' : this.getButton().ariaExpanded}
         >
           <div>${this.getLabel(this.value) ?? this.placeholder}</div>
-          <fds-icon icon='chevron-up'></fds-icon>
-          <fds-icon icon='chevron-down'></fds-icon>
+          <fds-icon icon="chevron-up"></fds-icon>
+          <fds-icon icon="chevron-down"></fds-icon>
         </button>
         ${optionsList}
       </div>
@@ -134,27 +138,27 @@ export class FdsDropdown<T> extends LitElement {
   }
 
   private getButton(): HTMLButtonElement {
-    const button = this.renderRoot.querySelector("button")
+    const button = this.renderRoot.querySelector('button')
 
     if (button === null) {
-        throw new Error('Button element not found')
+      throw new Error('Button element not found')
     }
     return button
   }
 
   private handleSelect(selectedOption: FdsDropdownOption<T>): void {
-    this.getButton().ariaExpanded = "false"
+    this.getButton().ariaExpanded = 'false'
     this.value = selectedOption
-    this.setValidity();
-    this.setFormValue();
+    this.setValidity()
+    this.setFormValue()
     this.dispatchEvent(new FdsDropdownEvent(selectedOption))
   }
 
   private handleMultiSelect(selectedOption: FdsDropdownOption<T>): void {
     const allValues = this.getValues()
     this.value = allValues.length > 0 ? allValues[0] : undefined
-    this.setValidity();
-    this.setFormValue();
+    this.setValidity()
+    this.setFormValue()
     this.dispatchEvent(new FdsDropdownEvent(selectedOption))
   }
 
@@ -169,26 +173,26 @@ export class FdsDropdown<T> extends LitElement {
       : label
   }
 
-  getValues():FdsDropdownOption<T>[] {
-    const findOption = (label: string) => {
-        return this.options.find((option) => option.label === label)
+  getValues(): FdsDropdownOption<T>[] {
+    const findOption = (label: string): FdsDropdownOption<T> | undefined => {
+      return this.options.find(option => option.label === label)
     }
-    let selectedOptions:FdsDropdownOption<T>[] = []
+    let selectedOptions: FdsDropdownOption<T>[] = []
     if (this.multiple) {
       const fdsCheckboxes = this.renderRoot.querySelectorAll('fds-checkbox')
       selectedOptions = Array.from(fdsCheckboxes)
-        .filter((fdsCheckbox) => fdsCheckbox.checked)
-        .map((fdsCheckbox) => {
+        .filter(fdsCheckbox => fdsCheckbox.checked)
+        .map(fdsCheckbox => {
           if (fdsCheckbox.labels === null || fdsCheckbox.labels[0].textContent === null) {
             return undefined
           }
           const fdsCheckboxLabel = fdsCheckbox.labels[0].textContent.trim()
           return findOption(fdsCheckboxLabel)
         })
-        .filter((option) => option !== undefined) as FdsDropdownOption<T>[]
+        .filter(option => option !== undefined) as FdsDropdownOption<T>[]
     } else {
       const listItems = this.renderRoot.querySelectorAll('li')
-      const selectedItem = Array.from(listItems).find((item) => item.getAttribute('aria-selected') === 'true')
+      const selectedItem = Array.from(listItems).find(item => item.getAttribute('aria-selected') === 'true')
       if (selectedItem !== undefined) {
         const selectedLabel = selectedItem.textContent?.trim()
         if (selectedLabel !== undefined) {
@@ -215,44 +219,43 @@ export class FdsDropdown<T> extends LitElement {
   }
 
   public checkValidity(): boolean {
-    return this._internals.checkValidity();
+    return this._internals.checkValidity()
   }
 
   public reportValidity(): boolean {
-    return this._internals.reportValidity();
+    return this._internals.reportValidity()
   }
 
   public get labels(): NodeList {
-    return this._internals.labels;
+    return this._internals.labels
   }
 
   public get validity(): ValidityState {
-    return this._internals.validity;
+    return this._internals.validity
   }
 
   public get validationMessage(): string {
-    return this._internals.validationMessage;
+    return this._internals.validationMessage
   }
 
-  private setValidity():void {
+  private setValidity(): void {
     const valueMissing = this.required ? this.value === undefined : false
-    this._internals.setValidity({ valueMissing, customError: this.error }, 'Invalid state');
+    this._internals.setValidity({ valueMissing, customError: this.error }, 'Invalid state')
   }
 
-  private setFormValue():void {
+  private setFormValue(): void {
     const dropdownName = this.name
     if (dropdownName !== undefined) {
-      const formData = new FormData();
-      const values = this.getValues();
-      values.forEach((option) => {
+      const formData = new FormData()
+      const values = this.getValues()
+      values.forEach(option => {
         if (option.value) {
-          formData.append(dropdownName, option.value.toString());
+          formData.append(dropdownName, option.value.toString())
         }
       })
-      this._internals.setFormValue(formData);
+      this._internals.setFormValue(formData)
     }
   }
-
 
   static override styles = [
     uiLabelTextClass,
@@ -314,7 +317,7 @@ export class FdsDropdown<T> extends LitElement {
         box-shadow: ${FdsStyleElevation200};
         padding: 0;
       }
-        
+
       .dropdown-wrapper:has([aria-expanded='false']) {
         .options-list {
           display: none;
@@ -363,7 +366,7 @@ export class FdsDropdown<T> extends LitElement {
 
         background-color: ${FdsColorBrandWhite};
         border-bottom: 1px solid ${FdsColorNeutral200};
-          
+
         &.option-multiple {
           cursor: pointer;
           gap: 10px;

@@ -51,7 +51,7 @@ export default {
       description: 'If true, alert can be dismissed by clicking the close button.',
       table: {
         category: 'Properties',
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     slot: {

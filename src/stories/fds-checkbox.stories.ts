@@ -2,6 +2,7 @@ import { Meta, StoryFn, StoryObj } from '@storybook/web-components'
 import { html } from 'lit'
 import '../define/fds-checkbox.js'
 import { expect, userEvent, within } from '@storybook/test'
+import { FdsCheckbox } from '../checkbox'
 
 export default {
   title: 'Checkbox',
@@ -114,44 +115,47 @@ export const CheckboxFormSend: StoryObj = {
     isFormUsed: true,
   },
   play: async ({ canvasElement }) => {
-
-    const canvas = within(canvasElement);
+    const canvas = within(canvasElement)
     const user = userEvent.setup()
 
     // Find elements outside the shadow DOM
     const submitButton = await canvas.getByTestId('submit-button')
     const form = await canvas.getByTestId('form')
-    const fdsCheckbox = await canvas.getByTestId("fds-checkbox");
+    const fdsCheckbox = await canvas.getByTestId<FdsCheckbox>('fds-checkbox')
 
-    const testFormSubmission = async (testFn: (formData: FormData) => Promise<void>) => {
-      const testIsDone = new Promise<void>(async (resolve) => {
-        form.addEventListener('submit', async (event: Event) => {
-          event.preventDefault();
-          const formData = new FormData(event.target as HTMLFormElement);
-          await testFn(formData);
-          resolve();
-        }, { once: true });
+    const testFormSubmission = async (testFn: (formData: FormData) => Promise<void>): Promise<void> => {
+      const testIsDone = new Promise<void>(async resolve => {
+        form.addEventListener(
+          'submit',
+          async (event: Event) => {
+            event.preventDefault()
+            const formData = new FormData(event.target as HTMLFormElement)
+            await testFn(formData)
+            resolve()
+          },
+          { once: true }
+        )
         // Submit the form
-        await userEvent.click(submitButton);
-      });
-      await testIsDone;
+        await userEvent.click(submitButton)
+      })
+      await testIsDone
     }
 
     // Select the checkbox
-    await user.click(fdsCheckbox);
+    await user.click(fdsCheckbox)
     await testFormSubmission(async (formData: FormData) => {
-      expect(formData.get('checkbox-value')).toEqual('on');
-    });
+      await expect(formData.get('checkbox-value')).toEqual('on')
+    })
     // Unselect the checkbox
-    await user.click(fdsCheckbox);
+    await user.click(fdsCheckbox)
     await testFormSubmission(async (formData: FormData) => {
-      expect(formData.get('checkbox-value')).toEqual(null);
-    });
+      await expect(formData.get('checkbox-value')).toEqual(null)
+    })
     // Set value of the checkbox to 'testValue' and check it
-    fdsCheckbox.value = 'testValue';
-    await user.click(fdsCheckbox);
+    fdsCheckbox.value = 'testValue'
+    await user.click(fdsCheckbox)
     await testFormSubmission(async (formData: FormData) => {
-      expect(formData.get('checkbox-value')).toEqual('testValue');
-    });
-  }
+      await expect(formData.get('checkbox-value')).toEqual('testValue')
+    })
+  },
 }

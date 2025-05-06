@@ -1,4 +1,4 @@
-import { StoryObj, Meta, StoryFn, Decorator } from '@storybook/web-components'
+import { StoryObj, Meta, StoryFn } from '@storybook/web-components'
 import { userEvent, within, expect, fireEvent } from '@storybook/test'
 import { html } from 'lit'
 import { FdsDropdownEvent } from '../dropdown.js'
@@ -132,20 +132,20 @@ export default {
 
 const Template: StoryFn = ({ options, value, disabled, error, required, placeholder, multiple, name }) => {
   return html`
-      <label for="the-dropdown">Dropdown</label>
-      <fds-dropdown
-         id="the-dropdown"
-         data-testid="fds-dropdown"
-        .options=${options}
-        .value=${value}
-        .disabled=${disabled}
-        .required=${required}
-        .error=${error}
-        .multiple=${multiple}
-        .placeholder=${placeholder} 
-        .name=${name}
-        @select="${(event: FdsDropdownEvent<string>): void => console.log('@select', event.detail)}"
-      ></fds-dropdown>
+    <label for="the-dropdown">Dropdown</label>
+    <fds-dropdown
+      id="the-dropdown"
+      data-testid="fds-dropdown"
+      .options=${options}
+      .value=${value}
+      .disabled=${disabled}
+      .required=${required}
+      .error=${error}
+      .multiple=${multiple}
+      .placeholder=${placeholder}
+      .name=${name}
+      @select="${(event: FdsDropdownEvent<string>): void => console.log('@select', event.detail)}"
+    ></fds-dropdown>
   `
 }
 
@@ -188,8 +188,7 @@ export const MultipleDropdownFormSend: StoryObj = {
     isFormUsed: true,
   },
   play: async ({ canvasElement }) => {
-
-    const canvas = within(canvasElement);
+    const canvas = within(canvasElement)
     const user = userEvent.setup()
 
     // Find elements outside the shadow DOM
@@ -197,10 +196,10 @@ export const MultipleDropdownFormSend: StoryObj = {
     const form = await canvas.getByTestId('form')
 
     // Find the shadow root
-    const fdsDropdownShadowRoot = await canvas.getByTestId("fds-dropdown").shadowRoot;
+    const fdsDropdownShadowRoot = await canvas.getByTestId('fds-dropdown').shadowRoot
 
     if (fdsDropdownShadowRoot === null) {
-        throw new Error('Shadow root not found');
+      throw new Error('Shadow root not found')
     }
 
     // Find elements inside the web component
@@ -208,20 +207,20 @@ export const MultipleDropdownFormSend: StoryObj = {
     const dropdonwList = fdsDropdownShadowRoot.querySelector('[role="listbox"]') as HTMLElement
 
     // Select multiple options
-    await user.click(dropdownButton);
+    await user.click(dropdownButton)
 
-    await fireEvent(within(dropdonwList).getByText("Foo"), new MouseEvent('click', { bubbles: true }));
-    await fireEvent(within(dropdonwList).getByText("Bar"), new MouseEvent('click', { bubbles: true }));
-    await fireEvent(within(dropdonwList).getByText("Icon"), new MouseEvent('click', { bubbles: true }));
+    await fireEvent(within(dropdonwList).getByText('Foo'), new MouseEvent('click', { bubbles: true }))
+    await fireEvent(within(dropdonwList).getByText('Bar'), new MouseEvent('click', { bubbles: true }))
+    await fireEvent(within(dropdonwList).getByText('Icon'), new MouseEvent('click', { bubbles: true }))
 
     // Catch the submit event
     form.addEventListener('submit', async (event: Event) => {
-        event.preventDefault();
-        const formData = new FormData(event.target as HTMLFormElement);
-        await expect(formData.getAll("dropdown-values")).toEqual(["Foo", "Bar", "Icon"])
+      event.preventDefault()
+      const formData = new FormData(event.target as HTMLFormElement)
+      await expect(formData.getAll('dropdown-values')).toEqual(['Foo', 'Bar', 'Icon'])
     })
 
     // Submit the form
-    await userEvent.click(submitButton);
-  }
+    await userEvent.click(submitButton)
+  },
 }

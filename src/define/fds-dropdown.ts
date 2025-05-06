@@ -1,6 +1,7 @@
 import { FdsDropdown } from '../dropdown.js'
 // import components used internally in FdsDropdown
 import './fds-icon.js'
+import './fds-checkbox.js'
 
 customElements.define('fds-dropdown', FdsDropdown)
 

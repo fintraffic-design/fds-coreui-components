@@ -12,14 +12,14 @@ import {
 } from '@fintraffic/fds-coreui-css'
 import { css, html, LitElement } from 'lit'
 import { TemplateResult } from 'lit-html'
-import { property, state } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { FdsIcon, FdsIconType } from './icon.js'
 
 // Declare used elements to avoid lit-plugin(no-unknown-tag-name) warning
 // These components still need to be registered separately (by the importing app).
 declare global {
   interface HTMLElementTagNameMap {
-    'fds-icon': FdsIcon
+    'fds-icon': FdsIcon,
   }
 }
 
@@ -76,7 +76,7 @@ export class FdsDropdown<T> extends LitElement {
   }
 
   override render(): TemplateResult {
-    const singleOptionItem = (option) => html`
+    const singleOptionItem = (option: FdsDropdownOption<T>) => html`
             <li
               @click=${(): void => this.handleSelect(option)}
               @keypress=${(e: KeyboardEvent): void => this.handleKeypress(e, option)}
@@ -87,14 +87,12 @@ export class FdsDropdown<T> extends LitElement {
               ${this.getLabel(option)}
             </li>
           `
-    const multipleOptionItem = (option) => html`
+    const multipleOptionItem = (option: FdsDropdownOption<T>) => html`
             <li>
                 <label class="ui-label-text option option-multiple ${this.getOptionCssClass(option)}">
-                    <input type="checkbox"
-                           @change="${(): void => this.handleMultiSelect(option)}"
-                           ${this.name ? html`name="${this.name}"`:""}
-                           ${option.value ? html`value="${option.value}"`:""}>
-                    ${this.getLabel(option)}
+                  <fds-checkbox @select="${(): void => this.handleMultiSelect(option)}">
+                  </fds-checkbox>
+                  ${this.getLabel(option)}
                 </label>
             </li>
         `
@@ -152,7 +150,7 @@ export class FdsDropdown<T> extends LitElement {
     this.dispatchEvent(new FdsDropdownEvent(selectedOption))
   }
 
-  private handleMultiSelect(selectedOption: FdsDropdownOption<T>) {
+  private handleMultiSelect(selectedOption: FdsDropdownOption<T>): void {
     const allValues = this.getValues()
     this.value = allValues.length > 0 ? allValues[0] : undefined
     this.setValidity();
@@ -177,17 +175,17 @@ export class FdsDropdown<T> extends LitElement {
     }
     let selectedOptions:FdsDropdownOption<T>[] = []
     if (this.multiple) {
-      const checkboxes = this.renderRoot.querySelectorAll('input[type="checkbox"]') as NodeListOf<HTMLInputElement>
-      selectedOptions = Array.from(checkboxes)
-        .filter((checkbox) => checkbox.checked)
-        .map((checkbox) => {
-          if (checkbox.labels === null || checkbox.labels[0].textContent === null) {
+      const fdsCheckboxes = this.renderRoot.querySelectorAll('fds-checkbox')
+      selectedOptions = Array.from(fdsCheckboxes)
+        .filter((fdsCheckbox) => fdsCheckbox.checked)
+        .map((fdsCheckbox) => {
+          if (fdsCheckbox.labels === null || fdsCheckbox.labels[0].textContent === null) {
             return undefined
           }
-          const checkboxLabel = checkbox.labels[0].textContent.trim()
-          return findOption(checkboxLabel)
+          const fdsCheckboxLabel = fdsCheckbox.labels[0].textContent.trim()
+          return findOption(fdsCheckboxLabel)
         })
-        .filter((option) => option !== undefined)
+        .filter((option) => option !== undefined) as FdsDropdownOption<T>[]
     } else {
       const listItems = this.renderRoot.querySelectorAll('li')
       const selectedItem = Array.from(listItems).find((item) => item.getAttribute('aria-selected') === 'true')
@@ -222,6 +220,10 @@ export class FdsDropdown<T> extends LitElement {
 
   public reportValidity(): boolean {
     return this._internals.reportValidity();
+  }
+
+  public get labels(): NodeList {
+    return this._internals.labels;
   }
 
   public get validity(): ValidityState {

@@ -1,25 +1,11 @@
 import { StoryObj, Meta, StoryFn, Decorator } from '@storybook/web-components'
-import { userEvent, within, expect } from '@storybook/test';
+import { userEvent, within, expect, fireEvent } from '@storybook/test'
 import { html } from 'lit'
 import { FdsDropdownEvent } from '../dropdown.js'
 import '../define/fds-dropdown.js'
 
-const storyDecorator: Decorator = (story, { parameters }) => {
-  type PartialStoryFn = typeof story
-  const formTemplate = (story: PartialStoryFn) => html`
-      <form action="" method="get" data-testid="form">
-          ${story()}
-          <button type="submit" data-testid="submit-button">Submit</button>
-      </form>`
-  return html`
-    <div style="width:284px; height: 260px;">
-        ${parameters.isFormUsed ? formTemplate(story):html`${story()}`}
-    </div>`
-}
-
 export default {
   title: 'Dropdown',
-  decorators: [storyDecorator],
   parameters: {
     componentSubtitle: 'List of options for selecting single choice input',
     docs: {
@@ -106,7 +92,7 @@ export default {
         `string`',
       table: {
         category: 'Properties',
-        defaultValue: { summary: 'false' },
+        defaultValue: { summary: 'undefined' },
       },
     },
     multiple: {
@@ -204,6 +190,7 @@ export const MultipleDropdownFormSend: StoryObj = {
   play: async ({ canvasElement }) => {
 
     const canvas = within(canvasElement);
+    const user = userEvent.setup()
 
     // Find elements outside the shadow DOM
     const submitButton = await canvas.getByTestId('submit-button')
@@ -221,10 +208,11 @@ export const MultipleDropdownFormSend: StoryObj = {
     const dropdonwList = fdsDropdownShadowRoot.querySelector('[role="listbox"]') as HTMLElement
 
     // Select multiple options
-    await userEvent.click(dropdownButton);
-    await userEvent.click(within(dropdonwList).getByText("Foo"));
-    await userEvent.click(within(dropdonwList).getByText("Bar"));
-    await userEvent.click(within(dropdonwList).getByText("Icon"));
+    await user.click(dropdownButton);
+
+    await fireEvent(within(dropdonwList).getByText("Foo"), new MouseEvent('click', { bubbles: true }));
+    await fireEvent(within(dropdonwList).getByText("Bar"), new MouseEvent('click', { bubbles: true }));
+    await fireEvent(within(dropdonwList).getByText("Icon"), new MouseEvent('click', { bubbles: true }));
 
     // Catch the submit event
     form.addEventListener('submit', async (event: Event) => {

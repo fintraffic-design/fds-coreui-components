@@ -52,7 +52,7 @@ export class FdsDropdownEvent<T> extends CustomEvent<FdsDropdownOption<T>> {
  * @property {boolean} multiple - Allow multiple selections.
  * @property {boolean} required - Required field indicator.
  * @property {string} name - Name of the dropdown. Used for form submission.
-*/
+ */
 export class FdsDropdown<T> extends LitElement {
   static formAssociated = true
   static override shadowRootOptions = { ...LitElement.shadowRootOptions, delegatesFocus: true }

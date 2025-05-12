@@ -178,7 +178,7 @@ export const LongText: StoryObj = {
   },
 }
 
-export const MultipleDropdownFormSend: StoryObj = {
+export const MultiselectionDropdown: StoryObj = {
   args: {
     multiple: true,
     name: 'dropdown-values',

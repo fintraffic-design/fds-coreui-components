@@ -15,6 +15,8 @@ import { property } from 'lit/decorators.js'
  * @property {string} label - Label for the checkbox.
  * @property {boolean} disabled - Disable checkbox.
  * @property {boolean} checked - Checkbox value.
+ * @property {string} value - Value used in the form submission.
+ * @property {string} name - Name of the checkbox. Used in form submission.
  * @event select - Dispatches a custom event when checkbox is clicked. The value is in the event details field.
  */
 export class FdsCheckbox extends LitElement {

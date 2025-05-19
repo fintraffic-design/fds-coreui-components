@@ -68,7 +68,7 @@ export class FdsDropdown<T> extends LitElement {
   @property({ type: Boolean }) disabled: boolean = false
   @property({ type: Boolean }) error: boolean = false
   @property() placeholder?: string
-  @property() value?: FdsDropdownOption<T>
+  @property() value?: FdsDropdownOption<T> | FdsDropdownOption<T>[]
   @property({ type: Boolean }) multiple: boolean = false
   @property({ type: Boolean }) required: boolean = false
   @property() name?: string
@@ -93,7 +93,10 @@ export class FdsDropdown<T> extends LitElement {
     const multipleOptionItem = (option: FdsDropdownOption<T>): TemplateResult => html`
       <li>
         <label class="ui-label-text option option-multiple ${this.getOptionCssClass(option)}">
-          <fds-checkbox @select="${(): void => this.handleMultiSelect(option)}"> </fds-checkbox>
+          <fds-checkbox 
+            @select="${(): void => this.handleMultiSelect(option)}"
+            ?checked=${Array.isArray(this.value) ? this.value.some(selectedOption => selectedOption.value === option.value) : false}
+          > </fds-checkbox>
           ${this.getLabel(option)}
         </label>
       </li>
@@ -159,15 +162,18 @@ export class FdsDropdown<T> extends LitElement {
 
   private handleMultiSelect(selectedOption: FdsDropdownOption<T>): void {
     const allValues = this.getValues()
-    this.value = allValues.length > 0 ? allValues[0] : undefined
+    this.value = allValues.length > 0 ? allValues : undefined
     this.setValidity()
     this.setFormValue()
     this.dispatchEvent(new FdsDropdownEvent(selectedOption))
   }
 
-  private getLabel(option?: FdsDropdownOption<T>): TemplateResult | null {
+  private getLabel(option?: FdsDropdownOption<T>|FdsDropdownOption<T>[]): TemplateResult | null {
     if (!option) {
       return null
+    }
+    if (Array.isArray(option)) {
+      option = option[0]
     }
     const label = html`<span class="label">${option.label}</span>`
 

@@ -94,10 +94,13 @@ export class FdsDropdown<T> extends LitElement {
     const multipleOptionItem = (option: FdsDropdownOption<T>): TemplateResult => html`
       <li>
         <label class="ui-label-text option option-multiple ${this.getOptionCssClass(option)}">
-          <fds-checkbox 
+          <fds-checkbox
             @select="${(): void => this.handleMultiSelect(option)}"
-            ?checked=${Array.isArray(this.value) ? this.value.some(selectedOption => selectedOption.value === option.value) : false}
-          > </fds-checkbox>
+            ?checked=${Array.isArray(this.value)
+              ? this.value.some(selectedOption => selectedOption.value === option.value)
+              : false}
+          >
+          </fds-checkbox>
           ${this.getLabel(option)}
         </label>
       </li>
@@ -117,26 +120,24 @@ export class FdsDropdown<T> extends LitElement {
     const isFirstRender = this.renderRoot.children.length === 0
 
     const multipleHeader = (): TemplateResult => {
-      const selectedOptions = this.getValues();
+      const selectedOptions = this.getValues()
 
       if (selectedOptions.length === 0) {
-        return html`<div>${this.placeholder || ''}</div>`;
+        return html`<div>${this.placeholder || ''}</div>`
       }
 
       return html`
-      <div class="selected-options-container">
-        <div class="selected-options">
-          ${selectedOptions.map(option => html`
-            <span class="selected-tag">${this.getLabel(option)}</span>
-          `)}
+        <div class="selected-options-container">
+          <div class="selected-options">
+            ${selectedOptions.map(
+              option => html` <span class="selected-tag">${this.getLabel(option)}</span> `
+            )}
+          </div>
+          <span class="overflow-counter"></span>
         </div>
-        <span class="overflow-counter"></span>
-      </div>
-    `;
+      `
     }
-    const singleHeader = html`
-        <div>${this.getLabel(this.value) ?? this.placeholder}</div>
-        `
+    const singleHeader = html` <div>${this.getLabel(this.value) ?? this.placeholder}</div> `
 
     return html`
       <div class="dropdown-wrapper">
@@ -161,44 +162,44 @@ export class FdsDropdown<T> extends LitElement {
   }
 
   override updated(): void {
-      const couterWidth = 30;
+    const couterWidth = 30
 
-      const container = this.renderRoot.querySelector('.selected-options-container') as HTMLElement;
-      const optionsEl = this.renderRoot.querySelector('.selected-options') as HTMLElement;
-      const counterEl = this.renderRoot.querySelector('.overflow-counter') as HTMLElement;
+    const container = this.renderRoot.querySelector('.selected-options-container') as HTMLElement
+    const optionsEl = this.renderRoot.querySelector('.selected-options') as HTMLElement
+    const counterEl = this.renderRoot.querySelector('.overflow-counter') as HTMLElement
 
-      if (!container || !optionsEl || !counterEl) return;
+    if (!container || !optionsEl || !counterEl) return
 
-      const optionTags = Array.from(optionsEl.querySelectorAll('.selected-tag'));
-      let hiddenCount = 0;
+    const optionTags = Array.from(optionsEl.querySelectorAll('.selected-tag'))
+    let hiddenCount = 0
 
-      const containerWidth = container.clientWidth - couterWidth;
-      let currentWidth = 0;
+    const containerWidth = container.clientWidth - couterWidth
+    let currentWidth = 0
 
-      optionTags.forEach((tag) => {
-        const tagEl = tag as HTMLElement;
-        currentWidth += tagEl.offsetWidth;
-        // offsetWidth doesn't take into account the fds-icon width. Check if the tag contains icon and add its width
-        const fdsIconEl = tagEl.querySelector('fds-icon')
-        if (fdsIconEl) {
-          currentWidth += parseInt(fdsIconEl.size.value)
-        }
-
-        if (currentWidth > containerWidth) {
-          tagEl.classList.add('hidden');
-          hiddenCount++;
-        } else {
-          tagEl.classList.remove('hidden');
-        }
-      });
-
-      if (hiddenCount > 0) {
-        counterEl.classList.remove('hidden');
-        counterEl.textContent = `+${hiddenCount}`;
-      } else {
-        counterEl.textContent = '';
-        counterEl.classList.add('hidden');
+    optionTags.forEach(tag => {
+      const tagEl = tag as HTMLElement
+      currentWidth += tagEl.offsetWidth
+      // offsetWidth doesn't take into account the fds-icon width. Check if the tag contains icon and add its width
+      const fdsIconEl = tagEl.querySelector('fds-icon')
+      if (fdsIconEl) {
+        currentWidth += parseInt(fdsIconEl.size.value)
       }
+
+      if (currentWidth > containerWidth) {
+        tagEl.classList.add('hidden')
+        hiddenCount++
+      } else {
+        tagEl.classList.remove('hidden')
+      }
+    })
+
+    if (hiddenCount > 0) {
+      counterEl.classList.remove('hidden')
+      counterEl.textContent = `+${hiddenCount}`
+    } else {
+      counterEl.textContent = ''
+      counterEl.classList.add('hidden')
+    }
   }
 
   private handleKeypress(event: KeyboardEvent, selectedOption: FdsDropdownOption<T>): void {
@@ -232,7 +233,7 @@ export class FdsDropdown<T> extends LitElement {
     this.dispatchEvent(new FdsDropdownEvent(selectedOption))
   }
 
-  private getLabel(option?: FdsDropdownOption<T>|FdsDropdownOption<T>[]): TemplateResult | null {
+  private getLabel(option?: FdsDropdownOption<T> | FdsDropdownOption<T>[]): TemplateResult | null {
     if (!option) {
       return null
     }

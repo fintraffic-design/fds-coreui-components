@@ -77,6 +77,9 @@ export class FdsDropdown<T> extends LitElement {
   override firstUpdated(): void {
     this.tabIndex = 0
     this.setValidity()
+    if (this.multiple) {
+      this.setMultipleHeaderContent()
+    }
   }
 
   override render(): TemplateResult {
@@ -120,7 +123,11 @@ export class FdsDropdown<T> extends LitElement {
     const isFirstRender = this.renderRoot.children.length === 0
 
     const multipleHeader = (): TemplateResult => {
-      const selectedOptions = this.getValues()
+      const selectedOptions = this.value
+
+      if (!Array.isArray(selectedOptions)) {
+        throw new Error('Selected options should be an array when multiple is true')
+      }
 
       if (selectedOptions.length === 0) {
         return html`<div>${this.placeholder || ''}</div>`
@@ -163,7 +170,7 @@ export class FdsDropdown<T> extends LitElement {
     `
   }
 
-  override updated(): void {
+  setMultipleHeaderContent(): void {
     const couterWidth = 30
 
     const container = this.renderRoot.querySelector('.selected-options-container') as HTMLElement
@@ -202,6 +209,10 @@ export class FdsDropdown<T> extends LitElement {
       counterEl.textContent = ''
       counterEl.classList.add('hidden')
     }
+  }
+
+  override updated(): void {
+    this.setMultipleHeaderContent()
   }
 
   private handleKeypress(event: KeyboardEvent, selectedOption: FdsDropdownOption<T>): void {

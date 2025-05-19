@@ -137,7 +137,9 @@ export class FdsDropdown<T> extends LitElement {
         </div>
       `
     }
-    const singleHeader = html` <div>${this.getLabel(this.value) ?? this.placeholder}</div> `
+    const singleHeader = (): TemplateResult => {
+      return html` <div>${this.getLabel(this.value) ?? this.placeholder}</div> `
+    }
 
     return html`
       <div class="dropdown-wrapper">
@@ -152,7 +154,7 @@ export class FdsDropdown<T> extends LitElement {
           aria-controls="options-list"
           aria-expanded=${isFirstRender ? 'false' : this.getButton().ariaExpanded}
         >
-          ${this.multiple ? multipleHeader() : singleHeader}
+          ${this.multiple ? multipleHeader() : singleHeader()}
           <fds-icon icon="chevron-up"></fds-icon>
           <fds-icon icon="chevron-down"></fds-icon>
         </button>
@@ -238,6 +240,9 @@ export class FdsDropdown<T> extends LitElement {
       return null
     }
     if (Array.isArray(option)) {
+      if (option.length === 0) {
+        return null
+      }
       option = option[0]
     }
     const label = html`<span class="label">${option.label}</span>`

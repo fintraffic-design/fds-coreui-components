@@ -3,6 +3,7 @@ import {
   FdsColorDanger200,
   FdsColorInteractive100,
   FdsColorInteractive200,
+  FdsColorNeutral100,
   FdsColorNeutral200,
   FdsColorNeutral50,
   FdsColorText1000,
@@ -115,6 +116,28 @@ export class FdsDropdown<T> extends LitElement {
     `
     const isFirstRender = this.renderRoot.children.length === 0
 
+    const multipleHeader = (): TemplateResult => {
+      const selectedOptions = this.getValues();
+
+      if (selectedOptions.length === 0) {
+        return html`<div>${this.placeholder || ''}</div>`;
+      }
+
+      return html`
+      <div class="selected-options-container">
+        <div class="selected-options">
+          ${selectedOptions.map(option => html`
+            <span class="selected-tag">${this.getLabel(option)}</span>
+          `)}
+        </div>
+        <span class="overflow-counter"></span>
+      </div>
+    `;
+    }
+    const singleHeader = html`
+        <div>${this.getLabel(this.value) ?? this.placeholder}</div>
+        `
+
     return html`
       <div class="dropdown-wrapper">
         <button
@@ -128,13 +151,54 @@ export class FdsDropdown<T> extends LitElement {
           aria-controls="options-list"
           aria-expanded=${isFirstRender ? 'false' : this.getButton().ariaExpanded}
         >
-          <div>${this.getLabel(this.value) ?? this.placeholder}</div>
+          ${this.multiple ? multipleHeader() : singleHeader}
           <fds-icon icon="chevron-up"></fds-icon>
           <fds-icon icon="chevron-down"></fds-icon>
         </button>
         ${optionsList}
       </div>
     `
+  }
+
+  override updated(): void {
+      const couterWidth = 30;
+
+      const container = this.renderRoot.querySelector('.selected-options-container') as HTMLElement;
+      const optionsEl = this.renderRoot.querySelector('.selected-options') as HTMLElement;
+      const counterEl = this.renderRoot.querySelector('.overflow-counter') as HTMLElement;
+
+      if (!container || !optionsEl || !counterEl) return;
+
+      const optionTags = Array.from(optionsEl.querySelectorAll('.selected-tag'));
+      let hiddenCount = 0;
+
+      const containerWidth = container.clientWidth - couterWidth;
+      let currentWidth = 0;
+
+      optionTags.forEach((tag) => {
+        const tagEl = tag as HTMLElement;
+        currentWidth += tagEl.offsetWidth;
+        // offsetWidth doesn't take into account the fds-icon width. Check if the tag contains icon and add its width
+        const fdsIconEl = tagEl.querySelector('fds-icon')
+        if (fdsIconEl) {
+          currentWidth += parseInt(fdsIconEl.size.value)
+        }
+
+        if (currentWidth > containerWidth) {
+          tagEl.classList.add('hidden');
+          hiddenCount++;
+        } else {
+          tagEl.classList.remove('hidden');
+        }
+      });
+
+      if (hiddenCount > 0) {
+        counterEl.classList.remove('hidden');
+        counterEl.textContent = `+${hiddenCount}`;
+      } else {
+        counterEl.textContent = '';
+        counterEl.classList.add('hidden');
+      }
   }
 
   private handleKeypress(event: KeyboardEvent, selectedOption: FdsDropdownOption<T>): void {
@@ -273,6 +337,7 @@ export class FdsDropdown<T> extends LitElement {
         width: 100%;
         position: relative;
         --fds-typography-ui-label-display: flex;
+        --counter-width: 30px;
       }
 
       button {
@@ -312,6 +377,36 @@ export class FdsDropdown<T> extends LitElement {
       button.error {
         color: ${FdsColorDanger200};
         border: 3px solid ${FdsColorDanger200};
+      }
+
+      .selected-options-container {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        width: 100%;
+      }
+
+      .selected-options {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow: hidden;
+        width: calc(100% - var(--counter-width));
+      }
+
+      .selected-tag {
+        white-space: nowrap;
+        background: ${FdsColorNeutral100};
+        padding: 2px 6px;
+        margin-right: 4px;
+        border-radius: 4px;
+      }
+
+      .hidden {
+        visibility: hidden;
+      }
+
+      .overflow-counter {
+        min-width: 24px;
       }
 
       .options-list {

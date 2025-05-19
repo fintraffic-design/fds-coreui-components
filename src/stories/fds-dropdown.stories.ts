@@ -211,13 +211,15 @@ export const MultiselectionDropdown: StoryObj = {
 
     await fireEvent(within(dropdonwList).getByText('Foo'), new MouseEvent('click', { bubbles: true }))
     await fireEvent(within(dropdonwList).getByText('Bar'), new MouseEvent('click', { bubbles: true }))
+    await fireEvent(within(dropdonwList).getByText('Bar 2'), new MouseEvent('click', { bubbles: true }))
     await fireEvent(within(dropdonwList).getByText('Icon'), new MouseEvent('click', { bubbles: true }))
+    await fireEvent(within(dropdonwList).getByText('Icon 2'), new MouseEvent('click', { bubbles: true }))
 
     // Catch the submit event
     form.addEventListener('submit', async (event: Event) => {
       event.preventDefault()
       const formData = new FormData(event.target as HTMLFormElement)
-      await expect(formData.getAll('dropdown-values')).toEqual(['Foo', 'Bar', 'Icon'])
+      await expect(formData.getAll('dropdown-values')).toEqual(['Foo', 'Bar', 'Bar 2', 'Icon', 'Icon 2'])
     })
 
     // Submit the form

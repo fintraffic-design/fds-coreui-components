@@ -124,13 +124,18 @@ export class FdsDropdown<T> extends LitElement {
 
     const multipleHeader = (): TemplateResult => {
       const selectedOptions = this.value
+      const placeholderTemplate = html`<div>${this.placeholder || ''}</div>`
+
+      if (selectedOptions === undefined || selectedOptions === null) {
+        return placeholderTemplate
+      }
 
       if (!Array.isArray(selectedOptions)) {
         throw new Error('Selected options should be an array when multiple is true')
       }
 
       if (selectedOptions.length === 0) {
-        return html`<div>${this.placeholder || ''}</div>`
+        return placeholderTemplate
       }
 
       return html`

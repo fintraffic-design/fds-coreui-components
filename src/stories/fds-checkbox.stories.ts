@@ -123,8 +123,8 @@ export const CheckboxFormSend: StoryObj = {
     const form = await canvas.getByTestId('form')
     const fdsCheckbox = await canvas.getByTestId<FdsCheckbox>('fds-checkbox')
 
-    const testFormSubmission = async (testFn: (formData: FormData) => Promise<void>): Promise<void> => {
-      const testIsDone = new Promise<void>(async resolve => {
+    const testFormSubmission = (testFn: (formData: FormData) => Promise<void>): Promise<void> =>
+      new Promise<void>(resolve => {
         form.addEventListener(
           'submit',
           async (event: Event) => {
@@ -136,10 +136,8 @@ export const CheckboxFormSend: StoryObj = {
           { once: true }
         )
         // Submit the form
-        await userEvent.click(submitButton)
+        userEvent.click(submitButton)
       })
-      await testIsDone
-    }
 
     // Select the checkbox
     await user.click(fdsCheckbox)

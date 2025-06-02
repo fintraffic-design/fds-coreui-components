@@ -43,7 +43,7 @@ export class FdsDropdownEvent<T> extends CustomEvent<FdsDropdownOption<T>> {
 /**
  * Single choice dropdown component.
  *
- * @event select - Dispatches an custom event when option is selected from dropdown.
+ * @event select - Dispatches a custom event when option is selected from dropdown.
  *
  * @property {FdsDropdownOption[]} options - List of options to be shown in the menu.
  * @property {FdsDropdownOption} value - Set value for the component.
@@ -284,7 +284,7 @@ export class FdsDropdown<T> extends LitElement {
           const fdsCheckboxLabel = fdsCheckbox.labels[0].textContent.trim()
           return findOption(fdsCheckboxLabel)
         })
-        .filter(option => option !== undefined) as FdsDropdownOption<T>[]
+        .filter(option => option !== undefined)
     } else {
       const listItems = this.renderRoot.querySelectorAll('li')
       const selectedItem = Array.from(listItems).find(item => item.getAttribute('aria-selected') === 'true')

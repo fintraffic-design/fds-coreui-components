@@ -32,11 +32,15 @@ export class FdsCheckbox extends LitElement {
   constructor() {
     super()
     this._internals = this.attachInternals()
-    // Clicking anywhere on this component should trigger the checkbox
-    this.addEventListener('click', () => {
-      const checkbox = this.shadowRoot?.getElementById('checkbox') as HTMLInputElement
-      if (checkbox) {
-        checkbox.click()
+    // Handle click events on the host element to toggle the checkbox
+    this.addEventListener('click', event => {
+      if (event.target === this) {
+        event.preventDefault()
+        event.stopPropagation()
+        const checkbox = this.shadowRoot?.getElementById('checkbox') as HTMLInputElement
+        if (checkbox) {
+          checkbox.click()
+        }
       }
     })
   }

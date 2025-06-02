@@ -15,15 +15,7 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
-      - name: Setup SSH key
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-        run: |
-          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-          ssh-add - <<< "${{ secrets.COREUI_CSS_SSH_KEY }}"
       - name: compile, lint, test
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
           npm ci
           npm run stylecheck

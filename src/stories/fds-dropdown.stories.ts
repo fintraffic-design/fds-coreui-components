@@ -1,4 +1,5 @@
 import { StoryObj, Meta, StoryFn } from '@storybook/web-components'
+import { userEvent, within, expect, fireEvent } from '@storybook/test'
 import { html } from 'lit'
 import { FdsDropdownEvent } from '../dropdown.js'
 import '../define/fds-dropdown.js'
@@ -31,9 +32,12 @@ export default {
     ],
     value: undefined,
     disabled: false,
+    required: false,
     error: false,
     select: undefined,
     slot: undefined,
+    name: undefined,
+    multiple: false,
   },
   argTypes: {
     placeholder: {
@@ -73,6 +77,33 @@ export default {
         defaultValue: { summary: 'false' },
       },
     },
+    required: {
+      description:
+        'Whether the dropdown value is required. <br><br>\
+        `boolean`',
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: 'false' },
+      },
+    },
+    name: {
+      description:
+        'Key name to use when sending with form. <br><br>\
+        `string`',
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: 'undefined' },
+      },
+    },
+    multiple: {
+      description:
+        'Whether the multiple values can be selected. <br><br>\
+        `boolean`',
+      table: {
+        category: 'Properties',
+        defaultValue: { summary: 'false' },
+      },
+    },
     error: {
       description:
         'Whether the dropdown is in error state. <br><br>\
@@ -99,18 +130,22 @@ export default {
   },
 } as Meta
 
-const Template: StoryFn = ({ options, value, disabled, error, placeholder }) => {
+const Template: StoryFn = ({ options, value, disabled, error, required, placeholder, multiple, name }) => {
   return html`
-    <div style="width:284px; height: 260px;">
-      <fds-dropdown
-        .options=${options}
-        .value=${value}
-        .disabled=${disabled}
-        .error=${error}
-        .placeholder=${placeholder}
-        @select="${(event: FdsDropdownEvent<string>): void => console.log('@select', event.detail)}"
-      ></fds-dropdown>
-    </div>
+    <label for="the-dropdown">Dropdown</label>
+    <fds-dropdown
+      id="the-dropdown"
+      data-testid="fds-dropdown"
+      .options=${options}
+      .value=${value}
+      .disabled=${disabled}
+      .required=${required}
+      .error=${error}
+      .multiple=${multiple}
+      .placeholder=${placeholder}
+      .name=${name}
+      @select="${(event: FdsDropdownEvent<string>): void => console.log('@select', event.detail)}"
+    ></fds-dropdown>
   `
 }
 
@@ -140,5 +175,54 @@ export const LongText: StoryObj = {
         story: 'An example of a combobox with long values in options.',
       },
     },
+  },
+}
+
+export const MultiselectionDropdown: StoryObj = {
+  args: {
+    multiple: true,
+    name: 'dropdown-values',
+  },
+  render: Template,
+  parameters: {
+    isFormUsed: true,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const user = userEvent.setup()
+
+    // Find elements outside the shadow DOM
+    const submitButton = await canvas.getByTestId('submit-button')
+    const form = await canvas.getByTestId('form')
+
+    // Find the shadow root
+    const fdsDropdownShadowRoot = await canvas.getByTestId('fds-dropdown').shadowRoot
+
+    if (fdsDropdownShadowRoot === null) {
+      throw new Error('Shadow root not found')
+    }
+
+    // Find elements inside the web component
+    const dropdownButton = fdsDropdownShadowRoot.querySelector('[role="combobox"]') as HTMLElement
+    const dropdonwList = fdsDropdownShadowRoot.querySelector('[role="listbox"]') as HTMLElement
+
+    // Select multiple options
+    await user.click(dropdownButton)
+
+    await fireEvent(within(dropdonwList).getByText('Foo'), new MouseEvent('click', { bubbles: true }))
+    await fireEvent(within(dropdonwList).getByText('Bar'), new MouseEvent('click', { bubbles: true }))
+    await fireEvent(within(dropdonwList).getByText('Bar 2'), new MouseEvent('click', { bubbles: true }))
+    await fireEvent(within(dropdonwList).getByText('Icon'), new MouseEvent('click', { bubbles: true }))
+    await fireEvent(within(dropdonwList).getByText('Icon 2'), new MouseEvent('click', { bubbles: true }))
+
+    // Catch the submit event
+    form.addEventListener('submit', async (event: Event) => {
+      event.preventDefault()
+      const formData = new FormData(event.target as HTMLFormElement)
+      await expect(formData.getAll('dropdown-values')).toEqual(['Foo', 'Bar', 'Bar 2', 'Icon', 'Icon 2'])
+    })
+
+    // Submit the form
+    await userEvent.click(submitButton)
   },
 }

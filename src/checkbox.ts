@@ -15,12 +15,40 @@ import { property } from 'lit/decorators.js'
  * @property {string} label - Label for the checkbox.
  * @property {boolean} disabled - Disable checkbox.
  * @property {boolean} checked - Checkbox value.
+ * @property {string} value - Value used in the form submission.
+ * @property {string} name - Name of the checkbox. Used in form submission.
  * @event select - Dispatches a custom event when checkbox is clicked. The value is in the event details field.
  */
 export class FdsCheckbox extends LitElement {
+  static formAssociated = true
+  static override shadowRootOptions = { ...LitElement.shadowRootOptions, delegatesFocus: true }
+  private _internals: ElementInternals
   @property() label: string = ''
-  @property() disabled: boolean = false
-  @property() checked: boolean = false
+  @property({ type: Boolean }) disabled: boolean = false
+  @property({ type: Boolean }) checked: boolean = false
+  @property() value: string = 'on'
+  @property() name?: string
+
+  constructor() {
+    super()
+    this._internals = this.attachInternals()
+    // Handle click events on the host element to toggle the checkbox
+    this.addEventListener('click', event => {
+      if (event.target === this) {
+        event.preventDefault()
+        event.stopPropagation()
+        const checkbox = this.shadowRoot?.getElementById('checkbox') as HTMLInputElement
+        if (checkbox) {
+          checkbox.click()
+        }
+      }
+    })
+  }
+
+  override firstUpdated(): void {
+    this.tabIndex = 0
+    this.setValidity()
+  }
 
   override render(): TemplateResult {
     return html`
@@ -29,7 +57,12 @@ export class FdsCheckbox extends LitElement {
         id="checkbox"
         .disabled=${this.disabled}
         .checked="${this.checked}"
+        .value="${this.value}"
         @change=${this.handleSelect}
+        @click=${(e: Event): void => {
+          // Prevent infinite loop
+          e.stopPropagation()
+        }}
       />
       ${this.label && html`<label for="checkbox" class="ui-label-text">${this.label}</label>`}
     `
@@ -38,9 +71,47 @@ export class FdsCheckbox extends LitElement {
   private handleSelect(): void {
     if (!this.disabled) {
       this.checked = !this.checked
+      this.setValidity()
+      this.setFormValue()
       setTimeout(() => {
         this.dispatchEvent(new CustomEvent<boolean>('select', { detail: this.checked }))
       })
+    }
+  }
+
+  public checkValidity(): boolean {
+    return this._internals.checkValidity()
+  }
+
+  public reportValidity(): boolean {
+    return this._internals.reportValidity()
+  }
+
+  public get validity(): ValidityState {
+    return this._internals.validity
+  }
+
+  public get labels(): NodeList {
+    return this._internals.labels
+  }
+
+  public get validationMessage(): string {
+    return this._internals.validationMessage
+  }
+
+  private setValidity(): void {
+    const checkbox = this.shadowRoot?.getElementById('checkbox') as HTMLInputElement
+    this._internals.setValidity(checkbox.validity, checkbox.validationMessage, checkbox)
+  }
+
+  private setFormValue(): void {
+    if (this.checked) {
+      const checkboxName = this.name
+      if (checkboxName !== undefined) {
+        this._internals.setFormValue(this.value.toString())
+      }
+    } else {
+      this._internals.setFormValue(null)
     }
   }
 

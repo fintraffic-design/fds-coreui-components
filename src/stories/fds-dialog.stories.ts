@@ -1,5 +1,5 @@
 import { StoryObj, StoryFn } from '@storybook/web-components'
-import { useArgs } from '@storybook/client-api'
+import { useArgs } from '@storybook/preview-api'
 import { html } from 'lit'
 import '../define/fds-action-sheet.js'
 import '../define/fds-button.js'

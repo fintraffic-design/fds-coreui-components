@@ -216,8 +216,11 @@ export const MultiselectionDropdown: StoryObj = {
     await fireEvent(within(dropdonwList).getByText('Icon'), new MouseEvent('click', { bubbles: true }))
     await fireEvent(within(dropdonwList).getByText('Icon 2'), new MouseEvent('click', { bubbles: true }))
 
+    let isFormSubmitted = false
+
     // Catch the submit event
     form.addEventListener('submit', async (event: Event) => {
+      isFormSubmitted = true
       event.preventDefault()
       const formData = new FormData(event.target as HTMLFormElement)
       await expect(formData.getAll('dropdown-values')).toEqual(['Foo', 'Bar', 'Bar 2', 'Icon', 'Icon 2'])
@@ -225,5 +228,9 @@ export const MultiselectionDropdown: StoryObj = {
 
     // Submit the form
     await userEvent.click(submitButton)
+
+    setTimeout(() => {
+      expect(isFormSubmitted, 'Form should be submitted').toBe(true)
+    }, 100)
   },
 }

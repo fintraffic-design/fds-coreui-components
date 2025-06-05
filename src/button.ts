@@ -49,18 +49,94 @@ const variantColorMap: Record<FdsButtonVariant, CSSResult> = {
  *
  */
 export class FdsButton extends LitElement {
+  static formAssociated = true
+  static override shadowRootOptions = { ...LitElement.shadowRootOptions, delegatesFocus: true }
+  private _internals: ElementInternals
+
   @property() variant: FdsButtonVariant = FdsButtonVariant.primary
   @property({ type: Boolean }) disabled: boolean = false
   @property() icon?: FdsIconType
   @property() label?: string
+  @property() type?: 'button' | 'submit' | 'reset' | 'menu'
+  @property() name?: string
+  @property() value?: string
+
+  constructor() {
+    super()
+    this._internals = this.attachInternals()
+  }
+
+  override updated(changedProperties: Map<string | number | symbol, unknown>): void {
+    if (changedProperties.has('value') || changedProperties.has('name')) {
+      this.setValidity()
+      this.setFormValue()
+    }
+  }
 
   override render(): TemplateResult {
     return html`
-      <button class="button--${this.variant}" ?disabled="${this.disabled}">
+      <button
+        id="button"
+        class="button--${this.variant}"
+        ?disabled="${this.disabled}"
+      >
         ${this.icon && html`<fds-icon .icon="${this.icon}"></fds-icon>`}
         ${this.label && html`<span class="ui-label-text">${this.label}</span>`}
       </button>
     `
+  }
+
+  public checkValidity(): boolean {
+    return this._internals.checkValidity()
+  }
+
+  public reportValidity(): boolean {
+    return this._internals.reportValidity()
+  }
+
+  public get validity(): ValidityState {
+    return this._internals.validity
+  }
+
+  public get labels(): NodeList {
+    return this._internals.labels
+  }
+
+  public get validationMessage(): string {
+    return this._internals.validationMessage
+  }
+
+  private setValidity(): void {
+    const button = this.shadowRoot?.getElementById('button') as HTMLInputElement
+    this._internals.setValidity(button.validity, button.validationMessage, button)
+  }
+
+  private setFormValue(): void {
+    if (this.name && this.value !== undefined) {
+      const buttonName = this.name
+      if (buttonName !== undefined) {
+        this._internals.setFormValue(this.value.toString())
+      }
+    } else {
+      this._internals.setFormValue(null)
+    }
+  }
+
+  override connectedCallback(): void {
+    super.connectedCallback()
+    this.addEventListener('click', this._handleFormSubmit)
+  }
+
+  override disconnectedCallback(): void {
+    super.disconnectedCallback()
+    this.removeEventListener('click', this._handleFormSubmit)
+  }
+
+  _handleFormSubmit(): void {
+    if (this.type === "submit" || this.type === undefined) {
+      const form = this._internals.form
+      form?.requestSubmit()
+    }
   }
 
   static override styles = [

@@ -12,6 +12,7 @@ import {
   uiLabelTextClass,
 } from '@fintraffic/fds-coreui-css'
 import { css, html, LitElement } from 'lit'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import { TemplateResult } from 'lit-html'
 import { property } from 'lit/decorators.js'
 import { FdsIcon, FdsIconType } from './icon.js'
@@ -65,11 +66,11 @@ export class FdsDropdown<T> extends LitElement {
     this._internals = this.attachInternals()
   }
 
-  @property() options: FdsDropdownOption<T>[] = []
+  @property({ type: Array }) options: FdsDropdownOption<T>[] = []
   @property({ type: Boolean }) disabled: boolean = false
   @property({ type: Boolean }) error: boolean = false
   @property() placeholder?: string
-  @property() value?: FdsDropdownOption<T> | FdsDropdownOption<T>[]
+  @property({ type: Object }) value?: FdsDropdownOption<T> | FdsDropdownOption<T>[]
   @property({ type: Boolean }) multiple: boolean = false
   @property({ type: Boolean }) required: boolean = false
   @property() name?: string
@@ -164,7 +165,7 @@ export class FdsDropdown<T> extends LitElement {
           class=${`ui-label-text ${this.getButtonCssClass()}`}
           role="combobox"
           aria-controls="options-list"
-          aria-expanded=${isFirstRender ? 'false' : this.getButton().ariaExpanded}
+          aria-expanded=${ifDefined(isFirstRender ? 'false' : this.getButton().ariaExpanded)}
         >
           ${this.multiple ? multipleHeader() : singleHeader()}
           <fds-icon icon="chevron-up"></fds-icon>
@@ -442,24 +443,24 @@ export class FdsDropdown<T> extends LitElement {
         max-height: 80vh;
         box-shadow: ${FdsStyleElevation200};
         padding: 0;
+        list-style: none;
+        margin: 0;
       }
-
-      .dropdown-wrapper:has([aria-expanded='false']) {
-        .options-list {
-          display: none;
-        }
-        fds-icon[icon='chevron-up'] {
-          display: none;
-        }
+      
+      .dropdown-wrapper [aria-expanded='false'] ~ .options-list {
+        display: none;
       }
-
-      .dropdown-wrapper:has([aria-expanded='true']) {
-        .options-list {
-          display: flex;
-        }
-        fds-icon[icon='chevron-down'] {
-          display: none;
-        }
+      
+      .dropdown-wrapper [aria-expanded='false'] fds-icon[icon='chevron-up'] {
+        display: none;
+      }
+      
+      .dropdown-wrapper [aria-expanded='true'] ~ .options-list {
+        display: flex;
+      }
+      
+      .dropdown-wrapper [aria-expanded='true'] fds-icon[icon='chevron-down'] {
+        display: none;
       }
 
       fds-icon {
@@ -481,6 +482,7 @@ export class FdsDropdown<T> extends LitElement {
       }
 
       .option {
+        flex: 1 0 auto;
         display: flex;
         align-items: center;
         white-space: nowrap;

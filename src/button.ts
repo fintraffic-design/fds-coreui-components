@@ -75,11 +75,7 @@ export class FdsButton extends LitElement {
 
   override render(): TemplateResult {
     return html`
-      <button
-        id="button"
-        class="button--${this.variant}"
-        ?disabled="${this.disabled}"
-      >
+      <button id="button" class="button--${this.variant}" ?disabled="${this.disabled}">
         ${this.icon && html`<fds-icon .icon="${this.icon}"></fds-icon>`}
         ${this.label && html`<span class="ui-label-text">${this.label}</span>`}
       </button>
@@ -133,7 +129,7 @@ export class FdsButton extends LitElement {
   }
 
   _handleFormSubmit(): void {
-    if (this.type === "submit" || this.type === undefined) {
+    if (this.type === 'submit' || this.type === undefined) {
       const form = this._internals.form
       form?.requestSubmit()
     }

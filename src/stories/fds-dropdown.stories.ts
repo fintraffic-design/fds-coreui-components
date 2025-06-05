@@ -186,7 +186,7 @@ export const MultiselectionDropdown: StoryObj = {
   parameters: {
     isFormUsed: true,
     labelFor: 'the-dropdown',
-    label: 'Dropdown'
+    label: 'Dropdown',
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)

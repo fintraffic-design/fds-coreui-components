@@ -446,19 +446,19 @@ export class FdsDropdown<T> extends LitElement {
         list-style: none;
         margin: 0;
       }
-      
+
       .dropdown-wrapper [aria-expanded='false'] ~ .options-list {
         display: none;
       }
-      
+
       .dropdown-wrapper [aria-expanded='false'] fds-icon[icon='chevron-up'] {
         display: none;
       }
-      
+
       .dropdown-wrapper [aria-expanded='true'] ~ .options-list {
         display: flex;
       }
-      
+
       .dropdown-wrapper [aria-expanded='true'] fds-icon[icon='chevron-down'] {
         display: none;
       }

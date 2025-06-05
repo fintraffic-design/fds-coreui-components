@@ -7,7 +7,7 @@ import '../define/fds-dropdown.js'
 export default {
   title: 'Dropdown',
   parameters: {
-    componentSubtitle: 'List of options for selecting single choice input',
+    componentSubtitle: 'A dropdown for selecting a single or multiple options.',
     docs: {
       description: {
         component:
@@ -132,7 +132,6 @@ export default {
 
 const Template: StoryFn = ({ options, value, disabled, error, required, placeholder, multiple, name }) => {
   return html`
-    <label for="the-dropdown">Dropdown</label>
     <fds-dropdown
       id="the-dropdown"
       data-testid="fds-dropdown"
@@ -186,6 +185,8 @@ export const MultiselectionDropdown: StoryObj = {
   render: Template,
   parameters: {
     isFormUsed: true,
+    labelFor: 'the-dropdown',
+    label: 'Dropdown'
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)

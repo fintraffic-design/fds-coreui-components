@@ -7,7 +7,7 @@ import '../define/fds-dropdown.js'
 export default {
   title: 'Dropdown',
   parameters: {
-    componentSubtitle: 'List of options for selecting single choice input',
+    componentSubtitle: 'A dropdown for selecting a single or multiple options.',
     docs: {
       description: {
         component:
@@ -132,7 +132,6 @@ export default {
 
 const Template: StoryFn = ({ options, value, disabled, error, required, placeholder, multiple, name }) => {
   return html`
-    <label for="the-dropdown">Dropdown</label>
     <fds-dropdown
       id="the-dropdown"
       data-testid="fds-dropdown"
@@ -186,6 +185,8 @@ export const MultiselectionDropdown: StoryObj = {
   render: Template,
   parameters: {
     isFormUsed: true,
+    labelFor: 'the-dropdown',
+    label: 'Dropdown',
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
@@ -215,8 +216,11 @@ export const MultiselectionDropdown: StoryObj = {
     await fireEvent(within(dropdonwList).getByText('Icon'), new MouseEvent('click', { bubbles: true }))
     await fireEvent(within(dropdonwList).getByText('Icon 2'), new MouseEvent('click', { bubbles: true }))
 
+    let isFormSubmitted = false
+
     // Catch the submit event
     form.addEventListener('submit', async (event: Event) => {
+      isFormSubmitted = true
       event.preventDefault()
       const formData = new FormData(event.target as HTMLFormElement)
       await expect(formData.getAll('dropdown-values')).toEqual(['Foo', 'Bar', 'Bar 2', 'Icon', 'Icon 2'])
@@ -224,5 +228,9 @@ export const MultiselectionDropdown: StoryObj = {
 
     // Submit the form
     await userEvent.click(submitButton)
+
+    setTimeout(() => {
+      expect(isFormSubmitted, 'Form should be submitted').toBe(true)
+    }, 100)
   },
 }

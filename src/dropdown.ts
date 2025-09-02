@@ -81,6 +81,7 @@ export class FdsDropdown<T> extends LitElement {
     if (this.multiple) {
       this.setMultipleHeaderContent()
     }
+    this.setFormValue()
   }
 
   override render(): TemplateResult {

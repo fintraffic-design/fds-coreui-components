@@ -18,6 +18,7 @@ import {
   CheckCircle,
   ChevronsLeftRightEllipsis,
   MessageCircle,
+  History,
 } from 'lucide'
 
 /**
@@ -39,6 +40,7 @@ export const FdsIcons = {
   'check-circle': CheckCircle,
   'chevrons-left-right-ellipsis': ChevronsLeftRightEllipsis,
   'message-circle': MessageCircle,
+  history: History,
 }
 
 export type FdsIconType = keyof typeof FdsIcons
@@ -55,7 +57,8 @@ export type FdsIconType = keyof typeof FdsIcons
  * - chevron-right
  * - chevron-up
  * - menu
- * - edit
+ * - pencil
+ * - plus
  * - plus-circle
  * - trash-2
  * - x
@@ -63,6 +66,7 @@ export type FdsIconType = keyof typeof FdsIcons
  * - check-circle
  * - chevrons-left-right-ellipsis
  * - message-circle
+ * - history
  * @property {string} size - FdsSizeToken
  */
 export class FdsIcon extends LitElement {
